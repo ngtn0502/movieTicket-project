@@ -1,38 +1,5 @@
-### Install Eslint + Prettier plugin
-
-```
-npm i -D eslint prettier eslint-plugin-prettier eslint-config-prettier
-```
-
-```
-$ npm i eslint
-
-```
-
-### Install .eslintrc.js
-
-```
-$ npx eslint --init
-```
-
-### Install eslint config airbnb
-
-```
-$ npx install-peerdeps --dev eslint-config-airbnb
-
-```
-
-### Install eslint config wesbos
-
-```
-$ npx install-peerdeps --dev eslint-config-wesbos
-```
-
-### Copy .eslintrc.js of wesbos
-
-```
 module.exports = {
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  extends: ['airbnb', 'wesbos'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2020,
@@ -49,6 +16,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    "react/prop-types": 0,
     'no-debugger': 0,
     'no-alert': 0,
     'no-await-in-loop': 0,
@@ -102,11 +70,11 @@ module.exports = {
     'react/forbid-prop-types': 0,
     'react/no-unescaped-entities': 0,
     'jsx-a11y/accessible-emoji': 0,
-    "jsx-a11y/label-has-associated-control": [
-      "error",
+    'jsx-a11y/label-has-associated-control': [
+      'error',
       {
-        "assert": "either"
-      }
+        assert: 'either',
+      },
     ],
     'react/require-default-props': 0,
     'react/jsx-filename-extension': [
@@ -137,7 +105,7 @@ module.exports = {
         trailingComma: 'es5',
         singleQuote: true,
         printWidth: 80,
-        //below line only for windows users facing CLRF and eslint/prettier error
+        // below line only for windows users facing CLRF and eslint/prettier error
         // non windows users feel free to delete it
         endOfLine: 'auto',
       },
@@ -154,5 +122,3 @@ module.exports = {
   },
   plugins: ['html', 'prettier', 'react-hooks'],
 };
-
-```
