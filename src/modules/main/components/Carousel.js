@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-//
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,15 +9,14 @@ import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 
 // import Swiper core and required modules
-import SwiperCore, { Autoplay, Navigation } from 'swiper/core';
-import MovieCard from './MovieCard';
+import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper/core';
 
 // install Swiper modules
-SwiperCore.use([Autoplay, Navigation]);
+SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default function Carousel({ movieList }) {
   return (
-    <Wrapper className="section-middle">
+    <Wrapper>
       <Swiper
         spaceBetween={30}
         centeredSlides
@@ -26,35 +24,24 @@ export default function Carousel({ movieList }) {
         //   delay: 2500,
         //   disableOnInteraction: false,
         // }}
+        pagination={{
+          clickable: true,
+        }}
         navigation
         className="mySwiper"
       >
-        <SwiperSlide className="movie__list">
-          {movieList.slice(1, 9).map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
-        </SwiperSlide>
-        <SwiperSlide className="movie__list">
-          {movieList.slice(10, 18).map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
-        </SwiperSlide>
+        {movieList.slice(28, 35).map((movie) => (
+          <SwiperSlide>
+            <img src={movie.hinhAnh} alt="movie" />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  margin-top: 5rem;
-  .swiper-slide {
-    margin-right: 0;
-  }
-  .movie__list {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
-    gap: 1.5rem;
-  }
-
+  display: none;
   .swiper-pagination-bullet {
     height: 1rem;
     width: 1rem;
@@ -68,5 +55,23 @@ const Wrapper = styled.div`
   }
   .swiper-pagination {
     bottom: 3rem;
+  }
+
+  @media screen and (min-width: 650px) {
+    display: block;
+    img {
+      display: block;
+      height: 70vh;
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    display: block;
+    img {
+      display: block;
+      height: 90vh;
+      width: 100%;
+    }
   }
 `;

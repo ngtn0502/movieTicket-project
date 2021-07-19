@@ -12,7 +12,7 @@ import MovieDetailsPage from './modules/main/pages/MovieDetailsPage';
 import SignInPage from './modules/main/pages/SignInPage';
 import NewsPage from './modules/main/pages/NewsPages';
 import ErrorPage from './modules/main/pages/ErrorPage';
-import Navbar from './modules/main/components/Navbar.component/Navbar.js';
+import Navbar from './modules/main/components/Navbar.js';
 
 function App() {
   return (

@@ -1,8 +1,7 @@
 // URL fetch movie
-export const url =
-  'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01';
+export const baseUrl = 'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim';
 
-export const navLink = [
+export const navBarLink = [
   {
     id: '1',
     title: 'Trang chủ',
@@ -113,7 +112,7 @@ export const movieHour = [
   {
     id: '0',
     value: 'all',
-    title: 'Ngày Xem',
+    title: 'Suất chiếu',
   },
   {
     id: '1',

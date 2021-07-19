@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FiUser, FiMenu } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import logo from '../../../../assets/img/web-logo.png';
-import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
+import logo from '../../../assets/img/logo-full.png';
+import { Flex, FlexCenter, FlexVCenter } from '../../utils/mixin';
 import NavLink from './NavLink';
 
 function Navbar() {
@@ -69,7 +69,7 @@ const Wrapper = styled.nav`
   z-index: 100;
   .nav {
     img {
-      width: 3rem;
+      width: 7rem;
     }
     width: 90%;
     ${Flex({ justify: 'space-between' })}
@@ -91,7 +91,7 @@ const Wrapper = styled.nav`
     height: 100vh;
     transition: var(--transition);
     transform: translateX(60vw);
-    z-index: 10;
+    z-index: 1000;
     .sideBar__links {
       li {
         margin: 1rem;

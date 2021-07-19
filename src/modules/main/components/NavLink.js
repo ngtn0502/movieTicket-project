@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { navLink } from '../../../utils/constants';
+import { navBarLink } from '../../utils/constants';
 
 function NavLink() {
   return (
     <Wrapper>
       <ul>
-        {navLink.map((item) => (
+        {navBarLink.map((item) => (
           <li className="nav_link" key={item.id}>
             <Link to={item.path}>
               <span className="title">{item.title}</span>
