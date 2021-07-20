@@ -2,26 +2,27 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { screen } from '@testing-library/react';
 import { getMovieListAction } from '../../redux/actions/getMovieListAction';
 import Carousel from '../components/Carousel';
 import MovieList from '../components/MovieList';
 import SearchBar from '../components/SearchBar';
 import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
+import { getCinemaListAction } from '../../redux/actions/getCinemaListAction';
 
 function HomePage() {
   const dispatch = useDispatch();
-  // movieList
-  const movieList = useSelector((state) => state.movieListReducer.movieList);
   // ui
   const uiState = useSelector((state) => state.uiReducer);
   const { isModalShow, trailer } = uiState;
+  // movieList
+  const movieList = useSelector((state) => state.movieListReducer.movieList);
+  // cinema List
   useEffect(() => {
     // Dispatch action creator thunk to fetch data in action component
     dispatch(getMovieListAction());
   }, [dispatch]);
-
+  // Get List Cinema
   return (
     <Wrapper className="page-100">
       {isModalShow && (

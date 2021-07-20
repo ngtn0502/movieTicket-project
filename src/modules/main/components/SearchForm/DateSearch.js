@@ -4,10 +4,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { movieCategory } from '../../../utils/constants';
-import { getMovieDetailAction } from '../../../redux/actions/getMovieDetailAction';
+import { movieCategory, movieDate } from '../../../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -20,36 +18,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SimpleSelect() {
-  const dispatch = useDispatch();
   const classes = useStyles();
   const [age, setAge] = useState('');
-  const movieList = useSelector((state) => state.movieListReducer.movieList);
 
   const handleChange = (event) => {
     setAge(event.target.value);
-    dispatch(getMovieDetailAction(event.target.value));
   };
 
   return (
     <Wrapper>
       <FormControl variant="" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Phim</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">Ngày Xem</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={age}
           onChange={handleChange}
-          label="Phim"
+          label="Ngay Xem"
         >
-          {movieList.map((item) => (
-            <MenuItem value={item.maPhim}>{item.tenPhim}</MenuItem>
+          {movieDate.map((item) => (
+            <MenuItem value={item.value}>{item.title}</MenuItem>
           ))}
         </Select>
       </FormControl>
     </Wrapper>
   );
 }
-
 const Wrapper = styled.div`
   #demo-simple-select-outlined-label {
     color: black;

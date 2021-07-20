@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaPlay, FaFacebookSquare } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import {
   converDate,
   randomDuration,
@@ -11,14 +12,21 @@ import { FlexHCenter, FlexVCenter } from '../../../utils/mixin';
 import ButtonMovie from './ButtonMovie.js';
 import MovieClass from '../MovieClass';
 import { movieDetailContent } from '../../../utils/constants';
+import { SHOW_MODAL } from '../../../redux/actions/constantsAction.js';
 
 function MovieInfor({ movieDetail, movie }) {
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <div className="section-middle">
         <div className="movieInfor__top">
           <img src={movie.hinhAnh} alt="" className="movieInfor__banner" />
-          <ButtonMovie className="movieInfor__booking">
+          <ButtonMovie
+            className="movieInfor__booking"
+            onClick={() => {
+              dispatch({ type: SHOW_MODAL, payload: movie.trailer });
+            }}
+          >
             <FaPlay />
             <span>Xem trailer</span>
           </ButtonMovie>

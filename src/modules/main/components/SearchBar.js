@@ -7,6 +7,10 @@ import {
   movieDate,
 } from '../../utils/constants';
 import { FlexCenter, Flex } from '../../utils/mixin.js';
+import MovieSearch from './SearchForm/MovieSearch';
+import CinemaSearch from './SearchForm/CinemaSearch';
+import DateSearch from './SearchForm/DateSearch';
+import HourSearch from './SearchForm/HourSearch';
 
 function SearchBar({ className }) {
   return (
@@ -16,43 +20,19 @@ function SearchBar({ className }) {
           <div className="search">
             {/* movie category */}
             <div className="search__field">
-              <div className="select">
-                <select>
-                  {movieCategory.map((movie) => (
-                    <option value={movie.value}>{movie.title}</option>
-                  ))}
-                </select>
-              </div>
+              <MovieSearch />
             </div>
             {/* movie cine */}
             <div className="search__field">
-              <div className="select">
-                <select>
-                  {movieCine.map((movie) => (
-                    <option value={movie.value}>{movie.title}</option>
-                  ))}
-                </select>
-              </div>
+              <CinemaSearch />
             </div>
             {/* movie date */}
             <div className="search__field">
-              <div className="select">
-                <select>
-                  {movieDate.map((movie) => (
-                    <option value={movie.value}>{movie.title}</option>
-                  ))}
-                </select>
-              </div>
+              <DateSearch />
             </div>
             {/* movie hour */}
             <div className="search__field">
-              <div className="select">
-                <select>
-                  {movieHour.map((movie) => (
-                    <option value={movie.value}>{movie.title}</option>
-                  ))}
-                </select>
-              </div>
+              <HourSearch />
             </div>
             <div search__button>
               <button type="button" className="btn">
@@ -88,7 +68,7 @@ const Wrapper = styled.div`
   ${FlexCenter()}
   .search {
     width: 90%;
-    ${Flex({ justify: 'space-between' })}
+    ${Flex({ justify: 'space-between', algin: 'center' })}
   }
   .search__field {
     position: relative;

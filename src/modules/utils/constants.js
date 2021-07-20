@@ -7,6 +7,8 @@ import {
 } from 'react-icons/fa';
 
 export const baseUrl = 'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim';
+export const cinemaListUrl =
+  'https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap';
 // Nav bar part
 export const navBarLink = [
   {
@@ -20,13 +22,13 @@ export const navBarLink = [
     path: '/news',
   },
   {
-    id: '3',
-    title: 'Ứng dụng',
+    id: '4',
+    title: 'Phim hay',
     path: '/home',
   },
   {
-    id: '4',
-    title: 'Phim hay',
+    id: '3',
+    title: 'FAQ',
     path: '/home',
   },
 ];
@@ -34,11 +36,6 @@ export const navBarLink = [
 // Search part
 
 export const movieCategory = [
-  {
-    id: '0',
-    value: 'all',
-    title: 'Phim',
-  },
   {
     id: '1',
     value: 'hanh-dong',
@@ -98,22 +95,22 @@ export const movieDate = [
   {
     id: '1',
     value: 'hanh-dong',
-    title: 'Hành Động',
+    title: '14 May 2021',
   },
   {
     id: '2',
     value: 'kinh-di',
-    title: 'Kinh dị',
+    title: '25 July 2021',
   },
   {
     id: '3',
     value: 'vien-tuong',
-    title: 'Viễn Tưỡng',
+    title: '29 July 2021',
   },
   {
     id: '4',
     value: 'lang-man',
-    title: 'Lãng Mạn',
+    title: '30 July 2021',
   },
 ];
 
@@ -121,27 +118,27 @@ export const movieHour = [
   {
     id: '0',
     value: 'all',
-    title: 'Suất chiếu',
+    title: '7:00',
   },
   {
     id: '1',
     value: 'hanh-dong',
-    title: 'Hành Động',
+    title: '9:00',
   },
   {
     id: '2',
     value: 'kinh-di',
-    title: 'Kinh dị',
+    title: '11:00',
   },
   {
     id: '3',
     value: 'vien-tuong',
-    title: 'Viễn Tưỡng',
+    title: '13:00',
   },
   {
     id: '4',
     value: 'lang-man',
-    title: 'Lãng Mạn',
+    title: '18:00',
   },
 ];
 

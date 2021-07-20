@@ -20,6 +20,7 @@ export default function Carousel({ movieList }) {
   const [typeMovie, setTypeMovie] = useState(true);
   // I have to fake type of Movie cause REST API does not support :(
   const fakeTypeMovie = typeMovie ? [4, 12] : [44, 52];
+  const fakeTypeMovie2 = typeMovie ? [14, 22] : [54, 62];
 
   const currentMovieHandler = () => {
     setTypeMovie(true);
@@ -30,34 +31,6 @@ export default function Carousel({ movieList }) {
   };
   return (
     <Wrapper className="section-middle">
-      {/* For screen > 800px */}
-      <Swiper
-        spaceBetween={30}
-        centeredSlides
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        navigation
-        className="mySwiper "
-      >
-        <SwiperSlide className="movie__list">
-          {movieList.slice(4, 12).map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
-        </SwiperSlide>
-        <SwiperSlide className="movie__list">
-          {movieList.slice(10, 18).map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
-        </SwiperSlide>
-        <SwiperSlide className="movie__list">
-          {movieList.slice(18, 26).map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
-        </SwiperSlide>
-      </Swiper>
-      {/* For screen < 800px */}
       <div className="movieList__navigation">
         <button
           type="button"
@@ -74,6 +47,36 @@ export default function Carousel({ movieList }) {
           Sắp chiếu
         </button>
       </div>
+      {/* For screen > 800px */}
+      <Swiper
+        spaceBetween={30}
+        centeredSlides
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
+        navigation
+        className="mySwiper "
+      >
+        <SwiperSlide className="movie__list">
+          {movieList.slice(fakeTypeMovie[0], fakeTypeMovie[1]).map((movie) => (
+            <MovieCard movie={movie} />
+          ))}
+        </SwiperSlide>
+        <SwiperSlide className="movie__list">
+          {movieList
+            .slice(fakeTypeMovie2[0], fakeTypeMovie2[1])
+            .map((movie) => (
+              <MovieCard movie={movie} />
+            ))}
+        </SwiperSlide>
+        <SwiperSlide className="movie__list">
+          {movieList.slice(18, 26).map((movie) => (
+            <MovieCard movie={movie} />
+          ))}
+        </SwiperSlide>
+      </Swiper>
+      {/* For screen < 800px */}
       <div className="movie__list--mobile">
         {movieList.slice(fakeTypeMovie[0], fakeTypeMovie[1]).map((movie) => (
           <MovieCard movie={movie} />
@@ -108,7 +111,9 @@ const Wrapper = styled.div`
       display: none;
     }
     .movieList__navigation {
-      display: none;
+      button {
+        font-size: 1rem;
+      }
     }
     .mySwiper {
       display: block;

@@ -8,6 +8,7 @@ import { getMovieListAction } from '../../redux/actions/getMovieListAction';
 import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import MovieInfor from '../components/MovieDetail.component/MovieInfor.js';
+import Loading from '../components/Loading.js';
 
 function MovieDetailsPage() {
   const dispatch = useDispatch();
@@ -16,9 +17,9 @@ function MovieDetailsPage() {
 
   const uiState = useSelector((state) => state.uiReducer);
   const { isModalShow, trailer } = uiState;
-  // Movie
-  const movieDetail = useSelector(
-    (state) => state.movieDetailReducer.movieDetail
+  // Movie Detail
+  const { movieDetail, isLoading } = useSelector(
+    (state) => state.movieDetailReducer
   );
   const movieList = useSelector((state) => state.movieListReducer.movieList);
   const movie = movieList.find((item) => item.maPhim === Number(params.id));
@@ -34,9 +35,14 @@ function MovieDetailsPage() {
   }, [dispatch, params]);
   console.log(movieDetail);
 
+  // Scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Wrapper>
       <div className="page-100">
+        {isLoading && <Loading />}
         {isModalShow && (
           <div className="section-middle">
             <Backdrop
@@ -48,8 +54,15 @@ function MovieDetailsPage() {
             <Modal trailer={trailer} />
           </div>
         )}
-        <Banner movie={movieDetail || []} params={params} />
-        <MovieInfor movieDetail={movieDetail} movie={movieDetail || []} />
+        {!isLoading && (
+          <div>
+            <Banner movie={movieDetail || []} params={params} />
+            <MovieInfor
+              movieDetail={movieDetail || []}
+              movie={movieDetail || []}
+            />
+          </div>
+        )}
       </div>
     </Wrapper>
   );
@@ -57,17 +70,8 @@ function MovieDetailsPage() {
 
 export default MovieDetailsPage;
 
-const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 110;
-`;
+const Backdrop = styled.div``;
 
 const Wrapper = styled.section`
-  .page-100 {
-    height: 100%;
-  }
   background-color: var(--color-bg);
 `;

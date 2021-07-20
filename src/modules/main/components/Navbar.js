@@ -21,9 +21,9 @@ function Navbar() {
         </div>
         <div className="nav_login">
           <FiUser />
-          <span className="title" to="/sign-in">
+          <Link className="title" to="/sign-in">
             Đăng nhập
-          </span>
+          </Link>
         </div>
         <button
           type="button"
@@ -67,6 +67,9 @@ const Wrapper = styled.nav`
   display: flex;
   align-items: center;
   z-index: 1000;
+  .title{
+    color: var(--color-black);
+  }
   .nav {
     img {
       width: 7rem;
@@ -99,6 +102,7 @@ const Wrapper = styled.nav`
     }
     .nav_login {
         margin: 2rem;
+        gap: var(--gap);
       ${FlexCenter()}
     }
   }
@@ -116,6 +120,7 @@ const Wrapper = styled.nav`
         }
       }
       .nav_login {
+        gap: 1rem;
         ${FlexCenter()}
       }
       .toggle {
