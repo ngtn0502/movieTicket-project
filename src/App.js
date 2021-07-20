@@ -13,6 +13,7 @@ import SignInPage from './modules/main/pages/SignInPage';
 import NewsPage from './modules/main/pages/NewsPages';
 import ErrorPage from './modules/main/pages/ErrorPage';
 import Navbar from './modules/main/components/Navbar.js';
+import Footer from './modules/main/components/Footer.component/Footer';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="/home">
             <HomePage />
           </Route>
-          <Route path="/movie-details/:id">
+          <Route path="/movie-details/:id" exact>
             <MovieDetailsPage />
           </Route>
           <Route path="/sign-in">
@@ -39,6 +40,7 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </>
   );

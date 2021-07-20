@@ -66,7 +66,7 @@ const Wrapper = styled.nav`
   height: 10vh;
   display: flex;
   align-items: center;
-  z-index: 100;
+  z-index: 1000;
   .nav {
     img {
       width: 7rem;

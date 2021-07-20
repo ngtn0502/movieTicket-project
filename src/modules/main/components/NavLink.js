@@ -10,7 +10,7 @@ function NavLink() {
         {navBarLink.map((item) => (
           <li className="nav_link" key={item.id}>
             <Link to={item.path}>
-              <span className="title">{item.title}</span>
+              <span className="nav_title">{item.title}</span>
             </Link>
           </li>
         ))}

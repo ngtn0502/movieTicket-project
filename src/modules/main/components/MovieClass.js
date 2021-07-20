@@ -10,7 +10,7 @@ function MovieClass({ checkClass }) {
 export default MovieClass;
 
 const Wrapper = styled.span`
-  padding: 0 1rem;
+  padding: 0 0.75rem;
   font-size: 1rem;
   border-radius: var(--radius);
   background-color: #00ac4d;
@@ -19,7 +19,7 @@ const Wrapper = styled.span`
 `;
 
 const WrapperC16 = styled.span`
-  padding: 0 1rem;
+  padding: 0 0.75rem;
   font-size: 1rem;
   border-radius: var(--radius);
   background-color: #fb4226;

@@ -19,5 +19,5 @@ export const FlexHCenter = () => css`
 
 export const FlexVCenter = () => css`
   display: flex;
-  align-items: center;
+  justify-content: center;
 `;

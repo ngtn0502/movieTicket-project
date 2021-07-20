@@ -19,8 +19,6 @@ function Modal({ trailer }) {
           id="ytplayer"
           title="youtube"
           type="text/html"
-          width="740"
-          height="490"
           src={trailer}
           frameBorder="0"
         />
@@ -40,17 +38,34 @@ const Wrapper = styled.div`
     z-index: 1000;
     .modal__close {
       position: absolute;
-      top: -2.5rem;
-      right: -2.5rem;
+      top: -2rem;
+      right: -2rem;
     }
   }
   iframe {
     border: 4px solid var(--color-white);
+    width: 300px;
+    height: 250px;
   }
   svg {
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     fill: var(--color-white);
     cursor: pointer;
+  }
+
+  @media screen and (min-width: 800px) {
+    iframe {
+      width: 740px;
+      height: 490px;
+    }
+    .modal__close {
+      top: -2.5rem;
+      right: -2.5rem;
+    }
+    svg {
+      width: 4rem;
+      height: 4rem;
+    }
   }
 `;

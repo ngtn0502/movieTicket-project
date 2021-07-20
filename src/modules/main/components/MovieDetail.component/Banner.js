@@ -4,40 +4,52 @@ import { useDispatch } from 'react-redux';
 import { FaPlay } from 'react-icons/fa';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
 
-// Cause lack of trailer in api i use hard link
+// // i use hard link cause lack of trailer in api
 
-const trailer = 'https://www.youtube.com/embed/K0eDlFX9GMc';
+// const trailer = 'https://www.youtube.com/embed/K0eDlFX9GMc';
 
 function Banner({ movie }) {
   const dispatch = useDispatch();
-
   return (
-    <Wrapper className="movieCard__img">
-      <FaPlay
-        className="playVideo"
-        onClick={() => {
-          dispatch({ type: SHOW_MODAL, payload: trailer });
-        }}
-      />
-      <div className="overlay" />
-      <img src={movie.hinhAnh} alt="movie" />
+    <Wrapper>
+      <div className="movieCard__img">
+        <FaPlay
+          className="playVideo"
+          onClick={() => {
+            dispatch({ type: SHOW_MODAL, payload: movie.trailer });
+          }}
+        />
+        <div className="overlay" />
+        <div className="banner">
+          <div
+            className="banner__img"
+            style={{ backgroundImage: `url(${movie.hinhAnh})` }}
+          />
+        </div>
+      </div>
     </Wrapper>
   );
 }
 
 export default Banner;
 
-const Wrapper = styled.div`
-  img {
+const Wrapper = styled.section`
+  .banner {
     border-radius: var(--radius);
-    display: block;
-    height: 20rem;
-    width: 100%;
+    z-index: 120;
+    .banner__img {
+      width: 100%;
+      height: 30vh;
+      background-position: center center;
+      background-repeat: repeat;
+    }
   }
   .movieCard__img {
     position: relative;
     overflow: hidden;
-
+    &:hover .playVideo {
+      opacity: 1;
+    }
     .playVideo {
       position: absolute;
       height: 3rem;
@@ -51,17 +63,27 @@ const Wrapper = styled.div`
       z-index: 2;
       fill: white;
       &:hover {
+        opacity: 1;
         fill: var(--color-gray-600);
       }
+    }
+    .overlay {
+      opacity: 1;
+      background: linear-gradient(
+        to top,
+        var(--color-bg),
+        rgba(10, 32, 41, 0.25)
+      );
     }
     img {
       cursor: pointer;
     }
-    &:hover .overlay {
-      opacity: 1;
-    }
-    &:hover .playVideo {
-      opacity: 1;
+  }
+  @media screen and (min-width: 700px) {
+    .banner {
+      .banner__img {
+        height: 70vh;
+      }
     }
   }
 `;

@@ -25,12 +25,12 @@ function MovieCard({ movie }) {
           <img src={movie.hinhAnh} alt="movie" />
         </Link>
       </div>
-      <p className="name">
+      <h5 className="name">
         <Link to={`/movie-details/${movie.maPhim}`}>
           <MovieClass checkClass={movie.tenPhim.length % 2 === 0} />
           {movie.tenPhim}
         </Link>
-      </p>
+      </h5>
       <p className="time">{randomDuration()} phút</p>
     </Wrapper>
   );
@@ -79,8 +79,9 @@ const Wrapper = styled.div`
   .name {
     color: var(--color-emphasis-1000);
     padding-top: 1rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     ${FlexHCenter()}
+    line-height: 1.25;
   }
   .time {
     font-size: 1rem;
