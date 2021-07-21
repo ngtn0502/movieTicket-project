@@ -9,6 +9,7 @@ import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import MovieInfor from '../components/MovieDetail.component/MovieInfor.js';
 import Loading from '../components/Loading.js';
+import MovieDetailBooking from '../components/MovieDetail.component/MovieDetailBooking';
 
 function MovieDetailsPage() {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ function MovieDetailsPage() {
               movieDetail={movieDetail || []}
               movie={movieDetail || []}
             />
+            <MovieDetailBooking movie={movieDetail || []} />
           </div>
         )}
       </div>

@@ -87,6 +87,7 @@ export default function Carousel({ movieList }) {
 }
 
 const Wrapper = styled.div`
+  background-attachment: fixed;
   margin-top: 5rem;
   position: relative;
   .mySwiper {

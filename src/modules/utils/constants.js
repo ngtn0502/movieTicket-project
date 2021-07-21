@@ -6,9 +6,6 @@ import {
   FaLinkedin,
 } from 'react-icons/fa';
 
-export const baseUrl = 'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim';
-export const cinemaListUrl =
-  'https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap';
 // Nav bar part
 export const navBarLink = [
   {

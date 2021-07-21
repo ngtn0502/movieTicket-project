@@ -9,6 +9,7 @@ import SearchBar from '../components/SearchBar';
 import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import { getCinemaListAction } from '../../redux/actions/getCinemaListAction';
+import Loading from '../components/Loading.js';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -16,7 +17,9 @@ function HomePage() {
   const uiState = useSelector((state) => state.uiReducer);
   const { isModalShow, trailer } = uiState;
   // movieList
-  const movieList = useSelector((state) => state.movieListReducer.movieList);
+  const { movieList, isLoading } = useSelector(
+    (state) => state.movieListReducer
+  );
   // cinema List
   useEffect(() => {
     // Dispatch action creator thunk to fetch data in action component
@@ -25,6 +28,7 @@ function HomePage() {
   // Get List Cinema
   return (
     <Wrapper className="page-100">
+      {isLoading && <Loading />}
       {isModalShow && (
         <>
           <Backdrop
@@ -36,9 +40,13 @@ function HomePage() {
           <Modal trailer={trailer} />
         </>
       )}
-      <Carousel movieList={movieList} className="home__carousel" />
-      <SearchBar className="home__searchbar" />
-      <MovieList movieList={movieList} className="home__movieList" />
+      {!isLoading && (
+        <div>
+          <Carousel movieList={movieList} className="home__carousel" />
+          <SearchBar className="home__searchbar" />
+          <MovieList movieList={movieList} className="home__movieList" />
+        </div>
+      )}
     </Wrapper>
   );
 }
@@ -49,7 +57,6 @@ const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
   width: 100%;
   z-index: 110;
 `;

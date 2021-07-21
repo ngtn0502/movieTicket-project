@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -14,33 +14,39 @@ import NewsPage from './modules/main/pages/NewsPages';
 import ErrorPage from './modules/main/pages/ErrorPage';
 import Navbar from './modules/main/components/Navbar.js';
 import Footer from './modules/main/components/Footer.component/Footer';
+import BookingPage from './modules/main/pages/BookingPage.js';
 
 function App() {
   return (
     <>
       <Router>
-        <Navbar />
         <Switch>
-          <Route path="/" exact>
-            <Redirect to="/home" />
-          </Route>
-          <Route path="/home">
-            <HomePage />
-          </Route>
-          <Route path="/movie-details/:id" exact>
-            <MovieDetailsPage />
-          </Route>
-          <Route path="/sign-in">
+          <Route path="/sign-in" exact>
             <SignInPage />
           </Route>
-          <Route path="/news">
-            <NewsPage />
-          </Route>
-          <Route path="*">
-            <ErrorPage />
-          </Route>
+          <>
+            <Navbar />
+            <Route path="/" exact>
+              <Redirect to="/home" />
+            </Route>
+            <Route path="/home" exact>
+              <HomePage />
+            </Route>
+            <Route path="/movie-details/:id" exact>
+              <MovieDetailsPage />
+            </Route>
+            <Route path="/booking/:ids" exact>
+              <BookingPage />
+            </Route>
+            <Route path="/news" exact>
+              <NewsPage />
+            </Route>
+            {/* <Route path="*" exact>
+              <Redirect to="/home" />
+            </Route> */}
+            <Footer />
+          </>
         </Switch>
-        <Footer />
       </Router>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FiUser, FiMenu } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -8,30 +8,46 @@ import NavLink from './NavLink';
 
 function Navbar() {
   const [isSideBarShow, setisSideBarShow] = useState(false);
+  // Scroll down animation
+  const [isSideBarScroll, setIsSideBarScroll] = useState(false);
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 150) {
+        setIsSideBarScroll(true);
+      } else {
+        setIsSideBarScroll(false);
+      }
+      return () => {
+        window.removeEventListener('scroll');
+      };
+    });
+  }, [isSideBarScroll]);
   return (
     <Wrapper>
-      <div className="nav">
-        <div className="nav_logo">
-          <Link to="/home">
-            <img src={logo} alt="logo" />
-          </Link>
+      <div className={`nav__bar ${isSideBarScroll && 'nav__scrollDown'}`}>
+        <div className="nav">
+          <div className="nav_logo">
+            <Link to="/home">
+              <img src={logo} alt="logo" />
+            </Link>
+          </div>
+          <div className="nav_links">
+            <NavLink />
+          </div>
+          <div className="nav_login">
+            <FiUser />
+            <Link className="nav_login--title" to="/sign-in">
+              Đăng nhập
+            </Link>
+          </div>
+          <button
+            type="button"
+            className="toggle"
+            onClick={() => setisSideBarShow((prev) => !prev)}
+          >
+            <FiMenu />
+          </button>
         </div>
-        <div className="nav_links">
-          <NavLink />
-        </div>
-        <div className="nav_login">
-          <FiUser />
-          <Link className="title" to="/sign-in">
-            Đăng nhập
-          </Link>
-        </div>
-        <button
-          type="button"
-          className="toggle"
-          onClick={() => setisSideBarShow((prev) => !prev)}
-        >
-          <FiMenu />
-        </button>
       </div>
       <div>
         {/* eslint-disable */}
@@ -45,7 +61,9 @@ function Navbar() {
           <div className='sideBar__links'>
             <div className='nav_login'>
               <FiUser />
-              <Link to="/sign-in" className='title'>Đăng nhập</Link>
+              <Link to='/sign-in' className='nav_login--title'>
+                Đăng nhập
+              </Link>
             </div>
             <NavLink />
           </div>
@@ -58,33 +76,6 @@ function Navbar() {
 export default Navbar;
 
 const Wrapper = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--color-white);
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-  .title{
-    color: var(--color-black);
-  }
-  .nav {
-    img {
-      width: 7rem;
-    }
-    width: 90%;
-    ${Flex({ justify: 'space-between' })}
-    margin: 0 auto;
-    .nav_links,
-    .nav_login {
-      display: none;
-    }
-    .toggle {
-      ${FlexCenter()}
-    }
-  }
   .sideBar {
     position: fixed;
     right: 0;
@@ -101,9 +92,15 @@ const Wrapper = styled.nav`
       }
     }
     .nav_login {
-        margin: 2rem;
-        gap: var(--gap);
-      ${FlexCenter()}
+      margin: 2rem;
+      gap: var(--gap);
+      color: var(--color-gray-700);
+      ${FlexCenter()};
+      .nav_login--title {
+        font-weight: 400;
+        font-size: 1.25rem;
+        color: var(--color-gray-700);
+      }
     }
   }
 
@@ -111,6 +108,44 @@ const Wrapper = styled.nav`
     transform: translate(0);
   }
   @media (min-width: 800px) {
+    .nav__bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+      background-color: var(--color-white);
+      transition: var(--transition);
+    }
+    .nav {
+      img {
+        width: 7rem;
+      }
+      width: 90%;
+      ${Flex({ justify: 'space-between' })}
+      margin: 0 auto;
+      .nav_links,
+      .nav_login {
+        display: none;
+      }
+      .toggle {
+        ${FlexCenter()}
+      }
+    }
+    .nav__scrollDown {
+      background-color: rgba(0, 0, 0, 0.8);
+      li:hover {
+        background-color: var(--color-redNetflix);
+      }
+      .nav_links,
+      .nav_title,
+      .nav_login--title {
+        color: white !important;
+      }
+    }
     .nav {
       .nav_links {
         ${FlexVCenter()}
@@ -122,6 +157,11 @@ const Wrapper = styled.nav`
       .nav_login {
         gap: 1rem;
         ${FlexCenter()}
+        color: var(--color-gray-700);
+        .nav_login--title {
+          font-weight: 400;
+          color: var(--color-gray-700);
+        }
       }
       .toggle {
         display: none;

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Provider } from 'react-redux';
+import { StylesProvider } from '@material-ui/core/styles';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Store } from './modules/redux/store/index';
@@ -9,7 +10,9 @@ import { Store } from './modules/redux/store/index';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={Store}>
-      <App />
+      <StylesProvider injectFirst>
+        <App />
+      </StylesProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

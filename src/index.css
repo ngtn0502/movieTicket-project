@@ -16,7 +16,7 @@ Variables
   --color-gray-400: #ccd0d5;
   --color-gray-500: #bec3c9;
   --color-gray-600: #8d949e;
-  --color-gray-700: #606770;
+  --color-gray-700: #777;
   --color-gray-800: #444950;
   --color-gray-900: #1c1e21;
   --color-gray-1000: var(--color-black);
@@ -37,7 +37,7 @@ Variables
   /* background Color */
   --color-bg: rgb(10, 32, 41);
   --color-overlay: rgba(10, 32, 41, 0.9);
-
+  --color-redNetflix: #e50914;
   --color-title: #9b9b9b;
   --color-facebook: rgb(35, 84, 161);
   /*  */
@@ -153,7 +153,7 @@ h5 {
 p {
   padding-top: 0;
   margin-bottom: 0.25rem;
-  color: var(--clr-grey-3);
+  color: var(--color-title);
 }
 span {
   font-size: 1rem;
@@ -308,12 +308,12 @@ svg {
 
 .btn__watching {
   text-transform: uppercase;
-  background: rgb(221, 0, 63);
+  background: var(--color-redNetflix);
   color: var(--color-gray-100);
   padding: 0.75rem 1rem;
   letter-spacing: var(--spacing);
   display: inline-block;
-  font-weight: 400;
+  font-weight: 600;
   transition: var(--transition);
   font-size: 0.875rem;
   cursor: pointer;
@@ -356,8 +356,7 @@ svg {
   margin-right: auto;
 } */
 .page-100 {
-  min-height: calc(100vh - 10vh);
-  padding: 5rem 0;
+  padding: 4rem 0;
 }
 .page {
   min-height: calc(100vh - (20vh + 10rem));

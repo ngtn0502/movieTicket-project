@@ -1,4 +1,4 @@
-import { baseUrl } from '../../utils/constants.js';
+import { baseUrl } from '../../../APIs/configs/api.configs';
 import {
   GET_MOVIE_DETAIL_LOADING,
   GET_MOVIE_DETAIL_SUCCESS,
@@ -10,7 +10,9 @@ export const getMovieDetailAction = (id) => async (dispatch) => {
     dispatch({
       type: GET_MOVIE_DETAIL_LOADING,
     });
-    const response = await fetch(`${baseUrl}/LayThongTinPhim?MaPhim=${id}`);
+    const response = await fetch(
+      `${baseUrl}/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`
+    );
     const data = await response.json();
     return data;
   };
