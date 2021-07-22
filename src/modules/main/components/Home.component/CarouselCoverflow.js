@@ -63,7 +63,7 @@ const Wrapper = styled.div`
     position: relative;
     z-index: 20;
     padding-top: 3rem;
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
   }
   .carousel__slider {
     position: relative;
@@ -90,7 +90,7 @@ const Wrapper = styled.div`
 
   .slider-left,
   .slider-right {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .slider-single {
     display: flex;
@@ -102,12 +102,28 @@ const Wrapper = styled.div`
       opacity: 0.7 !important;
     }
   }
+  .react-3d-carousel .slider-container .slider-content {
+    width: 80%;
+  }
   .slider-single-content {
     width: 80% !important;
     box-shadow: 10px 10px 10px rgb(0 0 0 / 50%);
   }
   .slider {
-    width: 800px;
-    height: 700px;
+    width: 500px;
+    height: 450px;
+  }
+  @media screen and (min-width: 700px) {
+    .App {
+      padding-bottom: 10rem;
+    }
+    .slider {
+      width: 500px;
+      height: 700px;
+    }
+    .slider-left,
+    .slider-right {
+      font-size: 2rem;
+    }
   }
 `;

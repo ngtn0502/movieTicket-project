@@ -76,6 +76,44 @@ function Navbar() {
 export default Navbar;
 
 const Wrapper = styled.nav`
+  .nav__bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    z-index: 1000;
+    background-color: rgba(300, 300, 300, 0.1);
+    transition: var(--transition);
+  }
+  .nav {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      width: 8rem;
+      height: 3rem;
+      margin: 0 1rem;
+    }
+    .toggle{
+      svg{
+        line{
+          color: var(--color-white);
+        }
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+      margin: 0 1rem;
+    }
+  }
+  .nav__scrollDown {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .nav_links,
+  .nav_login {
+    display: none;
+  }
   .sideBar {
     position: fixed;
     right: 0;

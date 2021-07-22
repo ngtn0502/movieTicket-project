@@ -10,16 +10,15 @@ import cinestar from '../../../../assets/img/cinema/cinestar.png';
 import galaxy from '../../../../assets/img/cinema/galaxy-cinema.png';
 import lotte from '../../../../assets/img/cinema/lotte-cinema.png';
 import megas from '../../../../assets/img/cinema/megags.png';
-import BookingTable from './BookingTable.js';
 
 //
 function MovieDetailBooking({ movie }) {
   const history = useHistory();
   const [cinema, setCinema] = useState('CGV');
-  // Tương ứng vớI mỗi click event trên logo rạp ta lọc ra các lịch chiếu phim `params` của rạp đó và truyền vào booking table
   const maHeThongRap = movie.lichChieu?.filter(
     (item) => item.thongTinRap.maHeThongRap === cinema
   );
+
   return (
     <Wrapper>
       {/* eslint-disable */}
@@ -91,10 +90,33 @@ function MovieDetailBooking({ movie }) {
               <div className={`${cinema === 'MegaGS' ? null : 'overlay'}`} />
             </div>
           </div>
-          {/* Booking  */}
-          <div className='booking__table'>
-            <BookingTable movie={maHeThongRap}></BookingTable>
-          </div>
+          {/* Table */}
+          <table className='booking__table'>
+            <thead>
+              <tr>
+                <th>TÊN PHIM</th>
+                <th>GIÁ VÉ</th>
+                <th>TÊN RẠP</th>
+                <th>NGÀY GIỜ CHIẾU</th>
+              </tr>
+            </thead>
+            <tbody>
+              {maHeThongRap?.slice(0, 15).map((item, index) => (
+                <tr className={index % 2 ? 'active-row' : null} key={index}>
+                  <td>{item.tenPhim}</td>
+                  <td>{item.giaVe}</td>
+                  <td>{item.thongTinRap.tenCumRap}</td>
+                  <td>{format("dd/MM/yy ___ hh:mm",new Date(item.ngayChieuGioChieu))}</td>
+                  <td>
+                    <button className='btn2' type='button' onClick={()=>{history.push(`/booking/${item.maLichChieu}`)}}>
+                      Đặt vé
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
         </div>
       </main>
     </Wrapper>
@@ -106,16 +128,14 @@ export default MovieDetailBooking;
 const Wrapper = styled.section`
   margin-top: 5rem;
   .booking__title {
-    font-size: 2rem;
+      font-size: 2rem;
     text-align: center;
     margin: 5rem 0;
     color: var(--color-white);
   }
   .booking__cinema {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem;
     .booking__cinema--main {
       position: relative;
       .overlay {
@@ -132,7 +152,44 @@ const Wrapper = styled.section`
       margin-right: 2rem;
     }
   }
-  @media screen and (min-width: 700px){
+  .booking__table {
+    margin: 5rem auto;
+    width: 100%;
+    gap: 2rem;
+    border-collapse: collapse;
+    tr {
+      padding-bottom: 50px;
+      border-top: none;
+      border-bottom: none !important;
+      color: #fff;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+      text-align: center;
+    }
+    thead {
+      th {
+        font-size: 1.25rem;
+      }
+    }
 
+    tbody {
+      td {
+        font-size: 1.25em;
+        padding: 2rem 0;
+        color: var(--color-gray-700);
+        transition: var(--transition);
+      }
+      tr:hover td {
+        color: var(--color-white);
+      }
+    }
+    .active-row {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    .btn2 {
+      color: var(--color-white);
+      border-color: var(--color-white);
+    }
   }
 `;

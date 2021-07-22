@@ -38,6 +38,7 @@ const Wrapper = styled.section`
     border-radius: var(--radius);
     z-index: 120;
     .banner__img {
+      background-attachment: fixed;
       width: 100%;
       height: 30vh;
       background-position: center center;

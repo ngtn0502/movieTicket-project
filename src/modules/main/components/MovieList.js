@@ -100,7 +100,8 @@ const Wrapper = styled.div`
   /* navigation */
   .movieList__navigation {
     margin-bottom: 5rem;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     button {
       margin: 0 2rem;
     }

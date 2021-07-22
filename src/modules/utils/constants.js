@@ -169,6 +169,17 @@ export const movieDetailContent = [
   },
 ];
 
+// map
+export const mapCGV = (
+  <iframe
+    title="cgv"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.435441945757!2d106.69976411474897!3d10.777923392320528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f48779307a5%3A0x9ba2ed64e9e3ef7b!2zQ0dWIFZpbmNvbSDEkOG7k25nIEto4bufaQ!5e0!3m2!1sen!2s!4v1626956986828!5m2!1sen!2s"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+  />
+);
+
 // Footer part
 
 export const links = [
