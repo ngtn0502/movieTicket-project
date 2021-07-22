@@ -26,7 +26,7 @@ function SearchBar({ className }) {
             <div className="search__field">
               <CinemaSearch />
             </div>
-            {/* movie date */}
+            {/* movie date */}s
             <div className="search__field">
               <DateSearch />
             </div>

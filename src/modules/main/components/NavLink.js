@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     transition: var(--transition);
     border-radius: var(--radius);
     &:hover {
-      background-color: var(--color-emphasis-300);
+      background-color: var(--color-redNetflix);
     }
   }
 `;

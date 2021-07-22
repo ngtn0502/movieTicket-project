@@ -88,7 +88,6 @@ export default function Carousel({ movieList }) {
 
 const Wrapper = styled.div`
   background-attachment: fixed;
-  margin-top: 5rem;
   position: relative;
   .mySwiper {
     display: none;
@@ -107,7 +106,7 @@ const Wrapper = styled.div`
     }
   }
   @media screen and (min-width: 800px) {
-    margin-top: 10rem;
+    margin-top: 7rem;
     .movie__list--mobile {
       display: none;
     }
@@ -137,7 +136,7 @@ const Wrapper = styled.div`
     .swiper-button-next {
       width: 5rem;
       height: 5rem;
-      color: black;
+      color: var(--color-white);
       z-index: 200;
       visibility: visible;
       top: 40%;

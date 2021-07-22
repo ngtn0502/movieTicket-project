@@ -6,6 +6,9 @@ import {
   FaLinkedin,
 } from 'react-icons/fa';
 
+import bgPopcorn from '../../assets/img/bg-popcorn.jpg';
+
+export const carouselBackground = bgPopcorn;
 // Nav bar part
 export const navBarLink = [
   {

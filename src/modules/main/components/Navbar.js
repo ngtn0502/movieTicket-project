@@ -12,7 +12,7 @@ function Navbar() {
   const [isSideBarScroll, setIsSideBarScroll] = useState(false);
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 150) {
+      if (window.scrollY > 100) {
         setIsSideBarScroll(true);
       } else {
         setIsSideBarScroll(false);
@@ -117,8 +117,13 @@ const Wrapper = styled.nav`
       display: flex;
       align-items: center;
       z-index: 1000;
-      background-color: var(--color-white);
+      background-color: rgba(300, 300, 300, 0.1);
       transition: var(--transition);
+      .nav_links,
+      .nav_title,
+      .nav_login--title {
+        color: white !important;
+      }
     }
     .nav {
       img {

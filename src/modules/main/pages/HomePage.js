@@ -10,6 +10,7 @@ import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import { getCinemaListAction } from '../../redux/actions/getCinemaListAction';
 import Loading from '../components/Loading.js';
+import CarouselCoverflow from '../components/Home.component/CarouselCoverflow';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -42,7 +43,8 @@ function HomePage() {
       )}
       {!isLoading && (
         <div>
-          <Carousel movieList={movieList} className="home__carousel" />
+          <CarouselCoverflow movieList={movieList} />
+          {/* <Carousel movieList={movieList} className="home__carousel" /> */}
           <SearchBar className="home__searchbar" />
           <MovieList movieList={movieList} className="home__movieList" />
         </div>
@@ -64,6 +66,7 @@ const Backdrop = styled.div`
 const Wrapper = styled.section`
   .home__searchbar {
     display: none;
+    margin-top: 0rem;
   }
   @media screen and (min-width: 1000px) {
     .home__searchbar {

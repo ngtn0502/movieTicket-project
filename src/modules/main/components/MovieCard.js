@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   img {
     border-radius: var(--radius);
     display: block;
-    height: 20rem;
+    height: 25rem;
     width: 100%;
   }
   .movieCard__img {
@@ -85,6 +85,6 @@ const Wrapper = styled.div`
   }
   .time {
     font-size: 1rem;
-    color: var(--color-gray--700);
+    color: var(--color-sub);
   }
 `;
