@@ -79,20 +79,30 @@ const Wrapper = styled.section`
   margin-top: 3rem;
 
   .booking__table {
-    display: grid;
-    grid-template-columns: 450px 1fr;
-    gap: 5rem;
     iframe {
       width: 100%;
-      height: 600px;
+      height: 500px;
     }
   }
   .booking__table--map {
     display: none;
   }
   @media screen and (min-width: 1000px) {
+    .booking__table {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 5rem;
+    iframe {
+      width: 100%;
+      height: 500px;
+    }
+  }
     .booking__table--map {
       display: block;
+    }
+    .booking__info{
+      width: 100%;
+      overflow: hidden;
     }
   }
 `;

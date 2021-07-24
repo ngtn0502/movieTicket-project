@@ -7,6 +7,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { useMediaQuery } from '@material-ui/core';
 import HomePage from './modules/main/pages/HomePage';
 import MovieDetailsPage from './modules/main/pages/MovieDetailsPage';
 import SignInPage from './modules/main/pages/SignInPage';
@@ -17,8 +19,19 @@ import Footer from './modules/main/components/Footer.component/Footer';
 import BookingPage from './modules/main/pages/BookingPage.js';
 
 function App() {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode]
+  );
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Router>
         <Switch>
           <Route path="/sign-in" exact>
@@ -48,7 +61,7 @@ function App() {
           </>
         </Switch>
       </Router>
-    </>
+    </ThemeProvider>
   );
 }
 
