@@ -5,12 +5,12 @@ import {
   movieCine,
   movieHour,
   movieDate,
-} from '../../utils/constants';
-import { FlexCenter, Flex } from '../../utils/mixin.js';
-import MovieSearch from './SearchForm/MovieSearch';
-import CinemaSearch from './SearchForm/CinemaSearch';
-import DateSearch from './SearchForm/DateSearch';
-import HourSearch from './SearchForm/HourSearch';
+} from '../../../utils/constants';
+import { FlexCenter, Flex } from '../../../utils/mixin.js';
+import MovieSearch from '../SearchForm/MovieSearch';
+import CinemaSearch from '../SearchForm/CinemaSearch';
+import DateSearch from '../SearchForm/DateSearch';
+import HourSearch from '../SearchForm/HourSearch';
 
 function SearchBar({ className }) {
   return (

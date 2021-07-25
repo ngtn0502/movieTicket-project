@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FiUser, FiMenu } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/img/logo-full.png';
-import { Flex, FlexCenter, FlexVCenter } from '../../utils/mixin';
+import logo from '../../../../assets/img/logo-full.png';
+import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
 import NavLink from './NavLink';
 
 function Navbar() {
@@ -188,6 +188,7 @@ const Wrapper = styled.nav`
       .nav_login--title {
         color: white !important;
       }
+
     }
     .nav {
       .nav_links {

@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import format from 'date-format';
-import { mapCGV } from '../../../utils/constants.js';
+import {
+  mapCGV,
+  mapLotte,
+  mapBHD,
+  mapCineStar,
+  mapGalaxy,
+  mapMegaGS,
+} from '../../../utils/constants.js';
 import { getDay } from '../../../utils/helper.js';
 import BookingInfo from './BookingInfo.js';
 
-function BookingTable({ movie }) {
+function BookingTable({ movie, cinema }) {
   // movie prop trả về là lịch chiếu phim tương ứng với rạp phim đưỢc click
   // Lấy giá trị của mỗi click event vào ngày chiếu phim
-  const [ngayChieu, setNgayChieu] = useState(['Tuesday']);
+  const [ngayChieu, setNgayChieu] = useState(['Thứ Ba']);
   // Day of week
   //   Mục đích: lấy giá trị của tất cả ngày chiếu bộ phim này trong tuần - tương ứng với ngày chiếu của nó (do API trả về  phức tạp)
   //   Lấy ngày chiếu giờ chiếu và format nó thành tháng/ngày/năm do ta cần lọc những giá trị ngày trong tuần duy nhất
@@ -21,51 +28,41 @@ function BookingTable({ movie }) {
   const dateChieu = movie?.filter(
     (item) => ngayChieu[0] === getDay(new Date(item.ngayChieuGioChieu))
   );
-  console.log(dateChieu);
 
-  //   console.log(dateChieu);
+  const getCinema = () => {
+    if (cinema === 'CGV') {
+      return mapCGV;
+    }
+    if (cinema === 'LotteCinima') {
+      return mapLotte;
+    }
+    if (cinema === 'BHDStar') {
+      return mapBHD;
+    }
+    if (cinema === 'CineStar') {
+      return mapCineStar;
+    }
+    if (cinema === 'Galaxy') {
+      return mapGalaxy;
+    }
+    if (cinema === 'MegaGS') {
+      return mapMegaGS;
+    }
+  };
+
   return (
     <Wrapper>
       {/* eslint-disable */}
       <div className='booking__table'>
         <div className='booking__table--map'>
-          {/* <h4>{item.thongTinRap.tenCumRap}</h4> */}
-          <div>{mapCGV}</div>
+          <div>{getCinema()}</div>
         </div>
         <div className='booking__info'>
-          {/* <div className='booking__info--date'>
-            {ngayChieuAllUnique?.map((item, index) => {
-              return (
-                <div
-                  onClick={() => {
-                    setNgayChieu([getDay(new Date(item))]);
-                  }}
-                  className='date'
-                >
-                  <p className='date__weekday'>{getDay(new Date(item))}</p>
-                  <p className='date__date'>
-                    {format(`dd / MM`, new Date(item))}
-                  </p>
-                </div>
-              );
-            })}
-          </div> */}
-          {/*  */}
-          {/* <div className='booking__info--hour'>
-            {dateChieu?.map((item) => {
-              return (
-                <div>
-                  <span>
-                    {format(`hh:mm`, new Date(item.ngayChieuGioChieu))}
-                  </span>
-                </div>
-              );
-            })}
-          </div> */}
           <BookingInfo
             ngayChieuAllUnique={ngayChieuAllUnique}
             dateChieu={dateChieu}
             setNgayChieu={setNgayChieu}
+            getCinema={getCinema}
           ></BookingInfo>
         </div>
       </div>
@@ -79,9 +76,9 @@ const Wrapper = styled.section`
   margin-top: 3rem;
 
   .booking__table {
-    iframe {
+    img {
       width: 100%;
-      height: 500px;
+      height: 400px;
     }
   }
   .booking__table--map {
@@ -89,18 +86,18 @@ const Wrapper = styled.section`
   }
   @media screen and (min-width: 1000px) {
     .booking__table {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 5rem;
-    iframe {
-      width: 100%;
-      height: 500px;
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 2rem;
+      img {
+        width: 100%;
+        height: 400px;
+      }
     }
-  }
     .booking__table--map {
       display: block;
     }
-    .booking__info{
+    .booking__info {
       width: 100%;
       overflow: hidden;
     }

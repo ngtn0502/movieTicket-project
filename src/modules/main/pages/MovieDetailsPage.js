@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getMovieDetailAction } from '../../redux/actions/getMovieDetailAction';
+import { getMovieDetailAction } from '../../redux/actions/MovieAction/getMovieDetailAction';
 import Banner from '../components/MovieDetail.component/Banner';
-import { getMovieListAction } from '../../redux/actions/getMovieListAction';
+import { getMovieListAction } from '../../redux/actions/MovieAction/getMovieListAction';
 import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
-import MovieInfor from '../components/MovieDetail.component/MovieInfor.js';
+import MovieInfor from '../components/MovieDetail.component/MovieInfor';
 import Loading from '../components/Loading.js';
 import MovieDetailBooking from '../components/MovieDetail.component/MovieDetailBooking';
 

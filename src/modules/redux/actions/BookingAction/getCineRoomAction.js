@@ -1,10 +1,10 @@
-import { baseUrl } from '../../../APIs/configs/api.configs';
+import { baseUrl } from '../../../../APIs/configs/api.configs';
 import {
   GET_CINE_ROOM_ERROR,
   GET_CINE_ROOM_LOADING,
   GET_CINE_ROOM_SUCCESS,
-} from './constantsAction.js';
-
+} from '../constantsAction.js';
+// Lấy thông tin phòng vé theo mã lịch chiếu
 export const getCineRoomAction = (params) => async (dispatch) => {
   //
   const sendRequest = async (id) => {

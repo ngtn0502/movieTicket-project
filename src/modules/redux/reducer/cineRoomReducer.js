@@ -7,6 +7,8 @@ import {
 const init = {
   cineRoomList: {},
 };
+
+// Handle fetch API get danh sách phòng chiếu của từng bộ phim tương ứng
 export const cineRoomReducer = (state = init, action) => {
   if (action.type === GET_CINE_ROOM_SUCCESS) {
     return {

@@ -27,3 +27,7 @@ export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL';
 export const GET_CINE_ROOM_LOADING = ' GET_CINE_ROOM_LOADING';
 export const GET_CINE_ROOM_SUCCESS = ' GET_CINE_ROOM_SUCCESS';
 export const GET_CINE_ROOM_ERROR = ' GET_CINE_ROOM_ERROR';
+
+// Booking Page
+
+export const CHOOSING_SEAT = 'CHOOSING_SEAT';

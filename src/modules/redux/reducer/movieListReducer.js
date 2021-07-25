@@ -8,6 +8,7 @@ const init = {
   movieList: [],
 };
 
+// Handle get danh sách phim
 export const movieListReducer = (state = init, action) => {
   if (action.type === GET_MOVIE_LIST_LOADING) {
     //

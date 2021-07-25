@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { FaPlay } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import MovieClass from './MovieClass';
-import { FlexHCenter } from '../../utils/mixin';
-import { randomDuration } from '../../utils/helper';
+import { FlexHCenter } from '../../../utils/mixin';
+import { randomDuration } from '../../../utils/helper';
 // import playVideo from '../../../assets/img/play-video.png';
-import { SHOW_MODAL } from '../../redux/actions/constantsAction';
+import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
 
 function MovieCard({ movie }) {
   const dispatch = useDispatch();

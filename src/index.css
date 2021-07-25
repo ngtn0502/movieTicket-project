@@ -34,12 +34,14 @@ Variables
   --color-emphasis-800: var(--color-gray-800);
   --color-emphasis-900: var(--color-gray-900);
   --color-emphasis-1000: var(--color-gray-1000);
-  /* background Color */
+  /* personal Color */
   --color-bg: rgb(10, 32, 41);
   --color-overlay: rgba(10, 32, 41, 0.9);
   --color-redNetflix: #e50914;
   --color-title: #9b9b9b;
   --color-facebook: rgb(35, 84, 161);
+  --color-seat: #444451;
+  --color-choosingSeat: #f7b500;
   /*  */
   --dark-value: 10%;
   --darker-value: 15%;
@@ -123,8 +125,9 @@ a {
   color: var(--color-white);
 }
 hr {
+  position: relative;
   border: none;
-  border-top: 1px solid var(--clr-grey-8);
+  border-top: 1px solid var(--color-gray-800);
 }
 h1,
 h2,
@@ -153,7 +156,7 @@ h5 {
 p {
   padding-top: 0;
   margin-bottom: 0.25rem;
-  color: var(--color-title);
+  /* color: var(--color-title); */
 }
 span {
   font-size: 1rem;

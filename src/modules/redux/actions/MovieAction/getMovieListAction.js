@@ -2,8 +2,8 @@ import {
   GET_MOVIE_LIST_LOADING,
   GET_MOVIE_LIST_SUCCESS,
   GET_MOVIE_LIST_ERROR,
-} from './constantsAction';
-import { baseUrl } from '../../../APIs/configs/api.configs';
+} from '../constantsAction';
+import { baseUrl } from '../../../../APIs/configs/api.configs';
 
 // Create action creator thunk to fetch data from API
 // best practice: doing async code in action creator thunk => maximize performance > component

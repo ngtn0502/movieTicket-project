@@ -2,15 +2,13 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovieListAction } from '../../redux/actions/getMovieListAction';
-import Carousel from '../components/Carousel';
-import MovieList from '../components/MovieList';
-import SearchBar from '../components/SearchBar';
+import { getMovieListAction } from '../../redux/actions/MovieAction/getMovieListAction';
+import CarouselCoverflow from '../components/Home.component/CarouselCoverflow';
+import MovieList from '../components/Home.component/MovieList';
+import SearchBar from '../components/Home.component/SearchBar';
 import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
-import { getCinemaListAction } from '../../redux/actions/getCinemaListAction';
 import Loading from '../components/Loading.js';
-import CarouselCoverflow from '../components/Home.component/CarouselCoverflow';
 
 function HomePage() {
   const dispatch = useDispatch();

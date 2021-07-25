@@ -7,7 +7,7 @@ import Select from '@material-ui/core/Select';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { movieCategory } from '../../../utils/constants';
-import { getMovieDetailAction } from '../../../redux/actions/getMovieDetailAction';
+import { getMovieDetailAction } from '../../../redux/actions/MovieAction/getMovieDetailAction';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

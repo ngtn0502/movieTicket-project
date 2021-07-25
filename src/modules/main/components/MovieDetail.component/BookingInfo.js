@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import format from 'date-format';
 import { getDay } from '../../../utils/helper.js';
 import { useHistory } from 'react-router';
-
+import { FlexHCenter } from './../../../utils/mixin';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'rgba(300,300,300,0.1);',
   },
 }));
 
@@ -43,11 +43,11 @@ export default function BookingInfo({
   ngayChieuAllUnique,
   dateChieu,
   setNgayChieu,
+  getCinema,
 }) {
   const history = useHistory();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -55,6 +55,23 @@ export default function BookingInfo({
   const ngayChieuHandler = (item) => {
     setNgayChieu([getDay(new Date(item))]);
   };
+  // Logic tìm toàn bộ lịch chiếu của bộ phim trong cùng một cụm rạp - đảm bảo trong cùng một cụm rạp lịch chiếu của một bộ phim là duy nhất
+  const lichChieuDuyNhat = (dateChieu) => {
+    const arr = [];
+    dateChieu?.forEach((item) => {
+      const index = arr.findIndex(
+        (product) => product.maCumRap === item.thongTinRap.maCumRap
+      );
+      if (index === -1) {
+        arr.push({ maCumRap: item.thongTinRap.maCumRap, lichChieu: [item] });
+      } else {
+        arr[index]?.lichChieu?.push(item);
+      }
+    });
+    return arr;
+  };
+  // debugger;
+  console.log(lichChieuDuyNhat(dateChieu));
   return (
     <Wrapper>
       <div className={classes.root}>
@@ -79,27 +96,66 @@ export default function BookingInfo({
                   }
                   onClick={ngayChieuHandler.bind(null, item)}
                   className='date'
+                  key={i}
                 ></Tab>
               );
             })}
             ;
           </Tabs>
         </AppBar>
-        {dateChieu?.map((item, i) => {
+        {/* {dateChieu?.map((item, i) => {
+          console.log(item.thongTinRap.tenCumRap);
           return (
-            <TabPanel value={value} index={i} className='tabPanel'>
+            <TabPanel value={value} index={i} className='tabPanel' key={i}>
+              <div className='tabPanel__btn'>
               <p>{item.thongTinRap.tenCumRap} - Rạp 2D</p>
-              {dateChieu?.map((item) => {
+                {dateChieu?.map((item) => {
+                  return (
+                    <button
+                      type='button'
+                      className='btn'
+                      onClick={() => {
+                        history.push(`/booking/${item.maLichChieu}`);
+                      }}
+                    >
+                      {format(`hh:mm`, new Date(item.ngayChieuGioChieu))}
+                    </button>
+                  );
+                })}
+              </div>
+            </TabPanel>
+          );
+        })} */}
+        {/*  */}
+        {/*  */}
+        {lichChieuDuyNhat(dateChieu)?.map((_, i) => {
+          return (
+            <TabPanel value={value} index={i} className='tabPanel' key={i}>
+              {lichChieuDuyNhat(dateChieu)?.map((item, index) => {
                 return (
-                  <button
-                    type='button'
-                    className='btn'
-                    onClick={() => {
-                      history.push(`/booking/${item.maLichChieu}`);
-                    }}
-                  >
-                    {format(`hh:mm`, new Date(item.ngayChieuGioChieu))}
-                  </button>
+                  <div key={index}>
+                    <p>
+                      {getCinema()} {item.lichChieu[0].thongTinRap.tenCumRap}
+                    </p>
+                    <div className='tabPanel__btn'>
+                      {item.lichChieu.map((product) => {
+                        return (
+                          <button
+                            type='button'
+                            className='btn '
+                            onClick={() => {
+                              history.push(`/booking/${product.maLichChieu}`);
+                            }}
+                          >
+                            {format(
+                              `hh:mm`,
+                              new Date(product.ngayChieuGioChieu)
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 );
               })}
             </TabPanel>
@@ -113,15 +169,36 @@ export default function BookingInfo({
 const Wrapper = styled.section`
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  .Mui-selected {
+    .date__weekday {
+      color: var(--color-redNetflix);
+    }
+  }
   .btn {
     border: 1px solid black;
-    margin: 1rem 1rem;
   }
   .tabPanel {
     p {
+      margin: 1rem 0;
       font-size: 1.5rem;
       color: var(--color-white);
+      ${FlexHCenter()}
+      gap: 1rem;
+      img {
+        max-width: 4rem;
+        height: 4rem;
+        border-radius: 10px;
+      }
     }
+  }
+  .tabPanel__btn {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .appBar {
+    background-color: rgba(300, 300, 300, 0.1);
   }
   @media screen and (min-width: 700px) {
     .MuiTab-root {
@@ -131,11 +208,13 @@ const Wrapper = styled.section`
     .appBar {
       .tabs {
         .date__weekday {
-          color: var(--color-emphasis-500);
+          font-size: 1rem !important;
         }
-        .date {
-          font-size: 1rem;
+        .date__date {
+          font-size: 1rem !important;
         }
+
+
       }
     }
     /* child */

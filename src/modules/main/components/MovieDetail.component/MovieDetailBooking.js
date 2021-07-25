@@ -93,7 +93,7 @@ function MovieDetailBooking({ movie }) {
           </div>
           {/* Booking  */}
           <div className='booking__table'>
-            <BookingTable movie={maHeThongRap}></BookingTable>
+            <BookingTable movie={maHeThongRap} cinema={cinema}></BookingTable>
           </div>
         </div>
       </main>

@@ -15,8 +15,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   CLOSE_MODAL,
   SHOW_MODAL,
-} from '../../redux/actions/constantsAction.js';
-import Modal from './Modal';
+} from '../../../redux/actions/constantsAction.js';
+import Modal from '../Modal';
 
 // install Swiper modules
 SwiperCore.use([Autoplay, Pagination, Navigation]);

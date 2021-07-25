@@ -1,9 +1,9 @@
-import { baseUrl } from '../../../APIs/configs/api.configs';
+import { baseUrl } from '../../../../APIs/configs/api.configs';
 import {
   GET_MOVIE_DETAIL_LOADING,
   GET_MOVIE_DETAIL_SUCCESS,
   GET_MOVIE_DETAIL_ERROR,
-} from './constantsAction';
+} from '../constantsAction';
 
 export const getMovieDetailAction = (id) => async (dispatch) => {
   const sendRequest = async () => {

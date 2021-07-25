@@ -106,6 +106,10 @@ const Wrapper = styled.div`
       margin: 0 2rem;
     }
   }
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
   @media screen and (min-width: 800px) {
     margin-top: 7rem;
     .movie__list--mobile {

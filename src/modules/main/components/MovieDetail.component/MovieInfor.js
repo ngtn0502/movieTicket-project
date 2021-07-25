@@ -10,9 +10,9 @@ import {
 import imdbLogo from '../../../../assets/img/imdb-logo.png';
 import { FlexHCenter, FlexVCenter } from '../../../utils/mixin';
 import ButtonMovie from './ButtonMovie.js';
-import MovieClass from '../MovieClass';
+import MovieClass from '../Home.component/MovieClass';
 import { movieDetailContent } from '../../../utils/constants';
-import { SHOW_MODAL } from '../../../redux/actions/constantsAction.js';
+import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
 
 function MovieInfor({ movieDetail, movie }) {
   const dispatch = useDispatch();
@@ -56,8 +56,8 @@ function MovieInfor({ movieDetail, movie }) {
           {/*  */}
           {/*  */}
           <div className="movieInfor__detail">
-            {movieDetailContent.map((item) => (
-              <p className="movieInfor__detail--item">
+            {movieDetailContent.map((item, index) => (
+              <p className="movieInfor__detail--item" key={index}>
                 <span className="subtitle">{item.title}</span>
                 <span className="subtitle__detail">{item.content}</span>
               </p>

@@ -4,7 +4,7 @@ const init = {
   isModalShow: false,
   trailer: 'https://www.youtube.com/embed/6ZfuNTqbHE8',
 };
-
+// Handle UI change in page
 export const uiReducer = (state = init, action) => {
   if (action.type === SHOW_MODAL) {
     return {

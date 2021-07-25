@@ -7,6 +7,12 @@ import {
 } from 'react-icons/fa';
 
 import bgPopcorn from '../../assets/img/bg-popcorn.jpg';
+import cgv from '../../assets/img/cinema/cinema-picture/cgv.png';
+import bhd from '../../assets/img/cinema/cinema-picture/bhd.png';
+import lotte from '../../assets/img/cinema/cinema-picture/lotte.png';
+import megaGs from '../../assets/img/cinema/cinema-picture/megaGs.png';
+import cinestart from '../../assets/img/cinema/cinema-picture/cinestart.jpg';
+import galaxy from '../../assets/img/cinema/cinema-picture/galaxy.jpg';
 
 export const carouselBackground = bgPopcorn;
 // Nav bar part
@@ -170,15 +176,14 @@ export const movieDetailContent = [
 ];
 
 // map
-export const mapCGV = (
-  <iframe
-    title="cgv"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.435441945757!2d106.69976411474897!3d10.777923392320528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f48779307a5%3A0x9ba2ed64e9e3ef7b!2zQ0dWIFZpbmNvbSDEkOG7k25nIEto4bufaQ!5e0!3m2!1sen!2s!4v1626956986828!5m2!1sen!2s"
-    style={{ border: 0 }}
-    allowFullScreen
-    loading="lazy"
-  />
-);
+export const mapCGV = <img src={cgv} alt="movie" />;
+
+export const mapLotte = <img src={lotte} alt="movie" />;
+export const mapBHD = <img src={bhd} alt="movie" />;
+export const mapCineStar = <img src={cinestart} alt="movie" />;
+export const mapGalaxy = <img src={galaxy} alt="movie" />;
+
+export const mapMegaGS = <img src={megaGs} alt="movie" />;
 
 // Footer part
 
