@@ -21,7 +21,6 @@ function CarouselCoverflow({ movieList }) {
       </div>
     )),
   ];
-  console.log(silde);
   return (
     <BigWrapper>
       <div className="overlay" />

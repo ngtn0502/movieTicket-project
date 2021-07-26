@@ -41,7 +41,10 @@ Variables
   --color-title: #9b9b9b;
   --color-facebook: rgb(35, 84, 161);
   --color-seat: #444451;
+  --color-vipSeat: #108f3e;
+  /*  */
   --color-choosingSeat: #f7b500;
+
   /*  */
   --dark-value: 10%;
   --darker-value: 15%;

@@ -1,42 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MdPayment } from 'react-icons/md';
+import { FaCcVisa } from 'react-icons/fa';
+import { HiOutlineCash } from 'react-icons/hi';
 import { FlexCenter, Flex, FlexHCenter } from '../../../utils/mixin.js';
-import atm from '../../../../assets/img/atm.png';
-import visa from '../../../../assets/img/visa.png';
-import cash from '../../../../assets/img/cash.png';
 
-function BookingPageRight({ cineRoomList }) {
+function BookingPageRight({ cineRoomMovie, totalAmount, choosingSeat }) {
   return (
     <Wrapper>
       <div className="booking__right">
         <div className="booking__price" />
         <div className="booking__info--movie">
-          <img src={cineRoomList?.thongTinPhim?.hinhAnh} alt="movie" />
-          <h2>{cineRoomList?.thongTinPhim?.tenPhim}</h2>
+          <img src={cineRoomMovie?.hinhAnh} alt="movie" />
+          <h2>{cineRoomMovie?.tenPhim}</h2>
         </div>
         <hr />
         <div className="booking__info--pay">
-          <h2>0 d</h2>
+          <h2>{totalAmount}đ</h2>
           <hr />
           <div>
-            <p>Ngày, giờ chiếu:</p>
-            <p>{cineRoomList?.thongTinPhim?.ngayChieu}</p>
+            <p>Ngày chiếu:</p>
+            <p>{cineRoomMovie?.ngayChieu}</p>
           </div>
           <div>
-            <p>Cụm rạp:</p>
-            <p>{cineRoomList?.thongTinPhim?.gioChieu}</p>
+            <p>Giờ Chiếu:</p>
+            <p>{cineRoomMovie?.gioChieu}</p>
           </div>
           <div>
             <p>Rạp:</p>
-            <p>{cineRoomList?.thongTinPhim?.tenRap}</p>
+            <p>{cineRoomMovie?.tenRap}</p>
           </div>
           <div className="seat">
             <p>Ghế:</p>
-            <p>
-              {cineRoomList?.thongTinPhim?.tenGhe
-                ? cineRoomList?.thongTinPhim?.tenGhe
-                : 'Vui long chọn ghế'}
-            </p>
+            <div>
+              {choosingSeat.map((item) => (
+                <p>Ghế {item.stt}</p>
+              ))}
+            </div>
           </div>
           <div>
             <p>Ưu đãi:</p>
@@ -59,7 +59,7 @@ function BookingPageRight({ cineRoomList }) {
                   />
                   <label className="radio__item--label" htmlFor="ATM">
                     <div className="pay__figure">
-                      <img src={atm} alt="ATM" />
+                      <MdPayment />
                     </div>
                     <p className="pay__text">Thẻ ATM nội địa</p>
                   </label>
@@ -74,7 +74,7 @@ function BookingPageRight({ cineRoomList }) {
                   />
                   <label className="radio__item--label" htmlFor="VISA">
                     <div className="pay__figure">
-                      <img src={visa} alt="VISA" />
+                      <FaCcVisa />
                     </div>
                     <p className="pay__text">Visa, Master, JCB</p>
                   </label>
@@ -89,7 +89,7 @@ function BookingPageRight({ cineRoomList }) {
                   />
                   <label className="radio__item--label" htmlFor="CASH">
                     <div className="pay__figure">
-                      <img src={cash} alt="CASH" />
+                      <HiOutlineCash />
                     </div>
                     <p className="pay__text">Thanh toán tiền mặt</p>
                   </label>
@@ -108,7 +108,7 @@ function BookingPageRight({ cineRoomList }) {
 }
 
 export default BookingPageRight;
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   position: fixed;
   width: 20rem;
   height: 100vh;
@@ -150,8 +150,6 @@ const Wrapper = styled.section`
     margin: 1rem auto;
     border-top: 1px dashed white;
   }
-  p {
-  }
   div {
     padding: 0.25rem 0;
   }
@@ -175,8 +173,18 @@ const Wrapper = styled.section`
       }
     }
     .seat {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       p {
         color: var(--color-redNetflix);
+        margin: 0;
+      }
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        gap: 0.5rem;
+        justify-self: end;
       }
     }
   }
@@ -187,9 +195,10 @@ const Wrapper = styled.section`
       gap: 0.5rem;
       .radio__item--label {
         ${FlexHCenter()}
-        img {
-          width: 5rem;
-          height: 3rem;
+        svg {
+          width: 2rem;
+          height: 2rem;
+          margin-right: 1rem;
         }
       }
     }
@@ -210,7 +219,7 @@ const Wrapper = styled.section`
     height: 20px;
     border-radius: 50%;
     border: 1px solid rgb(74, 144, 226);
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
   .radio__item--input[type='radio']:checked + .radio__item--label:before {
     width: 20px;

@@ -153,7 +153,10 @@ const Wrapper = styled.section`
   .signUp {
     padding-top: 1rem;
     a {
-      color: var(--color-white);
+      color: var(--color-title);
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
   @media screen and (min-width: 576px) {

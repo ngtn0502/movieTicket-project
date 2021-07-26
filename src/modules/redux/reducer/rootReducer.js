@@ -4,15 +4,13 @@ import { uiReducer } from './uiReducer';
 import { movieDetailReducer } from './movieDetailReducer';
 import { cinemaListReducer } from './cinemaListReducer';
 import { authReducer } from './authReducer';
-import { cineRoomReducer } from './cineRoomReducer';
-import { choosingSeatReducer } from './bookingReducer';
+import { bookingReducer } from './BookingReducer.js';
 
 export const rootReducer = combineReducers({
   uiReducer,
   movieListReducer,
   movieDetailReducer,
   authReducer,
-  cineRoomReducer,
   cinemaListReducer,
-  choosingSeatReducer,
+  bookingReducer,
 });

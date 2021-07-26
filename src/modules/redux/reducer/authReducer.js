@@ -12,7 +12,6 @@ export const authReducer = (state = init, action) => {
   }
   if (action.type === USER_LOGIN_FAIL) {
     //
-    console.log('fail');
     return false;
   }
   return state;
