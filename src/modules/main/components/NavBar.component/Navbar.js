@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FiUser, FiMenu } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import logo from '../../../../assets/img/logo-full.png';
 import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
 import NavLink from './NavLink';
 
+let userLogin;
+if (localStorage.getItem('userLogin')) {
+  userLogin = JSON.parse(localStorage.getItem('userLogin'));
+}
 function Navbar() {
   const [isSideBarShow, setisSideBarShow] = useState(false);
+  const isLogin = useSelector((state) => state.authReducer);
+
   // Scroll down animation
   const [isSideBarScroll, setIsSideBarScroll] = useState(false);
   useEffect(() => {
@@ -22,6 +29,12 @@ function Navbar() {
       };
     });
   }, [isSideBarScroll]);
+  //
+  // log out
+  const logoutHandler = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
   return (
     <Wrapper>
       <div className={`nav__bar ${isSideBarScroll && 'nav__scrollDown'}`}>
@@ -36,9 +49,21 @@ function Navbar() {
           </div>
           <div className="nav_login">
             <FiUser />
-            <Link className="nav_login--title" to="/sign-in">
-              Đăng nhập
-            </Link>
+            {userLogin ? (
+              <div>
+                <Link to="/profile" className="nav_login--title">
+                  {userLogin.hoTen}
+                </Link>
+
+                <button type="button" onClick={logoutHandler}>
+                  Đăng xuất
+                </button>
+              </div>
+            ) : (
+              <Link to="/sign-in" className="nav_login--title">
+                Đăng nhập
+              </Link>
+            )}
           </div>
           <button
             type="button"
@@ -61,9 +86,15 @@ function Navbar() {
           <div className='sideBar__links'>
             <div className='nav_login'>
               <FiUser />
-              <Link to='/sign-in' className='nav_login--title'>
-                Đăng nhập
-              </Link>
+              {userLogin ? (
+                <Link to='/profile' className='nav_login--title'>
+                  {userLogin.hoTen}
+                </Link>
+              ) : (
+                <Link to='/sign-in' className='nav_login--title'>
+                  Đăng nhập
+                </Link>
+              )}
             </div>
             <NavLink />
           </div>
@@ -96,9 +127,9 @@ const Wrapper = styled.nav`
       height: 3rem;
       margin: 0 1rem;
     }
-    .toggle{
-      svg{
-        line{
+    .toggle {
+      svg {
+        line {
           color: var(--color-white);
         }
         width: 2.25rem;
@@ -188,7 +219,6 @@ const Wrapper = styled.nav`
       .nav_login--title {
         color: white !important;
       }
-
     }
     .nav {
       .nav_links {
@@ -203,8 +233,30 @@ const Wrapper = styled.nav`
         ${FlexCenter()}
         color: var(--color-gray-700);
         .nav_login--title {
+          font-size: 1rem;
           font-weight: 400;
           color: var(--color-gray-700);
+        }
+        div {
+          display: flex;
+          align-items: center;
+          button {
+            font-size: 1rem;
+            color: var(--color-title);
+            position: relative;
+            margin-left: 1rem;
+            font-weight: 400;
+            transform: translateY(10%);
+            &:before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: -0.5rem;
+              height: 100%;
+              width: 2px;
+              background-color: #fff;
+            }
+          }
         }
       }
       .toggle {

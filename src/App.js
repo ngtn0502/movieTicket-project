@@ -15,6 +15,7 @@ import ErrorPage from './modules/main/pages/ErrorPage';
 import Navbar from './modules/main/components/NavBar.component/Navbar';
 import Footer from './modules/main/components/Footer.component/Footer';
 import BookingPage from './modules/main/pages/BookingPage';
+import SingUpPage from './modules/main/pages/SingUpPage';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
       <Switch>
         <Route path="/sign-in" exact>
           <SignInPage />
+        </Route>
+        <Route path="/sign-up" exact>
+          <SingUpPage />
         </Route>
         <>
           <Navbar />
@@ -40,6 +44,7 @@ function App() {
           <Route path="/news" exact>
             <NewsPage />
           </Route>
+
           {/* <Route path="*" exact>
               <Redirect to="/home" />
             </Route> */}

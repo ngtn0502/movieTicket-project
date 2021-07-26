@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import bgImage from '../../../assets/img/bg-singin.jpg';
 import logo from '../../../assets/img/logo-full.png';
-import { userLoginAction } from '../../redux/actions/authAction';
+import { userSignUpAction } from '../../redux/actions/authAction';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,13 +18,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignInPage() {
+function SignUpPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const [userLogin, setUserLogin] = useState({
     taiKhoan: '',
     matKhau: '',
+    email: '',
+    soDt: '',
+    maNhom: 'gp01',
+    maLoaiNguoiDung: 'KhachHang',
+    hoTen: '',
   });
   const userLoginHandler = (e) => {
     const { value, name } = e.target;
@@ -33,9 +38,10 @@ function SignInPage() {
       [name]: value,
     });
   };
+  console.log(userLogin);
   const userSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(userLoginAction(userLogin, history));
+    dispatch(userSignUpAction(userLogin, history));
   };
 
   return (
@@ -55,6 +61,15 @@ function SignInPage() {
                 variant="filled"
                 color="secondary"
                 id="standard-basic"
+                label="Họ và tên"
+                className="signIn__input"
+                name="hoTen"
+                onChange={userLoginHandler}
+              />
+              <TextField
+                variant="filled"
+                color="secondary"
+                id="standard-basic"
                 label="Tài Khoản"
                 className="signIn__input"
                 name="taiKhoan"
@@ -69,15 +84,28 @@ function SignInPage() {
                 name="matKhau"
                 onChange={userLoginHandler}
               />
-
+              <TextField
+                variant="filled"
+                color="secondary"
+                id="standard-basic"
+                label="Email"
+                className="signIn__input"
+                name="email"
+                onChange={userLoginHandler}
+              />
+              <TextField
+                variant="filled"
+                color="secondary"
+                id="standard-basic"
+                label="Số điện thoại"
+                className="signIn__input"
+                name="soDt"
+                onChange={userLoginHandler}
+              />
               <div className="signIn__button">
                 <button type="submit" className="btn__watching">
-                  Đăng Nhập
+                  Đăng Ký
                 </button>
-                <p className="signUp">
-                  Bạn mới tham gia G-Cinema?{' '}
-                  <Link to="/sign-up">Đăng ký ngay.</Link>
-                </p>
               </div>
             </form>
           </div>
@@ -87,7 +115,7 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default SignUpPage;
 const Wrapper = styled.section`
   position: relative;
   .page-100 {
@@ -95,7 +123,7 @@ const Wrapper = styled.section`
   }
   .signIn {
     width: 350px;
-    padding: 40px 32px 30px;
+    padding: 20px 20px 0;
     position: absolute;
     top: 50%;
     left: 50%;

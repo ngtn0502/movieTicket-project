@@ -3,7 +3,7 @@ import {
   USER_LOGIN_SUCCESS,
 } from '../actions/constantsAction.js';
 
-const init = true;
+const init = false;
 export const authReducer = (state = init, action) => {
   if (action.type === USER_LOGIN_SUCCESS) {
     //

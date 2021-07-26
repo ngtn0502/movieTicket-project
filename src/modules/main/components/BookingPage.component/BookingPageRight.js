@@ -3,9 +3,21 @@ import styled from 'styled-components';
 import { MdPayment } from 'react-icons/md';
 import { FaCcVisa } from 'react-icons/fa';
 import { HiOutlineCash } from 'react-icons/hi';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { FlexCenter, Flex, FlexHCenter } from '../../../utils/mixin.js';
+import { bookingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
 
 function BookingPageRight({ cineRoomMovie, totalAmount, choosingSeat }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const bookingHandler = () => {
+    const danhSachVe = [];
+    choosingSeat.forEach((item) => {
+      danhSachVe.push({ maGhe: item.maGhe, giaVe: item.giaVe });
+    });
+    dispatch(bookingSeatAction(cineRoomMovie.maLichChieu, danhSachVe, history));
+  };
   return (
     <Wrapper>
       <div className="booking__right">
@@ -99,8 +111,12 @@ function BookingPageRight({ cineRoomMovie, totalAmount, choosingSeat }) {
             </div>
           </div>
         </div>
-        <button type="button" className="btn__watching btn-paying">
-          Thanh Toan
+        <button
+          type="button"
+          className="btn__watching btn-paying"
+          onClick={bookingHandler}
+        >
+          Đặt vé
         </button>
       </div>
     </Wrapper>
@@ -185,6 +201,9 @@ const Wrapper = styled.div`
         padding: 0;
         gap: 0.5rem;
         justify-self: end;
+        p {
+          font-weight: 700;
+        }
       }
     }
   }

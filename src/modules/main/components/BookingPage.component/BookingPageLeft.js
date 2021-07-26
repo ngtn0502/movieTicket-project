@@ -9,7 +9,7 @@ import {
   mapGalaxy,
   mapMegaGS,
 } from '../../../utils/constants.js';
-import { FlexCenter, FlexHCenter } from '../../../utils/mixin.js';
+import { FlexCenter, FlexHCenter, FlexVCenter } from '../../../utils/mixin.js';
 import { choosingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
 
 function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
@@ -65,6 +65,27 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
         </div>
         <div className="screen__container">
           <div className="screen" />
+          <p>MÀN HÌNH</p>
+          <div className="note">
+            <div>
+              <button type="button" className="seat seat__vipSeat">
+                {/* ewrưe */}
+              </button>
+              <span>Ghế VIP</span>
+            </div>
+            <div>
+              <button type="button" className="seat">
+                {/* ewrưe */}
+              </button>
+              <span>Ghế thường</span>
+            </div>
+            <div>
+              <button type="button" className="seat seat__selected">
+                {/* ewrưe */}
+              </button>
+              <span>Ghế đã có người chọn</span>
+            </div>
+          </div>
         </div>
         <div className="booking__seat">
           <div>
@@ -209,6 +230,10 @@ const Wrapper = styled.section`
   .screen__container {
     perspective: 2000;
     transform: translateX(-1%);
+    p {
+      text-align: center;
+      font-size: 1.5rem;
+    }
     .screen {
       background-color: var(--color-white);
       height: 12rem;
@@ -216,32 +241,49 @@ const Wrapper = styled.section`
       transform: rotateX(-45deg);
       box-shadow: 0 10px 30px rgba(255, 255, 255, 0.7);
     }
-  }
-  .booking__seat {
-    margin-top: 2rem;
-    .seat {
-      background-color: var(--color-seat);
-      height: 25px;
-      width: 37px;
-      margin: 1rem 0.5rem;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      transition: var(--transition);
-      &:hover {
-        transform: scale(1.5);
-        background-color: var(--color-white);
+    .note {
+      ${FlexVCenter()}
+
+      div {
+        margin-right: 1rem;
+        span {
+          font-size: 0.75rem;
+          text-decoration: initial;
+        }
+        button {
+          height: 17px;
+          width: 25px;
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+        }
       }
     }
-    .seat__selected {
-      background-color: var(--color-white);
-    }
-    .seat__choosingSeat {
-      background-color: var(--color-choosingSeat);
-    }
-    .seat__vipSeat {
+  }
+  .booking__seat {
+    margin-top: 1rem;
+  }
+  .seat {
+    background-color: var(--color-seat);
+    height: 25px;
+    width: 37px;
+    margin: 1rem 0.5rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transition: var(--transition);
+  }
+  .seat__selected {
+    background-color: var(--color-white);
+  }
+  .seat__choosingSeat {
+    background-color: var(--color-choosingSeat);
+  }
+  .seat__vipSeat {
+    background-color: var(--color-vipSeat);
+    &:hover {
       background-color: var(--color-vipSeat);
     }
   }
+
   @media screen and (min-width: 1000px) {
     .booking__info {
       margin: 2rem 0;

@@ -28,15 +28,6 @@ export const bookingReducer = (state = init, action) => {
     const seat = { ...action.payload };
     const index = oldSeat.findIndex((item) => item.maGhe === seat.maGhe);
     console.log(state.cineSeatList);
-
-    // if (index === -1) {
-    //   seat.dangChon = true;
-    //   return {
-    //     ...state,
-    //     cineSeatList: [...state.cineSeatList, seat],
-    //   };
-    // }
-
     const updateSeat = { ...oldSeat[index] };
     // console.log('asdasd', oldSeat[index]);
     if (updateSeat.dangChon) {

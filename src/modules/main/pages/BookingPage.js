@@ -17,7 +17,7 @@ function BookingPage() {
   // fetch Api phòng chiếu của bộ phim tương ứng vơi mã rạp chiếu trong chi tiết bộ phim
   useEffect(() => {
     dispatch(getCineRoomAction(params.ids));
-  }, [dispatch]);
+  }, [dispatch, params.ids]);
   // ghế đang chọn
   const choosingSeat = cineSeatList?.filter((item) => item.dangChon === true);
   return (
@@ -54,6 +54,7 @@ const Wrapper = styled.section`
       margin: 5rem auto;
       display: grid;
       grid-template-columns: 1fr 18rem;
+      gap: 1.5rem;
       .right {
         display: block;
       }
