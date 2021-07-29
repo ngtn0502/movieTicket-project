@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../../APIs/configs/api.configs';
+import { baseUrl } from '../../../../configs/api.configs';
 import {
   GET_CINE_ROOM_ERROR,
   GET_CINE_ROOM_LOADING,

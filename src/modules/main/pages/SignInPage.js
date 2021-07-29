@@ -4,10 +4,12 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import bgImage from '../../../assets/img/bg-singin.jpg';
 import logo from '../../../assets/img/logo-full.png';
 import { userLoginAction } from '../../redux/actions/authAction';
+import AlertModal from '../components/AlertModal.js';
+import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignInPage() {
+  const { isModalShow, message } = useSelector((state) => state.uiReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -37,9 +40,19 @@ function SignInPage() {
     e.preventDefault();
     dispatch(userLoginAction(userLogin, history));
   };
-
+  const closeModalHandler = () => {
+    dispatch({ type: CLOSE_MODAL });
+  };
   return (
     <Wrapper style={{ backgroundImage: `url(${bgImage})` }}>
+      {isModalShow && (
+        <div>
+          {/* eslint-disable */}
+          <div className="backdrop" onClick={closeModalHandler} />
+          {/* eslint-enable */}
+          <AlertModal message={message} />
+        </div>
+      )}
       <div className="page-100">
         <div className="signIn">
           <img src={logo} alt="movie" />
@@ -90,6 +103,9 @@ function SignInPage() {
 export default SignInPage;
 const Wrapper = styled.section`
   position: relative;
+  .overlay {
+    opacity: 1;
+  }
   .page-100 {
     height: 100vh;
   }

@@ -1,5 +1,10 @@
-import { CHOOSING_SEAT } from '../constantsAction.js';
-import { baseUrl, METHOD__HTTP } from '../../../../APIs/configs/api.configs';
+import {
+  CHOOSING_SEAT,
+  RESET__AMOUNT,
+  USER_BOOKING_FAIL,
+  USER_BOOKING_SUCCESS,
+} from '../constantsAction.js';
+import { baseUrl, METHOD__HTTP } from '../../../../configs/api.configs.js';
 
 export const choosingSeatAction = (data) => ({
   type: CHOOSING_SEAT,
@@ -12,6 +17,12 @@ export const bookingSeatAction = (maLichChieu, danhSachVe, history) => async (
   let userLogin;
   if (localStorage.getItem('userLogin')) {
     userLogin = JSON.parse(localStorage.getItem('userLogin'));
+  } else {
+    dispatch({
+      type: USER_BOOKING_FAIL,
+      payload: 'Vui lòng đăng nhập để đặt vé xem phim!',
+    });
+    history.push('/sign-in');
   }
   //
   const sendRequest = async (data1, data2) => {
@@ -36,7 +47,13 @@ export const bookingSeatAction = (maLichChieu, danhSachVe, history) => async (
   //
   try {
     const data = await sendRequest(maLichChieu, danhSachVe);
-    history.push('/');
+    dispatch({
+      type: USER_BOOKING_SUCCESS,
+      payload: 'Vui lòng kiểm tra email xác nhận thông tin đặt vé!',
+    });
+    dispatch({
+      type: RESET__AMOUNT,
+    });
   } catch (error) {
     console.log(error);
   }

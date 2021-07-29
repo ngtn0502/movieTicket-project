@@ -126,23 +126,22 @@ function BookingPageRight({ cineRoomMovie, totalAmount, choosingSeat }) {
 export default BookingPageRight;
 const Wrapper = styled.div`
   position: fixed;
-  width: 20rem;
+  width: 15rem;
   height: 100vh;
   top: 4rem;
   right: 0;
-  background-color: rgba(70, 70, 70, 0.8);
-  box-shadow: 0 0 25px rgb(160 160 160 / 50%);
+  /* background-color: rgba(70, 70, 70, 1); */
+  background-color: var(--color-seat);
+  box-shadow: 0 0 5px rgb(160 160 160 / 50%);
   z-index: 2000;
   overflow: hidden;
   border-radius: var(--radius);
   /* global */
-
   h2,
   h5 {
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
-    color: #44c020;
     margin-bottom: 0;
   }
   h5 {
@@ -253,5 +252,8 @@ const Wrapper = styled.div`
     &:hover {
       background-color: rgb(18, 112, 12);
     }
+  }
+  @media screen and (min-width: 1200px) {
+    width: 20rem;
   }
 `;

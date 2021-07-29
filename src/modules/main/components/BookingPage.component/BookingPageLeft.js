@@ -171,6 +171,62 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                 {`${seat.stt}`}
               </button>
             ))}
+          </div>{' '}
+          <div>
+            {cineSeatList?.slice(96, 112).map((seat) => (
+              <button
+                disabled={seat.daDat}
+                type="button"
+                className={checkSeat(seat)}
+                onClick={() => {
+                  selectSeatHandler(seat);
+                }}
+              >
+                {`${seat.stt}`}
+              </button>
+            ))}
+          </div>{' '}
+          <div>
+            {cineSeatList?.slice(112, 128).map((seat) => (
+              <button
+                disabled={seat.daDat}
+                type="button"
+                className={checkSeat(seat)}
+                onClick={() => {
+                  selectSeatHandler(seat);
+                }}
+              >
+                {`${seat.stt}`}
+              </button>
+            ))}
+          </div>{' '}
+          <div>
+            {cineSeatList?.slice(128, 144).map((seat) => (
+              <button
+                disabled={seat.daDat}
+                type="button"
+                className={checkSeat(seat)}
+                onClick={() => {
+                  selectSeatHandler(seat);
+                }}
+              >
+                {`${seat.stt}`}
+              </button>
+            ))}
+          </div>{' '}
+          <div>
+            {cineSeatList?.slice(144, 160).map((seat) => (
+              <button
+                disabled={seat.daDat}
+                type="button"
+                className={checkSeat(seat)}
+                onClick={() => {
+                  selectSeatHandler(seat);
+                }}
+              >
+                {`${seat.stt}`}
+              </button>
+            ))}
           </div>
           {/* <div>
             {cineSeatList?.slice(50, 100).map((seat) => (
@@ -230,6 +286,8 @@ const Wrapper = styled.section`
   .screen__container {
     perspective: 2000;
     transform: translateX(-1%);
+    width: 250%;
+
     p {
       text-align: center;
       font-size: 1.5rem;
@@ -260,15 +318,18 @@ const Wrapper = styled.section`
     }
   }
   .booking__seat {
+    text-align: center;
     margin-top: 1rem;
+    margin-bottom: 2rem;
+    width: 250%;
   }
   .seat {
     background-color: var(--color-seat);
-    height: 25px;
-    width: 37px;
+    height: 20px;
+    width: 32px;
     margin: 1rem 0.5rem;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     transition: var(--transition);
   }
   .seat__selected {
@@ -284,13 +345,59 @@ const Wrapper = styled.section`
     }
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 576px) {
+    .screen__container {
+      width: 160%;
+      .screen {
+      }
+    }
+    .booking__seat {
+      width: 160%;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .screen__container {
+      width: 130%;
+      .screen {
+      }
+    }
+    .booking__seat {
+      width: 130%;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .screen__container {
+      width: 110%;
+      .screen {
+      }
+    }
+    .booking__seat {
+      width: 110%;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .screen__container {
+      width: 100%;
+      .screen {
+      }
+    }
     .booking__info {
       margin: 2rem 0;
       div {
         p {
           font-size: 1.25rem;
         }
+      }
+    }
+    .booking__seat {
+      width: 100%;
+      .seat {
+        height: 25px;
+        width: 37px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
       }
     }
   }

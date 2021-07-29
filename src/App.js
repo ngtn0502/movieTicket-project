@@ -16,40 +16,45 @@ import Navbar from './modules/main/components/NavBar.component/Navbar';
 import Footer from './modules/main/components/Footer.component/Footer';
 import BookingPage from './modules/main/pages/BookingPage';
 import SingUpPage from './modules/main/pages/SingUpPage';
+import { mainRoutes } from './configs/route.config';
+import { MainTemplates } from './modules/templates/mainTemplates.js';
 
 function App() {
+  const renderMainRoutes = () =>
+    mainRoutes.map((item) => {
+      const { path, Component, exact } = item;
+      return (
+        <Route path={path} exact={exact}>
+          <MainTemplates>{Component}</MainTemplates>
+        </Route>
+      );
+    });
+
   return (
     <Router>
       <Switch>
+        {/* Special Route */}
         <Route path="/sign-in" exact>
           <SignInPage />
         </Route>
         <Route path="/sign-up" exact>
           <SingUpPage />
         </Route>
-        <>
-          <Navbar />
-          <Route path="/" exact>
-            <Redirect to="/home" />
-          </Route>
-          <Route path="/home" exact>
-            <HomePage />
-          </Route>
-          <Route path="/movie-details/:id" exact>
-            <MovieDetailsPage />
-          </Route>
-          <Route path="/booking/:ids" exact>
-            <BookingPage />
-          </Route>
-          <Route path="/news" exact>
-            <NewsPage />
-          </Route>
-
-          {/* <Route path="*" exact>
-              <Redirect to="/home" />
-            </Route> */}
-          <Footer />
-        </>
+        <Route path="/" exact>
+          <Redirect to="/home" />
+        </Route>
+        {/* BookingPage Route */}
+        <Route path="/booking/:ids" exact>
+          <BookingPage />
+        </Route>
+        {/* Main Route */}
+        {renderMainRoutes()}
+        {/* Admin Route */}
+        {/*  */}
+        {/* Undefined Route */}
+        <Route path="*" exact>
+          <Redirect to="/home" />
+        </Route>
       </Switch>
     </Router>
   );

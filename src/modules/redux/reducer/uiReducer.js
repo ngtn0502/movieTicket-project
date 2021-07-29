@@ -1,8 +1,16 @@
-import { SHOW_MODAL, CLOSE_MODAL } from '../actions/constantsAction';
+import {
+  SHOW_MODAL,
+  CLOSE_MODAL,
+  USER_LOGIN_FAIL,
+  USER_SIGN_UP_FAIL,
+  USER_BOOKING_SUCCESS,
+  USER_BOOKING_FAIL,
+} from '../actions/constantsAction';
 
 const init = {
   isModalShow: false,
   trailer: 'https://www.youtube.com/embed/6ZfuNTqbHE8',
+  message: 'Đăng nhập',
 };
 // Handle UI change in page
 export const uiReducer = (state = init, action) => {
@@ -17,6 +25,34 @@ export const uiReducer = (state = init, action) => {
     return {
       ...state,
       isModalShow: false,
+    };
+  }
+  if (action.type === USER_LOGIN_FAIL) {
+    return {
+      ...state,
+      message: action.payload,
+      isModalShow: true,
+    };
+  }
+  if (action.type === USER_SIGN_UP_FAIL) {
+    return {
+      ...state,
+      message: action.payload,
+      isModalShow: true,
+    };
+  }
+  if (action.type === USER_BOOKING_SUCCESS) {
+    return {
+      ...state,
+      message: action.payload,
+      isModalShow: true,
+    };
+  }
+  if (action.type === USER_BOOKING_FAIL) {
+    return {
+      ...state,
+      message: action.payload,
+      isModalShow: true,
     };
   }
   return { ...state };

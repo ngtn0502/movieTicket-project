@@ -1,5 +1,9 @@
-import { baseUrl, METHOD__HTTP } from '../../../APIs/configs/api.configs';
-import { USER_LOGIN_FAIL, USER_LOGIN_SUCCESS } from './constantsAction.js';
+import { baseUrl, METHOD__HTTP } from '../../../configs/api.configs';
+import {
+  USER_LOGIN_FAIL,
+  USER_LOGIN_SUCCESS,
+  USER_SIGN_UP_FAIL,
+} from './constantsAction.js';
 
 export const userLoginAction = (loginData, history) => async (dispatch) => {
   const sendRequest = async (dataString) => {
@@ -21,8 +25,11 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
     history.push('/home');
     window.location.reload();
   } catch (error) {
-    dispatch({ type: USER_LOGIN_FAIL });
-    alert('Sai tài khoản hoặc mật khẩu');
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload: 'Đăng nhập thất bại, vui lòng kiểm tra lại thông tin!',
+    });
+    console.log('ó');
   }
 };
 
@@ -46,6 +53,9 @@ export const userSignUpAction = (signUpData, history) => async (dispatch) => {
     console.log(data);
     history.goBack();
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: USER_SIGN_UP_FAIL,
+      payload: 'Đăng ký thất bại, vui lòng kiểm tra lại thông tin!',
+    });
   }
 };

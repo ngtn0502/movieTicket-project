@@ -3,6 +3,7 @@ import {
   GET_CINE_ROOM_ERROR,
   GET_CINE_ROOM_LOADING,
   CHOOSING_SEAT,
+  RESET__AMOUNT,
 } from '../actions/constantsAction';
 
 const init = {
@@ -42,5 +43,12 @@ export const bookingReducer = (state = init, action) => {
       cineSeatList: [...oldSeat],
     };
   }
+  if (action.type === RESET__AMOUNT) {
+    return {
+      ...state,
+      totalAmount: 0,
+    };
+  }
+
   return { ...state };
 };

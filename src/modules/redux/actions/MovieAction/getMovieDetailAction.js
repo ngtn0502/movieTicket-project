@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../../APIs/configs/api.configs';
+import { baseUrl } from '../../../../configs/api.configs';
 import {
   GET_MOVIE_DETAIL_LOADING,
   GET_MOVIE_DETAIL_SUCCESS,

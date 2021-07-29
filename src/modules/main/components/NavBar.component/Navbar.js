@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FiUser, FiMenu } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import logo from '../../../../assets/img/logo-full.png';
 import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
@@ -12,6 +12,7 @@ if (localStorage.getItem('userLogin')) {
   userLogin = JSON.parse(localStorage.getItem('userLogin'));
 }
 function Navbar() {
+  const history = useHistory();
   const [isSideBarShow, setisSideBarShow] = useState(false);
   const isLogin = useSelector((state) => state.authReducer);
 
@@ -33,6 +34,7 @@ function Navbar() {
   // log out
   const logoutHandler = () => {
     localStorage.clear();
+    history.push('/home');
     window.location.reload();
   };
   return (

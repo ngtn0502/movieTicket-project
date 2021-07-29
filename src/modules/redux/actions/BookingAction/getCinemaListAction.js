@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../../APIs/configs/api.configs';
+import { baseUrl } from '../../../../configs/api.configs';
 import { GET_CINEMA_LIST } from '../constantsAction';
 
 // Lấy thông tin hệ thống rạp
