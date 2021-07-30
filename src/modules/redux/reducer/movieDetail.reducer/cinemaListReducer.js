@@ -1,4 +1,4 @@
-import { GET_CINEMA_LIST } from '../actions/constantsAction';
+import { GET_CINEMA_LIST } from '../../actions/constantsAction';
 
 const init = {
   cinemaList: [],

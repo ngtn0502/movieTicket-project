@@ -9,7 +9,7 @@ import { carouselBackground } from '../../../utils/constants.js';
 function CarouselCoverflow({ movieList }) {
   const dispatch = useDispatch();
   const silde = [
-    movieList.slice(5, 10).map((movie) => (
+    movieList.slice(1, 5).map((movie) => (
       <div className="carousel__slider">
         <FaPlay
           className="playVideo"

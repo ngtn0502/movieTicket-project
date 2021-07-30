@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { TiTick, TiCancel } from 'react-icons/ti';
 import {
   CLOSE_MODAL,
+  RESET__AMOUNT,
   USER_BOOKING_SUCCESS,
   USER_LOGOUT,
 } from '../../redux/actions/constantsAction.js';
@@ -29,8 +30,12 @@ function AlertModal({ message, goTo, type, message2 }) {
         goTo: '/home',
       },
     });
+    dispatch({
+      type: RESET__AMOUNT,
+    });
   };
   const logoutHandler = () => {
+    dispatch({ type: CLOSE_MODAL });
     dispatch({ type: USER_LOGOUT });
     localStorage.clear();
     history.push('/home');
@@ -147,6 +152,7 @@ const Wrapper = styled.div`
     }
   }
   .btn {
+    text-transform: none;
     font-size: 1.25rem;
     margin-top: 1.5rem;
     padding: 1rem 1.5rem;

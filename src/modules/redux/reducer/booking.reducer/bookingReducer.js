@@ -4,20 +4,29 @@ import {
   GET_CINE_ROOM_LOADING,
   CHOOSING_SEAT,
   RESET__AMOUNT,
-} from '../actions/constantsAction';
+} from '../../actions/constantsAction.js';
 
 const init = {
+  isLoading: false,
   cineRoomMovie: {},
   cineSeatList: [],
   totalAmount: 0,
 };
 
 export const bookingReducer = (state = init, action) => {
+  // check if it loading
+  if (action.type === GET_CINE_ROOM_LOADING) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
   // Handle fetch API get danh sách phòng chiếu của từng bộ phim tương ứng
 
   if (action.type === GET_CINE_ROOM_SUCCESS) {
     return {
       ...state,
+      isLoading: false,
       cineRoomMovie: action.payload.thongTinPhim,
       cineSeatList: action.payload.danhSachGhe,
     };

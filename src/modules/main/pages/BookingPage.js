@@ -19,7 +19,7 @@ function BookingPage() {
   const { isModalShow, message, goTo, type, message2 } = useSelector(
     (state) => state.uiReducer.modal
   );
-  const { cineRoomMovie, cineSeatList, totalAmount } = useSelector(
+  const { cineRoomMovie, cineSeatList, totalAmount, isLoading } = useSelector(
     (state) => state.bookingReducer
   );
   // ui
@@ -52,33 +52,36 @@ function BookingPage() {
           />
         </div>
       )}
-      {/* <BookingNavBar className="nav" /> */}
-      <main className="booking section-middle">
-        <BookingPageLeft
-          className="left"
-          cineSeatList={cineSeatList}
-          cineRoomMovie={cineRoomMovie}
-        />
-        <section>
-          {isSideBarShow && (
+      {/* Check if it loading */}
+      {isLoading && <Loading />}
+      {!isLoading && (
+        <main className="booking section-middle">
+          <BookingPageLeft
+            className="left"
+            cineSeatList={cineSeatList}
+            cineRoomMovie={cineRoomMovie}
+          />
+          <section>
+            {isSideBarShow && (
+              <BookingPageRight
+                cineSeatList={cineSeatList}
+                cineRoomMovie={cineRoomMovie}
+                totalAmount={totalAmount}
+                choosingSeat={choosingSeat}
+                setIsSideBarShow={setIsSideBarShow}
+              />
+            )}
             <BookingPageRight
               cineSeatList={cineSeatList}
               cineRoomMovie={cineRoomMovie}
               totalAmount={totalAmount}
               choosingSeat={choosingSeat}
               setIsSideBarShow={setIsSideBarShow}
+              className="right"
             />
-          )}
-          <BookingPageRight
-            cineSeatList={cineSeatList}
-            cineRoomMovie={cineRoomMovie}
-            totalAmount={totalAmount}
-            choosingSeat={choosingSeat}
-            setIsSideBarShow={setIsSideBarShow}
-            className="right"
-          />
-        </section>
-      </main>
+          </section>
+        </main>
+      )}
       <BookingFotter
         choosingSeat={choosingSeat}
         className="booking__footer"

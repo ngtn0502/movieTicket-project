@@ -7,18 +7,13 @@ import {
 } from '../constantsAction.js';
 import { baseUrl, METHOD__HTTP } from '../../../../configs/api.configs.js';
 
-export const choosingSeatAction = (data) => ({
-  type: CHOOSING_SEAT,
-  payload: data,
-});
-
-export const bookingSeatAction = (maLichChieu, danhSachVe, history) => async (
-  dispatch
-) => {
+export const choosingSeatAction = (data, history) => (dispatch) => {
   let userLogin;
   if (localStorage.getItem('userLogin')) {
     userLogin = JSON.parse(localStorage.getItem('userLogin'));
-  } else {
+  }
+  console.log(userLogin);
+  if (!userLogin) {
     dispatch({
       type: USER_BOOKING_FAIL,
       payload: {
@@ -28,6 +23,20 @@ export const bookingSeatAction = (maLichChieu, danhSachVe, history) => async (
       },
     });
     history.push('/sign-in');
+  } else {
+    dispatch({ type: CHOOSING_SEAT, payload: data });
+  }
+};
+
+export const bookingSeatAction = (
+  maLichChieu,
+  danhSachVe,
+  history,
+  choosingSeat
+) => async (dispatch) => {
+  let userLogin;
+  if (localStorage.getItem('userLogin')) {
+    userLogin = JSON.parse(localStorage.getItem('userLogin'));
   }
   //
   const sendRequest = async (data1, data2) => {
@@ -60,9 +69,6 @@ export const bookingSeatAction = (maLichChieu, danhSachVe, history) => async (
         message2: 'vui lòng kiểm tra lại thông tin trước khi xác nhận',
         goTo: null,
       },
-    });
-    dispatch({
-      type: RESET__AMOUNT,
     });
   } catch (error) {
     console.log(error);

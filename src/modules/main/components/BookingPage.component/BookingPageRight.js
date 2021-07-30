@@ -37,7 +37,12 @@ function BookingPageRight({
         danhSachVe.push({ maGhe: item.maGhe, giaVe: item.giaVe });
       });
       dispatch(
-        bookingSeatAction(cineRoomMovie.maLichChieu, danhSachVe, history)
+        bookingSeatAction(
+          cineRoomMovie.maLichChieu,
+          danhSachVe,
+          history,
+          choosingSeat
+        )
       );
     }
   };

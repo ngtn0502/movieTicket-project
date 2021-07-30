@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import {
   mapCGV,
   mapLotte,
@@ -13,10 +14,11 @@ import { FlexCenter, FlexHCenter, FlexVCenter } from '../../../utils/mixin.js';
 import { choosingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
 
 function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   //
   const selectSeatHandler = (seat) => {
-    dispatch(choosingSeatAction(seat));
+    dispatch(choosingSeatAction(seat, history));
   };
   //
   const checkSeat = (seat) => {

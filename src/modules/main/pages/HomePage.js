@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { getMovieListAction } from '../../redux/actions/MovieAction/getMovieListAction';
 import CarouselCoverflow from '../components/Home.component/CarouselCoverflow';
 import MovieList from '../components/Home.component/MovieList';
@@ -12,6 +13,7 @@ import Loading from '../components/Loading.js';
 import AlertModal from '../components/AlertModal.js';
 
 function HomePage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   // ui
   const uiState = useSelector((state) => state.uiReducer);
@@ -19,6 +21,14 @@ function HomePage() {
   const { isModalShow, message, goTo, type, message2 } = useSelector(
     (state) => state.uiReducer.modal
   );
+  // close modal
+  const closeModalHandler = () => {
+    dispatch({ type: CLOSE_MODAL });
+    // goTo depend on what modal appear for
+    if (goTo) {
+      history.push(goTo);
+    }
+  };
   // movieList
   const { movieList, isLoading } = useSelector(
     (state) => state.movieListReducer

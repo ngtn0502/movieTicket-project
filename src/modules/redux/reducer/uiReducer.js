@@ -7,6 +7,7 @@ import {
   USER_BOOKING_FAIL,
   REQUIRE__CHOOSINGSEAT,
   USER_BOOKING_WARNING,
+  USER_LOGOUT_ALERT,
 } from '../actions/constantsAction';
 
 const init = {
@@ -39,6 +40,18 @@ export const uiReducer = (state = init, action) => {
     };
   }
   if (action.type === USER_LOGIN_FAIL) {
+    return {
+      ...state,
+      modal: {
+        ...state.modal,
+        isModalShow: true,
+        type: action.payload.type,
+        message: action.payload.message,
+        message2: action.payload.message2,
+      },
+    };
+  }
+  if (action.type === USER_LOGOUT_ALERT) {
     return {
       ...state,
       modal: {
