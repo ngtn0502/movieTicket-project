@@ -5,7 +5,6 @@ import { FaCcVisa } from 'react-icons/fa';
 import { HiOutlineCash } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-<<<<<<< HEAD
 import { IoIosArrowDropleftCircle } from 'react-icons/io';
 import { FlexCenter, Flex, FlexHCenter } from '../../../utils/mixin.js';
 import { bookingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
@@ -49,25 +48,6 @@ function BookingPageRight({
             Go Back
           </button>
         </div>
-=======
-import { FlexCenter, Flex, FlexHCenter } from '../../../utils/mixin.js';
-import { bookingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
-
-function BookingPageRight({ cineRoomMovie, totalAmount, choosingSeat }) {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const bookingHandler = () => {
-    const danhSachVe = [];
-    choosingSeat.forEach((item) => {
-      danhSachVe.push({ maGhe: item.maGhe, giaVe: item.giaVe });
-    });
-    dispatch(bookingSeatAction(cineRoomMovie.maLichChieu, danhSachVe, history));
-  };
-  return (
-    <Wrapper>
-      <div className="booking__right">
-        <div className="booking__price" />
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
         <div className="booking__info--movie">
           <img src={cineRoomMovie?.hinhAnh} alt="movie" />
           <h2>{cineRoomMovie?.tenPhim}</h2>
@@ -91,15 +71,9 @@ function BookingPageRight({ cineRoomMovie, totalAmount, choosingSeat }) {
           <div className="seat">
             <p>Ghế:</p>
             <div>
-<<<<<<< HEAD
               {choosingSeat.length !== 0
                 ? choosingSeat.map((item) => <p>Ghế {item.stt}</p>)
                 : 'Vui lòng chọn ghế'}
-=======
-              {choosingSeat.map((item) => (
-                <p>Ghế {item.stt}</p>
-              ))}
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
             </div>
           </div>
           <div>
@@ -178,15 +152,9 @@ function BookingPageRight({ cineRoomMovie, totalAmount, choosingSeat }) {
 export default BookingPageRight;
 const Wrapper = styled.div`
   position: fixed;
-<<<<<<< HEAD
   width: 100%;
   height: 100vh;
   top: 0rem;
-=======
-  width: 15rem;
-  height: 100vh;
-  top: 4rem;
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   right: 0;
   /* background-color: rgba(70, 70, 70, 1); */
   background-color: var(--color-seat);
@@ -206,7 +174,6 @@ const Wrapper = styled.div`
     text-align: left;
     font-size: 1rem;
   }
-<<<<<<< HEAD
   .booking__back {
     ${FlexCenter()}
     button {
@@ -221,19 +188,12 @@ const Wrapper = styled.div`
       }
     }
   }
-=======
-
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   .booking__right {
     ::-webkit-scrollbar {
       width: 0px;
       background: transparent; /* make scrollbar transparent */
     }
-<<<<<<< HEAD
     height: 100%;
-=======
-    height: 91vh;
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
     position: relative;
     width: 90%;
     margin: 0 auto;
@@ -325,7 +285,6 @@ const Wrapper = styled.div`
     background-color: rgb(74, 144, 226);
   }
   /*  */
-<<<<<<< HEAD
   @media screen and (min-width: 1000px) {
     width: 15rem;
     top: 4rem;
@@ -334,13 +293,6 @@ const Wrapper = styled.div`
     }
     .booking__back {
       display: none;
-=======
-  .btn-paying {
-    background-color: #44c020;
-    width: 100%;
-    &:hover {
-      background-color: rgb(18, 112, 12);
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
     }
   }
   @media screen and (min-width: 1200px) {

@@ -4,7 +4,7 @@ import { uiReducer } from './uiReducer';
 import { movieDetailReducer } from './movieDetailReducer';
 import { cinemaListReducer } from './cinemaListReducer';
 import { authReducer } from './authReducer';
-import { bookingReducer } from './BookingReducer.js';
+import { bookingReducer } from './bookingReducer';
 
 export const rootReducer = combineReducers({
   uiReducer,

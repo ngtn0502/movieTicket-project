@@ -41,11 +41,7 @@ const Wrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-<<<<<<< HEAD
     z-index: 3000;
-=======
-    z-index: 1000;
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
     width: 15rem;
     height: 15rem;
     background-color: #fff;

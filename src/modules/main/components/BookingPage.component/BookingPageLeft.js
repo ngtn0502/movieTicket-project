@@ -264,10 +264,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
 
 export default BookingPageLeft;
 const Wrapper = styled.section`
-<<<<<<< HEAD
   padding-bottom: 5rem;
-=======
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   .booking__info {
     margin: 7rem 0 2rem;
     img {
@@ -337,11 +334,7 @@ const Wrapper = styled.section`
     transition: var(--transition);
   }
   .seat__selected {
-<<<<<<< HEAD
     background-color: var(--color-white) !important;
-=======
-    background-color: var(--color-white);
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   }
   .seat__choosingSeat {
     background-color: var(--color-choosingSeat);
@@ -354,10 +347,7 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 576px) {
-<<<<<<< HEAD
     padding-bottom: 0;
-=======
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
     .screen__container {
       width: 160%;
       .screen {

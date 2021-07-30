@@ -45,10 +45,7 @@ function App() {
         </Route>
         {/* BookingPage Route */}
         <Route path="/booking/:ids" exact>
-<<<<<<< HEAD
           <Navbar />
-=======
->>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
           <BookingPage />
         </Route>
         {/* Main Route */}
