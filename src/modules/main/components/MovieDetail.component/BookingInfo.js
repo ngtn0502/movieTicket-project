@@ -72,6 +72,7 @@ export default function BookingInfo({
   };
   // debugger;
   console.log(lichChieuDuyNhat(dateChieu));
+  // console.log(dateChieu);
   return (
     <Wrapper>
       <div className={classes.root}>
@@ -128,7 +129,7 @@ export default function BookingInfo({
         })} */}
         {/*  */}
         {/*  */}
-        {lichChieuDuyNhat(dateChieu)?.map((_, i) => {
+        {ngayChieuAllUnique?.map((_, i) => {
           return (
             <TabPanel value={value} index={i} className='tabPanel' key={i}>
               {lichChieuDuyNhat(dateChieu)?.map((item, index) => {
@@ -178,6 +179,12 @@ const Wrapper = styled.section`
     border: 1px solid black;
   }
   .tabPanel {
+    .MuiTypography-root{
+      flex-wrap: wrap;
+      div{
+        width: 100%;
+      }
+    }
     p {
       margin: 1rem 0;
       font-size: 1.5rem;

@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignInPage() {
-  const { isModalShow, message } = useSelector((state) => state.uiReducer);
+  const { isModalShow, message, type, message2, goTo } = useSelector(
+    (state) => state.uiReducer.modal
+  );
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -50,7 +52,12 @@ function SignInPage() {
           {/* eslint-disable */}
           <div className="backdrop" onClick={closeModalHandler} />
           {/* eslint-enable */}
-          <AlertModal message={message} />
+          <AlertModal
+            message={message}
+            goTo={goTo}
+            type={type}
+            message2={message2}
+          />
         </div>
       )}
       <div className="page-100">

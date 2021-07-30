@@ -2,20 +2,27 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FiUser, FiMenu } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../../../assets/img/logo-full.png';
 import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
 import NavLink from './NavLink';
+import {
+  USER_LOGOUT,
+  USER_LOGOUT_ALERT,
+} from '../../../redux/actions/constantsAction.js';
 
-let userLogin;
-if (localStorage.getItem('userLogin')) {
-  userLogin = JSON.parse(localStorage.getItem('userLogin'));
-}
 function Navbar() {
-  const history = useHistory();
   const [isSideBarShow, setisSideBarShow] = useState(false);
-  const isLogin = useSelector((state) => state.authReducer);
-
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { isLoginSuccess, loginData } = useSelector(
+    (state) => state.authReducer
+  );
+  // login
+  let userLogin;
+  if (localStorage.getItem('userLogin')) {
+    userLogin = JSON.parse(localStorage.getItem('userLogin'));
+  }
   // Scroll down animation
   const [isSideBarScroll, setIsSideBarScroll] = useState(false);
   useEffect(() => {
@@ -33,9 +40,14 @@ function Navbar() {
   //
   // log out
   const logoutHandler = () => {
-    localStorage.clear();
-    history.push('/home');
-    window.location.reload();
+    dispatch({
+      type: USER_LOGOUT_ALERT,
+      payload: {
+        type: 'Logout',
+        message: 'Bạn có chắc muốn đăng xuất?',
+        goTo: null,
+      },
+    });
   };
   return (
     <Wrapper>
@@ -51,10 +63,10 @@ function Navbar() {
           </div>
           <div className="nav_login">
             <FiUser />
-            {userLogin ? (
+            {isLoginSuccess || userLogin ? (
               <div>
                 <Link to="/profile" className="nav_login--title">
-                  {userLogin.hoTen}
+                  {loginData?.hoTen || userLogin.hoTen}
                 </Link>
 
                 <button type="button" onClick={logoutHandler}>
@@ -88,9 +100,9 @@ function Navbar() {
           <div className='sideBar__links'>
             <div className='nav_login'>
               <FiUser />
-              {userLogin ? (
+              {isLoginSuccess || userLogin ? (
                 <Link to='/profile' className='nav_login--title'>
-                  {userLogin.hoTen}
+                  {loginData?.hoTen || userLogin.hoTen}
                 </Link>
               ) : (
                 <Link to='/sign-in' className='nav_login--title'>

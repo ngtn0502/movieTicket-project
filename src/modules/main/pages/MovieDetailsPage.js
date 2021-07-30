@@ -17,7 +17,7 @@ function MovieDetailsPage() {
   // UI
 
   const uiState = useSelector((state) => state.uiReducer);
-  const { isModalShow, trailer } = uiState;
+  const { isTrailerShow, trailer } = uiState;
   // Movie Detail
   const { movieDetail, isLoading } = useSelector(
     (state) => state.movieDetailReducer
@@ -44,7 +44,7 @@ function MovieDetailsPage() {
     <Wrapper>
       <div className="page-100">
         {isLoading && <Loading />}
-        {isModalShow && (
+        {isTrailerShow && (
           <div className="section-middle">
             <Backdrop
               className="backdrop"

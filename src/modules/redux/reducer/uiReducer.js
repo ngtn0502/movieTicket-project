@@ -6,13 +6,19 @@ import {
   USER_BOOKING_SUCCESS,
   USER_BOOKING_FAIL,
   REQUIRE__CHOOSINGSEAT,
+  USER_BOOKING_WARNING,
 } from '../actions/constantsAction';
 
 const init = {
-  isModalShow: false,
+  isTrailerShow: false,
   trailer: 'https://www.youtube.com/embed/6ZfuNTqbHE8',
-  message: 'Đăng nhập',
-  goTo: null,
+  modal: {
+    isModalShow: false,
+    type: null,
+    message: 'Đăng nhập',
+    message2: null,
+    goTo: null,
+  },
 };
 // Handle UI change in page
 export const uiReducer = (state = init, action) => {
@@ -20,48 +26,90 @@ export const uiReducer = (state = init, action) => {
     return {
       ...state,
       trailer: action.payload,
-      isModalShow: true,
+      isTrailerShow: true,
     };
   }
   if (action.type === CLOSE_MODAL) {
     return {
       ...state,
-      isModalShow: false,
+      isTrailerShow: false,
+      modal: {
+        isModalShow: false,
+      },
     };
   }
   if (action.type === USER_LOGIN_FAIL) {
     return {
       ...state,
-      message: action.payload,
-      isModalShow: true,
+      modal: {
+        ...state.modal,
+        isModalShow: true,
+        type: action.payload.type,
+        message: action.payload.message,
+        message2: action.payload.message2,
+      },
     };
   }
   if (action.type === USER_SIGN_UP_FAIL) {
     return {
       ...state,
-      message: action.payload,
-      isModalShow: true,
+      modal: {
+        ...state.modal,
+        isModalShow: true,
+        type: action.payload.type,
+        message: action.payload.message,
+        message2: action.payload.message2,
+      },
     };
   }
   if (action.type === USER_BOOKING_SUCCESS) {
     return {
       ...state,
-      message: action.payload,
-      isModalShow: true,
+      modal: {
+        ...state.modal,
+        isModalShow: true,
+        type: action.payload.type,
+        message: action.payload.message,
+        message2: action.payload.message2,
+        goTo: action.payload.goTo,
+      },
+    };
+  }
+  if (action.type === USER_BOOKING_WARNING) {
+    return {
+      ...state,
+      modal: {
+        ...state.modal,
+        isModalShow: true,
+        type: action.payload.type,
+        message: action.payload.message,
+        message2: action.payload.message2,
+      },
     };
   }
   if (action.type === USER_BOOKING_FAIL) {
     return {
       ...state,
-      message: action.payload,
-      isModalShow: true,
+      modal: {
+        ...state.modal,
+        isModalShow: true,
+        type: action.payload.type,
+        message: action.payload.message,
+        message2: action.payload.message2,
+      },
     };
   }
   if (action.type === REQUIRE__CHOOSINGSEAT) {
     return {
       ...state,
-      message: action.payload,
-      isModalShow: true,
+      modal: {
+        ...state.modal,
+        isModalShow: true,
+        type: action.payload.type,
+        message: action.payload.message,
+        message2: action.payload.message2,
+        goTo: action.payload.goTo,
+      },
     };
   }
   return { ...state };

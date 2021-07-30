@@ -158,7 +158,7 @@ h5 {
 }
 p {
   padding-top: 0;
-  margin-bottom: 0.25rem;
+  /* margin-bottom: 0.25rem; */
   /* color: var(--color-title); */
 }
 span {

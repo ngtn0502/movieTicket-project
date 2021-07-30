@@ -16,14 +16,19 @@ function BookingPage() {
   const dispatch = useDispatch();
   const params = useParams();
   const [isSideBarShow, setIsSideBarShow] = useState(false);
-  const { isModalShow, message } = useSelector((state) => state.uiReducer);
+  const { isModalShow, message, goTo, type, message2 } = useSelector(
+    (state) => state.uiReducer.modal
+  );
   const { cineRoomMovie, cineSeatList, totalAmount } = useSelector(
     (state) => state.bookingReducer
   );
   // ui
   const closeModalHandler = () => {
     dispatch({ type: CLOSE_MODAL });
-    history.push('/home');
+    // goTo depend on what modal appear for
+    if (goTo) {
+      history.push(goTo);
+    }
   };
   //
   // fetch Api phòng chiếu của bộ phim tương ứng vơi mã rạp chiếu trong chi tiết bộ phim
@@ -39,7 +44,12 @@ function BookingPage() {
           {/* eslint-disable */}
           <div className='backdrop' onClick={closeModalHandler} />
           {/* eslint-enable */}
-          <AlertModal message={message} goTo="/home" />
+          <AlertModal
+            message={message}
+            goTo={goTo}
+            type={type}
+            message2={message2}
+          />
         </div>
       )}
       {/* <BookingNavBar className="nav" /> */}

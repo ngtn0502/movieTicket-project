@@ -9,12 +9,16 @@ import SearchBar from '../components/Home.component/SearchBar';
 import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import Loading from '../components/Loading.js';
+import AlertModal from '../components/AlertModal.js';
 
 function HomePage() {
   const dispatch = useDispatch();
   // ui
   const uiState = useSelector((state) => state.uiReducer);
-  const { isModalShow, trailer } = uiState;
+  const { isTrailerShow, trailer } = uiState;
+  const { isModalShow, message, goTo, type, message2 } = useSelector(
+    (state) => state.uiReducer.modal
+  );
   // movieList
   const { movieList, isLoading } = useSelector(
     (state) => state.movieListReducer
@@ -28,7 +32,7 @@ function HomePage() {
   return (
     <Wrapper className="page-100">
       {isLoading && <Loading />}
-      {isModalShow && (
+      {isTrailerShow && (
         <>
           <Backdrop
             className="backdrop"
@@ -38,6 +42,19 @@ function HomePage() {
           />
           <Modal trailer={trailer} />
         </>
+      )}
+      {isModalShow && (
+        <div>
+          {/* eslint-disable */}
+          <div className='backdrop' onClick={closeModalHandler} />
+          {/* eslint-enable */}
+          <AlertModal
+            message={message}
+            goTo={goTo}
+            type={type}
+            message2={message2}
+          />
+        </div>
       )}
       {!isLoading && (
         <div>

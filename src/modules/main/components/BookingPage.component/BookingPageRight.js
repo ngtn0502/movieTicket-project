@@ -21,7 +21,15 @@ function BookingPageRight({
   const history = useHistory();
   const bookingHandler = () => {
     if (choosingSeat.length === 0) {
-      dispatch({ type: REQUIRE__CHOOSINGSEAT, payload: 'Vui lòng chọn ghế' });
+      dispatch({
+        type: REQUIRE__CHOOSINGSEAT,
+        payload: {
+          type: 'Warning',
+          message: 'Vui lòng chọn ghế',
+          message2: 'có vẻ bạn đã quên chọn ghế!',
+          goTo: null,
+        },
+      });
     } else {
       // format to API data requirement
       const danhSachVe = [];

@@ -3,6 +3,7 @@ import {
   RESET__AMOUNT,
   USER_BOOKING_FAIL,
   USER_BOOKING_SUCCESS,
+  USER_BOOKING_WARNING,
 } from '../constantsAction.js';
 import { baseUrl, METHOD__HTTP } from '../../../../configs/api.configs.js';
 
@@ -20,7 +21,11 @@ export const bookingSeatAction = (maLichChieu, danhSachVe, history) => async (
   } else {
     dispatch({
       type: USER_BOOKING_FAIL,
-      payload: 'Vui lòng đăng nhập để đặt vé xem phim!',
+      payload: {
+        type: 'Warning',
+        message: 'Vui lòng đăng nhập để đặt vé xem phim!',
+        goTo: null,
+      },
     });
     history.push('/sign-in');
   }
@@ -48,8 +53,13 @@ export const bookingSeatAction = (maLichChieu, danhSachVe, history) => async (
   try {
     const data = await sendRequest(maLichChieu, danhSachVe);
     dispatch({
-      type: USER_BOOKING_SUCCESS,
-      payload: 'Vui lòng kiểm tra email xác nhận thông tin đặt vé!',
+      type: USER_BOOKING_WARNING,
+      payload: {
+        type: 'Confirm',
+        message: 'Thông tin đặt vé sẽ được gởi qua Email!',
+        message2: 'vui lòng kiểm tra lại thông tin trước khi xác nhận',
+        goTo: null,
+      },
     });
     dispatch({
       type: RESET__AMOUNT,

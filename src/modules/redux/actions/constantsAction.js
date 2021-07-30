@@ -4,6 +4,7 @@ export const SHOW_MODAL = 'SHOW_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const HIDE_FOOTER = 'HIDE_FOOTER';
 export const SHOW_FOOTER = 'SHOW_FOOTER';
+export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL';
 
 // Get movie list action
 
@@ -22,9 +23,11 @@ export const GET_CINEMA_LIST = 'GET_CINEMA_LIST';
 
 // Authentication
 
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
-export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGOUT_ALERT = 'USER_LOGOUT_ALERT';
 
+export const USER_SIGN_UP_SUCCESS = 'USER_SIGN_UP_FAIL';
 export const USER_SIGN_UP_FAIL = 'USER_SIGN_UP_FAIL';
 
 // Cineflex phòng vé
@@ -36,6 +39,7 @@ export const GET_CINE_ROOM_ERROR = ' GET_CINE_ROOM_ERROR';
 
 export const CHOOSING_SEAT = 'CHOOSING_SEAT';
 export const USER_BOOKING_SUCCESS = ' USER_BOOKING_SUCCESS';
+export const USER_BOOKING_WARNING = ' USER_BOOKING_WARNING';
 export const USER_BOOKING_FAIL = ' USER_BOOKING_FAIL';
 export const RESET__AMOUNT = ' RESET__AMOUNT';
 export const REQUIRE__CHOOSINGSEAT = ' REQUIRE__CHOOSINGSEAT';
