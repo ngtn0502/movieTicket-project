@@ -8,14 +8,20 @@ import BookingPageLeft from '../components/BookingPage.component/BookingPageLeft
 import BookingPageRight from '../components/BookingPage.component/BookingPageRight.js';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import AlertModal from '../components/AlertModal.js';
+<<<<<<< HEAD
 import BookingNavBar from '../components/BookingPage.component/BookingNavBar.js';
 import BookingFotter from '../components/BookingPage.component/BookingFotter.js';
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
 
 function BookingPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
+<<<<<<< HEAD
   const [isSideBarShow, setIsSideBarShow] = useState(false);
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   const { isModalShow, message } = useSelector((state) => state.uiReducer);
   const { cineRoomMovie, cineSeatList, totalAmount } = useSelector(
     (state) => state.bookingReducer
@@ -42,13 +48,17 @@ function BookingPage() {
           <AlertModal message={message} goTo="/home" />
         </div>
       )}
+<<<<<<< HEAD
       {/* <BookingNavBar className="nav" /> */}
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
       <main className="booking section-middle">
         <BookingPageLeft
           className="left"
           cineSeatList={cineSeatList}
           cineRoomMovie={cineRoomMovie}
         />
+<<<<<<< HEAD
         <section>
           {isSideBarShow && (
             <BookingPageRight
@@ -59,11 +69,15 @@ function BookingPage() {
               setIsSideBarShow={setIsSideBarShow}
             />
           )}
+=======
+        <section className="right">
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
           <BookingPageRight
             cineSeatList={cineSeatList}
             cineRoomMovie={cineRoomMovie}
             totalAmount={totalAmount}
             choosingSeat={choosingSeat}
+<<<<<<< HEAD
             setIsSideBarShow={setIsSideBarShow}
             className="right"
           />
@@ -74,22 +88,33 @@ function BookingPage() {
         className="booking__footer"
         setIsSideBarShow={setIsSideBarShow}
       />
+=======
+          />
+        </section>
+      </main>
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
     </Wrapper>
   );
 }
 
 export default BookingPage;
 const Wrapper = styled.section`
+<<<<<<< HEAD
   .backdrop {
     z-index: 3000;
   }
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   .booking {
     display: block;
     .right {
       display: none;
     }
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   @media screen and (min-width: 1000px) {
     .booking {
       margin: 5rem auto;
@@ -100,8 +125,11 @@ const Wrapper = styled.section`
         display: block;
       }
     }
+<<<<<<< HEAD
     .booking__footer {
       display: none;
     }
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   }
 `;

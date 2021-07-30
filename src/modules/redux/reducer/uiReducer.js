@@ -5,14 +5,20 @@ import {
   USER_SIGN_UP_FAIL,
   USER_BOOKING_SUCCESS,
   USER_BOOKING_FAIL,
+<<<<<<< HEAD
   REQUIRE__CHOOSINGSEAT,
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
 } from '../actions/constantsAction';
 
 const init = {
   isModalShow: false,
   trailer: 'https://www.youtube.com/embed/6ZfuNTqbHE8',
   message: 'Đăng nhập',
+<<<<<<< HEAD
   goTo: null,
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
 };
 // Handle UI change in page
 export const uiReducer = (state = init, action) => {
@@ -57,6 +63,7 @@ export const uiReducer = (state = init, action) => {
       isModalShow: true,
     };
   }
+<<<<<<< HEAD
   if (action.type === REQUIRE__CHOOSINGSEAT) {
     return {
       ...state,
@@ -64,5 +71,7 @@ export const uiReducer = (state = init, action) => {
       isModalShow: true,
     };
   }
+=======
+>>>>>>> 8c208ad9af24959ad9cf4c08965647c970240f9b
   return { ...state };
 };
