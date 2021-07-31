@@ -1,14 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 
+const trailerModalVariants = {
+  hidden: {
+    opacity: 0,
+    y: 600,
+    x: -400,
+  },
+  visible: {
+    opacity: 1,
+    y: -300,
+    x: -400,
+    transition: {
+      duration: 0.7,
+    },
+  },
+};
 function Modal({ trailer }) {
   const dispatch = useDispatch();
+  const keydownHadler = (event) => {
+    if (event.keyCode === 27) {
+      dispatch({ type: CLOSE_MODAL });
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keydown', keydownHadler);
+  }, []);
   return (
     <Wrapper>
-      <div className="modal">
+      <motion.div
+        variants={trailerModalVariants}
+        initial="hidden"
+        animate="visible"
+        layout
+        className="modal"
+      >
         <AiOutlineCloseCircle
           className="modal__close"
           onClick={() => {
@@ -22,7 +52,7 @@ function Modal({ trailer }) {
           src={trailer}
           frameBorder="0"
         />
-      </div>
+      </motion.div>
     </Wrapper>
   );
 }

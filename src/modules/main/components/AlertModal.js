@@ -4,7 +4,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { TiTick, TiCancel } from 'react-icons/ti';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   CLOSE_MODAL,
   RESET__AMOUNT,
@@ -103,74 +103,131 @@ function AlertModal({
   };
   return (
     <Wrapper>
-      <motion.div
-        variants={alertModalVariants}
-        initial="hidden"
-        animate="visible"
-        layout
-        className="modal"
-      >
-        <div className="alert">
-          {!(
-            type === 'Warning' ||
-            type === 'Confirm' ||
-            type === 'Logout'
-          ) ? null : (
-            <div className="warning">
-              <div className="warning__icon">
-                <span>!</span>
+      <AnimatePresence>
+        <motion.div
+          variants={alertModalVariants}
+          initial="hidden"
+          animate="visible"
+          exit={{ opacity: 0 }}
+          layout
+          className="modal"
+        >
+          <div className="alert">
+            {!(
+              type === 'Warning' ||
+              type === 'Confirm' ||
+              type === 'Logout'
+            ) ? null : (
+              <div className="warning">
+                <div className="svg-box">
+                  <svg className="circular yellow-stroke">
+                    <circle
+                      className="path"
+                      cx="75"
+                      cy="75"
+                      r="50"
+                      fill="none"
+                      strokeWidth="5"
+                      strokeMiterlimit="10"
+                    />
+                  </svg>
+                  <svg className="alert-sign yellow-stroke">
+                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                      <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                        <path
+                          className="line"
+                          d="M634.087,300.805L673.361,261.53"
+                          fill="none"
+                        />
+                      </g>
+                      <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                        <circle
+                          className="dot"
+                          cx="621.52"
+                          cy="316.126"
+                          r="1.318"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </div>
               </div>
-            </div>
-          )}
-          {!(type === 'Success') ? null : (
-            <div className="success">
-              <div className="check-icon">
-                <span className="icon-line line-tip" />
-                <span className="icon-line line-long" />
-                <div className="icon-circle" />
-                <div className="icon-fix" />
-              </div>
-            </div>
-          )}
-          {!(type === 'Error') ? null : (
-            <div className="error">
-              <div className="error__icon">
-                <TiCancel />
-              </div>
-            </div>
-          )}
-          <p className="alert__title">{message}</p>
-          {message2 && <p className="alert__subTitle">{message2}</p>}
-          <div className="alert__button">
-            {type === 'Confirm' && (
-              <button
-                type="button"
-                className="btn btn-paying"
-                onClick={acceptModalHandler}
-              >
-                Đặt vé
-              </button>
             )}
-            {!(type === 'Logout') ? (
-              <button
-                type="button"
-                className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
-                onClick={closeModalHandler}
-              >
-                {type === 'Confirm' ? 'Hủy' : 'Ok'}
-              </button>
-            ) : (
-              <button
-                type="button"
-                className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
-                onClick={logoutHandler}
-              >
-                Logout
-              </button>
+            {!(type === 'Success') ? null : (
+              <div className="success">
+                <div className="check-icon">
+                  <span className="icon-line line-tip" />
+                  <span className="icon-line line-long" />
+                  <div className="icon-circle" />
+                  <div className="icon-fix" />
+                </div>
+              </div>
             )}
+            {!(type === 'Error') ? null : (
+              <div className="error">
+                <div className="svg-box">
+                  <svg className="circular red-stroke">
+                    <circle
+                      className="path"
+                      cx="75"
+                      cy="75"
+                      r="50"
+                      fill="none"
+                      strokeWidth="5"
+                      strokeMiterlimit="10"
+                    />
+                  </svg>
+                  <svg className="cross red-stroke">
+                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
+                      <path
+                        className="first-line"
+                        d="M634.087,300.805L673.361,261.53"
+                        fill="none"
+                      />
+                    </g>
+                    <g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)">
+                      <path
+                        className="second-line"
+                        d="M634.087,300.805L673.361,261.53"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            )}
+            <p className="alert__title">{message}</p>
+            {message2 && <p className="alert__subTitle">{message2}</p>}
+            <div className="alert__button">
+              {type === 'Confirm' && (
+                <button
+                  type="button"
+                  className="btn btn-paying"
+                  onClick={acceptModalHandler}
+                >
+                  Đặt vé
+                </button>
+              )}
+              {!(type === 'Logout') ? (
+                <button
+                  type="button"
+                  className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
+                  onClick={closeModalHandler}
+                >
+                  {type === 'Confirm' ? 'Hủy' : 'Ok'}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
+                  onClick={logoutHandler}
+                >
+                  Logout
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </AnimatePresence>
     </Wrapper>
   );
 }
@@ -203,14 +260,15 @@ const Wrapper = styled.div`
       .alert__title {
         font-weight: 700;
         font-size: 1.5rem;
-        padding: 1rem 0;
+        padding-bottom: 1rem;
         color: var(--color-black);
       }
       .alert__button {
         display: flex;
         justify-content: center;
         button {
-          margin-right: 1rem;
+          margin: 0 auto;
+          /* margin-right: 1rem; */
         }
       }
     }
@@ -231,28 +289,41 @@ const Wrapper = styled.div`
     background: #4a4a4a;
   }
   /* type icon: warning */
+  .yellow-stroke {
+    stroke: #ffc107;
+  }
+  .alert-sign {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 40px;
+    left: 68px;
+    width: 15px;
+    height: 70px;
+    animation: 0.8s alert-sign-bounce cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
 
-  .warning__icon {
-    position: relative;
-    box-sizing: content-box;
-    justify-content: center;
-    width: 6rem;
-    height: 6rem;
-    margin: 0 auto;
-    border: 0.25em solid transparent;
-    border-radius: 50%;
-    font-family: inherit;
-    line-height: 5em;
-    cursor: default;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-color: #facea8;
-    color: #f8bb86;
-    span {
-      font-size: 4rem;
+  .alert-sign .dot {
+    stroke: none;
+    fill: #ffc107;
+  }
+
+  @keyframes alert-sign-bounce {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    50% {
+      transform: scale(0);
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(1.3);
     }
   }
+  /*  */
   /* type icon: success */
   /**
  * Extracted from: SweetAlert
@@ -413,18 +484,83 @@ const Wrapper = styled.div`
     }
   }
   /* type icon: error */
-  .error {
+  .error,
+  .warning {
     display: flex;
     justify-content: center;
     align-items: center;
-    .error__icon {
-      svg {
-        fill: var(--color-redNetflix);
-        width: 5em;
-        height: 5em;
-      }
+  }
+  .svg-box {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+  }
+
+  .red-stroke {
+    stroke: #ff6245;
+  }
+  .circular circle.path {
+    stroke-dasharray: 330;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    opacity: 0.4;
+    animation: 0.7s draw-circle ease-out;
+  }
+
+  .cross {
+    stroke-width: 6.25;
+    stroke-linecap: round;
+    position: absolute;
+    top: 54px;
+    left: 54px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .cross .first-line {
+    animation: 0.7s draw-first-line ease-out;
+  }
+
+  .cross .second-line {
+    animation: 0.7s draw-second-line ease-out;
+  }
+
+  @keyframes draw-first-line {
+    0% {
+      stroke-dasharray: 0, 56;
+      stroke-dashoffset: 0;
+    }
+
+    50% {
+      stroke-dasharray: 0, 56;
+      stroke-dashoffset: 0;
+    }
+
+    100% {
+      stroke-dasharray: 56, 330;
+      stroke-dashoffset: 0;
     }
   }
+
+  @keyframes draw-second-line {
+    0% {
+      stroke-dasharray: 0, 55;
+      stroke-dashoffset: 1;
+    }
+
+    50% {
+      stroke-dasharray: 0, 55;
+      stroke-dashoffset: 1;
+    }
+
+    100% {
+      stroke-dasharray: 55, 0;
+      stroke-dashoffset: 70;
+    }
+  }
+
+  /*  */
+
   @media screen and (min-width: 1000px) {
     .modal {
       width: 35rem;
