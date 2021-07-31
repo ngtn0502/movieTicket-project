@@ -39,19 +39,24 @@ function BookingPage() {
   const choosingSeat = cineSeatList?.filter((item) => item.dangChon === true);
   return (
     <Wrapper>
+      {/* Alert modal */}
       {isModalShow && (
         <div>
           {/* eslint-disable */}
-          <div className='backdrop' onClick={closeModalHandler} />
-          {/* eslint-enable */}
+        <div className='backdrop' onClick={closeModalHandler}></div>
+        {/* eslint-enable */}
+
           <AlertModal
             message={message}
             goTo={goTo}
             type={type}
             message2={message2}
+            choosingSeat={choosingSeat}
+            cineRoomMovie={cineRoomMovie}
           />
         </div>
       )}
+
       {/* Check if it loading */}
       {isLoading && <Loading />}
       {!isLoading && (
@@ -94,7 +99,7 @@ function BookingPage() {
 export default BookingPage;
 const Wrapper = styled.section`
   .backdrop {
-    z-index: 3000;
+    z-index: 2999;
   }
   .booking {
     display: block;

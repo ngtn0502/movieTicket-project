@@ -1,20 +1,58 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { TiTick, TiCancel } from 'react-icons/ti';
+import { motion } from 'framer-motion';
 import {
   CLOSE_MODAL,
   RESET__AMOUNT,
   USER_BOOKING_SUCCESS,
   USER_LOGOUT,
+  USER_LOGOUT_SUCCESS,
 } from '../../redux/actions/constantsAction.js';
 import { FlexHCenter } from '../../utils/mixin';
+import { bookingSeatAction } from '../../redux/actions/BookingAction/bookingAction.js';
 
-function AlertModal({ message, goTo, type, message2 }) {
+const alertModalVariants = {
+  hidden: {
+    opacity: 0,
+    y: -500,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    animate: {
+      duration: 1,
+      type: 'spring',
+      stiffness: 100,
+    },
+  },
+};
+
+function AlertModal({
+  message,
+  goTo,
+  type,
+  message2,
+  choosingSeat,
+  cineRoomMovie,
+  className,
+}) {
   const history = useHistory();
   const dispatch = useDispatch();
+  // keydown esc to close modal
+  const keydownHandler = (event) => {
+    if (event.keyCode === 27) {
+      dispatch({ type: CLOSE_MODAL });
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keydown', keydownHandler);
+  }, []);
+
+  //
   const closeModalHandler = () => {
     dispatch({ type: CLOSE_MODAL });
     if (goTo) {
@@ -30,20 +68,48 @@ function AlertModal({ message, goTo, type, message2 }) {
         goTo: '/home',
       },
     });
+    // dispatch booking action in ALERTMODAL component is because i want send the booking request after user click confirm button
+
+    // format to API data requirement
+    const danhSachVe = [];
+    choosingSeat.forEach((item) => {
+      danhSachVe.push({ maGhe: item.maGhe, giaVe: item.giaVe });
+    });
+    // dispatch action creator booking
+    dispatch(
+      bookingSeatAction(
+        cineRoomMovie.maLichChieu,
+        danhSachVe,
+        history,
+        choosingSeat
+      )
+    );
     dispatch({
       type: RESET__AMOUNT,
     });
   };
   const logoutHandler = () => {
-    dispatch({ type: CLOSE_MODAL });
+    dispatch({
+      type: USER_LOGOUT_SUCCESS,
+      payload: {
+        type: 'Success',
+        message: 'Đăng xuất thành công',
+        goTo: '/home',
+      },
+    });
+    // dispatch({ type: CLOSE_MODAL });
     dispatch({ type: USER_LOGOUT });
     localStorage.clear();
-    history.push('/home');
   };
-  console.log(message);
   return (
     <Wrapper>
-      <div className="modal">
+      <motion.div
+        variants={alertModalVariants}
+        initial="hidden"
+        animate="visible"
+        layout
+        className="modal"
+      >
         <div className="alert">
           {!(
             type === 'Warning' ||
@@ -58,8 +124,11 @@ function AlertModal({ message, goTo, type, message2 }) {
           )}
           {!(type === 'Success') ? null : (
             <div className="success">
-              <div className="success__icon">
-                <TiTick />
+              <div className="check-icon">
+                <span className="icon-line line-tip" />
+                <span className="icon-line line-long" />
+                <div className="icon-circle" />
+                <div className="icon-fix" />
               </div>
             </div>
           )}
@@ -101,7 +170,7 @@ function AlertModal({ message, goTo, type, message2 }) {
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
     </Wrapper>
   );
 }
@@ -111,12 +180,12 @@ export default AlertModal;
 const Wrapper = styled.div`
   .modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 20%;
+    left: 7%;
+    /* transform: translate(-50%, -50%); */
     z-index: 3000;
-    width: 15rem;
-    height: 15rem;
+    width: 20rem;
+    height: 25rem;
     background-color: #fff;
     border-radius: 0.5rem;
     .alert {
@@ -133,7 +202,7 @@ const Wrapper = styled.div`
       }
       .alert__title {
         font-weight: 700;
-        font-size: 2rem;
+        font-size: 1.5rem;
         padding: 1rem 0;
         color: var(--color-black);
       }
@@ -185,22 +254,162 @@ const Wrapper = styled.div`
     }
   }
   /* type icon: success */
+  /**
+ * Extracted from: SweetAlert
+ * Modified by: Istiak Tridip
+ */
   .success {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: content-box;
+    width: 80px;
+    height: 115px;
     margin: 0 auto;
-    width: 5rem;
-    height: 5rem;
-    border: 0.25em solid rgba(165, 220, 134, 1);
-    border-radius: 50%;
-    .success__icon {
-      svg {
-        fill: rgba(165, 220, 134, 1);
-        width: 3em;
-        height: 3em;
+
+    .check-icon {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      border-radius: 50%;
+      box-sizing: content-box;
+      border: 4px solid #4caf50;
+
+      &::before {
+        top: 3px;
+        left: -2px;
+        width: 30px;
+        transform-origin: 100% 50%;
+        border-radius: 100px 0 0 100px;
       }
+
+      &::after {
+        top: 0;
+        left: 30px;
+        width: 60px;
+        transform-origin: 0 50%;
+        border-radius: 0 100px 100px 0;
+        animation: rotate-circle 4.25s ease-in;
+      }
+
+      &::before,
+      &::after {
+        content: '';
+        height: 100px;
+        position: absolute;
+        background: #ffffff;
+        transform: rotate(-45deg);
+      }
+
+      .icon-line {
+        height: 5px;
+        background-color: #4caf50;
+        display: block;
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+
+        &.line-tip {
+          top: 46px;
+          left: 14px;
+          width: 25px;
+          transform: rotate(45deg);
+          animation: icon-line-tip 0.75s;
+        }
+
+        &.line-long {
+          top: 38px;
+          right: 8px;
+          width: 47px;
+          transform: rotate(-45deg);
+          animation: icon-line-long 0.75s;
+        }
+      }
+
+      .icon-circle {
+        top: -4px;
+        left: -4px;
+        z-index: 10;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        position: absolute;
+        box-sizing: content-box;
+        border: 4px solid rgba(76, 175, 80, 0.5);
+      }
+
+      .icon-fix {
+        top: 8px;
+        width: 5px;
+        left: 26px;
+        z-index: 1;
+        height: 85px;
+        position: absolute;
+        transform: rotate(-45deg);
+        background-color: #ffffff;
+      }
+    }
+  }
+
+  @keyframes rotate-circle {
+    0% {
+      transform: rotate(-45deg);
+    }
+    5% {
+      transform: rotate(-45deg);
+    }
+    12% {
+      transform: rotate(-405deg);
+    }
+    100% {
+      transform: rotate(-405deg);
+    }
+  }
+
+  @keyframes icon-line-tip {
+    0% {
+      width: 0;
+      left: 1px;
+      top: 19px;
+    }
+    54% {
+      width: 0;
+      left: 1px;
+      top: 19px;
+    }
+    70% {
+      width: 50px;
+      left: -8px;
+      top: 37px;
+    }
+    84% {
+      width: 17px;
+      left: 21px;
+      top: 48px;
+    }
+    100% {
+      width: 25px;
+      left: 14px;
+      top: 45px;
+    }
+  }
+
+  @keyframes icon-line-long {
+    0% {
+      width: 0;
+      right: 46px;
+      top: 54px;
+    }
+    65% {
+      width: 0;
+      right: 46px;
+      top: 54px;
+    }
+    84% {
+      width: 55px;
+      right: 0px;
+      top: 35px;
+    }
+    100% {
+      width: 47px;
+      right: 8px;
+      top: 38px;
     }
   }
   /* type icon: error */
@@ -216,13 +425,21 @@ const Wrapper = styled.div`
       }
     }
   }
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 1000px) {
     .modal {
       width: 35rem;
       height: 23rem;
+      top: 25%;
+      left: 35%;
       .alert {
         p {
           font-size: 1.5rem;
+        }
+        .alert__subTitle {
+          font-size: 1.25rem;
+        }
+        .alert__title {
+          font-size: 2rem;
         }
       }
     }

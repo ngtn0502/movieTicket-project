@@ -4,6 +4,7 @@ import {
   USER_LOGIN,
   USER_SIGN_UP_FAIL,
   USER_SIGN_UP_SUCCESS,
+  USER_LOGIN_SUCCESS,
 } from './constantsAction.js';
 
 export const userLoginAction = (loginData, history) => async (dispatch) => {
@@ -22,6 +23,14 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
   try {
     const data = await sendRequest(loginData);
     localStorage.setItem('userLogin', JSON.stringify(data));
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: {
+        type: 'Success',
+        message: 'Đăng nhập thành công!',
+        goTo: null,
+      },
+    });
     dispatch({ type: USER_LOGIN, payload: data });
     history.goBack();
   } catch (error) {
@@ -34,7 +43,6 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
         goTo: null,
       },
     });
-    console.log('ó');
   }
 };
 

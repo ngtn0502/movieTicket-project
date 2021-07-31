@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import format from 'date-format';
 import {
@@ -23,12 +23,15 @@ function BookingTable({ movie, cinema }) {
     ?.map((item) => item.ngayChieuGioChieu)
     .map((item) => format(`MM / dd / yyyy`, new Date(item)));
   const ngayChieuAllUnique = [...new Set(ngayChieuAll)];
+  console.log(ngayChieuAllUnique);
+  useEffect(() => {
+    setNgayChieu([getDay(new Date(ngayChieuAllUnique[0]))]);
+  }, [cinema]);
   // Date
   //   Sau khi user click vào ngày chiếu ta sẽ truyền lên state và dựa vào đó để lọc ra tất cả lịch chiếu của bộ phim này trong ngày đó (không hiểu thì xem lại api - do api phức tạp)
   const dateChieu = movie?.filter(
     (item) => ngayChieu[0] === getDay(new Date(item.ngayChieuGioChieu))
   );
-
   const getCinema = () => {
     if (cinema === 'CGV') {
       return mapCGV;
@@ -63,6 +66,7 @@ function BookingTable({ movie, cinema }) {
             dateChieu={dateChieu}
             setNgayChieu={setNgayChieu}
             getCinema={getCinema}
+            cinema={cinema}
           ></BookingInfo>
         </div>
       </div>

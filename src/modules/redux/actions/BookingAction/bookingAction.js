@@ -61,15 +61,6 @@ export const bookingSeatAction = (
   //
   try {
     const data = await sendRequest(maLichChieu, danhSachVe);
-    dispatch({
-      type: USER_BOOKING_WARNING,
-      payload: {
-        type: 'Confirm',
-        message: 'Thông tin đặt vé sẽ được gởi qua Email!',
-        message2: 'vui lòng kiểm tra lại thông tin trước khi xác nhận',
-        goTo: null,
-      },
-    });
   } catch (error) {
     console.log(error);
   }

@@ -11,6 +11,7 @@ import format from 'date-format';
 import { getDay } from '../../../utils/helper.js';
 import { useHistory } from 'react-router';
 import { FlexHCenter } from './../../../utils/mixin';
+import { useEffect } from 'react';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -44,6 +45,7 @@ export default function BookingInfo({
   dateChieu,
   setNgayChieu,
   getCinema,
+  cinema,
 }) {
   const history = useHistory();
   const classes = useStyles();
@@ -51,7 +53,11 @@ export default function BookingInfo({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  useEffect(() => {
+    console.log("Change cinema");
+    setValue(0);
+  }, [cinema]);
+  // console.log(value);
   const ngayChieuHandler = (item) => {
     setNgayChieu([getDay(new Date(item))]);
   };
@@ -71,8 +77,10 @@ export default function BookingInfo({
     return arr;
   };
   // debugger;
-  console.log(lichChieuDuyNhat(dateChieu));
+  // console.log(lichChieuDuyNhat(dateChieu));
+  // console.log(ngayChieuAllUnique);
   // console.log(dateChieu);
+  // console.log(value);
   return (
     <Wrapper>
       <div className={classes.root}>
@@ -101,6 +109,13 @@ export default function BookingInfo({
                 ></Tab>
               );
             })}
+            {ngayChieuAllUnique.length === 0 && (
+              <div className='bookingInfo__notfound'>
+                <Typography component={'span'} variant={'body2'}>
+                  Không tìm thấy lịch chiếu
+                </Typography>
+              </div>
+            )}
             ;
           </Tabs>
         </AppBar>
@@ -132,33 +147,39 @@ export default function BookingInfo({
         {ngayChieuAllUnique?.map((_, i) => {
           return (
             <TabPanel value={value} index={i} className='tabPanel' key={i}>
-              {lichChieuDuyNhat(dateChieu)?.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <p>
-                      {getCinema()} {item.lichChieu[0].thongTinRap.tenCumRap}
-                    </p>
-                    <div className='tabPanel__btn'>
-                      {item.lichChieu.map((product) => {
-                        return (
-                          <button
-                            type='button'
-                            className='btn '
-                            onClick={() => {
-                              history.push(`/booking/${product.maLichChieu}`);
-                            }}
-                          >
-                            {format(
-                              `hh:mm`,
-                              new Date(product.ngayChieuGioChieu)
-                            )}
-                          </button>
-                        );
-                      })}
+              {lichChieuDuyNhat(dateChieu) !== [] &&
+                lichChieuDuyNhat(dateChieu)?.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <p>
+                        {getCinema()} {item.lichChieu[0].thongTinRap.tenCumRap}
+                      </p>
+                      <div className='tabPanel__btn'>
+                        {item.lichChieu.map((product) => {
+                          return (
+                            <button
+                              type='button'
+                              className='btn '
+                              onClick={() => {
+                                history.push(`/booking/${product.maLichChieu}`);
+                              }}
+                            >
+                              {format(
+                                `hh:mm`,
+                                new Date(product.ngayChieuGioChieu)
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              {lichChieuDuyNhat(dateChieu).length === 0 && (
+                <Typography component={'span'} variant={'body2'}>
+                  Không có lịch chiếu trong ngày hôm nay
+                </Typography>
+              )}
             </TabPanel>
           );
         })}
@@ -178,10 +199,20 @@ const Wrapper = styled.section`
   .btn {
     border: 1px solid black;
   }
+
+  .bookingInfo__notfound {
+    padding: 1rem;
+    span {
+      font-size: 1rem;
+      color: var(--color-title);
+      font-weight: 700;
+    }
+  }
+
   .tabPanel {
-    .MuiTypography-root{
+    .MuiTypography-root {
       flex-wrap: wrap;
-      div{
+      div {
         width: 100%;
       }
     }
@@ -220,8 +251,6 @@ const Wrapper = styled.section`
         .date__date {
           font-size: 1rem !important;
         }
-
-
       }
     }
     /* child */

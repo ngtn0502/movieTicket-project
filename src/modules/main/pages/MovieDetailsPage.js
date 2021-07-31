@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { getMovieDetailAction } from '../../redux/actions/MovieAction/getMovieDetailAction';
 import Banner from '../components/MovieDetail.component/Banner';
 import { getMovieListAction } from '../../redux/actions/MovieAction/getMovieListAction';
@@ -10,12 +10,16 @@ import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import MovieInfor from '../components/MovieDetail.component/MovieInfor';
 import Loading from '../components/Loading.js';
 import MovieDetailBooking from '../components/MovieDetail.component/MovieDetailBooking';
+import AlertModal from '../components/AlertModal.js';
 
 function MovieDetailsPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
   // UI
-
+  const { isModalShow, message, goTo, type, message2 } = useSelector(
+    (state) => state.uiReducer.modal
+  );
   const uiState = useSelector((state) => state.uiReducer);
   const { isTrailerShow, trailer } = uiState;
   // Movie Detail
@@ -35,7 +39,14 @@ function MovieDetailsPage() {
     dispatch(getMovieDetailAction(params.id));
   }, [dispatch, params]);
   console.log(movieDetail);
-
+  // close modal
+  const closeModalHandler = () => {
+    dispatch({ type: CLOSE_MODAL });
+    // goTo depend on what modal appear for
+    if (goTo) {
+      history.push(goTo);
+    }
+  };
   // Scroll to top
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,7 +54,7 @@ function MovieDetailsPage() {
   return (
     <Wrapper>
       <div className="page-100">
-        {isLoading && <Loading />}
+        {isLoading && <Loading className="movieDetail__loading" />}
         {isTrailerShow && (
           <div className="section-middle">
             <Backdrop
@@ -53,6 +64,19 @@ function MovieDetailsPage() {
               }}
             />
             <Modal trailer={trailer} />
+          </div>
+        )}
+        {isModalShow && (
+          <div>
+            {/* eslint-disable */}
+            <div className='backdrop' onClick={closeModalHandler} />
+            {/* eslint-enable */}
+            <AlertModal
+              message={message}
+              goTo={goTo}
+              type={type}
+              message2={message2}
+            />
           </div>
         )}
         {!isLoading && (
@@ -76,4 +100,7 @@ const Backdrop = styled.div``;
 
 const Wrapper = styled.section`
   background-color: var(--color-bg);
+  .movieDetail__loading {
+    margin-bottom: 14rem;
+  }
 `;

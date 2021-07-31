@@ -24,8 +24,10 @@ export const GET_CINEMA_LIST = 'GET_CINEMA_LIST';
 // Authentication
 
 export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGOUT_ALERT = 'USER_LOGOUT_ALERT';
+export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
 
 export const USER_SIGN_UP_SUCCESS = 'USER_SIGN_UP_FAIL';
 export const USER_SIGN_UP_FAIL = 'USER_SIGN_UP_FAIL';

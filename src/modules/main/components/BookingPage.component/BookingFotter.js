@@ -8,20 +8,22 @@ function BookingFotter({ choosingSeat, className, setIsSideBarShow }) {
     <Wrapper className={className}>
       <section className="booking__fotter">
         <div className="seat">
-          {choosingSeat.length !== 0
+          {choosingSeat?.length !== 0
             ? '---------------->'
             : 'Vui lòng chọn ghế'}
         </div>
         {/* eslint-disable  */}
-        <div
-          className="paying"
-          onClick={() => {
-            setIsSideBarShow(true);
-          }}
+          <button
+           className='paying'
+            type='button'
+            disabled={choosingSeat?.length === 0}
+            onClick={() => {
+              setIsSideBarShow(true);
+            }}
           >
-          Đặt vé
-        </div>
-          {/* eslint-enable  */}
+            Đặt vé
+          </button>
+        {/* eslint-enable  */}
       </section>
     </Wrapper>
   );
@@ -53,8 +55,9 @@ const Wrapper = styled.footer`
       flex-wrap: wrap;
     }
     .paying {
-      ${FlexCenter()}
       background-color: #44c020;
+      font-size: 1.25rem;
+      padding: 1rem;
     }
   }
 `;

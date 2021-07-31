@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { MdPayment } from 'react-icons/md';
 import { FaCcVisa } from 'react-icons/fa';
@@ -8,7 +8,11 @@ import { useHistory } from 'react-router';
 import { IoIosArrowDropleftCircle } from 'react-icons/io';
 import { FlexCenter, Flex, FlexHCenter } from '../../../utils/mixin.js';
 import { bookingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
-import { REQUIRE__CHOOSINGSEAT } from '../../../redux/actions/constantsAction.js';
+import {
+  REQUIRE__CHOOSINGSEAT,
+  RESET__AMOUNT,
+  USER_BOOKING_WARNING,
+} from '../../../redux/actions/constantsAction.js';
 
 function BookingPageRight({
   cineRoomMovie,
@@ -19,6 +23,12 @@ function BookingPageRight({
 }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  // Handle reset total amount
+  useEffect(() => {
+    dispatch({ type: RESET__AMOUNT });
+  }, []);
+
+  // Handle booking
   const bookingHandler = () => {
     if (choosingSeat.length === 0) {
       dispatch({
@@ -31,19 +41,16 @@ function BookingPageRight({
         },
       });
     } else {
-      // format to API data requirement
-      const danhSachVe = [];
-      choosingSeat.forEach((item) => {
-        danhSachVe.push({ maGhe: item.maGhe, giaVe: item.giaVe });
+      //
+      dispatch({
+        type: USER_BOOKING_WARNING,
+        payload: {
+          type: 'Confirm',
+          message: 'Thông tin đặt vé sẽ được gởi qua Email!',
+          message2: 'vui lòng kiểm tra lại thông tin trước khi xác nhận',
+          goTo: null,
+        },
       });
-      dispatch(
-        bookingSeatAction(
-          cineRoomMovie.maLichChieu,
-          danhSachVe,
-          history,
-          choosingSeat
-        )
-      );
     }
   };
   return (
@@ -84,9 +91,11 @@ function BookingPageRight({
           <div className="seat">
             <p>Ghế:</p>
             <div>
-              {choosingSeat.length !== 0
-                ? choosingSeat.map((item) => <p>Ghế {item.stt}</p>)
-                : 'Vui lòng chọn ghế'}
+              {choosingSeat?.length !== 0 ? (
+                choosingSeat?.map((item) => <p>Ghế {item.stt}.</p>)
+              ) : (
+                <p>Vui lòng chọn ghế</p>
+              )}
             </div>
           </div>
           <div>
