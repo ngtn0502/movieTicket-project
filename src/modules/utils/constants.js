@@ -5,7 +5,7 @@ import {
   FaTwitterSquare,
   FaLinkedin,
 } from 'react-icons/fa';
-
+// cinema picture
 import bgPopcorn from '../../assets/img/bg-popcorn.jpg';
 import cgv from '../../assets/img/cinema/cinema-picture/cgv.png';
 import bhd from '../../assets/img/cinema/cinema-picture/bhd.png';
@@ -13,29 +13,53 @@ import lotte from '../../assets/img/cinema/cinema-picture/lotte.png';
 import megaGs from '../../assets/img/cinema/cinema-picture/megaGs.png';
 import cinestart from '../../assets/img/cinema/cinema-picture/cinestart.jpg';
 import galaxy from '../../assets/img/cinema/cinema-picture/galaxy.jpg';
+// cinema logo
+
+import logobhd from '../../assets/img/cinema/bhd-star-cineplex.png';
+import logocgv from '../../assets/img/cinema/cgv.png';
+import logocinestart from '../../assets/img/cinema/cinestar.png';
+import logogalaxy from '../../assets/img/cinema/galaxy-cinema.png';
+import logolotte from '../../assets/img/cinema/lotte-cinema.png';
+import logomegaGs from '../../assets/img/cinema/megags.png';
 
 export const carouselBackground = bgPopcorn;
+
+// Variants animate loading route
+
+export const loadingVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+};
+
 // Nav bar part
 export const navBarLink = [
   {
     id: '1',
     title: 'Trang chủ',
-    path: '/home',
+    goTo: '/home',
   },
   {
     id: '2',
     title: 'Tin tức',
-    path: '/news',
-  },
-  {
-    id: '4',
-    title: 'Phim hay',
-    path: '/home',
+    goTo: '/news',
   },
   {
     id: '3',
+    title: 'Phim hay',
+    path: '#homePage__movieList',
+    goTo: '/home',
+  },
+  {
+    id: '4',
     title: 'FAQ',
-    path: '/home',
+    goTo: '/home',
   },
 ];
 
@@ -175,7 +199,7 @@ export const movieDetailContent = [
   },
 ];
 
-// map
+// cinema picture
 export const mapCGV = <img src={cgv} alt="movie" />;
 
 export const mapLotte = <img src={lotte} alt="movie" />;
@@ -184,6 +208,16 @@ export const mapCineStar = <img src={cinestart} alt="movie" />;
 export const mapGalaxy = <img src={galaxy} alt="movie" />;
 
 export const mapMegaGS = <img src={megaGs} alt="movie" />;
+
+// cinema logo
+export const logoCGV = <img src={logocgv} alt="movie" />;
+
+export const logoLotte = <img src={logolotte} alt="movie" />;
+export const logoBHD = <img src={logobhd} alt="movie" />;
+export const logoCineStar = <img src={logocinestart} alt="movie" />;
+export const logoGalaxy = <img src={logogalaxy} alt="movie" />;
+
+export const logoMegaGS = <img src={logomegaGs} alt="movie" />;
 
 // Footer part
 

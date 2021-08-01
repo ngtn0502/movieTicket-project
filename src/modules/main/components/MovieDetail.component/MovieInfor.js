@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaPlay, FaFacebookSquare } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 import {
   converDate,
   randomDuration,
@@ -11,77 +12,83 @@ import imdbLogo from '../../../../assets/img/imdb-logo.png';
 import { FlexHCenter, FlexVCenter } from '../../../utils/mixin';
 import ButtonMovie from './ButtonMovie.js';
 import MovieClass from '../Home.component/MovieClass';
-import { movieDetailContent } from '../../../utils/constants';
+import { movieDetailContent, loadingVariants } from '../../../utils/constants';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
 
 function MovieInfor({ movieDetail, movie }) {
   const dispatch = useDispatch();
   return (
-    <Wrapper>
-      <div className="section-middle">
-        <div className="movieInfor__top">
-          <img src={movie.hinhAnh} alt="" className="movieInfor__banner" />
-          <ButtonMovie
-            className="movieInfor__booking"
-            onClick={() => {
-              dispatch({ type: SHOW_MODAL, payload: movie.trailer });
-            }}
-          >
-            <FaPlay />
-            <span>Xem trailer</span>
-          </ButtonMovie>
-        </div>
-        <div className="movieInfor__bottom">
-          <h5 className="title"> {movieDetail.tenPhim} (2020)</h5>
-          <p className="subtitle__meta">
-            <MovieClass />
-            {randomDuration()} phút
-          </p>
-          <div className="subtitle__imdb">
-            <img src={imdbLogo} alt="" />
-            <span className="subtitle__meta">{randomNumber()} ++</span>
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper>
+        <div className="section-middle">
+          <div className="movieInfor__top">
+            <img src={movie.hinhAnh} alt="" className="movieInfor__banner" />
+            <ButtonMovie
+              className="movieInfor__booking"
+              onClick={() => {
+                dispatch({ type: SHOW_MODAL, payload: movie.trailer });
+              }}
+            >
+              <FaPlay />
+              <span>Xem trailer</span>
+            </ButtonMovie>
           </div>
-          {/*  */}
-          <div className="movieInfor__sharing">
-            <div className="movieInfor__sharing--btn">
-              <ButtonMovie className="btn__save">+ Đặt vé</ButtonMovie>
+          <div className="movieInfor__bottom">
+            <h5 className="title"> {movieDetail.tenPhim} (2020)</h5>
+            <p className="subtitle__meta">
+              <MovieClass />
+              {randomDuration()} phút
+            </p>
+            <div className="subtitle__imdb">
+              <img src={imdbLogo} alt="" />
+              <span className="subtitle__meta">{randomNumber()} ++</span>
             </div>
-            <div className="movieInfor__sharing--btn ">
-              <ButtonMovie>
-                <FaFacebookSquare />
-                Chia sẻ
-              </ButtonMovie>
+            {/*  */}
+            <div className="movieInfor__sharing">
+              <div className="movieInfor__sharing--btn">
+                <ButtonMovie className="btn__save">+ Đặt vé</ButtonMovie>
+              </div>
+              <div className="movieInfor__sharing--btn ">
+                <ButtonMovie>
+                  <FaFacebookSquare />
+                  Chia sẻ
+                </ButtonMovie>
+              </div>
             </div>
-          </div>
-          {/*  */}
-          {/*  */}
-          <div className="movieInfor__detail">
-            {movieDetailContent.map((item, index) => (
-              <p className="movieInfor__detail--item" key={index}>
-                <span className="subtitle">{item.title}</span>
-                <span className="subtitle__detail">{item.content}</span>
+            {/*  */}
+            {/*  */}
+            <div className="movieInfor__detail">
+              {movieDetailContent.map((item, index) => (
+                <p className="movieInfor__detail--item" key={index}>
+                  <span className="subtitle">{item.title}</span>
+                  <span className="subtitle__detail">{item.content}</span>
+                </p>
+              ))}
+              <p className="movieInfor__detail--item">
+                <span className="subtitle">Ngày công chiếu: </span>
+                <span className="subtitle__detail">
+                  {converDate(movieDetail.ngayKhoiChieu)}
+                </span>
               </p>
-            ))}
-            <p className="movieInfor__detail--item">
-              <span className="subtitle">Ngày công chiếu: </span>
-              <span className="subtitle__detail">
-                {converDate(movieDetail.ngayKhoiChieu)}
-              </span>
-            </p>
-            <p className="movieInfor__detail--item">
-              <span className="subtitle">Nội dung: </span>
-            </p>
-            <p className="subtitle__detail--content">{movie.moTa}</p>
+              <p className="movieInfor__detail--item">
+                <span className="subtitle">Nội dung: </span>
+              </p>
+              <p className="subtitle__detail--content">{movie.moTa}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </motion.section>
   );
 }
 
 export default MovieInfor;
 
-const Wrapper = styled.section`
+const Wrapper = styled.main`
   position: relative;
   margin-top: 2rem;
   /* banner */

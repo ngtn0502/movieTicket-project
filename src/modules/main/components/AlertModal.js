@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { TiTick, TiCancel } from 'react-icons/ti';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   CLOSE_MODAL,
   RESET__AMOUNT,
@@ -12,7 +10,7 @@ import {
   USER_LOGOUT,
   USER_LOGOUT_SUCCESS,
 } from '../../redux/actions/constantsAction.js';
-import { FlexHCenter } from '../../utils/mixin';
+import { FlexHCenter, FlexVCenter } from '../../utils/mixin';
 import { bookingSeatAction } from '../../redux/actions/BookingAction/bookingAction.js';
 
 const alertModalVariants = {
@@ -23,12 +21,10 @@ const alertModalVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    animate: {
-      duration: 1,
-      type: 'spring',
-      stiffness: 100,
-    },
   },
+  // transition: {
+  //   duration: 0.8,
+  // },
 };
 
 function AlertModal({
@@ -68,6 +64,7 @@ function AlertModal({
         goTo: '/home',
       },
     });
+
     // dispatch booking action in ALERTMODAL component is because i want send the booking request after user click confirm button
 
     // format to API data requirement
@@ -97,137 +94,138 @@ function AlertModal({
         goTo: '/home',
       },
     });
-    // dispatch({ type: CLOSE_MODAL });
     dispatch({ type: USER_LOGOUT });
     localStorage.clear();
   };
   return (
     <Wrapper>
-      <AnimatePresence>
-        <motion.div
-          variants={alertModalVariants}
-          initial="hidden"
-          animate="visible"
-          exit={{ opacity: 0 }}
-          layout
-          className="modal"
-        >
-          <div className="alert">
-            {!(
-              type === 'Warning' ||
-              type === 'Confirm' ||
-              type === 'Logout'
-            ) ? null : (
-              <div className="warning">
-                <div className="svg-box">
-                  <svg className="circular yellow-stroke">
-                    <circle
-                      className="path"
-                      cx="75"
-                      cy="75"
-                      r="50"
-                      fill="none"
-                      strokeWidth="5"
-                      strokeMiterlimit="10"
-                    />
-                  </svg>
-                  <svg className="alert-sign yellow-stroke">
-                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
-                      <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
-                        <path
-                          className="line"
-                          d="M634.087,300.805L673.361,261.53"
-                          fill="none"
-                        />
-                      </g>
-                      <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
-                        <circle
-                          className="dot"
-                          cx="621.52"
-                          cy="316.126"
-                          r="1.318"
-                        />
-                      </g>
-                    </g>
-                  </svg>
-                </div>
-              </div>
-            )}
-            {!(type === 'Success') ? null : (
-              <div className="success">
-                <div className="check-icon">
-                  <span className="icon-line line-tip" />
-                  <span className="icon-line line-long" />
-                  <div className="icon-circle" />
-                  <div className="icon-fix" />
-                </div>
-              </div>
-            )}
-            {!(type === 'Error') ? null : (
-              <div className="error">
-                <div className="svg-box">
-                  <svg className="circular red-stroke">
-                    <circle
-                      className="path"
-                      cx="75"
-                      cy="75"
-                      r="50"
-                      fill="none"
-                      strokeWidth="5"
-                      strokeMiterlimit="10"
-                    />
-                  </svg>
-                  <svg className="cross red-stroke">
-                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
+      <motion.div
+        variants={alertModalVariants}
+        initial="hidden"
+        animate="visible"
+        layout
+        className="modal"
+        key="child"
+        exit={{ y: 700, opacity: 0 }}
+        transition={{
+          duration: 0.3,
+        }}
+      >
+        <div className="alert">
+          {!(
+            type === 'Warning' ||
+            type === 'Confirm' ||
+            type === 'Logout'
+          ) ? null : (
+            <div className="warning">
+              <div className="svg-box">
+                <svg className="circular yellow-stroke">
+                  <circle
+                    className="path"
+                    cx="75"
+                    cy="75"
+                    r="50"
+                    fill="none"
+                    strokeWidth="5"
+                    strokeMiterlimit="10"
+                  />
+                </svg>
+                <svg className="alert-sign yellow-stroke">
+                  <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                    <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
                       <path
-                        className="first-line"
+                        className="line"
                         d="M634.087,300.805L673.361,261.53"
                         fill="none"
                       />
                     </g>
-                    <g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)">
-                      <path
-                        className="second-line"
-                        d="M634.087,300.805L673.361,261.53"
+                    <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                      <circle
+                        className="dot"
+                        cx="621.52"
+                        cy="316.126"
+                        r="1.318"
                       />
                     </g>
-                  </svg>
-                </div>
+                  </g>
+                </svg>
               </div>
-            )}
-            <p className="alert__title">{message}</p>
-            {message2 && <p className="alert__subTitle">{message2}</p>}
-            <div className="alert__button">
-              {type === 'Confirm' && (
-                <button
-                  type="button"
-                  className="btn btn-paying"
-                  onClick={acceptModalHandler}
-                >
-                  Đặt vé
-                </button>
-              )}
-              {!(type === 'Logout') ? (
-                <button
-                  type="button"
-                  className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
-                  onClick={closeModalHandler}
-                >
-                  {type === 'Confirm' ? 'Hủy' : 'Ok'}
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
-                  onClick={logoutHandler}
-                >
-                  Logout
-                </button>
-              )}
             </div>
+          )}
+          {!(type === 'Success') ? null : (
+            <div className="success">
+              <div className="check-icon">
+                <span className="icon-line line-tip" />
+                <span className="icon-line line-long" />
+                <div className="icon-circle" />
+                <div className="icon-fix" />
+              </div>
+            </div>
+          )}
+          {!(type === 'Error') ? null : (
+            <div className="error">
+              <div className="svg-box">
+                <svg className="circular red-stroke">
+                  <circle
+                    className="path"
+                    cx="75"
+                    cy="75"
+                    r="50"
+                    fill="none"
+                    strokeWidth="5"
+                    strokeMiterlimit="10"
+                  />
+                </svg>
+                <svg className="cross red-stroke">
+                  <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
+                    <path
+                      className="first-line"
+                      d="M634.087,300.805L673.361,261.53"
+                      fill="none"
+                    />
+                  </g>
+                  <g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)">
+                    <path
+                      className="second-line"
+                      d="M634.087,300.805L673.361,261.53"
+                    />
+                  </g>
+                </svg>
+              </div>
+            </div>
+          )}
+          <p className="alert__title">{message}</p>
+          {message2 && <p className="alert__subTitle">{message2}</p>}
+          <div className="alert__button">
+            {type === 'Confirm' && (
+              <button
+                type="button"
+                className="btn btn-paying"
+                onClick={acceptModalHandler}
+              >
+                Đặt vé
+              </button>
+            )}
+            {!(type === 'Logout') ? (
+              <button
+                type="button"
+                className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
+                onClick={closeModalHandler}
+              >
+                {type === 'Confirm' ? 'Hủy' : 'Ok'}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
+                onClick={logoutHandler}
+              >
+                Logout
+              </button>
+            )}
           </div>
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      </motion.div>
     </Wrapper>
   );
 }
@@ -253,6 +251,7 @@ const Wrapper = styled.div`
       width: 80%;
       .alert__title,
       .alert__subTitle {
+        padding-bottom: 1rem;
         font-size: 1.25rem;
         text-align: center;
         color: var(--color-seat);
@@ -260,14 +259,13 @@ const Wrapper = styled.div`
       .alert__title {
         font-weight: 700;
         font-size: 1.5rem;
-        padding-bottom: 1rem;
         color: var(--color-black);
       }
       .alert__button {
-        display: flex;
-        justify-content: center;
+        ${FlexVCenter()}
+        gap: 2rem;
         button {
-          margin: 0 auto;
+          margin: 0 auto 1rem;
           /* margin-right: 1rem; */
         }
       }

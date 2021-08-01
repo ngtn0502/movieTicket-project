@@ -5,11 +5,13 @@ import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import bgImage from '../../../assets/img/bg-singin.jpg';
 import logo from '../../../assets/img/logo-full.png';
 import { userLoginAction } from '../../redux/actions/authAction';
 import AlertModal from '../components/AlertModal.js';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
+import { loadingVariants } from '../../utils/constants.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,69 +48,78 @@ function SignInPage() {
     dispatch({ type: CLOSE_MODAL });
   };
   return (
-    <Wrapper style={{ backgroundImage: `url(${bgImage})` }}>
-      {isModalShow && (
-        <div>
-          {/* eslint-disable */}
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper style={{ backgroundImage: `url(${bgImage})` }}>
+        <AnimatePresence>
+          {isModalShow && (
+            <div>
+              {/* eslint-disable */}
           <div className="backdrop" onClick={closeModalHandler} />
           {/* eslint-enable */}
-          <AlertModal
-            message={message}
-            goTo={goTo}
-            type={type}
-            message2={message2}
-          />
-        </div>
-      )}
-      <div className="page-100">
-        <div className="signIn">
-          <img src={logo} alt="movie" />
-          <h5>Thế giới phim trên đầu ngón tay</h5>
-          <div className="signIn__form">
-            <form
-              className={classes.root}
-              noValidate
-              autoComplete="off"
-              onSubmit={userSubmitHandler}
-            >
-              <TextField
-                variant="filled"
-                color="secondary"
-                id="standard-basic"
-                label="Tài Khoản"
-                className="signIn__input"
-                name="taiKhoan"
-                onChange={userLoginHandler}
+              <AlertModal
+                message={message}
+                goTo={goTo}
+                type={type}
+                message2={message2}
               />
-              <TextField
-                variant="filled"
-                color="secondary"
-                id="standard-basic"
-                label="Mật Khẩu"
-                className="signIn__input"
-                name="matKhau"
-                onChange={userLoginHandler}
-              />
+            </div>
+          )}{' '}
+        </AnimatePresence>
 
-              <div className="signIn__button">
-                <button type="submit" className="btn__watching">
-                  Đăng Nhập
-                </button>
-                <p className="signUp">
-                  Bạn mới tham gia G-Cinema?{' '}
-                  <Link to="/sign-up">Đăng ký ngay.</Link>
-                </p>
-              </div>
-            </form>
+        <div className="page-100">
+          <div className="signIn">
+            <img src={logo} alt="movie" />
+            <h5>Thế giới phim trên đầu ngón tay</h5>
+            <div className="signIn__form">
+              <form
+                className={classes.root}
+                noValidate
+                autoComplete="off"
+                onSubmit={userSubmitHandler}
+              >
+                <TextField
+                  variant="filled"
+                  color="secondary"
+                  id="standard-basic"
+                  label="Tài Khoản"
+                  className="signIn__input"
+                  name="taiKhoan"
+                  onChange={userLoginHandler}
+                />
+                <TextField
+                  variant="filled"
+                  color="secondary"
+                  id="standard-basic"
+                  label="Mật Khẩu"
+                  className="signIn__input"
+                  name="matKhau"
+                  onChange={userLoginHandler}
+                />
+
+                <div className="signIn__button">
+                  <button type="submit" className="btn__watching">
+                    Đăng Nhập
+                  </button>
+                  <p className="signUp">
+                    Bạn mới tham gia G-Cinema?{' '}
+                    <Link to="/sign-up">Đăng ký ngay.</Link>
+                  </p>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>{' '}
+    </motion.section>
   );
 }
 
 export default SignInPage;
-const Wrapper = styled.section`
+const Wrapper = styled.main`
   position: relative;
   .overlay {
     opacity: 1;

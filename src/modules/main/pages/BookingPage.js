@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
+import { AnimatePresence, motion } from 'framer-motion';
 import Loading from '../components/Loading.js';
 import { getCineRoomAction } from '../../redux/actions/BookingAction/getCineRoomAction';
 import BookingPageLeft from '../components/BookingPage.component/BookingPageLeft.js';
@@ -10,6 +11,7 @@ import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import AlertModal from '../components/AlertModal.js';
 import BookingNavBar from '../components/BookingPage.component/BookingNavBar.js';
 import BookingFotter from '../components/BookingPage.component/BookingFotter.js';
+import { loadingVariants } from '../../utils/constants.js';
 
 function BookingPage() {
   const history = useHistory();
@@ -38,61 +40,69 @@ function BookingPage() {
   // ghế đang chọn
   const choosingSeat = cineSeatList?.filter((item) => item.dangChon === true);
   return (
-    <Wrapper>
-      {/* Alert modal */}
-      {isModalShow && (
-        <div>
-          {/* eslint-disable */}
-        <div className='backdrop' onClick={closeModalHandler}></div>
-        {/* eslint-enable */}
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper>
+        {/* Alert modal */}
+        <AnimatePresence>
+          {isModalShow && (
+            <div>
+              {/* eslint-disable */}
+            <div className='backdrop' onClick={closeModalHandler}></div>
+            {/* eslint-enable */}
 
-          <AlertModal
-            message={message}
-            goTo={goTo}
-            type={type}
-            message2={message2}
-            choosingSeat={choosingSeat}
-            cineRoomMovie={cineRoomMovie}
-          />
-        </div>
-      )}
+              <AlertModal
+                message={message}
+                goTo={goTo}
+                type={type}
+                message2={message2}
+                choosingSeat={choosingSeat}
+                cineRoomMovie={cineRoomMovie}
+              />
+            </div>
+          )}
+        </AnimatePresence>
 
-      {/* Check if it loading */}
-      {isLoading && <Loading />}
-      {!isLoading && (
-        <main className="booking section-middle">
-          <BookingPageLeft
-            className="left"
-            cineSeatList={cineSeatList}
-            cineRoomMovie={cineRoomMovie}
-          />
-          <section>
-            {isSideBarShow && (
+        {/* Check if it loading */}
+        {isLoading && <Loading />}
+        {!isLoading && (
+          <main className="booking section-middle">
+            <BookingPageLeft
+              className="left"
+              cineSeatList={cineSeatList}
+              cineRoomMovie={cineRoomMovie}
+            />
+            <section>
+              {isSideBarShow && (
+                <BookingPageRight
+                  cineSeatList={cineSeatList}
+                  cineRoomMovie={cineRoomMovie}
+                  totalAmount={totalAmount}
+                  choosingSeat={choosingSeat}
+                  setIsSideBarShow={setIsSideBarShow}
+                />
+              )}
               <BookingPageRight
                 cineSeatList={cineSeatList}
                 cineRoomMovie={cineRoomMovie}
                 totalAmount={totalAmount}
                 choosingSeat={choosingSeat}
                 setIsSideBarShow={setIsSideBarShow}
+                className="right"
               />
-            )}
-            <BookingPageRight
-              cineSeatList={cineSeatList}
-              cineRoomMovie={cineRoomMovie}
-              totalAmount={totalAmount}
-              choosingSeat={choosingSeat}
-              setIsSideBarShow={setIsSideBarShow}
-              className="right"
-            />
-          </section>
-        </main>
-      )}
-      <BookingFotter
-        choosingSeat={choosingSeat}
-        className="booking__footer"
-        setIsSideBarShow={setIsSideBarShow}
-      />
-    </Wrapper>
+            </section>
+          </main>
+        )}
+        <BookingFotter
+          choosingSeat={choosingSeat}
+          className="booking__footer"
+          setIsSideBarShow={setIsSideBarShow}
+        />
+      </Wrapper>{' '}
+    </motion.section>
   );
 }
 

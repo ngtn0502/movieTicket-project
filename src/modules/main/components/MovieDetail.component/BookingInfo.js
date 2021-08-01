@@ -46,6 +46,7 @@ export default function BookingInfo({
   setNgayChieu,
   getCinema,
   cinema,
+  getCinemaLogo,
 }) {
   const history = useHistory();
   const classes = useStyles();
@@ -54,7 +55,7 @@ export default function BookingInfo({
     setValue(newValue);
   };
   useEffect(() => {
-    console.log("Change cinema");
+    console.log('Change cinema');
     setValue(0);
   }, [cinema]);
   // console.log(value);
@@ -77,7 +78,7 @@ export default function BookingInfo({
     return arr;
   };
   // debugger;
-  // console.log(lichChieuDuyNhat(dateChieu));
+  console.log(lichChieuDuyNhat(dateChieu));
   // console.log(ngayChieuAllUnique);
   // console.log(dateChieu);
   // console.log(value);
@@ -149,17 +150,23 @@ export default function BookingInfo({
             <TabPanel value={value} index={i} className='tabPanel' key={i}>
               {lichChieuDuyNhat(dateChieu) !== [] &&
                 lichChieuDuyNhat(dateChieu)?.map((item, index) => {
+                  const string = item.lichChieu[0].thongTinRap.tenCumRap;
+                  const indexDivide = string.indexOf('-');
                   return (
                     <div key={index}>
                       <p>
-                        {getCinema()} {item.lichChieu[0].thongTinRap.tenCumRap}
+                        {getCinemaLogo()}
+                        <span className='bookingInfo__cinemaName'>
+                          {string.slice(0, indexDivide)}
+                          <span> {string.slice(indexDivide)}</span>
+                        </span>
                       </p>
                       <div className='tabPanel__btn'>
                         {item.lichChieu.map((product) => {
                           return (
                             <button
                               type='button'
-                              className='btn '
+                              className='btn'
                               onClick={() => {
                                 history.push(`/booking/${product.maLichChieu}`);
                               }}
@@ -210,6 +217,12 @@ const Wrapper = styled.section`
   }
 
   .tabPanel {
+    .bookingInfo__cinemaName {
+      color: var(--color-redNetflix);
+      span {
+        color: var(--color-white);
+      }
+    }
     .MuiTypography-root {
       flex-wrap: wrap;
       div {
@@ -223,9 +236,8 @@ const Wrapper = styled.section`
       ${FlexHCenter()}
       gap: 1rem;
       img {
-        max-width: 4rem;
-        height: 4rem;
-        border-radius: 10px;
+        max-width: 3.5rem;
+        height: 3.5rem;
       }
     }
   }
@@ -234,6 +246,17 @@ const Wrapper = styled.section`
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    button {
+      background-color: transparent;
+      border-radius: 0;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      letter-spacing: 0.25rem;
+      &:hover{
+        background-color: var(--color-seat)
+
+      }
+    }
   }
   .appBar {
     background-color: rgba(300, 300, 300, 0.1);

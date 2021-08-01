@@ -38,6 +38,8 @@ function Modal({ trailer }) {
         animate="visible"
         layout
         className="modal"
+        key="child"
+        exit={{ y: 500, opacity: 0 }}
       >
         <AiOutlineCloseCircle
           className="modal__close"

@@ -8,7 +8,14 @@ import {
   mapCineStar,
   mapGalaxy,
   mapMegaGS,
+  logoCGV,
+  logoLotte,
+  logoBHD,
+  logoCineStar,
+  logoGalaxy,
+  logoMegaGS,
 } from '../../../utils/constants.js';
+
 import { getDay } from '../../../utils/helper.js';
 import BookingInfo from './BookingInfo.js';
 
@@ -53,21 +60,43 @@ function BookingTable({ movie, cinema }) {
     }
   };
 
+  const getCinemaLogo = () => {
+    if (cinema === 'CGV') {
+      return logoCGV;
+    }
+    if (cinema === 'LotteCinima') {
+      return logoLotte;
+    }
+    if (cinema === 'BHDStar') {
+      return logoBHD;
+    }
+    if (cinema === 'CineStar') {
+      return logoCineStar;
+    }
+    if (cinema === 'Galaxy') {
+      return logoGalaxy;
+    }
+    if (cinema === 'MegaGS') {
+      return logoMegaGS;
+    }
+  };
   return (
     <Wrapper>
       {/* eslint-disable */}
       <div className='booking__table'>
         <div className='booking__table--map'>
           <div>{getCinema()}</div>
+          {/* eslint-enable */}
         </div>
-        <div className='booking__info'>
+        <div className="booking__info">
           <BookingInfo
             ngayChieuAllUnique={ngayChieuAllUnique}
             dateChieu={dateChieu}
             setNgayChieu={setNgayChieu}
             getCinema={getCinema}
             cinema={cinema}
-          ></BookingInfo>
+            getCinemaLogo={getCinemaLogo}
+          />
         </div>
       </div>
     </Wrapper>

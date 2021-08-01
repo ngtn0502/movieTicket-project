@@ -104,7 +104,9 @@ Global Styles
   src: url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
   font-style: normal;
 }
-
+html {
+  font-size: 14px;
+}
 *,
 ::after,
 ::before {
@@ -361,9 +363,9 @@ svg {
   margin-left: auto;
   margin-right: auto;
 } */
-.page-100 {
-  /* padding: 4rem 0; */
-}
+/* .page-100 { */
+/* padding: 4rem 0; */
+/* } */
 .page {
   min-height: calc(100vh - (20vh + 10rem));
 }

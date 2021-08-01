@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../../../assets/img/logo-full.png';
 import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
-import NavLink from './NavLink';
+import NavLink from './NavLink.js';
 import {
   USER_LOGOUT,
   USER_LOGOUT_ALERT,
@@ -18,6 +18,7 @@ function Navbar() {
   const { isLoginSuccess, loginData } = useSelector(
     (state) => state.authReducer
   );
+
   // login
   let userLogin;
   if (localStorage.getItem('userLogin')) {
@@ -110,6 +111,7 @@ function Navbar() {
                 </Link>
               )}
             </div>
+            {/*  */}
             <NavLink />
           </div>
         </div>

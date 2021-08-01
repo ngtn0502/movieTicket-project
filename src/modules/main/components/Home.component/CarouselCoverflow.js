@@ -3,13 +3,17 @@ import { Carousel } from '3d-react-carousal';
 import styled from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction.js';
-import { carouselBackground } from '../../../utils/constants.js';
+import {
+  carouselBackground,
+  loadingVariants,
+} from '../../../utils/constants.js';
 
-function CarouselCoverflow({ movieList }) {
+function CarouselCoverflow({ movieList, className }) {
   const dispatch = useDispatch();
   const silde = [
-    movieList.slice(1, 5).map((movie) => (
+    movieList.slice(4, 20).map((movie) => (
       <div className="carousel__slider">
         <FaPlay
           className="playVideo"
@@ -22,29 +26,35 @@ function CarouselCoverflow({ movieList }) {
     )),
   ];
   return (
-    <BigWrapper>
-      <div className="overlay" />
-      <Wrapper
-        style={{ backgroundImage: `url(${carouselBackground})` }}
-        className="coverflow"
-      >
-        <div className="App">
-          {/* <header className="App-header">
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <BigWrapper className={className}>
+        <div className="overlay" />
+        <Wrapper
+          style={{ backgroundImage: `url(${carouselBackground})` }}
+          className="coverflow"
+        >
+          <div className="App">
+            {/* <header className="App-header">
             <h1 className="App-title">/</h1>
           </header> */}
-          <br />
-          <br />
-          <br />
-          <Carousel slides={silde[0]} />
-          {/* Carousal.Carousal because of unpkg in developement use npm import and use only {Carousal} */}
-        </div>
-      </Wrapper>
-    </BigWrapper>
+            <br />
+            <br />
+            <br />
+            <Carousel slides={silde[0]} />
+            {/* Carousal.Carousal because of unpkg in developement use npm import and use only {Carousal} */}
+          </div>
+        </Wrapper>
+      </BigWrapper>
+    </motion.section>
   );
 }
 
 export default CarouselCoverflow;
-const BigWrapper = styled.div`
+const BigWrapper = styled.main`
   position: relative;
   .overlay {
     height: 100%;

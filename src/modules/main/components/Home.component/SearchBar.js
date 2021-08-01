@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import {
   movieCategory,
   movieCine,
   movieHour,
   movieDate,
+  loadingVariants,
 } from '../../../utils/constants';
 import { FlexCenter, Flex } from '../../../utils/mixin.js';
 import MovieSearch from '../SearchForm/MovieSearch';
@@ -14,35 +16,41 @@ import HourSearch from '../SearchForm/HourSearch';
 
 function SearchBar({ className }) {
   return (
-    <BigWrapper className={className}>
-      <Search className="section-middle">
-        <Wrapper>
-          <div className="search">
-            {/* movie category */}
-            <div className="search__field">
-              <MovieSearch />
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <BigWrapper className={className}>
+        <Search className="section-middle">
+          <Wrapper>
+            <div className="search">
+              {/* movie category */}
+              <div className="search__field">
+                <MovieSearch />
+              </div>
+              {/* movie cine */}
+              <div className="search__field">
+                <CinemaSearch />
+              </div>
+              {/* movie date */}s
+              <div className="search__field">
+                <DateSearch />
+              </div>
+              {/* movie hour */}
+              <div className="search__field">
+                <HourSearch />
+              </div>
+              <div search__button>
+                <button type="button" className="btn">
+                  Mua Vé Ngay
+                </button>
+              </div>
             </div>
-            {/* movie cine */}
-            <div className="search__field">
-              <CinemaSearch />
-            </div>
-            {/* movie date */}s
-            <div className="search__field">
-              <DateSearch />
-            </div>
-            {/* movie hour */}
-            <div className="search__field">
-              <HourSearch />
-            </div>
-            <div search__button>
-              <button type="button" className="btn">
-                Mua Vé Ngay
-              </button>
-            </div>
-          </div>
-        </Wrapper>
-      </Search>
-    </BigWrapper>
+          </Wrapper>
+        </Search>
+      </BigWrapper>{' '}
+    </motion.section>
   );
 }
 

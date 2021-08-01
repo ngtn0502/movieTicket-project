@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { FaPlay } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
+import { loadingVariants } from '../../../utils/constants.js';
 
 // // i use hard link cause lack of trailer in api
 
@@ -11,23 +13,29 @@ import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
 function Banner({ movie }) {
   const dispatch = useDispatch();
   return (
-    <Wrapper>
-      <div className="movieCard__img">
-        <FaPlay
-          className="playVideo"
-          onClick={() => {
-            dispatch({ type: SHOW_MODAL, payload: movie.trailer });
-          }}
-        />
-        <div className="overlay" />
-        <div className="banner">
-          <div
-            className="banner__img"
-            style={{ backgroundImage: `url(${movie.hinhAnh})` }}
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper>
+        <div className="movieCard__img">
+          <FaPlay
+            className="playVideo"
+            onClick={() => {
+              dispatch({ type: SHOW_MODAL, payload: movie.trailer });
+            }}
           />
+          <div className="overlay" />
+          <div className="banner">
+            <div
+              className="banner__img"
+              style={{ backgroundImage: `url(${movie.hinhAnh})` }}
+            />
+          </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>{' '}
+    </motion.section>
   );
 }
 

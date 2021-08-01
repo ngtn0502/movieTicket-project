@@ -12,7 +12,7 @@ export const getMovieListAction = () => async (dispatch) => {
   const sendRequest = async () => {
     dispatch({ type: GET_MOVIE_LIST_LOADING });
     const response = await fetch(
-      `${baseUrl}/QuanLyPhim/LayDanhSachPhim?maNhom=GP02`
+      `${baseUrl}/QuanLyPhim/LayDanhSachPhim?maNhom=GP03`
     );
     const data = await response.json();
     if (!response.ok) {

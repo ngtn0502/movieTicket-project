@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
+import { AnimatePresence, motion } from 'framer-motion';
 import { getMovieDetailAction } from '../../redux/actions/MovieAction/getMovieDetailAction';
 import Banner from '../components/MovieDetail.component/Banner';
 import { getMovieListAction } from '../../redux/actions/MovieAction/getMovieListAction';
@@ -11,6 +12,7 @@ import MovieInfor from '../components/MovieDetail.component/MovieInfor';
 import Loading from '../components/Loading.js';
 import MovieDetailBooking from '../components/MovieDetail.component/MovieDetailBooking';
 import AlertModal from '../components/AlertModal.js';
+import { loadingVariants } from '../../utils/constants.js';
 
 function MovieDetailsPage() {
   const history = useHistory();
@@ -52,45 +54,57 @@ function MovieDetailsPage() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Wrapper>
-      <div className="page-100">
-        {isLoading && <Loading className="movieDetail__loading" />}
-        {isTrailerShow && (
-          <div className="section-middle">
-            <Backdrop
-              className="backdrop"
-              onClick={() => {
-                dispatch({ type: CLOSE_MODAL });
-              }}
-            />
-            <Modal trailer={trailer} />
-          </div>
-        )}
-        {isModalShow && (
-          <div>
-            {/* eslint-disable */}
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper>
+        <div className="page-100">
+          {isLoading && <Loading className="movieDetail__loading" />}
+          <AnimatePresence>
+            {isTrailerShow && (
+              <div className="section-middle">
+                <Backdrop
+                  className="backdrop"
+                  onClick={() => {
+                    dispatch({ type: CLOSE_MODAL });
+                  }}
+                />
+                <Modal trailer={trailer} />
+              </div>
+            )}{' '}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {isModalShow && (
+              <div>
+                {/* eslint-disable */}
             <div className='backdrop' onClick={closeModalHandler} />
             {/* eslint-enable */}
-            <AlertModal
-              message={message}
-              goTo={goTo}
-              type={type}
-              message2={message2}
-            />
-          </div>
-        )}
-        {!isLoading && (
-          <div>
-            <Banner movie={movieDetail || []} params={params} />
-            <MovieInfor
-              movieDetail={movieDetail || []}
-              movie={movieDetail || []}
-            />
-            <MovieDetailBooking movie={movieDetail || []} />
-          </div>
-        )}
-      </div>
-    </Wrapper>
+
+                <AlertModal
+                  message={message}
+                  goTo={goTo}
+                  type={type}
+                  message2={message2}
+                />
+              </div>
+            )}
+          </AnimatePresence>
+          {!isLoading && (
+            <div>
+              <Banner movie={movieDetail || []} params={params} />
+              <MovieInfor
+                movieDetail={movieDetail || []}
+                movie={movieDetail || []}
+              />
+              <MovieDetailBooking movie={movieDetail || []} />
+            </div>
+          )}
+        </div>
+      </Wrapper>
+    </motion.section>
   );
 }
 
@@ -98,7 +112,7 @@ export default MovieDetailsPage;
 
 const Backdrop = styled.div``;
 
-const Wrapper = styled.section`
+const Wrapper = styled.main`
   background-color: var(--color-bg);
   .movieDetail__loading {
     margin-bottom: 14rem;

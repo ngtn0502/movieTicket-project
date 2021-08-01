@@ -6,13 +6,20 @@ import { HiOutlineCash } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { IoIosArrowDropleftCircle } from 'react-icons/io';
-import { FlexCenter, Flex, FlexHCenter } from '../../../utils/mixin.js';
+import { motion } from 'framer-motion';
+import {
+  FlexCenter,
+  Flex,
+  FlexHCenter,
+  FlexVCenter,
+} from '../../../utils/mixin.js';
 import { bookingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
 import {
   REQUIRE__CHOOSINGSEAT,
   RESET__AMOUNT,
   USER_BOOKING_WARNING,
 } from '../../../redux/actions/constantsAction.js';
+import { loadingVariants } from '../../../utils/constants.js';
 
 function BookingPageRight({
   cineRoomMovie,
@@ -54,136 +61,144 @@ function BookingPageRight({
     }
   };
   return (
-    <Wrapper className={className}>
-      <div className="booking__right">
-        <div className="booking__back">
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper className={className}>
+        <div className="booking__right">
+          <div className="booking__back">
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                setIsSideBarShow(false);
+              }}
+            >
+              <IoIosArrowDropleftCircle />
+              Go Back
+            </button>
+          </div>
+          <div className="booking__info--movie">
+            <h2>{cineRoomMovie?.tenPhim}</h2>
+          </div>
+          <hr />
+          <div className="booking__info--pay">
+            <h2>{totalAmount}đ</h2>
+            <hr />
+            <div>
+              <p>Ngày chiếu:</p>
+              <p>{cineRoomMovie?.ngayChieu}</p>
+            </div>
+            <div>
+              <p>Giờ Chiếu:</p>
+              <p>{cineRoomMovie?.gioChieu}</p>
+            </div>
+            <div>
+              <p>Rạp:</p>
+              <p>{cineRoomMovie?.tenRap}</p>
+            </div>
+            <div className="seat">
+              <p>Ghế:</p>
+              <div>
+                {choosingSeat?.length !== 0 ? (
+                  choosingSeat?.map((item) => <p>Ghế {item.stt}.</p>)
+                ) : (
+                  <p>Vui lòng chọn ghế</p>
+                )}
+              </div>
+            </div>
+            <div>
+              <p>Ưu đãi:</p>
+              <p>0%</p>
+            </div>
+          </div>
+          <hr />
+          <div className="booking__pay">
+            <div className="payMethod">
+              <h5>Hình thức thanh toán</h5>
+              <div className="radio-selection">
+                <form>
+                  <div className="radio__item">
+                    <input
+                      className="radio__item--input"
+                      type="radio"
+                      name="payMethod"
+                      id="ATM"
+                      defaultValue="ATM"
+                    />
+                    <label className="radio__item--label" htmlFor="ATM">
+                      <div className="pay__figure">
+                        <MdPayment />
+                      </div>
+                      <p className="pay__text">Thẻ ATM nội địa</p>
+                    </label>
+                  </div>
+                  <div className="radio__item">
+                    <input
+                      className="radio__item--input"
+                      type="radio"
+                      name="payMethod"
+                      id="VISA"
+                      defaultValue="VISA"
+                    />
+                    <label className="radio__item--label" htmlFor="VISA">
+                      <div className="pay__figure">
+                        <FaCcVisa />
+                      </div>
+                      <p className="pay__text">Visa, Master, JCB</p>
+                    </label>
+                  </div>
+                  <div className="radio__item">
+                    <input
+                      className="radio__item--input"
+                      type="radio"
+                      name="payMethod"
+                      id="CASH"
+                      defaultValue="CASH"
+                    />
+                    <label className="radio__item--label" htmlFor="CASH">
+                      <div className="pay__figure">
+                        <HiOutlineCash />
+                      </div>
+                      <p className="pay__text">Thanh toán tiền mặt</p>
+                    </label>
+                  </div>
+                </form>
+                {/*  */}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="booking__button">
           <button
             type="button"
-            className="btn"
-            onClick={() => {
-              setIsSideBarShow(false);
-            }}
+            className="btn__watching btn-paying"
+            onClick={bookingHandler}
           >
-            <IoIosArrowDropleftCircle />
-            Go Back
+            Đặt vé
           </button>
         </div>
-        <div className="booking__info--movie">
-          <img src={cineRoomMovie?.hinhAnh} alt="movie" />
-          <h2>{cineRoomMovie?.tenPhim}</h2>
-        </div>
-        <hr />
-        <div className="booking__info--pay">
-          <h2>{totalAmount}đ</h2>
-          <hr />
-          <div>
-            <p>Ngày chiếu:</p>
-            <p>{cineRoomMovie?.ngayChieu}</p>
-          </div>
-          <div>
-            <p>Giờ Chiếu:</p>
-            <p>{cineRoomMovie?.gioChieu}</p>
-          </div>
-          <div>
-            <p>Rạp:</p>
-            <p>{cineRoomMovie?.tenRap}</p>
-          </div>
-          <div className="seat">
-            <p>Ghế:</p>
-            <div>
-              {choosingSeat?.length !== 0 ? (
-                choosingSeat?.map((item) => <p>Ghế {item.stt}.</p>)
-              ) : (
-                <p>Vui lòng chọn ghế</p>
-              )}
-            </div>
-          </div>
-          <div>
-            <p>Ưu đãi:</p>
-            <p>0%</p>
-          </div>
-        </div>
-        <hr />
-        <div className="booking__pay">
-          <div className="payMethod">
-            <h5>Hình thức thanh toán</h5>
-            <div className="radio-selection">
-              <form>
-                <div className="radio__item">
-                  <input
-                    className="radio__item--input"
-                    type="radio"
-                    name="payMethod"
-                    id="ATM"
-                    defaultValue="ATM"
-                  />
-                  <label className="radio__item--label" htmlFor="ATM">
-                    <div className="pay__figure">
-                      <MdPayment />
-                    </div>
-                    <p className="pay__text">Thẻ ATM nội địa</p>
-                  </label>
-                </div>
-                <div className="radio__item">
-                  <input
-                    className="radio__item--input"
-                    type="radio"
-                    name="payMethod"
-                    id="VISA"
-                    defaultValue="VISA"
-                  />
-                  <label className="radio__item--label" htmlFor="VISA">
-                    <div className="pay__figure">
-                      <FaCcVisa />
-                    </div>
-                    <p className="pay__text">Visa, Master, JCB</p>
-                  </label>
-                </div>
-                <div className="radio__item">
-                  <input
-                    className="radio__item--input"
-                    type="radio"
-                    name="payMethod"
-                    id="CASH"
-                    defaultValue="CASH"
-                  />
-                  <label className="radio__item--label" htmlFor="CASH">
-                    <div className="pay__figure">
-                      <HiOutlineCash />
-                    </div>
-                    <p className="pay__text">Thanh toán tiền mặt</p>
-                  </label>
-                </div>
-              </form>
-              {/*  */}
-            </div>
-          </div>
-        </div>
-        <button
-          type="button"
-          className="btn__watching btn-paying"
-          onClick={bookingHandler}
-        >
-          Đặt vé
-        </button>
-      </div>
-    </Wrapper>
+      </Wrapper>{' '}
+    </motion.section>
   );
 }
 
 export default BookingPageRight;
-const Wrapper = styled.div`
+const Wrapper = styled.main`
   position: fixed;
   width: 100%;
   height: 100vh;
   top: 0rem;
   right: 0;
-  /* background-color: rgba(70, 70, 70, 1); */
-  background-color: var(--color-seat);
+  background-color: #f5f5f5;
+  /* background-color: var(--color-seat); */
   box-shadow: 0 0 5px rgb(160 160 160 / 50%);
   z-index: 2000;
   overflow: hidden;
   border-radius: var(--radius);
+  color: black;
   /* global */
   h2,
   h5 {
@@ -224,7 +239,7 @@ const Wrapper = styled.div`
   }
   hr {
     margin: 1rem auto;
-    border-top: 1px dashed white;
+    border-top: 1px dashed black;
   }
   div {
     padding: 0.25rem 0;
@@ -247,6 +262,7 @@ const Wrapper = styled.div`
       p:nth-child(2) {
         font-weight: 700;
       }
+      padding: 0.5rem 0;
     }
     .seat {
       display: grid;
@@ -306,12 +322,24 @@ const Wrapper = styled.div`
     border-radius: 50%;
     background-color: rgb(74, 144, 226);
   }
+  /* Button paying */
+  .booking__button {
+    position: absolute;
+    ${FlexVCenter()}
+    width: 100%;
+    bottom: 5rem;
+    .btn__watching {
+      width: 90%;
+      padding: 1.5rem 0;
+    }
+  }
+
   /*  */
   @media screen and (min-width: 1000px) {
     width: 15rem;
     top: 4rem;
     .booking__right {
-      height: 91vh;
+      height: 85vh;
     }
     .booking__back {
       display: none;

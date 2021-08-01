@@ -4,6 +4,7 @@ import format from 'date-format';
 import { useHistory } from 'react-router';
 import { FlexCenter } from '../../../utils/mixin.js';
 // Cinema
+
 import bhd from '../../../../assets/img/cinema/bhd-star-cineplex.png';
 import cgv from '../../../../assets/img/cinema/cgv.png';
 import cinestar from '../../../../assets/img/cinema/cinestar.png';
@@ -11,7 +12,6 @@ import galaxy from '../../../../assets/img/cinema/galaxy-cinema.png';
 import lotte from '../../../../assets/img/cinema/lotte-cinema.png';
 import megas from '../../../../assets/img/cinema/megags.png';
 import BookingTable from './BookingTable.js';
-
 //
 function MovieDetailBooking({ movie }) {
   const history = useHistory();

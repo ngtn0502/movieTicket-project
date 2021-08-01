@@ -4,11 +4,13 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import bgImage from '../../../assets/img/bg-singin.jpg';
 import logo from '../../../assets/img/logo-full.png';
 import { userSignUpAction } from '../../redux/actions/authAction';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import AlertModal from '../components/AlertModal.js';
+import { loadingVariants } from '../../utils/constants.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,91 +53,100 @@ function SignUpPage() {
     dispatch({ type: CLOSE_MODAL });
   };
   return (
-    <Wrapper style={{ backgroundImage: `url(${bgImage})` }}>
-      {isModalShow && (
-        <div>
-          {/* eslint-disable */}
-          <div className="backdrop" onClick={closeModalHandler} />
-          {/* eslint-enable */}
-          <AlertModal
-            message={message}
-            goTo={goTo}
-            type={type}
-            message2={message2}
-          />
-        </div>
-      )}
-      <div className="page-100">
-        <div className="signIn">
-          <img src={logo} alt="movie" />
-          <h5>Thế giới phim trên đầu ngón tay</h5>
-          <div className="signIn__form">
-            <form
-              className={classes.root}
-              noValidate
-              autoComplete="off"
-              onSubmit={userSubmitHandler}
-            >
-              <TextField
-                variant="filled"
-                color="secondary"
-                id="standard-basic"
-                label="Họ và tên"
-                className="signIn__input"
-                name="hoTen"
-                onChange={userLoginHandler}
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper style={{ backgroundImage: `url(${bgImage})` }}>
+        <AnimatePresence>
+          {isModalShow && (
+            <div>
+              {/* eslint-disable */}
+            <div className="backdrop" onClick={closeModalHandler} />
+            {/* eslint-enable */}
+              <AlertModal
+                message={message}
+                goTo={goTo}
+                type={type}
+                message2={message2}
               />
-              <TextField
-                variant="filled"
-                color="secondary"
-                id="standard-basic"
-                label="Tài Khoản"
-                className="signIn__input"
-                name="taiKhoan"
-                onChange={userLoginHandler}
-              />
-              <TextField
-                variant="filled"
-                color="secondary"
-                id="standard-basic"
-                label="Mật Khẩu"
-                className="signIn__input"
-                name="matKhau"
-                onChange={userLoginHandler}
-              />
-              <TextField
-                variant="filled"
-                color="secondary"
-                id="standard-basic"
-                label="Email"
-                className="signIn__input"
-                name="email"
-                onChange={userLoginHandler}
-              />
-              <TextField
-                variant="filled"
-                color="secondary"
-                id="standard-basic"
-                label="Số điện thoại"
-                className="signIn__input"
-                name="soDt"
-                onChange={userLoginHandler}
-              />
-              <div className="signIn__button">
-                <button type="submit" className="btn__watching">
-                  Đăng Ký
-                </button>
-              </div>
-            </form>
+            </div>
+          )}{' '}
+        </AnimatePresence>
+
+        <div className="page-100">
+          <div className="signIn">
+            <img src={logo} alt="movie" />
+            <h5>Thế giới phim trên đầu ngón tay</h5>
+            <div className="signIn__form">
+              <form
+                className={classes.root}
+                noValidate
+                autoComplete="off"
+                onSubmit={userSubmitHandler}
+              >
+                <TextField
+                  variant="filled"
+                  color="secondary"
+                  id="standard-basic"
+                  label="Họ và tên"
+                  className="signIn__input"
+                  name="hoTen"
+                  onChange={userLoginHandler}
+                />
+                <TextField
+                  variant="filled"
+                  color="secondary"
+                  id="standard-basic"
+                  label="Tài Khoản"
+                  className="signIn__input"
+                  name="taiKhoan"
+                  onChange={userLoginHandler}
+                />
+                <TextField
+                  variant="filled"
+                  color="secondary"
+                  id="standard-basic"
+                  label="Mật Khẩu"
+                  className="signIn__input"
+                  name="matKhau"
+                  onChange={userLoginHandler}
+                />
+                <TextField
+                  variant="filled"
+                  color="secondary"
+                  id="standard-basic"
+                  label="Email"
+                  className="signIn__input"
+                  name="email"
+                  onChange={userLoginHandler}
+                />
+                <TextField
+                  variant="filled"
+                  color="secondary"
+                  id="standard-basic"
+                  label="Số điện thoại"
+                  className="signIn__input"
+                  name="soDt"
+                  onChange={userLoginHandler}
+                />
+                <div className="signIn__button">
+                  <button type="submit" className="btn__watching">
+                    Đăng Ký
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </motion.section>
   );
 }
 
 export default SignUpPage;
-const Wrapper = styled.section`
+const Wrapper = styled.main`
   position: relative;
   .page-100 {
     height: 100vh;

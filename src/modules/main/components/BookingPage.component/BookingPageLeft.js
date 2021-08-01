@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { motion } from 'framer-motion';
 import {
   mapCGV,
   mapLotte,
@@ -9,6 +10,7 @@ import {
   mapCineStar,
   mapGalaxy,
   mapMegaGS,
+  loadingVariants,
 } from '../../../utils/constants.js';
 import { FlexCenter, FlexHCenter, FlexVCenter } from '../../../utils/mixin.js';
 import { choosingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
@@ -54,183 +56,195 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
     }
   };
 
+  console.log(cineRoomMovie);
   return (
-    <Wrapper>
-      <div className="booking__left">
-        <div className="booking__info">
-          {getCinema()}
-          <div>
-            <p>{cineRoomMovie?.tenCumRap}</p>
-            <p>{cineRoomMovie?.diaChi}</p>
-            <p>{cineRoomMovie?.tenRap}</p>
+    <motion.section
+      variants={loadingVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Wrapper>
+        <div className="booking__left">
+          <div className="booking__info">
+            <div className="booking__info--address">
+              <img src={cineRoomMovie.hinhAnh} alt="" />
+              <div>
+                <p>{cineRoomMovie?.tenCumRap}</p>
+                <p>{cineRoomMovie?.diaChi}</p>
+                <p>{cineRoomMovie?.tenRap}</p>
+              </div>
+            </div>
+            <div className="booking__info--name">
+              <span className="title">{cineRoomMovie.tenPhim}</span>
+            </div>
+            <div />
           </div>
-        </div>
-        <div className="screen__container">
-          <div className="screen" />
-          <p>MÀN HÌNH</p>
-          <div className="note">
+          <div className="screen__container">
+            <div className="screen" />
+            <p>MÀN HÌNH</p>
+            <div className="note">
+              <div>
+                <button type="button" className="seat seat__vipSeat">
+                  {/* ewrưe */}
+                </button>
+                <span>Ghế VIP</span>
+              </div>
+              <div>
+                <button type="button" className="seat">
+                  {/* ewrưe */}
+                </button>
+                <span>Ghế thường</span>
+              </div>
+              <div>
+                <button type="button" className="seat seat__selected">
+                  {/* ewrưe */}
+                </button>
+                <span>Ghế đã có người chọn</span>
+              </div>
+            </div>
+          </div>
+          <div className="booking__seat">
             <div>
-              <button type="button" className="seat seat__vipSeat">
-                {/* ewrưe */}
-              </button>
-              <span>Ghế VIP</span>
+              {cineSeatList?.slice(0, 16).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
             </div>
             <div>
-              <button type="button" className="seat">
-                {/* ewrưe */}
-              </button>
-              <span>Ghế thường</span>
+              {cineSeatList?.slice(16, 32).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
             </div>
             <div>
-              <button type="button" className="seat seat__selected">
-                {/* ewrưe */}
-              </button>
-              <span>Ghế đã có người chọn</span>
+              {cineSeatList?.slice(32, 48).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
             </div>
-          </div>
-        </div>
-        <div className="booking__seat">
-          <div>
-            {cineSeatList?.slice(0, 16).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>
-          <div>
-            {cineSeatList?.slice(16, 32).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>
-          <div>
-            {cineSeatList?.slice(32, 48).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>
-          <div>
-            {cineSeatList?.slice(48, 64).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>
-          <div>
-            {cineSeatList?.slice(64, 80).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>
-          <div>
-            {cineSeatList?.slice(80, 96).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>{' '}
-          <div>
-            {cineSeatList?.slice(96, 112).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>{' '}
-          <div>
-            {cineSeatList?.slice(112, 128).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>{' '}
-          <div>
-            {cineSeatList?.slice(128, 144).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>{' '}
-          <div>
-            {cineSeatList?.slice(144, 160).map((seat) => (
-              <button
-                disabled={seat.daDat}
-                type="button"
-                className={checkSeat(seat)}
-                onClick={() => {
-                  selectSeatHandler(seat);
-                }}
-              >
-                {`${seat.stt}`}
-              </button>
-            ))}
-          </div>
-          {/* <div>
+            <div>
+              {cineSeatList?.slice(48, 64).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
+            </div>
+            <div>
+              {cineSeatList?.slice(64, 80).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
+            </div>
+            <div>
+              {cineSeatList?.slice(80, 96).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
+            </div>{' '}
+            <div>
+              {cineSeatList?.slice(96, 112).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
+            </div>{' '}
+            <div>
+              {cineSeatList?.slice(112, 128).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
+            </div>{' '}
+            <div>
+              {cineSeatList?.slice(128, 144).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
+            </div>{' '}
+            <div>
+              {cineSeatList?.slice(144, 160).map((seat) => (
+                <button
+                  disabled={seat.daDat}
+                  type="button"
+                  className={checkSeat(seat)}
+                  onClick={() => {
+                    selectSeatHandler(seat);
+                  }}
+                >
+                  {`${seat.stt}`}
+                </button>
+              ))}
+            </div>
+            {/* <div>
             {cineSeatList?.slice(50, 100).map((seat) => (
               <button
                 disabled={seat.daDat}
@@ -258,9 +272,10 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
               </button>
             ))}
           </div> */}
+          </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>{' '}
+    </motion.section>
   );
 }
 
@@ -269,16 +284,26 @@ const Wrapper = styled.section`
   padding-bottom: 5rem;
   .booking__info {
     margin: 7rem 0 2rem;
-    img {
-      max-height: 7rem;
-      width: 10rem;
-      margin-right: 1rem;
-      border-radius: 10px;
+    .booking__info--name {
+      display: flex;
+      justify-content: center;
+      span {
+        padding: 0.25rem 2rem;
+        border-bottom: 1px solid var(--color-gray-700);
+        padding-top: 0.5rem;
+        text-align: center;
+      }
     }
-    ${FlexHCenter()}
-    div {
+    .booking__info--address {
+      ${FlexVCenter()}
+      img {
+        max-height: 7rem;
+        width: 7rem;
+        margin-right: 1rem;
+        border-radius: 10px;
+      }
       p {
-        font-size: 1rem;
+        padding-bottom: 0.25rem;
       }
       p:nth-child(2),
       p:nth-child(3) {
@@ -389,10 +414,11 @@ const Wrapper = styled.section`
     }
     .booking__info {
       margin: 2rem 0;
-      div {
-        p {
-          font-size: 1.25rem;
-        }
+      p {
+        font-size: 1.25rem;
+      }
+      .title {
+        font-size: 1.5rem;
       }
     }
     .booking__seat {
