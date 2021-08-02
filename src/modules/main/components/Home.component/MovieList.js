@@ -81,12 +81,12 @@ export default function Carousel({ movieList }) {
           {typeMovie && (
             <>
               <SwiperSlide className="movie__list">
-                {movieList.slice(0, 8).map((movie) => (
+                {movieList.slice(8, 16).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>
               <SwiperSlide className="movie__list">
-                {movieList.slice(8, 16).map((movie) => (
+                {movieList.slice(16, 24).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>
@@ -95,12 +95,12 @@ export default function Carousel({ movieList }) {
           {!typeMovie && (
             <>
               <SwiperSlide className="movie__list">
-                {movieList.slice(18, 26).map((movie) => (
+                {movieList.slice(24, 32).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>
               <SwiperSlide className="movie__list">
-                {movieList.slice(26).map((movie) => (
+                {movieList.slice(32).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>

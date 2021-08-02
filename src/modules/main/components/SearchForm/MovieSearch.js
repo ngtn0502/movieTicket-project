@@ -23,7 +23,7 @@ export default function SimpleSelect() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [age, setAge] = useState('');
-  const movieList = useSelector((state) => state.movieListReducer.movieList);
+  const { movieList } = useSelector((state) => state.homeReducer);
 
   const handleChange = (event) => {
     setAge(event.target.value);

@@ -20,16 +20,13 @@ function NavLink() {
   return (
     <Wrapper>
       <ul>
-        {navBarLink.map((item) => {
-          console.log(`${item.goTo}${item.path}`);
-          return (
-            <li className="nav_link" key={item.id}>
-              <Link smooth to={`${item.goTo}${item.path}`}>
-                <span className="nav_title">{item.title}</span>
-              </Link>
-            </li>
-          );
-        })}
+        {navBarLink.map((item) => (
+          <li className="nav_link" key={item.id}>
+            <Link smooth to={`${item.goTo}${item.path}`}>
+              <span className="nav_title">{item.title}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </Wrapper>
   );

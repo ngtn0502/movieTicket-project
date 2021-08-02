@@ -28,8 +28,8 @@ function MovieDetailsPage() {
   const { movieDetail, isLoading } = useSelector(
     (state) => state.movieDetailReducer
   );
-  const movieList = useSelector((state) => state.movieListReducer.movieList);
-  const movie = movieList.find((item) => item.maPhim === Number(params.id));
+  // const { movieList } = useSelector((state) => state.homeReducer);
+  // const movie = movieList.find((item) => item.maPhim === Number(params.id));
 
   // movieList
   useEffect(() => {
@@ -40,7 +40,6 @@ function MovieDetailsPage() {
   useEffect(() => {
     dispatch(getMovieDetailAction(params.id));
   }, [dispatch, params]);
-  console.log(movieDetail);
   // close modal
   const closeModalHandler = () => {
     dispatch({ type: CLOSE_MODAL });
@@ -53,6 +52,7 @@ function MovieDetailsPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  console.log(movieDetail);
   return (
     <motion.section
       variants={loadingVariants}

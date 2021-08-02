@@ -27,7 +27,7 @@ function MovieCard({ movie }) {
       </div>
       <h5 className="name">
         <Link to={`/movie-details/${movie.maPhim}`}>
-          <MovieClass checkClass={movie.tenPhim.length % 2 === 0} />
+          <MovieClass checkClass={movie.tenPhim?.length % 2 === 0} />
           {movie.tenPhim}
         </Link>
       </h5>

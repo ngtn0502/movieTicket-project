@@ -13,6 +13,9 @@ import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import Loading from '../components/Loading.js';
 import AlertModal from '../components/AlertModal.js';
 import { loadingVariants } from '../../utils/constants.js';
+import HomeBooking from '../components/Home.component/HomeBooking';
+import { getCineplexLogoAction } from '../../redux/actions/HomeAction/getCineplexLogoAction.js';
+import { getMovieByCineplex } from '../../redux/actions/HomeAction/getMovieByCineplex.js';
 
 function HomePage() {
   const history = useHistory();
@@ -32,13 +35,15 @@ function HomePage() {
     }
   };
   // movieList
-  const { movieList, isLoading } = useSelector(
-    (state) => state.movieListReducer
-  );
+  const { movieList, isLoading } = useSelector((state) => state.homeReducer);
+  console.log('hoempage movie list', movieList);
   // cinema List
   useEffect(() => {
     // Dispatch action creator thunk to fetch data in action component
     dispatch(getMovieListAction());
+    // Dispatch action creator thunk to get cineplex logo
+    dispatch(getCineplexLogoAction());
+    dispatch(getMovieByCineplex());
   }, [dispatch]);
   // Get List Cinema
   return (
@@ -89,6 +94,7 @@ function HomePage() {
             {/* <Carousel movieList={movieList} className="home__carousel" /> */}
             <SearchBar className="home__searchbar" />
             <MovieList movieList={movieList} className="home__movieList" />
+            <HomeBooking />
           </div>
         )}
       </Wrapper>

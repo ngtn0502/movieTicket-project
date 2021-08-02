@@ -78,7 +78,7 @@ export default function BookingInfo({
     return arr;
   };
   // debugger;
-  console.log(lichChieuDuyNhat(dateChieu));
+  // console.log(lichChieuDuyNhat(dateChieu));
   // console.log(ngayChieuAllUnique);
   // console.log(dateChieu);
   // console.log(value);
@@ -155,7 +155,7 @@ export default function BookingInfo({
                   return (
                     <div key={index}>
                       <p>
-                        {getCinemaLogo()}
+                        {getCinemaLogo(cinema)}
                         <span className='bookingInfo__cinemaName'>
                           {string.slice(0, indexDivide)}
                           <span> {string.slice(indexDivide)}</span>

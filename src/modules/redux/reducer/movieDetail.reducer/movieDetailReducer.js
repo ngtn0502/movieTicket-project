@@ -1,7 +1,7 @@
 import {
   GET_MOVIE_DETAIL_LOADING,
   GET_MOVIE_DETAIL_SUCCESS,
-  GET_MOVIE_DETAIL_ERROR,
+  // GET_MOVIE_DETAIL_ERROR,
 } from '../../actions/constantsAction.js';
 
 const init = {

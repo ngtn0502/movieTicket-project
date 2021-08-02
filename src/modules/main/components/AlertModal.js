@@ -265,7 +265,7 @@ const Wrapper = styled.div`
         ${FlexVCenter()}
         gap: 2rem;
         button {
-          margin: 0 auto 1rem;
+          margin: 0 auto 2rem;
           /* margin-right: 1rem; */
         }
       }
@@ -562,7 +562,7 @@ const Wrapper = styled.div`
   @media screen and (min-width: 1000px) {
     .modal {
       width: 35rem;
-      height: 23rem;
+      height: 25rem;
       top: 25%;
       left: 35%;
       .alert {

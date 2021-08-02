@@ -23,7 +23,20 @@ import logolotte from '../../assets/img/cinema/lotte-cinema.png';
 import logomegaGs from '../../assets/img/cinema/megags.png';
 
 export const carouselBackground = bgPopcorn;
-
+// import {
+//   mapCGV,
+//   mapLotte,
+//   mapBHD,
+//   mapCineStar,
+//   mapGalaxy,
+//   mapMegaGS,
+//   logoCGV,
+//   logoLotte,
+//   logoBHD,
+//   logoCineStar,
+//   logoGalaxy,
+//   logoMegaGS,
+// } from '../../../utils/constants.js';
 // Variants animate loading route
 
 export const loadingVariants = {
@@ -38,6 +51,7 @@ export const loadingVariants = {
   },
 };
 
+/// ////////////////////////////HEADER/////////////////////////////////
 // Nav bar part
 export const navBarLink = [
   {
@@ -63,6 +77,7 @@ export const navBarLink = [
   },
 ];
 
+/// ////////////////////////////HOME PAGE/////////////////////////////////
 // Search part
 
 export const movieCategory = [
@@ -171,7 +186,7 @@ export const movieHour = [
     title: '18:00',
   },
 ];
-
+/// ////////////////////////////MOVIE DETAIL PAGE/////////////////////////////////
 // Movie Detail part
 
 export const movieDetailContent = [
@@ -218,6 +233,52 @@ export const logoCineStar = <img src={logocinestart} alt="movie" />;
 export const logoGalaxy = <img src={logogalaxy} alt="movie" />;
 
 export const logoMegaGS = <img src={logomegaGs} alt="movie" />;
+
+/// ////////////////////////////BOOKING PAGE/////////////////////////////////
+
+export const getCinema = (cinema) => {
+  if (cinema === 'CGV') {
+    return mapCGV;
+  }
+  if (cinema === 'LotteCinima') {
+    return mapLotte;
+  }
+  if (cinema === 'BHDStar') {
+    return mapBHD;
+  }
+  if (cinema === 'CineStar') {
+    return mapCineStar;
+  }
+  if (cinema === 'Galaxy') {
+    return mapGalaxy;
+  }
+  if (cinema === 'MegaGS') {
+    return mapMegaGS;
+  }
+};
+
+export const getCinemaLogo = (cinema) => {
+  if (cinema === 'CGV') {
+    return logoCGV;
+  }
+  if (cinema === 'LotteCinima') {
+    return logoLotte;
+  }
+  if (cinema === 'BHDStar') {
+    return logoBHD;
+  }
+  if (cinema === 'CineStar') {
+    return logoCineStar;
+  }
+  if (cinema === 'Galaxy') {
+    return logoGalaxy;
+  }
+  if (cinema === 'MegaGS') {
+    return logoMegaGS;
+  }
+};
+
+/// ////////////////////////////FOOTER/////////////////////////////////
 
 // Footer part
 

@@ -1,23 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import format from 'date-format';
-import {
-  mapCGV,
-  mapLotte,
-  mapBHD,
-  mapCineStar,
-  mapGalaxy,
-  mapMegaGS,
-  logoCGV,
-  logoLotte,
-  logoBHD,
-  logoCineStar,
-  logoGalaxy,
-  logoMegaGS,
-} from '../../../utils/constants.js';
 
 import { getDay } from '../../../utils/helper.js';
 import BookingInfo from './BookingInfo.js';
+import { getCinema, getCinemaLogo } from '../../../utils/constants.js';
 
 function BookingTable({ movie, cinema }) {
   // movie prop trả về là lịch chiếu phim tương ứng với rạp phim đưỢc click
@@ -39,53 +26,13 @@ function BookingTable({ movie, cinema }) {
   const dateChieu = movie?.filter(
     (item) => ngayChieu[0] === getDay(new Date(item.ngayChieuGioChieu))
   );
-  const getCinema = () => {
-    if (cinema === 'CGV') {
-      return mapCGV;
-    }
-    if (cinema === 'LotteCinima') {
-      return mapLotte;
-    }
-    if (cinema === 'BHDStar') {
-      return mapBHD;
-    }
-    if (cinema === 'CineStar') {
-      return mapCineStar;
-    }
-    if (cinema === 'Galaxy') {
-      return mapGalaxy;
-    }
-    if (cinema === 'MegaGS') {
-      return mapMegaGS;
-    }
-  };
 
-  const getCinemaLogo = () => {
-    if (cinema === 'CGV') {
-      return logoCGV;
-    }
-    if (cinema === 'LotteCinima') {
-      return logoLotte;
-    }
-    if (cinema === 'BHDStar') {
-      return logoBHD;
-    }
-    if (cinema === 'CineStar') {
-      return logoCineStar;
-    }
-    if (cinema === 'Galaxy') {
-      return logoGalaxy;
-    }
-    if (cinema === 'MegaGS') {
-      return logoMegaGS;
-    }
-  };
   return (
     <Wrapper>
       {/* eslint-disable */}
       <div className='booking__table'>
         <div className='booking__table--map'>
-          <div>{getCinema()}</div>
+          <div>{getCinema(cinema)}</div>
           {/* eslint-enable */}
         </div>
         <div className="booking__info">
