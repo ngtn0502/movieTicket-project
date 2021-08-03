@@ -1,5 +1,5 @@
 import format from 'date-format';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -10,10 +10,11 @@ import imdbLogo from '../../../../assets/img/imdb-logo.png';
 
 const Day = '2019';
 
-function HomeBookingSchedule({ danhSachPhim, className }) {
+function HomeBookingSchedule(props, ref) {
   const history = useHistory();
+  const { danhSachPhim, className } = props;
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} ref={ref}>
       {danhSachPhim?.map((item) => {
         const lstLichChieuTheoPhim = item.lstLichChieuTheoPhim.filter((movie) =>
           movie.ngayChieuGioChieu?.includes(Day)
@@ -55,11 +56,9 @@ function HomeBookingSchedule({ danhSachPhim, className }) {
   );
 }
 
-export default HomeBookingSchedule;
+export default forwardRef(HomeBookingSchedule);
 const Wrapper = styled.div`
   padding: 20px 20px;
-  height: 42rem;
-  overflow: hidden;
 
   &:hover {
     overflow-y: auto;

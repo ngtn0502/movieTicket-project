@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,18 @@ function HomeBooking() {
   const [phimTheoCumRap, setPhimTheoCumRap] = useState(
     'bhd-star-cineplex-bitexco'
   );
+  // Collapse
+  const [isShowSchedule, setIsShowSchedule] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (contentRef.current !== null) {
+      contentRef.current.style.maxHeight = isShowSchedule
+        ? `${contentRef.current.scrollHeight}px`
+        : '0px';
+      console.log(contentRef.current.style.maxHeight);
+    }
+  }, [contentRef, isShowSchedule]);
   // Create unique cineplex
   const cineplexByBrand = movieByCineplex.filter(
     (item) => item.maHeThongRap === cineplex
@@ -71,6 +83,7 @@ function HomeBooking() {
                   }`}
                   onClick={() => {
                     setPhimTheoCumRap(item.maCumRap);
+                    setIsShowSchedule(!isShowSchedule);
                   }}
                 >
                   {getCinema(cineplex)}
@@ -82,7 +95,13 @@ function HomeBooking() {
                   </div>
                 </div>
                 <HomeBookingSchedule
+                  ref={contentRef}
                   danhSachPhim={danhSachPhim}
+                  // className={`homeBooking__schedule--mobile ${
+                  //   isShowSchedule && phimTheoCumRap === item.maCumRap
+                  //     ? 'homeBooking__schedule--active'
+                  //     : null
+                  // }`}
                   className='homeBooking__schedule--mobile'
                 />
               </>
@@ -110,12 +129,6 @@ const Wrapper = styled.main`
     overflow: hidden;
     /*  */
     border: 2px solid var(--color-gray-800);
-    .homeBooking__schedule--mobile {
-      display: none;
-    }
-    .homeBooking__schedule--active {
-      display: block;
-    }
 
     .homeBooking__schedule--destop {
       display: none;
@@ -185,11 +198,21 @@ const Wrapper = styled.main`
       height: 42rem;
       position: relative;
       overflow: hidden;
+      transition: var(--transition);
+      .homeBooking__schedule--mobile {
+        overflow: hidden;
+        transition: max-height 0.6s ease;
+      }
+      .homeBooking__schedule--active {
+        display: block;
+      }
+
       img {
         width: 4rem;
         height: 4rem;
         border-radius: var(--radius);
       }
+      /* Scroll Bar */
       &:hover {
         overflow-y: auto;
       }
@@ -204,7 +227,8 @@ const Wrapper = styled.main`
         border: 2px solid var(--color-gray-800);
         border-radius: var(--radius);
       }
-
+      /*  */
+      /* Each item */
       .homeBooking__cineplex--item {
         /* margin-right: 1rem; */
         display: flex;
@@ -214,8 +238,10 @@ const Wrapper = styled.main`
         /* max-width: 90%; */
         cursor: pointer;
         padding: 20px;
+        margin-bottom: 2rem;
         height: 7rem;
         opacity: 0.5;
+
         &:hover {
           opacity: 1;
           &::after {
@@ -231,7 +257,7 @@ const Wrapper = styled.main`
           bottom: 0;
           height: 2px;
           min-width: calc(100% - 5rem);
-          transform: translate(-50%, 0rem);
+          transform: translate(-50%, 2rem);
           background-color: var(--color-gray-800);
           box-shadow: 0 -4px 10px 1px var(--color-gray-800);
           transition: var(--transition);
@@ -272,12 +298,25 @@ const Wrapper = styled.main`
         display: block;
         height: 42rem;
       }
-      .homeBooking__schedule--mobile {
-        display: none;
-      }
 
       .homeBooking__schedule--destop {
         display: block;
+      }
+      .homeBooking__cineplex {
+        .homeBooking__schedule--mobile {
+          display: none;
+        }
+        .homeBooking__schedule--active {
+          display: none;
+        }
+
+        .homeBooking__cineplex--item {
+          margin-bottom: 0;
+
+          &:after {
+            transform: translate(-50%, 0rem);
+          }
+        }
       }
     }
   }
