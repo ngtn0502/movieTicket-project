@@ -105,17 +105,7 @@ const Wrapper = styled.main`
     }
   }
   /* title */
-  .subtitle__imdb {
-    ${FlexHCenter()}
-    img {
-      width: 2rem;
-      height: 2rem;
-      margin-right: 0.5rem;
-    }
-    span {
-      font-size: 1rem;
-    }
-  }
+
   .subtitle__meta {
     color: var(--color-white);
     letter-spacing: var(--spacing);

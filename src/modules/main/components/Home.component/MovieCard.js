@@ -25,13 +25,13 @@ function MovieCard({ movie }) {
           <img src={movie.hinhAnh} alt="movie" />
         </Link>
       </div>
-      <h5 className="name">
+      <h5 className="nameMovie">
         <Link to={`/movie-details/${movie.maPhim}`}>
           <MovieClass checkClass={movie.tenPhim?.length % 2 === 0} />
           {movie.tenPhim}
         </Link>
       </h5>
-      <p className="time">{randomDuration()} phút</p>
+      <p className="subNameMovie">{randomDuration()} phút</p>
     </Wrapper>
   );
 }
@@ -49,6 +49,7 @@ const Wrapper = styled.div`
   .movieCard__img {
     position: relative;
     overflow: hidden;
+    margin-bottom: 0.5rem;
 
     .playVideo {
       position: absolute;
@@ -76,17 +77,7 @@ const Wrapper = styled.div`
       opacity: 1;
     }
   }
-  .name {
-    color: var(--color-emphasis-1000);
-    padding-top: 1rem;
-    font-size: 1rem;
-    ${FlexHCenter()}
-    line-height: 1.25;
-  }
-  .time {
-    font-size: 1rem;
-    color: var(--color-sub);
-  }
+
   @media screen and (min-width: 700px) {
     img {
       height: 25rem;

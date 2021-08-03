@@ -36,7 +36,6 @@ function HomePage() {
   };
   // movieList
   const { movieList, isLoading } = useSelector((state) => state.homeReducer);
-  console.log('hoempage movie list', movieList);
   // cinema List
   useEffect(() => {
     // Dispatch action creator thunk to fetch data in action component

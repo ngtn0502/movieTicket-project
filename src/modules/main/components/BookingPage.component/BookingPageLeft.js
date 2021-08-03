@@ -69,9 +69,9 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
             <div className="booking__info--address">
               <img src={cineRoomMovie.hinhAnh} alt="" />
               <div>
-                <p>{cineRoomMovie?.tenCumRap}</p>
-                <p>{cineRoomMovie?.diaChi}</p>
-                <p>{cineRoomMovie?.tenRap}</p>
+                <p className="nameMovie">{cineRoomMovie?.tenCumRap}</p>
+                <p className="subNameMovie">{cineRoomMovie?.diaChi}</p>
+                <p className="subNameMovie">{cineRoomMovie?.tenRap}</p>
               </div>
             </div>
             <div className="booking__info--name">
@@ -301,13 +301,6 @@ const Wrapper = styled.section`
         width: 7rem;
         margin-right: 1rem;
         border-radius: 10px;
-      }
-      p {
-        padding-bottom: 0.25rem;
-      }
-      p:nth-child(2),
-      p:nth-child(3) {
-        color: var(--color-title);
       }
     }
   }

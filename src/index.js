@@ -6,11 +6,13 @@ import { StylesProvider } from '@material-ui/core/styles';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Store } from './modules/redux/store/index';
+import GlobalStyles from './modules/utils/GlobalStyles.js';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={Store}>
       <StylesProvider injectFirst>
+        <GlobalStyles />
         <App />
       </StylesProvider>
     </Provider>
