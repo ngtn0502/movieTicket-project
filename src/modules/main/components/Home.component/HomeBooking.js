@@ -166,7 +166,6 @@ const Wrapper = styled.main`
       justify-content: space-between;
       flex-wrap: wrap;
       padding-bottom: 20px;
-      border-bottom: 2px solid var(--color-gray-800);
       img {
         width: 4rem;
         height: auto;
@@ -315,6 +314,7 @@ const Wrapper = styled.main`
       }
       /* Home booking part 2  */
       .homeBooking__cineplex {
+        overflow-y: auto;
         .homeBooking__schedule--mobile {
           display: none;
         }
@@ -323,9 +323,12 @@ const Wrapper = styled.main`
         }
 
         .homeBooking__cineplex--item {
-          margin-bottom: 0;
+          margin: 0 0 1rem;
           /* Hover - Active Line */
-
+          img {
+            width: 4rem;
+            height: 4rem;
+          }
           &:after {
             content: '';
             position: absolute;
