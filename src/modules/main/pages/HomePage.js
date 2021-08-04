@@ -117,9 +117,6 @@ const Wrapper = styled.main`
     margin-top: 0rem;
   }
   @media screen and (min-width: 1000px) {
-    .carousel__overflow {
-      height: 130vh;
-    }
     .home__searchbar {
       display: flex;
     }

@@ -72,7 +72,6 @@ const Wrapper = styled.div`
   border-radius: var(--radius);
   background: var(--color-white);
   width: 100%;
-  height: 10vh;
   ${FlexCenter()}
   .search {
     width: 90%;

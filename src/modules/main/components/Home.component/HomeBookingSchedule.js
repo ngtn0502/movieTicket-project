@@ -1,20 +1,21 @@
 import format from 'date-format';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { randomDuration, randomNumber } from '../../../utils/helper.js';
 import { FlexCenter, FlexHCenter } from '../../../utils/mixin.js';
 import MovieClass from './MovieClass.js';
 import imdbLogo from '../../../../assets/img/imdb-logo.png';
 
 const Day = '2019';
-
 function HomeBookingSchedule(props, ref) {
-  const history = useHistory();
-  const { danhSachPhim, className } = props;
+  const dispatch = useDispatch();
+
+  const { danhSachPhim, className, style, isEmptyHandler } = props;
   return (
-    <Wrapper className={className} ref={ref}>
+    <Wrapper className={className}>
       {danhSachPhim?.map((item) => {
         const lstLichChieuTheoPhim = item.lstLichChieuTheoPhim.filter((movie) =>
           movie.ngayChieuGioChieu?.includes(Day)
@@ -56,10 +57,10 @@ function HomeBookingSchedule(props, ref) {
   );
 }
 
-export default forwardRef(HomeBookingSchedule);
+export default HomeBookingSchedule;
 const Wrapper = styled.div`
-  padding: 20px 20px;
-
+  padding: 0 20px;
+  /* Scroll bar setting */
   &:hover {
     overflow-y: auto;
   }
@@ -74,6 +75,7 @@ const Wrapper = styled.div`
     border: 2px solid var(--color-gray-800);
     border-radius: var(--radius);
   }
+  /*  */
   .homeBooking__schedule--item {
     margin-bottom: 5rem;
     position: relative;
@@ -101,6 +103,13 @@ const Wrapper = styled.div`
         ${FlexHCenter()}
         gap: 1rem;
       }
+      .subtitle__imdb {
+        img {
+          width: 2rem;
+          height: 2rem;
+          margin-right: 0.5rem;
+        }
+      }
     }
 
     .item__schedule {
@@ -121,5 +130,8 @@ const Wrapper = styled.div`
         }
       }
     }
+  }
+  @media screen and (min-width: 992px) {
+    padding: 20px 20px;
   }
 `;
