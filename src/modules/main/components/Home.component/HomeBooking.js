@@ -102,7 +102,6 @@ function HomeBooking() {
                       className='homeBooking__schedule--mobile'
                     />
                   </AccordionDetails>
-                  {/* {empty && <p>Chua co phim</p>} */}
                 </Accordion>
               );
               /* eslint-enable */
@@ -167,6 +166,7 @@ const Wrapper = styled.main`
       justify-content: space-between;
       flex-wrap: wrap;
       padding-bottom: 20px;
+      border-bottom: 2px solid var(--color-gray-800);
       img {
         width: 4rem;
         height: auto;
@@ -311,6 +311,7 @@ const Wrapper = styled.main`
       .homeBooking__cineplexLogo {
         display: block;
         height: 42rem;
+        border-bottom: none;
       }
       /* Home booking part 2  */
       .homeBooking__cineplex {

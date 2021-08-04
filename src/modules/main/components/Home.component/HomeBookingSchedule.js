@@ -11,50 +11,54 @@ import imdbLogo from '../../../../assets/img/imdb-logo.png';
 
 const Day = '2019';
 function HomeBookingSchedule(props, ref) {
-  const dispatch = useDispatch();
-
   const { danhSachPhim, className, style, isEmptyHandler } = props;
-  return (
-    <Wrapper className={className}>
-      {danhSachPhim?.map((item) => {
-        const lstLichChieuTheoPhim = item.lstLichChieuTheoPhim.filter((movie) =>
-          movie.ngayChieuGioChieu?.includes(Day)
-        );
-        // console.log('lstLichChieuTheoPhim', lstLichChieuTheoPhim);
-        if (lstLichChieuTheoPhim.length !== 0) {
-          return (
-            <div className="homeBooking__schedule--item">
-              <div className="item__info">
-                <img src={item.hinhAnh} alt="" className="item__info--img" />
-                <div>
-                  <MovieClass />
-                  <p className="nameMovie">{item.tenPhim}</p>
-                  <div className="subNameMovie">
-                    <p>{randomDuration()} phút </p>
-                    <div className="subtitle__imdb">
-                      <img src={imdbLogo} alt="" />
-                      {randomNumber()} ++
-                    </div>
+  const renderSchedule = () =>
+    danhSachPhim?.map((item) => {
+      const lstLichChieuTheoPhim = item.lstLichChieuTheoPhim.filter((movie) =>
+        movie.ngayChieuGioChieu?.includes(Day)
+      );
+      // console.log('lstLichChieuTheoPhim', lstLichChieuTheoPhim);
+      if (lstLichChieuTheoPhim.length !== 0) {
+        return (
+          <div className="homeBooking__schedule--item">
+            <div className="item__info">
+              <img src={item.hinhAnh} alt="" className="item__info--img" />
+              <div>
+                <MovieClass />
+                <p className="nameMovie">{item.tenPhim}</p>
+                <div className="subNameMovie">
+                  <p>{randomDuration()} phút </p>
+                  <div className="subtitle__imdb">
+                    <img src={imdbLogo} alt="" />
+                    {randomNumber()} ++
                   </div>
                 </div>
               </div>
-              <div className="item__schedule">
-                {lstLichChieuTheoPhim.slice(0, 6).map((lichChieu) => (
-                  <Link
-                    className="btn"
-                    to={`/booking/${lichChieu.maLichChieu}`}
-                  >
-                    {format(`hh:mm`, new Date(lichChieu.ngayChieuGioChieu))}
-                  </Link>
-                ))}
-              </div>
             </div>
-          );
-        }
-        return null;
-      })}
-    </Wrapper>
-  );
+            <div className="item__schedule">
+              {lstLichChieuTheoPhim.slice(0, 6).map((lichChieu) => (
+                <Link className="btn" to={`/booking/${lichChieu.maLichChieu}`}>
+                  {format(`hh:mm`, new Date(lichChieu.ngayChieuGioChieu))}
+                </Link>
+              ))}
+            </div>
+          </div>
+        );
+      }
+      return null;
+    });
+  const checkRenderSchedule = () => {
+    if (renderSchedule() !== undefined) {
+      return renderSchedule()[0] === null ? (
+        <p className="item__empty btn2">
+          Không tìm thấy lịch chiếu trong cụm rạp này
+        </p>
+      ) : (
+        renderSchedule()
+      );
+    }
+  };
+  return <Wrapper className={className}>{checkRenderSchedule()}</Wrapper>;
 }
 
 export default HomeBookingSchedule;
@@ -130,6 +134,11 @@ const Wrapper = styled.div`
         }
       }
     }
+  }
+  .item__empty {
+    border: 1px solid var(--color-black);
+    background-color: transparent;
+    color: #fff;
   }
   @media screen and (min-width: 992px) {
     padding: 20px 20px;

@@ -10,11 +10,13 @@ import {
   USER_LOGOUT_ALERT,
   USER_LOGOUT_SUCCESS,
   USER_LOGIN_SUCCESS,
+  IS_SCHEDULE_EMPTY,
 } from '../actions/constantsAction';
 
 const init = {
   isTrailerShow: false,
   trailer: 'https://www.youtube.com/embed/6ZfuNTqbHE8',
+  isScheduleEmpty: false,
   modal: {
     isModalShow: false,
     type: null,
@@ -150,6 +152,15 @@ export const uiReducer = (state = init, action) => {
         message2: action.payload.message2,
         goTo: action.payload.goTo,
       },
+    };
+  }
+  if (action.type === IS_SCHEDULE_EMPTY) {
+    return {
+      ...state,
+      modal: {
+        ...state.modal,
+      },
+      isScheduleEmpty: true,
     };
   }
   return { ...state };
