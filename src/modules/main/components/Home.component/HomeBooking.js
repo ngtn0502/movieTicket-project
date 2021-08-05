@@ -7,9 +7,35 @@ import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import { AnimatePresence, motion } from 'framer-motion';
 import HomeBookingSchedule from './HomeBookingSchedule.js';
 import { FlexCenter, FlexHCenter, FlexVCenter } from '../../../utils/mixin';
 import { getCinema } from '../../../utils/constants';
+
+// variant for MUI
+
+export const loadingCineVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+export const loadingScheduleVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+};
 
 function HomeBooking() {
   const { cineplexList, movieByCineplex } = useSelector(
@@ -19,17 +45,27 @@ function HomeBooking() {
   const [phimTheoCumRap, setPhimTheoCumRap] = useState(
     'bhd-star-cineplex-bitexco'
   );
+  // For animation key purpose (because i design two layout screen so each layout much have one unique key value array)
+  const [cineplex2, setCineplex2] = useState('BHDStar2');
+
+  //
   const [isShowSchedule, setIsShowSchedule] = useState(false);
   const itemCupRapHandler = (data) => {
     setPhimTheoCumRap(data);
     setIsShowSchedule((state) => !state);
+  };
+  //
+  const setCineplexHandler = (item) => {
+    setCineplex(item.maHeThongRap);
+    // For animation of big screen layout purpose
+    setCineplex2(item.maHeThongRap.concat('2'));
   };
   // Create unique cineplex
   const cineplexByBrand = movieByCineplex.filter(
     (item) => item.maHeThongRap === cineplex
   );
   // create lstCumRap
-  // if dont understand - review API
+  // if dont understand - review API (because the structure of API result)
   let lstCumRap;
   if (cineplexByBrand !== undefined) {
     lstCumRap = cineplexByBrand[0]?.lstCumRap;
@@ -41,9 +77,6 @@ function HomeBooking() {
   if (phimTheoCumRapArray !== undefined) {
     danhSachPhim = phimTheoCumRapArray[0]?.danhSachPhim;
   }
-  // console.log(danhSachPhim);
-  // console.log('cineplex', cineplex);
-  // console.log('phimTheoCumRap', phimTheoCumRap);
   // lấy cụm rạp đầu tiên
   useEffect(() => {
     if (lstCumRap !== undefined) {
@@ -57,10 +90,8 @@ function HomeBooking() {
           {cineplexList.map((item) => (
             /* eslint-disable */
             <div
-              onClick={() => {
-                setCineplex(item.maHeThongRap);
-              }}
-              className={`homeBooking__logo ${
+              onClick={setCineplexHandler.bind(null, item)}
+              className={`homeBooking__logo--item ${
                 cineplex === item.maHeThongRap ? 'active' : null
               }`}
             >
@@ -70,7 +101,13 @@ function HomeBooking() {
           ))}
         </div>
         <div className="homeBooking__main">
-          <div className="homeBooking__cineplex mobile">
+          <motion.div
+            variants={loadingCineVariants}
+            initial="hidden"
+            animate="visible"
+            key={cineplex}
+            className="homeBooking__cineplex mobile"
+          >
             {lstCumRap?.map((item) => {
               /* eslint-disable */
               const phimTheoCumRapArray = lstCumRap?.filter(
@@ -106,8 +143,14 @@ function HomeBooking() {
               );
               /* eslint-enable */
             })}
-          </div>
-          <div className="homeBooking__cineplex desktop">
+          </motion.div>
+          <motion.div
+            variants={loadingCineVariants}
+            initial="hidden"
+            animate="visible"
+            key={cineplex2}
+            className="homeBooking__cineplex desktop"
+          >
             {lstCumRap?.map((item) => (
               /* eslint-disable */
               <div
@@ -128,11 +171,16 @@ function HomeBooking() {
 
               /* eslint-enable */
             ))}
-          </div>
-          <HomeBookingSchedule
-            danhSachPhim={danhSachPhim}
+          </motion.div>
+          <motion.div
+            variants={loadingScheduleVariants}
+            initial="hidden"
+            animate="visible"
+            key={phimTheoCumRap}
             className="homeBooking__schedule desktop"
-          />
+          >
+            <HomeBookingSchedule danhSachPhim={danhSachPhim} />
+          </motion.div>
         </div>
       </div>
     </Wrapper>
@@ -171,10 +219,10 @@ const Wrapper = styled.main`
         height: auto;
         border-radius: var(--radius);
       }
-      .homeBooking__logo {
+      .homeBooking__logo--item {
         position: relative;
         padding: 20px;
-        height: 7rem;
+        /* height: 7rem; */
         transition: var(--transition);
         opacity: 0.5;
         cursor: pointer;
@@ -220,10 +268,10 @@ const Wrapper = styled.main`
     }
     /* Cụm rạp part */
     .homeBooking__cineplex {
-      height: 42rem;
       position: relative;
       overflow: hidden;
       transition: var(--transition);
+      overflow-y: auto;
       .homeBooking__schedule--mobile {
         overflow: hidden;
         transition: max-height 0.6s ease;
@@ -238,9 +286,7 @@ const Wrapper = styled.main`
         border-radius: var(--radius);
       }
       /* Scroll Bar */
-      &:hover {
-        overflow-y: auto;
-      }
+
       &::-webkit-scrollbar {
         width: 5px;
         background-color: var(--color-gray-400);
@@ -260,8 +306,8 @@ const Wrapper = styled.main`
         position: relative;
         cursor: pointer;
         padding: 20px;
-        margin: 1rem 0;
-        height: 7rem;
+        /* margin: 1rem 0; */
+        /* height: 7rem; */
         opacity: 0.5;
         .MuiAccordionSummary-content {
           ${FlexHCenter()}
@@ -272,7 +318,7 @@ const Wrapper = styled.main`
           position: absolute;
           /* right: -4rem; */
           right: 0;
-          bottom: 0;
+          bottom: -42rem;
           height: 10000rem;
           /* width: 2rem; */
           transform: rotateX('45deg');
@@ -290,6 +336,7 @@ const Wrapper = styled.main`
       }
     }
   }
+  /* For big screen */
   @media screen and (min-width: 992px) {
     .desktop {
       display: block;
@@ -314,7 +361,14 @@ const Wrapper = styled.main`
       }
       /* Home booking part 2  */
       .homeBooking__cineplex {
-        overflow-y: auto;
+        overflow-y: hidden;
+        height: 42rem;
+
+        /* overflow-y: auto; */
+
+        &:hover {
+          overflow-y: auto;
+        }
         .homeBooking__schedule--mobile {
           display: none;
         }
@@ -323,7 +377,7 @@ const Wrapper = styled.main`
         }
 
         .homeBooking__cineplex--item {
-          margin: 0 0 1rem;
+          /* margin: 0 0 1rem; */
           /* Hover - Active Line */
           img {
             width: 4rem;

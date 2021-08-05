@@ -50,7 +50,17 @@ export const loadingVariants = {
     },
   },
 };
-
+export const loadingVariants2 = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
 /// ////////////////////////////HEADER/////////////////////////////////
 // Nav bar part
 export const navBarLink = [
@@ -62,7 +72,8 @@ export const navBarLink = [
   {
     id: '2',
     title: 'Tin tức',
-    goTo: '/news',
+    path: '#homePage__news',
+    goTo: '/home',
   },
   {
     id: '3',
@@ -72,7 +83,8 @@ export const navBarLink = [
   },
   {
     id: '4',
-    title: 'FAQ',
+    title: 'Đặt vé',
+    path: '#homePage__booking',
     goTo: '/home',
   },
 ];

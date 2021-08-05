@@ -284,6 +284,7 @@ const Wrapper = styled.section`
   padding-bottom: 5rem;
   .booking__info {
     margin: 7rem 0 2rem;
+    width: 250%;
     .booking__info--name {
       display: flex;
       justify-content: center;
@@ -368,6 +369,7 @@ const Wrapper = styled.section`
 
   @media screen and (min-width: 576px) {
     padding-bottom: 0;
+    .booking__info,
     .screen__container {
       width: 160%;
       .screen {
@@ -378,6 +380,7 @@ const Wrapper = styled.section`
     }
   }
   @media screen and (min-width: 768px) {
+    .booking__info,
     .screen__container {
       width: 130%;
       .screen {
@@ -389,6 +392,7 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 992px) {
+    .booking__info,
     .screen__container {
       width: 110%;
       .screen {
@@ -400,6 +404,7 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 1200px) {
+    .booking__info,
     .screen__container {
       width: 100%;
       .screen {

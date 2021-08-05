@@ -2,9 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import format from 'date-format';
 
+import { motion } from 'framer-motion';
 import { getDay } from '../../../utils/helper.js';
 import BookingInfo from './BookingInfo.js';
-import { getCinema, getCinemaLogo } from '../../../utils/constants.js';
+import {
+  getCinema,
+  getCinemaLogo,
+  loadingVariants2,
+} from '../../../utils/constants.js';
+
+// MUI variants
 
 function BookingTable({ movie, cinema }) {
   // movie prop trả về là lịch chiếu phim tương ứng với rạp phim đưỢc click
@@ -35,7 +42,13 @@ function BookingTable({ movie, cinema }) {
           <div>{getCinema(cinema)}</div>
           {/* eslint-enable */}
         </div>
-        <div className="booking__info">
+        <motion.div
+          variants={loadingVariants2}
+          initial="hidden"
+          animate="visible"
+          key={cinema}
+          className="booking__info"
+        >
           <BookingInfo
             ngayChieuAllUnique={ngayChieuAllUnique}
             dateChieu={dateChieu}
@@ -44,7 +57,7 @@ function BookingTable({ movie, cinema }) {
             cinema={cinema}
             getCinemaLogo={getCinemaLogo}
           />
-        </div>
+        </motion.div>
       </div>
     </Wrapper>
   );

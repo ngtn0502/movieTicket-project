@@ -1,4 +1,7 @@
 import {
+  GET_NEWS_ERROR,
+  GET_NEWS_LOADING,
+  GET_NEWS_SUCCESS,
   GET_MOVIE_BY_CINEPLEX_ERROR,
   GET_MOVIE_BY_CINEPLEX_LOADING,
   GET_MOVIE_BY_CINEPLEX_SUCCESS,
@@ -19,6 +22,7 @@ const init = {
   // PART THREE
   cineplexList: [],
   movieByCineplex: [],
+  newsDatas: [],
 };
 
 // Handle get danh sách phim - SECTION ONE AND TWO
@@ -83,6 +87,27 @@ export const homeReducer = (state = init, action) => {
     };
   }
   if (action.type === GET_MOVIE_BY_CINEPLEX_ERROR) {
+    return {
+      ...state,
+      isError: true,
+    };
+  }
+  // Handle get news data - SECTION FOUR
+  if (action.type === GET_NEWS_LOADING) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === GET_NEWS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      isError: false,
+      newsDatas: [...action.payload],
+    };
+  }
+  if (action.type === GET_NEWS_ERROR) {
     return {
       ...state,
       isError: true,

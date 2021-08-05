@@ -12,6 +12,23 @@ import { getDay } from '../../../utils/helper.js';
 import { useHistory } from 'react-router';
 import { FlexHCenter } from './../../../utils/mixin';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+
+
+export const loadingVariants2 = {
+  hidden: {
+    opacity: 0,
+    x: 500,
+  },
+  visible: {
+    opacity: 1,
+    x:0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -153,7 +170,12 @@ export default function BookingInfo({
                   const string = item.lichChieu[0].thongTinRap.tenCumRap;
                   const indexDivide = string.indexOf('-');
                   return (
-                    <div key={index}>
+                    <motion.div
+                      variants={loadingVariants2}
+                      initial='hidden'
+                      animate='visible'
+                      key={index}
+                    >
                       <p>
                         {getCinemaLogo(cinema)}
                         <span className='bookingInfo__cinemaName'>
@@ -179,7 +201,7 @@ export default function BookingInfo({
                           );
                         })}
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               {lichChieuDuyNhat(dateChieu).length === 0 && (
@@ -252,9 +274,8 @@ const Wrapper = styled.section`
       padding: 0.75rem 1rem;
       font-size: 1rem;
       letter-spacing: 0.25rem;
-      &:hover{
-        background-color: var(--color-seat)
-
+      &:hover {
+        background-color: var(--color-seat);
       }
     }
   }

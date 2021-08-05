@@ -3,35 +3,67 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaPlay } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
+import { HashLink } from 'react-router-hash-link';
 import MovieClass from './MovieClass';
 import { FlexHCenter } from '../../../utils/mixin';
 import { randomDuration } from '../../../utils/helper';
 // import playVideo from '../../../assets/img/play-video.png';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
 
+export const loadingVariants2 = {
+  hidden: {
+    opacity: 0,
+    x: 200,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 function MovieCard({ movie }) {
   const dispatch = useDispatch();
   return (
     <Wrapper>
-      <div className="movieCard__img">
-        <FaPlay
-          className="playVideo"
-          onClick={() => {
-            dispatch({ type: SHOW_MODAL, payload: movie.trailer });
-          }}
-        />
-        <Link to={`/movie-details/${movie.maPhim}`}>
-          <div className="overlay" />
-          <img src={movie.hinhAnh} alt="movie" />
-        </Link>
-      </div>
-      <h5 className="nameMovie">
-        <Link to={`/movie-details/${movie.maPhim}`}>
-          <MovieClass checkClass={movie.tenPhim?.length % 2 === 0} />
-          {movie.tenPhim}
-        </Link>
-      </h5>
-      <p className="subNameMovie">{randomDuration()} phút</p>
+      {' '}
+      <motion.div
+        variants={loadingVariants2}
+        initial="hidden"
+        animate="visible"
+        key={movie.maPhim}
+      >
+        <div className="movieCard__img">
+          <FaPlay
+            className="playVideo"
+            onClick={() => {
+              dispatch({ type: SHOW_MODAL, payload: movie.trailer });
+            }}
+          />
+          <div className="movieCard__booking">
+            <HashLink
+              to={`/movie-details/${movie.maPhim}#movieDetail__booking`}
+              type="button"
+              className="btn__watching"
+            >
+              Đặt vé
+            </HashLink>
+          </div>
+          <Link to={`/movie-details/${movie.maPhim}`}>
+            <div className="overlay" />
+            <img src={movie.hinhAnh} alt="movie" />
+          </Link>
+        </div>
+        <h5 className="nameMovie">
+          <Link to={`/movie-details/${movie.maPhim}`}>
+            <MovieClass checkClass={movie.tenPhim?.length % 2 === 0} />
+            {movie.tenPhim}
+          </Link>
+        </h5>
+        <p className="subNameMovie">{randomDuration()} phút</p>{' '}
+      </motion.div>
     </Wrapper>
   );
 }
@@ -67,8 +99,24 @@ const Wrapper = styled.div`
         fill: var(--color-gray-600);
       }
     }
+    .movieCard__booking {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      opacity: 0;
+      z-index: 2;
+      transition: var(--transition);
+      .btn__watching {
+        margin: 0;
+        padding: 0.5rem 1rem;
+      }
+    }
     img {
       cursor: pointer;
+    }
+    &:hover .movieCard__booking {
+      opacity: 1;
     }
     &:hover .overlay {
       opacity: 1;

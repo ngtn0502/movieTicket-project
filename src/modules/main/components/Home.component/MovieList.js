@@ -13,7 +13,7 @@ import 'swiper/components/navigation/navigation.min.css';
 import SwiperCore, { Autoplay, Navigation } from 'swiper/core';
 import { motion } from 'framer-motion';
 import MovieCard from './MovieCard';
-import { loadingVariants } from '../../../utils/constants.js';
+import { loadingVariants, loadingVariants2 } from '../../../utils/constants.js';
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -92,6 +92,7 @@ export default function Carousel({ movieList }) {
               </SwiperSlide>
             </>
           )}
+
           {!typeMovie && (
             <>
               <SwiperSlide className="movie__list">

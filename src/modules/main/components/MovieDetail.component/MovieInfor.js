@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FaPlay, FaFacebookSquare } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
+import { HashLink } from 'react-router-hash-link';
 import {
   converDate,
   randomDuration,
@@ -49,9 +50,12 @@ function MovieInfor({ movieDetail, movie }) {
             </div>
             {/*  */}
             <div className="movieInfor__sharing">
-              <div className="movieInfor__sharing--btn">
+              <HashLink
+                to={`/movie-details/${movie.maPhim}#movieDetail__booking`}
+                className="movieInfor__sharing--btn"
+              >
                 <ButtonMovie className="btn__save">+ Đặt vé</ButtonMovie>
-              </div>
+              </HashLink>
               <div className="movieInfor__sharing--btn ">
                 <ButtonMovie>
                   <FaFacebookSquare />

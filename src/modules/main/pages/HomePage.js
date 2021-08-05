@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,8 @@ import { loadingVariants } from '../../utils/constants.js';
 import HomeBooking from '../components/Home.component/HomeBooking';
 import { getCineplexLogoAction } from '../../redux/actions/HomeAction/getCineplexLogoAction.js';
 import { getMovieByCineplex } from '../../redux/actions/HomeAction/getMovieByCineplex.js';
+import HomeNews from '../components/Home.component/HomeNew.component/HomeNews.js';
+import { getNewsAction } from '../../redux/actions/HomeAction/getNewsAction.js';
 
 function HomePage() {
   const history = useHistory();
@@ -42,7 +44,10 @@ function HomePage() {
     dispatch(getMovieListAction());
     // Dispatch action creator thunk to get cineplex logo
     dispatch(getCineplexLogoAction());
+    // Dispatch action creator thunk to get movie by cineplex
     dispatch(getMovieByCineplex());
+    // Dispatch action creator thunk to get News data
+    dispatch(getNewsAction());
   }, [dispatch]);
   // Get List Cinema
   return (
@@ -93,7 +98,10 @@ function HomePage() {
             {/* <Carousel movieList={movieList} className="home__carousel" /> */}
             <SearchBar className="home__searchbar" />
             <MovieList movieList={movieList} className="home__movieList" />
+            <div id="homePage__booking" />
             <HomeBooking />
+            <div id="homePage__news" />
+            <HomeNews />
           </div>
         )}
       </Wrapper>
@@ -111,7 +119,7 @@ const Backdrop = styled.div`
   z-index: 110;
 `;
 
-const Wrapper = styled.main`
+const Wrapper = styled.section`
   .home__searchbar {
     display: none;
     margin-top: 0rem;

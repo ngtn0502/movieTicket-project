@@ -4,16 +4,18 @@ import styled from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction.js';
 import {
   carouselBackground,
   loadingVariants,
 } from '../../../utils/constants.js';
+import { carouselData } from '../../../utils/carouselData.js';
 
 function CarouselCoverflow({ movieList, className }) {
   const dispatch = useDispatch();
   const silde = [
-    movieList.slice(4, 20).map((movie) => (
+    carouselData.slice(0).map((movie) => (
       <div className="carousel__slider">
         <FaPlay
           className="playVideo"
@@ -21,7 +23,16 @@ function CarouselCoverflow({ movieList, className }) {
             dispatch({ type: SHOW_MODAL, payload: movie.trailer });
           }}
         />
+        <div className="carousel__button">
+          <Link to={`/movie-details/${movie.maPhim}`}>
+            <button type="button" className="booking__button">
+              Available now
+            </button>
+          </Link>
+        </div>
+        {/* <Link to={`/movie-details/${movie.maPhim}`}> */}
         <img src={movie.hinhAnh} alt="5" className="slider" />
+        {/* </Link> */}
       </div>
     )),
   ];
@@ -32,7 +43,7 @@ function CarouselCoverflow({ movieList, className }) {
       animate="visible"
     >
       <BigWrapper className={className}>
-        <div className="overlay" />
+        {/* <div className="overlay" /> */}
         <Wrapper
           style={{ backgroundImage: `url(${carouselBackground})` }}
           className="coverflow"
@@ -79,6 +90,9 @@ const Wrapper = styled.div`
     &:hover .playVideo {
       opacity: 1;
     }
+    &:hover .carousel__button {
+      opacity: 1;
+    }
     .playVideo {
       position: absolute;
       top: 40%;
@@ -94,6 +108,26 @@ const Wrapper = styled.div`
       &:hover {
         color: var(--color-gray-700);
       }
+    }
+    .movieCard__booking {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      opacity: 0;
+      z-index: 2;
+      transition: var(--transition);
+      .btn__watching {
+        margin: 0;
+        padding: 0.5rem 1rem;
+      }
+    }
+    .carousel__button {
+      position: absolute;
+      opacity: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 

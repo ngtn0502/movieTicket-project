@@ -62,12 +62,12 @@ function HomeBookingSchedule(props, ref) {
 }
 
 export default HomeBookingSchedule;
+
 const Wrapper = styled.div`
   padding: 0 20px;
   /* Scroll bar setting */
-  &:hover {
-    overflow-y: auto;
-  }
+  height: 100%;
+
   &::-webkit-scrollbar {
     width: 5px;
     background-color: var(--color-gray-400);
@@ -142,5 +142,10 @@ const Wrapper = styled.div`
   }
   @media screen and (min-width: 992px) {
     padding: 20px 20px;
+    height: 42rem;
+    overflow-y: hidden;
+    &:hover {
+      overflow-y: auto;
+    }
   }
 `;
