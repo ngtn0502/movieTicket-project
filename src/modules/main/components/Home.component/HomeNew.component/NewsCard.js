@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AiOutlineLike } from 'react-icons/ai';
 import { VscComment } from 'react-icons/vsc';
 import { AnimatePresence, motion } from 'framer-motion';
-import { loadingVariants2 } from '../../../../utils/constants.js';
+import { exitVariants, loadingVariants2 } from '../../../../utils/constants.js';
 
 function NewsCard({ newsData }) {
   return (
@@ -14,7 +14,7 @@ function NewsCard({ newsData }) {
           initial="hidden"
           animate="visible"
           key={newsData?.id}
-          exit={{ opacity: 0, transition: { duration: 0.6 } }}
+          exit={exitVariants}
         >
           <a href={newsData?.link} target="_blank" rel="noreferrer">
             <div className="card__img">

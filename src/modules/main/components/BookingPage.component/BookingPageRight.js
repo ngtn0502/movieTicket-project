@@ -171,10 +171,10 @@ function BookingPageRight({
             </div>
           </div>
         </div>
-        <div className="booking__button">
+        <div className="bookingLeft__button">
           <button
             type="button"
-            className="btn__watching btn-paying"
+            className="booking__button"
             onClick={bookingHandler}
           >
             Đặt vé
@@ -323,12 +323,13 @@ const Wrapper = styled.main`
     background-color: rgb(74, 144, 226);
   }
   /* Button paying */
-  .booking__button {
+  .bookingLeft__button {
     position: absolute;
     ${FlexVCenter()}
     width: 100%;
     bottom: 5rem;
-    .btn__watching {
+    .booking__button {
+      ${FlexCenter()}
       width: 90%;
       padding: 1.5rem 0;
     }

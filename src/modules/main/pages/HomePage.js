@@ -18,6 +18,7 @@ import { getCineplexLogoAction } from '../../redux/actions/HomeAction/getCineple
 import { getMovieByCineplex } from '../../redux/actions/HomeAction/getMovieByCineplex.js';
 import HomeNews from '../components/Home.component/HomeNew.component/HomeNews.js';
 import { getNewsAction } from '../../redux/actions/HomeAction/getNewsAction.js';
+import SearchBar2 from '../components/Home.component/HomeSearch.component/SearchBar2.js';
 
 function HomePage() {
   const history = useHistory();
@@ -95,8 +96,10 @@ function HomePage() {
               movieList={movieList}
               className="carousel__overflow"
             />
+            <div id="homePage__search" />
+
             {/* <Carousel movieList={movieList} className="home__carousel" /> */}
-            <SearchBar className="home__searchbar" />
+            <SearchBar2 className="home__searchbar" />
             <MovieList movieList={movieList} className="home__movieList" />
             <div id="homePage__booking" />
             <HomeBooking />
@@ -121,12 +124,11 @@ const Backdrop = styled.div`
 
 const Wrapper = styled.section`
   .home__searchbar {
-    display: none;
-    margin-top: 0rem;
+    /* display: none;
+    margin-top: 0rem; */
   }
   @media screen and (min-width: 1000px) {
     .home__searchbar {
-      display: flex;
     }
   }
 `;

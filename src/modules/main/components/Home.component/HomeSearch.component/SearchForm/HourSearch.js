@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import styled from 'styled-components';
-import { movieCategory, movieDate } from '../../../utils/constants';
+import { movieCategory, movieHour } from '../../../../../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -28,15 +28,17 @@ export default function SimpleSelect() {
   return (
     <Wrapper>
       <FormControl variant="" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Ngày Xem</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">
+          Xuất Chiếu
+        </InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={age}
           onChange={handleChange}
-          label="Ngay Xem"
+          label="Xuat Chieu"
         >
-          {movieDate.map((item) => (
+          {movieHour.map((item) => (
             <MenuItem value={item.value}>{item.title}</MenuItem>
           ))}
         </Select>
@@ -44,6 +46,7 @@ export default function SimpleSelect() {
     </Wrapper>
   );
 }
+
 const Wrapper = styled.div`
   #demo-simple-select-outlined-label {
     color: black;

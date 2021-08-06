@@ -39,6 +39,10 @@ export const carouselBackground = bgPopcorn;
 // } from '../../../utils/constants.js';
 // Variants animate loading route
 
+// For filtering list movie
+
+export const toDay = new Date();
+
 export const loadingVariants = {
   hidden: {
     opacity: 0,
@@ -60,6 +64,23 @@ export const loadingVariants2 = {
       duration: 0.8,
     },
   },
+};
+export const loadingVariants3 = {
+  hidden: {
+    opacity: 0,
+    // x: 200,
+  },
+  visible: {
+    opacity: 1,
+    // x: 0,
+    transition: { duration: 1 },
+  },
+};
+
+export const exitVariants = {
+  opacity: 0,
+  x: -200,
+  transition: { duration: 0.5 },
 };
 /// ////////////////////////////HEADER/////////////////////////////////
 // Nav bar part
@@ -91,7 +112,32 @@ export const navBarLink = [
 
 /// ////////////////////////////HOME PAGE/////////////////////////////////
 // Search part
-
+export const cityList = [
+  {
+    maCity: '1',
+    tenCity: 'Thành phố Hồ Chí Minh',
+  },
+  {
+    maCity: '2',
+    tenCity: 'Hà Nội',
+  },
+  {
+    maCity: '3',
+    tenCity: 'Cần Thơ',
+  },
+  {
+    maCity: '4',
+    tenCity: 'Đà Nẵng',
+  },
+  {
+    maCity: '5',
+    tenCity: 'Vũng Tàu',
+  },
+  {
+    maCity: '6',
+    tenCity: 'Đà Lạt',
+  },
+];
 export const movieCategory = [
   {
     id: '1',

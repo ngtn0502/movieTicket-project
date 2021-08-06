@@ -37,18 +37,18 @@ function BookingTable({ movie, cinema }) {
   return (
     <Wrapper>
       {/* eslint-disable */}
-      <div className='booking__table'>
+      <motion.div
+        variants={loadingVariants2}
+        initial='hidden'
+        animate='visible'
+        key={cinema}
+        className='booking__table'
+      >
         <div className='booking__table--map'>
           <div>{getCinema(cinema)}</div>
           {/* eslint-enable */}
         </div>
-        <motion.div
-          variants={loadingVariants2}
-          initial="hidden"
-          animate="visible"
-          key={cinema}
-          className="booking__info"
-        >
+        <div className="booking__info">
           <BookingInfo
             ngayChieuAllUnique={ngayChieuAllUnique}
             dateChieu={dateChieu}
@@ -57,8 +57,8 @@ function BookingTable({ movie, cinema }) {
             cinema={cinema}
             getCinemaLogo={getCinemaLogo}
           />
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </Wrapper>
   );
 }

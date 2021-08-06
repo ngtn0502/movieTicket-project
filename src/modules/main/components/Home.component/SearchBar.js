@@ -9,10 +9,10 @@ import {
   loadingVariants,
 } from '../../../utils/constants';
 import { FlexCenter, Flex } from '../../../utils/mixin.js';
-import MovieSearch from '../SearchForm/MovieSearch';
-import CinemaSearch from '../SearchForm/CinemaSearch';
-import DateSearch from '../SearchForm/DateSearch';
-import HourSearch from '../SearchForm/HourSearch';
+import MovieSearch from './HomeSearch.component/SearchForm/MovieSearch';
+import CinemaSearch from './HomeSearch.component/SearchForm/CinemaSearch';
+import DateSearch from './HomeSearch.component/SearchForm/DateSearch';
+import HourSearch from './HomeSearch.component/SearchForm/HourSearch';
 
 function SearchBar({ className }) {
   return (

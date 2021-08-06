@@ -80,8 +80,8 @@ function MovieDetailsPage() {
             {isModalShow && (
               <div>
                 {/* eslint-disable */}
-            <div className='backdrop' onClick={closeModalHandler} />
-            {/* eslint-enable */}
+                <div className='backdrop' onClick={closeModalHandler} />
+                {/* eslint-enable */}
 
                 <AlertModal
                   message={message}
@@ -103,6 +103,7 @@ function MovieDetailsPage() {
             </div>
           )}
         </div>
+        <div id="movieDetail__table" />
       </Wrapper>
     </motion.section>
   );

@@ -26,7 +26,7 @@ function CarouselCoverflow({ movieList, className }) {
         <div className="carousel__button">
           <Link to={`/movie-details/${movie.maPhim}`}>
             <button type="button" className="booking__button">
-              Available now
+              ĐẶT VÉ
             </button>
           </Link>
         </div>
@@ -43,7 +43,7 @@ function CarouselCoverflow({ movieList, className }) {
       animate="visible"
     >
       <BigWrapper className={className}>
-        {/* <div className="overlay" /> */}
+        <div className="overlay" />
         <Wrapper
           style={{ backgroundImage: `url(${carouselBackground})` }}
           className="coverflow"
@@ -125,9 +125,9 @@ const Wrapper = styled.div`
     .carousel__button {
       position: absolute;
       opacity: 0;
-      top: 50%;
+      bottom: 0;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
     }
   }
 

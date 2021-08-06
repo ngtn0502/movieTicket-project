@@ -23,7 +23,7 @@ function MovieDetailBooking({ movie }) {
   return (
     <Wrapper>
       {/* eslint-disable */}
-      <main className='section-middle' id='movieDetail__booking'>
+      <main className='section-middle'>
         <div className='booking'>
           <h5 className='booking__title'>CHỌN RẠP CHIẾU</h5>
           <div className='booking__cinema'>

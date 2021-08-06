@@ -50,10 +50,7 @@ function MovieInfor({ movieDetail, movie }) {
             </div>
             {/*  */}
             <div className="movieInfor__sharing">
-              <HashLink
-                to={`/movie-details/${movie.maPhim}#movieDetail__booking`}
-                className="movieInfor__sharing--btn"
-              >
+              <HashLink className="movieInfor__sharing--btn btn__save">
                 <ButtonMovie className="btn__save">+ Đặt vé</ButtonMovie>
               </HashLink>
               <div className="movieInfor__sharing--btn ">

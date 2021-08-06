@@ -87,6 +87,7 @@ Variables
   --transition: all 0.3s linear;
   --spacing: 0.075rem;
   --radius: 0.25rem;
+  --radius2: 0.5rem;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --max-width: 1170px;
@@ -383,7 +384,7 @@ svg {
 }
 
 .btn-paying {
-  background-color: #44c020;
+  /* background-color: #44c020; */
   width: 100%;
 }
 .btn-paying:hover {
@@ -404,12 +405,16 @@ svg {
 
 /* Carousel button */
 
+.booking__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .booking__button,
 .booking__button::after {
   width: 200px;
-  height: 60px;
-  font-size: 26px;
-  font-family: Merriweather, serif;
+  height: 50px;
+  font-size: 1.5rem;
   background: linear-gradient(45deg, transparent 5%, #ff013c 5%);
   border: 0;
   color: #fff;
@@ -429,7 +434,7 @@ svg {
   --slice-4: inset(40% -6px 43% 0);
   --slice-5: inset(80% -6px 5% 0);
 
-  content: 'AVAILABLE NOW';
+  content: 'ĐẶT VÉ';
   display: block;
   position: absolute;
   top: 0;

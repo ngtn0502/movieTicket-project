@@ -1,9 +1,21 @@
 export const carouselData = [
   {
+    maPhim: 6551,
+    tenPhim: 'Saw',
+    biDanh: 'saw',
+    trailer: 'https://www.youtube.com/embed/4nx5Ao4fS9k',
+    hinhAnh: 'http://movie0706.cybersoft.edu.vn/hinhanh/saw_gp03.jpeg',
+    moTa:
+      "Working in the shadow of his father, an esteemed police veteran (Samuel L. Jackson), brash Detective Ezekiel Zeke Banks (Chris Rock) and his rookie partner (Max Minghella) take charge of a grisly investigation into murders that are eerily reminiscent of the city's gruesome past. Unwittingly entrapped in a deepening mystery, Zeke finds himself at the center of the killer's morbid game.",
+    maNhom: 'GP03',
+    ngayKhoiChieu: '2021-12-20T00:00:00',
+    danhGia: 10,
+  },
+  {
     maPhim: 1350,
     tenPhim: 'Lừa đểu gặp lừa đảo',
     biDanh: 'lua-deu-gap-lua-dao',
-    trailer: 'https://youtu.be/T36HGZagV5w',
+    trailer: 'https://www.youtube.com/embed/T36HGZagV5w',
     hinhAnh:
       'http://movie0706.cybersoft.edu.vn/hinhanh/lua-deu-gap-lua-dao_gp07.jpeg',
     moTa:
@@ -49,18 +61,6 @@ export const carouselData = [
     maNhom: 'GP03',
     ngayKhoiChieu: '2019-07-29T00:00:00',
     danhGia: 5,
-  },
-  {
-    maPhim: 6551,
-    tenPhim: 'Saw',
-    biDanh: 'saw',
-    trailer: 'https://www.youtube.com/watch?v=4nx5Ao4fS9k',
-    hinhAnh: 'http://movie0706.cybersoft.edu.vn/hinhanh/saw_gp03.jpeg',
-    moTa:
-      "Working in the shadow of his father, an esteemed police veteran (Samuel L. Jackson), brash Detective Ezekiel Zeke Banks (Chris Rock) and his rookie partner (Max Minghella) take charge of a grisly investigation into murders that are eerily reminiscent of the city's gruesome past. Unwittingly entrapped in a deepening mystery, Zeke finds himself at the center of the killer's morbid game.",
-    maNhom: 'GP03',
-    ngayKhoiChieu: '2021-12-20T00:00:00',
-    danhGia: 10,
   },
 
   {

@@ -47,7 +47,7 @@ function HomeBooking() {
   );
   // For animation key purpose (because i design two layout screen so each layout much have one unique key value array)
   const [cineplex2, setCineplex2] = useState('BHDStar2');
-
+  console.log('movieByCineplex', movieByCineplex);
   //
   const [isShowSchedule, setIsShowSchedule] = useState(false);
   const itemCupRapHandler = (data) => {
@@ -66,6 +66,7 @@ function HomeBooking() {
   );
   // create lstCumRap
   // if dont understand - review API (because the structure of API result)
+  console.log('cineplexByBrand', cineplexByBrand);
   let lstCumRap;
   if (cineplexByBrand !== undefined) {
     lstCumRap = cineplexByBrand[0]?.lstCumRap;
