@@ -79,6 +79,7 @@ const BigWrapper = styled.main`
 `;
 const Wrapper = styled.div`
   background-attachment: fixed;
+  height: 44rem;
   .App {
     position: relative;
     z-index: 20;
@@ -159,7 +160,13 @@ const Wrapper = styled.div`
     width: 500px;
     height: 450px;
   }
+  .react-3d-carousel .slider-container .slider-left div,
+  .react-3d-carousel .slider-container .slider-right div {
+    padding: 1rem;
+    border: none;
+  }
   @media screen and (min-width: 700px) {
+    height: 65rem;
     .App {
       padding-bottom: 5rem;
     }

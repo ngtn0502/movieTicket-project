@@ -93,9 +93,11 @@ export const loadingVariants4 = {
     },
   },
 };
+
 export const exitVariants = {
   opacity: 0,
   x: -200,
+  y: 0,
   transition: { duration: 0.5 },
 };
 /// ////////////////////////////HEADER/////////////////////////////////
@@ -103,24 +105,24 @@ export const exitVariants = {
 export const navBarLink = [
   {
     id: '1',
-    title: 'Trang chủ',
+    title: 'HOME',
     goTo: '/home',
   },
   {
     id: '2',
-    title: 'Tin tức',
+    title: 'NEWS',
     path: '#homePage__news',
     goTo: '/home',
   },
   {
     id: '3',
-    title: 'Phim hay',
+    title: 'MOVIES',
     path: '#homePage__movieList',
     goTo: '/home',
   },
   {
     id: '4',
-    title: 'Đặt vé',
+    title: 'BOOKING',
     path: '#homePage__booking',
     goTo: '/home',
   },

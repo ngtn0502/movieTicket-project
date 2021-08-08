@@ -7,12 +7,13 @@ import logo from '../../../../assets/img/logo-full.png';
 import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
 import NavLink from './NavLink.js';
 import {
+  CLOSE_MODAL,
   USER_LOGOUT,
   USER_LOGOUT_ALERT,
 } from '../../../redux/actions/constantsAction.js';
 
 function Navbar() {
-  const [isSideBarShow, setisSideBarShow] = useState(false);
+  const [isSideBarShow, setIsSideBarShow] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const { isLoginSuccess, loginData } = useSelector(
@@ -41,6 +42,7 @@ function Navbar() {
   //
   // log out
   const logoutHandler = () => {
+    dispatch({ type: CLOSE_MODAL });
     dispatch({
       type: USER_LOGOUT_ALERT,
       payload: {
@@ -60,7 +62,10 @@ function Navbar() {
             </Link>
           </div>
           <div className="nav_links">
-            <NavLink />
+            <NavLink
+              logoutHandler={logoutHandler}
+              setIsSideBarShow={setIsSideBarShow}
+            />
           </div>
           <div className="nav_login">
             <FiUser />
@@ -80,21 +85,36 @@ function Navbar() {
               </Link>
             )}
           </div>
-          <button
-            type="button"
-            className="toggle"
-            onClick={() => setisSideBarShow((prev) => !prev)}
-          >
-            <FiMenu />
-          </button>
+          {/* eslint-disable */}
         </div>
       </div>
+      <div className='sideBar__toggle'>
+        <div
+          class='menuToggle'
+          onClick={() => setIsSideBarShow((prev) => !prev)}
+        >
+          {/* eslint-enable */}
+          <input type="checkbox" />
+          <span className={`${isSideBarShow ? 'menuToggle__span' : null}`} />
+          <span
+            className={`${
+              isSideBarShow ? 'menuToggle__span menuToggle__span2' : null
+            }`}
+          />
+          <span
+            className={`${
+              isSideBarShow ? 'menuToggle__span menuToggle__span3' : null
+            }`}
+          />
+        </div>
+      </div>
+      {/* For Mobile */}
       <div>
         {/* eslint-disable */}
         {isSideBarShow && (
           <div
             className='backdrop'
-            onClick={() => setisSideBarShow((prev) => !prev)}
+            onClick={() => setIsSideBarShow((prev) => !prev)}
           />
         )}
         <div className={`sideBar ${isSideBarShow ? 'sideBar__show' : null}`}>
@@ -106,13 +126,22 @@ function Navbar() {
                   {loginData?.hoTen || userLogin.hoTen}
                 </Link>
               ) : (
-                <Link to='/sign-in' className='nav_login--title'>
+                <Link
+                  to='/sign-in'
+                  className='nav_login--title'
+                  onClick={() => {
+                    setIsSideBarShow(false);
+                  }}
+                >
                   Đăng nhập
                 </Link>
               )}
             </div>
             {/*  */}
-            <NavLink />
+            <NavLink
+              logoutHandler={logoutHandler}
+              setIsSideBarShow={setIsSideBarShow}
+            />
           </div>
         </div>
       </div>
@@ -123,12 +152,14 @@ function Navbar() {
 export default Navbar;
 
 const Wrapper = styled.nav`
+  font-weight: 700;
+  font-size: 1.25rem;
   .nav__bar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 4rem;
+    height: 5rem;
     z-index: 1000;
     background-color: rgba(300, 300, 300, 0.1);
     transition: var(--transition);
@@ -153,7 +184,74 @@ const Wrapper = styled.nav`
       }
       margin: 0 1rem;
     }
+    /* Button toogle */
   }
+  .sideBar__toggle {
+    position: fixed;
+    right: 1rem;
+    top: 2rem;
+    z-index: 3500;
+  }
+  .menuToggle {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .menuToggle input {
+    display: flex;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 3500;
+  }
+
+  .menuToggle span {
+    display: flex;
+    width: 29px;
+    height: 3px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #ffffff;
+    border-radius: 3px;
+    z-index: 3500;
+    transform-origin: 5px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+  }
+  .menuToggle {
+    cursor: pointer;
+    .menuToggle span:first-child {
+      transform-origin: 0% 0%;
+    }
+
+    .menuToggle span:nth-last-child(2) {
+      transform-origin: 0% 100%;
+    }
+    .menuToggle__input {
+      background: rgba(0, 0, 0) !important;
+    }
+    .menuToggle__span {
+      opacity: 1;
+      transform: rotate(45deg) translate(-3px, -1px);
+      background: rgba(0, 0, 0);
+      transform-origin: 7px 2px;
+    }
+    .menuToggle__span3 {
+      opacity: 0;
+      transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    .menuToggle__span2 {
+      transform: rotate(-45deg) translate(0, -1px);
+    }
+  }
+  /*  */
   .nav__scrollDown {
     background-color: rgba(0, 0, 0, 0.8);
   }
@@ -165,19 +263,23 @@ const Wrapper = styled.nav`
     position: fixed;
     right: 0;
     top: 0;
-    width: 60vw;
+    width: 15rem;
     background-color: var(--color-white);
     height: 100vh;
-    transition: var(--transition);
-    transform: translateX(60vw);
-    z-index: 1000;
+    border-radius: var(--radius);
+    z-index: 3100;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+    transform: translate(1100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     .sideBar__links {
+      padding: 3rem 0;
       li {
         margin: 1rem;
       }
     }
     .nav_login {
-      margin: 2rem;
+      margin: 1.5rem;
       gap: var(--gap);
       color: var(--color-gray-700);
       ${FlexCenter()};
@@ -188,11 +290,15 @@ const Wrapper = styled.nav`
       }
     }
   }
-
+  /*  */
   .sideBar__show {
-    transform: translate(0);
+    transform: none;
   }
-  @media (min-width: 800px) {
+  @media (min-width: 768px) {
+    .sideBar__toggle {
+      display: none;
+    }
+
     .nav__bar {
       position: fixed;
       top: 0;

@@ -65,7 +65,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(85%, 50%);
+  transform: translate(84%, 50%);
   z-index: 3000;
   .modal {
     position: relative;
@@ -100,7 +100,7 @@ const Wrapper = styled.div`
   @media screen and (min-width: 800px) {
     top: 55%;
     left: 50%;
-    transform: translateX(0);
+    transform: translateX(4.4%);
     iframe {
       width: 740px;
       height: 490px;

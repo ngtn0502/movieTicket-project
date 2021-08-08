@@ -56,6 +56,8 @@ function AlertModal({
     }
   };
   const acceptModalHandler = () => {
+    dispatch({ type: RESET__AMOUNT });
+
     dispatch({
       type: USER_BOOKING_SUCCESS,
       payload: {
@@ -236,8 +238,8 @@ const Wrapper = styled.div`
   z-index: 3000;
   .modal {
     position: fixed;
-    top: 20%;
-    left: 15%;
+    top: 26.8%;
+    left: 16.7%;
     /* transform: translate(-50%, -50%); */
     z-index: 3000;
     width: 20rem;
@@ -568,8 +570,9 @@ const Wrapper = styled.div`
     .modal {
       width: 35rem;
       height: 25rem;
-      top: 25%;
-      left: 35%;
+      top: 26.9%;
+      left: 34%;
+      /* transform: translate(-50%, -50%); */
       .alert {
         p {
           font-size: 1.5rem;

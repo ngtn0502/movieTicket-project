@@ -36,6 +36,9 @@ function HomePage() {
       history.push(goTo);
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // movieList
   const { movieList, isLoading } = useSelector((state) => state.homeReducer);
   // cinema List

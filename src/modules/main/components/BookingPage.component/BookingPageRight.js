@@ -38,9 +38,6 @@ function BookingPageRight({
   const dispatch = useDispatch();
   const history = useHistory();
   // Handle reset total amount
-  useEffect(() => {
-    dispatch({ type: RESET__AMOUNT });
-  }, []);
 
   // Handle booking
   const bookingHandler = () => {
@@ -129,6 +126,7 @@ function BookingPageRight({
                     name="payMethod"
                     id="ATM"
                     defaultValue="ATM"
+                    defaultChecked
                   />
                   <label className="radio__item--label" htmlFor="ATM">
                     <div className="pay__figure">
@@ -339,7 +337,7 @@ const Wrapper = styled.main`
 
   /*  */
   @media screen and (min-width: 1000px) {
-    width: 15rem;
+    width: 20rem;
     top: 4rem;
     .booking__right {
       height: 85vh;
@@ -347,8 +345,5 @@ const Wrapper = styled.main`
     .booking__back {
       display: none;
     }
-  }
-  @media screen and (min-width: 1200px) {
-    width: 20rem;
   }
 `;

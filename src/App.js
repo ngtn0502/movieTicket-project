@@ -35,9 +35,13 @@ function App() {
       <Switch>
         {/* Special Route */}
         <Route path="/sign-in" exact>
+          {' '}
+          <Navbar />
           <SignInPage />
         </Route>
         <Route path="/sign-up" exact>
+          {' '}
+          <Navbar />
           <SingUpPage />
         </Route>
         <Route path="/" exact>

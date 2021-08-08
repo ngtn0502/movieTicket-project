@@ -80,7 +80,7 @@ export default function Carousel({ movieLists }) {
           //   disableOnInteraction: false,
           // }}
           navigation
-          className="mySwiper "
+          className="mySwiper"
         >
           {typeMovie && (
             <>
@@ -187,22 +187,43 @@ const Wrapper = styled.main`
     }
     .swiper-button-prev,
     .swiper-button-next {
+      display: block;
       width: 5rem;
       height: 5rem;
       color: var(--color-white);
       z-index: 200;
       visibility: visible;
-      top: 40%;
+      top: 7%;
     }
     .swiper-button-prev {
-      left: -7rem;
+      left: 1rem;
     }
 
     .swiper-button-next {
-      right: -7rem;
+      right: -2.4rem;
     }
     .swiper-pagination {
       bottom: 3rem;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: block;
+      width: 5rem;
+      height: 5rem;
+      color: var(--color-white);
+      z-index: 200;
+      visibility: visible;
+      top: 52%;
+    }
+
+    .swiper-button-prev {
+      left: -4.6rem;
+    }
+
+    .swiper-button-next {
+      right: -8rem;
     }
   }
 `;

@@ -24,6 +24,7 @@ function BookingPage() {
   const { cineRoomMovie, cineSeatList, totalAmount, isLoading } = useSelector(
     (state) => state.bookingReducer
   );
+
   // ui
   const closeModalHandler = () => {
     dispatch({ type: CLOSE_MODAL });
@@ -84,22 +85,13 @@ function BookingPage() {
                 key={isSideBarShow}
               >
                 <section>
-                  {isSideBarShow && (
-                    <BookingPageRight
-                      cineSeatList={cineSeatList}
-                      cineRoomMovie={cineRoomMovie}
-                      totalAmount={totalAmount}
-                      choosingSeat={choosingSeat}
-                      setIsSideBarShow={setIsSideBarShow}
-                    />
-                  )}
                   <BookingPageRight
                     cineSeatList={cineSeatList}
                     cineRoomMovie={cineRoomMovie}
                     totalAmount={totalAmount}
                     choosingSeat={choosingSeat}
                     setIsSideBarShow={setIsSideBarShow}
-                    className="right"
+                    className={`right ${isSideBarShow ? 'isShow' : null}`}
                     isSideBarShow={isSideBarShow}
                   />
                 </section>
@@ -129,9 +121,13 @@ const Wrapper = styled.section`
       display: none;
     }
   }
+  .booking {
+    .isShow {
+      display: block;
+    }
+  }
   @media screen and (min-width: 1000px) {
     .booking {
-      margin: 5rem auto;
       display: grid;
       grid-template-columns: 1fr 18rem;
       gap: 1.5rem;
