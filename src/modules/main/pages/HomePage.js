@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { getMovieListAction } from '../../redux/actions/MovieAction/getMovieListAction';
 import CarouselCoverflow from '../components/Home.component/CarouselCoverflow';
 import MovieList from '../components/Home.component/MovieList';
-import SearchBar from '../components/Home.component/SearchBar';
 import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import Loading from '../components/Loading.js';
@@ -62,12 +61,15 @@ function HomePage() {
         <AnimatePresence>
           {isTrailerShow && (
             <>
-              <Backdrop
-                className="backdrop"
+              {/* eslint-disable */}
+              <div
+                className='backdrop'
                 onClick={() => {
                   dispatch({ type: CLOSE_MODAL });
                 }}
               />
+              {/* eslint-enable */}
+
               <Modal trailer={trailer} />
             </>
           )}
@@ -100,7 +102,7 @@ function HomePage() {
 
             {/* <Carousel movieList={movieList} className="home__carousel" /> */}
             <SearchBar2 className="home__searchbar" />
-            <MovieList movieList={movieList} className="home__movieList" />
+            <MovieList movieLists={movieList} className="home__movieList" />
             <div id="homePage__booking" />
             <HomeBooking />
             <div id="homePage__news" />
@@ -113,14 +115,6 @@ function HomePage() {
 }
 
 export default HomePage;
-
-const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 110;
-`;
 
 const Wrapper = styled.section`
   .home__searchbar {

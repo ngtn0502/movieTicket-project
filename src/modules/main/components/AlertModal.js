@@ -233,10 +233,11 @@ function AlertModal({
 export default AlertModal;
 
 const Wrapper = styled.div`
+  z-index: 3000;
   .modal {
     position: fixed;
     top: 20%;
-    left: 7%;
+    left: 15%;
     /* transform: translate(-50%, -50%); */
     z-index: 3000;
     width: 20rem;
@@ -249,6 +250,10 @@ const Wrapper = styled.div`
       left: 50%;
       transform: translate(-50%, -50%);
       width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       .alert__title,
       .alert__subTitle {
         padding-bottom: 1rem;

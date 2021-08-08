@@ -117,7 +117,7 @@ export default function BookingInfo({
                     <div>
                       <p className='date__weekday'>{getDay(new Date(item))}</p>
                       <p className='date__date'>
-                        {format(`dd / MM`, new Date(item))}
+                        {format(`dd / MM / yyyy`, new Date(item))}
                       </p>
                     </div>
                   }

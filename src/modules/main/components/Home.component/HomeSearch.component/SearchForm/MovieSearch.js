@@ -7,20 +7,21 @@ import Select from '@material-ui/core/Select';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { BiMovie } from 'react-icons/bi';
-import { FaCity } from 'react-icons/fa';
-import { MdTheaters } from 'react-icons/md';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import dateFormat from 'date-format';
 import { Link, useHistory } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { AiOutlineSchedule } from 'react-icons/ai';
 import {
   cityList,
   exitVariants,
   loadingVariants3,
   movieCategory,
-  toDay,
+  today,
 } from '../../../../../utils/constants';
 import { getMovieDetailAction } from '../../../../../redux/actions/MovieAction/getMovieDetailAction';
 import { getDay } from '../../../../../utils/helper.js';
+import { FlexCenter } from '../../../../../utils/mixin.js';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -38,24 +39,46 @@ export default function MovieSearch() {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-  const [movie, setMovie] = useState('');
+  // Handle choosen event
+  const [movieChoose, setMovieChoose] = useState('');
+  const [cinemaChoose, setCinemaChoose] = useState('');
+  const [scheduleChoose, setScheduleChoose] = useState('');
+  // Lấy danh sách phim
   const { movieList } = useSelector((state) => state.homeReducer);
-  const [city, setCity] = useState('');
-  const [dates, setDates] = useState('');
-
-  const handleChange = (event) => {
-    setMovie(event.target.value);
-    dispatch(getMovieDetailAction(event.target.value));
-  };
-  console.log('movieList', movieList);
-  const movieAfterToday = movieList.filter(
-    (item) => new Date(item.ngayKhoiChieu) > toDay
+  // Lấy lich chiếu của danh sách phim
+  const { movieDetail, isLoading } = useSelector(
+    (state) => state.movieDetailReducer
   );
-  const movieChoose = movieAfterToday.filter((item) => item.maPhim === movie);
-  console.log('movieChoose', movieChoose);
+
+  // Handle sự kiện chọn bộ phim mới
+  const movieChooseHandler = (event) => {
+    setMovieChoose(event.target.value);
+    setCinemaChoose('');
+    setScheduleChoose('');
+    // Lấy chi tiết của bộ phim vừa mớI chọn, do API result về ko nằm chung
+    dispatch(getMovieDetailAction(event.target.value));
+  }; // Handle sự kiện chọn rạp chiếu
+  const cinemaChooseHandler = (event) => {
+    setCinemaChoose(event.target.value);
+  };
+  // Lấy những bộ phim chiếu sau ngày hôm nay
+  const movieAfterToday = movieList.filter(
+    (item) => new Date(item.ngayKhoiChieu) > today()
+  );
+  // Lấy những rạp có chiếu bộ phim này
+  const cinemaByMovie = movieDetail?.lichChieu?.map(
+    (item) => item.thongTinRap.tenCumRap
+  );
+  const cinemaByMovieUnique = [...new Set(cinemaByMovie)];
+  // Lấy thời gian chiếu bộ phim này của rạp đã chọn
+
+  const movieByCinema = movieDetail?.lichChieu?.filter(
+    (item) => item.thongTinRap.tenCumRap === cinemaChoose
+  );
 
   return (
     <Wrapper>
+      {/* Movie Search Part */}
       <div>
         <FormControl variant="" className={classes.formControl}>
           <InputLabel id="demo-simple-select-outlined-label">
@@ -65,8 +88,8 @@ export default function MovieSearch() {
           <Select
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
-            value={movie}
-            onChange={handleChange}
+            value={movieChoose}
+            onChange={movieChooseHandler}
             label="Phim"
           >
             {movieAfterToday.map((item) => (
@@ -74,56 +97,69 @@ export default function MovieSearch() {
             ))}
           </Select>
         </FormControl>
-        {/* <FormControl variant="" className={classes.formControl}>
+      </div>
+      {/* Cinema Search Part */}
+      <div>
+        <FormControl variant="" className={classes.formControl}>
           <InputLabel id="demo-simple-select-outlined-label">
-            <FaCity />
-            Thành Phố
+            <FaMapMarkerAlt />
+            Rạp chiếu
           </InputLabel>
           <Select
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
-            value={city}
-            onChange={(event) => {
-              setCity(event.target.value);
-            }}
-            label="City"
+            value={cinemaChoose}
+            onChange={cinemaChooseHandler}
+            label="Cinema"
           >
-            {cityList.map((item) => (
-              <MenuItem value={item.maCity}>{item.tenCity}</MenuItem>
+            {cinemaByMovieUnique?.map((item) => (
+              <MenuItem value={item}>{item}</MenuItem>
             ))}
           </Select>
-        </FormControl> */}
+        </FormControl>
       </div>
+      {/* Schedule Search Part */}{' '}
+      <div>
+        <FormControl variant="" className={classes.formControl}>
+          <InputLabel id="demo-simple-select-outlined-label">
+            <AiOutlineSchedule />
+            Lịch chiếu
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            value={scheduleChoose}
+            onChange={(e) => {
+              setScheduleChoose(e.target.value);
+            }}
+            label="schedule"
+          >
+            {movieByCinema?.map((item) => (
+              <MenuItem value={item.ngayChieuGioChieu}>
+                {getDay(new Date(item.ngayChieuGioChieu))} -
+                {dateFormat('dd:MM:yyyy', new Date(item.ngayChieuGioChieu))}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      {/* Button Bookng */}
       <AnimatePresence>
         <motion.div
           variants={loadingVariants3}
           initial="hidden"
           animate="visible"
-          // exit={exitVariants}
-          key={movieChoose[0]?.maPhim}
+          // exit={{ opacity: 0 }}
+          key={scheduleChoose}
         >
-          <div />
-          {movie === '' ? null : (
-            <div className="movie__picture">
-              <div>
-                {/* eslint-disable */}
-                <img
-                  src={movieChoose[0].hinhAnh}
-                  alt=''
-                  onClick={() => {
-                    history.push(`/movie-details/${movieChoose[0].maPhim}`);
-                  }}
-                />{' '}
-                {/* eslint-enable */}
-              </div>
-              <div>
-                <Link
-                  to={`/movie-details/${movieChoose[0].maPhim}`}
-                  className="booking__button"
-                >
-                  Avaiable Now
-                </Link>
-              </div>
+          {scheduleChoose === '' ? null : (
+            <div className="search__btn">
+              <Link
+                to={`/booking/${movieByCinema[0].maLichChieu}`}
+                className="booking__button"
+              >
+                Avaiable Now
+              </Link>
             </div>
           )}
         </motion.div>
@@ -134,7 +170,7 @@ export default function MovieSearch() {
 
 const Wrapper = styled.div`
   #demo-simple-select-outlined-label {
-    display: flex;
+    ${FlexCenter()}
     font-size: 1.25rem;
     gap: 1rem;
     color: #31d7a9;
@@ -153,23 +189,14 @@ const Wrapper = styled.div`
       color: var(--color-white);
     }
   }
-  .movie__picture {
-    margin: 1rem 0;
-    /* display: flex; */
-    img {
-      max-width: 80%;
-      cursor: pointer;
-      border-radius: var(--radius);
-      margin: 0 auto;
-    }
-    div {
-      padding-top: 1rem;
-      display: flex;
-      justify-content: center;
-      .booking__button {
-        font-size: 1.25rem;
-        height: 3.5rem;
-      }
+  .search__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .booking__button {
+      font-size: 1.25rem;
+      height: 3.5rem;
+      opacity: 1;
     }
   }
   @media screen and (min-width: 576px) {
@@ -183,10 +210,7 @@ const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    .movie__picture {
-      img {
-        max-width: 20%;
-      }
-    }
+    column-gap: 3rem;
+    row-gap: 1rem;
   }
 `;

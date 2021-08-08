@@ -127,7 +127,7 @@ const Wrapper = styled.nav`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 4rem;
     z-index: 1000;
     background-color: rgba(300, 300, 300, 0.1);
@@ -197,7 +197,7 @@ const Wrapper = styled.nav`
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 100vw;
       height: 4rem;
       display: flex;
       align-items: center;

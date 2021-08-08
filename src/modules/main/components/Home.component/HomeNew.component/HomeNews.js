@@ -61,6 +61,7 @@ function HomeNews({ className }) {
               {!isEnd && (
                 <button
                   type="button"
+                  style={{ color: 'white' }}
                   className="btn2"
                   onClick={() => {
                     setIsContinue(true);
@@ -73,6 +74,7 @@ function HomeNews({ className }) {
               {isContinue && (
                 <button
                   type="button"
+                  style={{ color: 'white' }}
                   className="btn2"
                   onClick={() => {
                     setIsContinue(false);
@@ -109,6 +111,5 @@ const Wrapper = styled.section`
     }
   }
   .btn2 {
-    color: var(--color-white);
   }
 `;

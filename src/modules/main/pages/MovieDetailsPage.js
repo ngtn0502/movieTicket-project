@@ -99,7 +99,7 @@ function MovieDetailsPage() {
                 movieDetail={movieDetail || []}
                 movie={movieDetail || []}
               />
-              <MovieDetailBooking movie={movieDetail || []} />
+              <MovieDetailBooking movies={movieDetail || []} />
             </div>
           )}
         </div>

@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import searchBg from '../../../../../assets/img/searchSection/ticket-bg01.jpg';
 import searchNews from '../../../../../assets/img/searchSection/news.png';
 import searchMovie from '../../../../../assets/img/searchSection/ticket-tab01.png';
-import city from '../../../../../assets/img/searchSection/city.png';
-import { FlexCenter, FlexHCenter } from '../../../../utils/mixin';
 import CategoryItem from './CategoryItem.js';
-import FilterItem from './FilterItem.js';
 import MovieSearch from './SearchForm/MovieSearch.js';
-import CitySearch from './SearchForm/CitySearch.js';
 
 function SearchBar2({ className }) {
   return (
@@ -77,7 +72,7 @@ const Wrapper = styled.section`
       display: flex;
       justify-content: center;
       padding: 1rem;
-      gap: 3rem;
+      gap: 1rem;
     }
   }
   /* BOTTOM */

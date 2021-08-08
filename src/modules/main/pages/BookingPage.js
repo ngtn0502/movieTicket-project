@@ -11,7 +11,7 @@ import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import AlertModal from '../components/AlertModal.js';
 import BookingNavBar from '../components/BookingPage.component/BookingNavBar.js';
 import BookingFotter from '../components/BookingPage.component/BookingFotter.js';
-import { loadingVariants } from '../../utils/constants.js';
+import { loadingVariants, loadingVariants4 } from '../../utils/constants.js';
 
 function BookingPage() {
   const history = useHistory();
@@ -51,8 +51,8 @@ function BookingPage() {
           {isModalShow && (
             <div>
               {/* eslint-disable */}
-            <div className='backdrop' onClick={closeModalHandler}></div>
-            {/* eslint-enable */}
+              <div className='backdrop' onClick={closeModalHandler}></div>
+              {/* eslint-enable */}
 
               <AlertModal
                 message={message}
@@ -75,25 +75,36 @@ function BookingPage() {
               cineSeatList={cineSeatList}
               cineRoomMovie={cineRoomMovie}
             />
-            <section>
-              {isSideBarShow && (
-                <BookingPageRight
-                  cineSeatList={cineSeatList}
-                  cineRoomMovie={cineRoomMovie}
-                  totalAmount={totalAmount}
-                  choosingSeat={choosingSeat}
-                  setIsSideBarShow={setIsSideBarShow}
-                />
-              )}
-              <BookingPageRight
-                cineSeatList={cineSeatList}
-                cineRoomMovie={cineRoomMovie}
-                totalAmount={totalAmount}
-                choosingSeat={choosingSeat}
-                setIsSideBarShow={setIsSideBarShow}
-                className="right"
-              />
-            </section>
+            <AnimatePresence>
+              <motion.section
+                variants={loadingVariants4}
+                initial="hidden"
+                animate="visible"
+                exit={{ opacity: 0 }}
+                key={isSideBarShow}
+              >
+                <section>
+                  {isSideBarShow && (
+                    <BookingPageRight
+                      cineSeatList={cineSeatList}
+                      cineRoomMovie={cineRoomMovie}
+                      totalAmount={totalAmount}
+                      choosingSeat={choosingSeat}
+                      setIsSideBarShow={setIsSideBarShow}
+                    />
+                  )}
+                  <BookingPageRight
+                    cineSeatList={cineSeatList}
+                    cineRoomMovie={cineRoomMovie}
+                    totalAmount={totalAmount}
+                    choosingSeat={choosingSeat}
+                    setIsSideBarShow={setIsSideBarShow}
+                    className="right"
+                    isSideBarShow={isSideBarShow}
+                  />
+                </section>
+              </motion.section>
+            </AnimatePresence>
           </main>
         )}
         <BookingFotter
@@ -101,7 +112,8 @@ function BookingPage() {
           className="booking__footer"
           setIsSideBarShow={setIsSideBarShow}
         />
-      </Wrapper>{' '}
+      </Wrapper>
+      {}
     </motion.section>
   );
 }

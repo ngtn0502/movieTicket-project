@@ -41,7 +41,13 @@ export const carouselBackground = bgPopcorn;
 
 // For filtering list movie
 
-export const toDay = new Date();
+// export const toDay = new Date()
+
+export const today = () => {
+  const toDay = new Date();
+  toDay.setMonth(toDay.getMonth() - 22);
+  return toDay;
+};
 
 export const loadingVariants = {
   hidden: {
@@ -68,15 +74,25 @@ export const loadingVariants2 = {
 export const loadingVariants3 = {
   hidden: {
     opacity: 0,
-    // x: 200,
+    x: 200,
   },
   visible: {
     opacity: 1,
-    // x: 0,
-    transition: { duration: 1 },
+    x: 0,
+    transition: { duration: 0.8 },
   },
 };
-
+export const loadingVariants4 = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 export const exitVariants = {
   opacity: 0,
   x: -200,
@@ -112,138 +128,6 @@ export const navBarLink = [
 
 /// ////////////////////////////HOME PAGE/////////////////////////////////
 // Search part
-export const cityList = [
-  {
-    maCity: '1',
-    tenCity: 'Thành phố Hồ Chí Minh',
-  },
-  {
-    maCity: '2',
-    tenCity: 'Hà Nội',
-  },
-  {
-    maCity: '3',
-    tenCity: 'Cần Thơ',
-  },
-  {
-    maCity: '4',
-    tenCity: 'Đà Nẵng',
-  },
-  {
-    maCity: '5',
-    tenCity: 'Vũng Tàu',
-  },
-  {
-    maCity: '6',
-    tenCity: 'Đà Lạt',
-  },
-];
-export const movieCategory = [
-  {
-    id: '1',
-    value: 'hanh-dong',
-    title: 'Hành Động',
-  },
-  {
-    id: '2',
-    value: 'kinh-di',
-    title: 'Kinh dị',
-  },
-  {
-    id: '3',
-    value: 'vien-tuong',
-    title: 'Viễn Tưỡng',
-  },
-  {
-    id: '4',
-    value: 'lang-man',
-    title: 'Lãng Mạn',
-  },
-];
-
-export const movieCine = [
-  {
-    id: '0',
-    value: 'all',
-    title: 'Rạp',
-  },
-  {
-    id: '1',
-    value: 'hanh-dong',
-    title: 'Hành Động',
-  },
-  {
-    id: '2',
-    value: 'kinh-di',
-    title: 'Kinh dị',
-  },
-  {
-    id: '3',
-    value: 'vien-tuong',
-    title: 'Viễn Tưỡng',
-  },
-  {
-    id: '4',
-    value: 'lang-man',
-    title: 'Lãng Mạn',
-  },
-];
-
-export const movieDate = [
-  {
-    id: '0',
-    value: 'all',
-    title: 'Ngày Xem',
-  },
-  {
-    id: '1',
-    value: 'hanh-dong',
-    title: '14 May 2021',
-  },
-  {
-    id: '2',
-    value: 'kinh-di',
-    title: '25 July 2021',
-  },
-  {
-    id: '3',
-    value: 'vien-tuong',
-    title: '29 July 2021',
-  },
-  {
-    id: '4',
-    value: 'lang-man',
-    title: '30 July 2021',
-  },
-];
-
-export const movieHour = [
-  {
-    id: '0',
-    value: 'all',
-    title: '7:00',
-  },
-  {
-    id: '1',
-    value: 'hanh-dong',
-    title: '9:00',
-  },
-  {
-    id: '2',
-    value: 'kinh-di',
-    title: '11:00',
-  },
-  {
-    id: '3',
-    value: 'vien-tuong',
-    title: '13:00',
-  },
-  {
-    id: '4',
-    value: 'lang-man',
-    title: '18:00',
-  },
-];
 /// ////////////////////////////MOVIE DETAIL PAGE/////////////////////////////////
 // Movie Detail part
 
@@ -340,26 +224,56 @@ export const getCinemaLogo = (cinema) => {
 
 // Footer part
 
-export const links = [
+export const footerCompany = [
   {
     id: 1,
-    text: 'home',
-    url: '/',
+    title: 'Company',
+    content:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam blanditiis itaque consequuntur est. Eveniet, similique! Id iste qui culpa?',
+  },
+];
+export const importantLinks = [
+  {
+    id: 1,
+    text: 'Important Links',
+    link: [
+      {
+        id: 1,
+        title: 'Home',
+        to: '/home',
+      },
+      {
+        id: 2,
+        title: 'About us',
+        to: '',
+      },
+      {
+        id: 3,
+        title: 'Contact',
+        to: '',
+      },
+    ],
   },
   {
-    id: 2,
-    text: 'Contact',
-    url: '/about',
-  },
-  {
-    id: 3,
-    text: 'News',
-    url: '/project',
-  },
-  {
-    id: 4,
-    text: 'FAQ',
-    url: '/contact',
+    id: 1,
+    text: 'Frequent Question',
+    link: [
+      {
+        id: 1,
+        title: 'Account?',
+        to: '',
+      },
+      {
+        id: 2,
+        title: 'Personal Private?',
+        to: '',
+      },
+      {
+        id: 3,
+        title: 'Opportunity',
+        to: '',
+      },
+    ],
   },
 ];
 

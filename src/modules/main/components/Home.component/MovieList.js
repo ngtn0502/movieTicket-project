@@ -13,16 +13,20 @@ import 'swiper/components/navigation/navigation.min.css';
 import SwiperCore, { Autoplay, Navigation } from 'swiper/core';
 import { motion } from 'framer-motion';
 import MovieCard from './MovieCard';
-import { loadingVariants, loadingVariants2 } from '../../../utils/constants.js';
+import {
+  loadingVariants,
+  loadingVariants2,
+  today,
+} from '../../../utils/constants.js';
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
 
-export default function Carousel({ movieList }) {
+export default function Carousel({ movieLists }) {
+  const movieList =
+    movieLists?.filter((item) => new Date(item.ngayKhoiChieu) > today()) || [];
+
   const [typeMovie, setTypeMovie] = useState(true);
-  // I have to fake type of Movie cause REST API does not support :(
-  const fakeTypeMovie = typeMovie ? [0, 8] : [16, 24];
-  const fakeTypeMovie2 = typeMovie ? [8, 16] : [16, 24];
 
   const currentMovieHandler = () => {
     setTypeMovie(true);
@@ -81,12 +85,12 @@ export default function Carousel({ movieList }) {
           {typeMovie && (
             <>
               <SwiperSlide className="movie__list">
-                {movieList.slice(8, 16).map((movie) => (
+                {movieList.slice(0, 8).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>
               <SwiperSlide className="movie__list">
-                {movieList.slice(16, 24).map((movie) => (
+                {movieList.slice(8, 16).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>
@@ -96,12 +100,12 @@ export default function Carousel({ movieList }) {
           {!typeMovie && (
             <>
               <SwiperSlide className="movie__list">
-                {movieList.slice(24, 32).map((movie) => (
+                {movieList.slice(16, 24).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>
               <SwiperSlide className="movie__list">
-                {movieList.slice(32).map((movie) => (
+                {movieList.slice(24).map((movie) => (
                   <MovieCard movie={movie} />
                 ))}
               </SwiperSlide>
@@ -110,9 +114,20 @@ export default function Carousel({ movieList }) {
         </Swiper>
         {/* For screen < 800px */}
         <div className="movie__list--mobile">
-          {movieList.slice(0, 8).map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
+          {typeMovie && (
+            <>
+              {movieList.slice(0, 8).map((movie) => (
+                <MovieCard movie={movie} />
+              ))}
+            </>
+          )}{' '}
+          {!typeMovie && (
+            <>
+              {movieList.slice(8, 16).map((movie) => (
+                <MovieCard movie={movie} />
+              ))}
+            </>
+          )}
         </div>
       </Wrapper>{' '}
     </motion.section>

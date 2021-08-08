@@ -130,6 +130,9 @@ const Wrapper = styled.div`
       transform: translateX(-50%);
     }
   }
+  .carousel__slider:hover .booking__button {
+    opacity: 1;
+  }
 
   .slider-left,
   .slider-right {
@@ -158,7 +161,7 @@ const Wrapper = styled.div`
   }
   @media screen and (min-width: 700px) {
     .App {
-      padding-bottom: 10rem;
+      padding-bottom: 5rem;
     }
     .slider {
       width: 500px;

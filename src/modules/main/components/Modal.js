@@ -62,12 +62,13 @@ function Modal({ trailer }) {
 export default Modal;
 
 const Wrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(85%, 50%);
+  z-index: 3000;
   .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
+    position: relative;
     .modal__close {
       position: absolute;
       top: -2rem;
@@ -85,8 +86,21 @@ const Wrapper = styled.div`
     fill: var(--color-white);
     cursor: pointer;
   }
-
+  @media screen and (min-width: 576px) {
+    top: 50%;
+    left: 50%;
+    transform: translate(25%, 40%);
+    iframe {
+      width: 540px;
+      height: 290px;
+    }
+    .modal {
+    }
+  }
   @media screen and (min-width: 800px) {
+    top: 55%;
+    left: 50%;
+    transform: translateX(0);
     iframe {
       width: 740px;
       height: 490px;

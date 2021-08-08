@@ -8,16 +8,15 @@ import { randomDuration, randomNumber } from '../../../utils/helper.js';
 import { FlexCenter, FlexHCenter } from '../../../utils/mixin.js';
 import MovieClass from './MovieClass.js';
 import imdbLogo from '../../../../assets/img/imdb-logo.png';
+import { today } from '../../../utils/constants.js';
 
-const Day = '2019';
 function HomeBookingSchedule(props, ref) {
   const { danhSachPhim, className, style, isEmptyHandler } = props;
   const renderSchedule = () =>
     danhSachPhim?.map((item) => {
-      const lstLichChieuTheoPhim = item.lstLichChieuTheoPhim.filter((movie) =>
-        movie.ngayChieuGioChieu?.includes(Day)
+      const lstLichChieuTheoPhim = item.lstLichChieuTheoPhim.filter(
+        (movie) => new Date(movie.ngayChieuGioChieu) > today()
       );
-      // console.log('lstLichChieuTheoPhim', lstLichChieuTheoPhim);
       if (lstLichChieuTheoPhim.length !== 0) {
         return (
           <div className="homeBooking__schedule--item">

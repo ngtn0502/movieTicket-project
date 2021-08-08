@@ -9,11 +9,16 @@ import {
   getCinema,
   getCinemaLogo,
   loadingVariants2,
+  today,
 } from '../../../utils/constants.js';
 
 // MUI variants
 
-function BookingTable({ movie, cinema }) {
+function BookingTable({ movies, cinema }) {
+  const movie = movies?.filter(
+    (item) => new Date(item.ngayChieuGioChieu) > today()
+  );
+
   // movie prop trả về là lịch chiếu phim tương ứng với rạp phim đưỢc click
   // Lấy giá trị của mỗi click event vào ngày chiếu phim
   const [ngayChieu, setNgayChieu] = useState(['Thứ Ba']);
@@ -51,7 +56,7 @@ function BookingTable({ movie, cinema }) {
         <div className="booking__info">
           <BookingInfo
             ngayChieuAllUnique={ngayChieuAllUnique}
-            dateChieu={dateChieu}
+            dateChieu={dateChieu || []}
             setNgayChieu={setNgayChieu}
             getCinema={getCinema}
             cinema={cinema}

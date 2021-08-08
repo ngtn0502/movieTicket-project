@@ -3,8 +3,16 @@ import styled from 'styled-components';
 import { FaBars, FaGlobe } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { links, socials } from '../../../utils/constants';
+import {
+  footerCompany,
+  importantLinks,
+  socials,
+} from '../../../utils/constants';
 import bgImage from '../../../../assets/img/bg-popcorn.jpg';
+import appStore from '../../../../assets/img/download/app_store.jpg';
+import windows from '../../../../assets/img/download/windows.jpg';
+import ggPlay from '../../../../assets/img/download/google_play.jpg';
+import { FlexCenter } from '../../../utils/mixin.js';
 
 const socialsVariants = {
   hover: {
@@ -26,52 +34,65 @@ const linksVariants = {
 
 function Footer() {
   return (
-    <Wrapper style={{ backgroundImage: `url(${bgImage})` }}>
-      <div className="overlay" />
-      <div className="section__middle">
-        <div className="footer__links">
-          <div className="footer__link">
-            <span className="footer__link__icon">
-              <FaBars />
-            </span>
+    <Wrapper /* >style={{ backgroundImage: `url(${bgImage})` }} */>
+      <div className="footer__newsletter section-middle">
+        <div className="newsletter__container">
+          <div className="newsletter__title">
+            <p className="subNameMovie">SUBSCRIBE NOW</p>
+            <p className="nameMovie">
+              TO GET LATEST UPDATE ABOUT NEW MOVIE AND MORE...
+            </p>
           </div>
-          <h2>Links</h2>
-          <ul>
-            {links.map((link) => (
-              <motion.li
-                key={link.id}
-                variants={socialsVariants}
-                whileHover="hover"
-              >
-                <Link to={link.url}>{link.text}</Link>
-              </motion.li>
-            ))}
-          </ul>
+          <form className="newsletter__form">
+            <input type="text" placeholder="Your Email Address" />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p className="subNameMovie">
+            We send you latest update and news to your email
+          </p>
         </div>
-        <div className="footer__links">
-          <div className="footer__link">
-            <span className="footer__link__icon">
-              <FaGlobe />
-            </span>
+      </div>
+      {/* <ul>
+        {socials.map((link) => (
+          <motion.li key={link.id} variants={linksVariants} whileHover="hover">
+            <a href={link.url} target="_blank" rel="noreferrer">
+              {link.image}
+            </a>
+          </motion.li>
+        ))}
+      </ul> */}
+      {/* <div className="overlay" /> */}
+      <div className="footer__information section-middle">
+        {footerCompany.map((item) => (
+          <div className="footer__links" key={item.id}>
+            <h5 className="footer__links-title">{item.title}</h5>
+            <p className="footer__links-content subNameMovie">{item.content}</p>
           </div>
-          <h2>Socials</h2>
-          <ul>
-            {socials.map((link) => (
-              <motion.li
-                key={link.id}
-                variants={linksVariants}
-                whileHover="hover"
-              >
-                <a href={link.url} target="_blank" rel="noreferrer">
-                  {link.image}
-                </a>
-              </motion.li>
-            ))}
-          </ul>
+        ))}
+        {importantLinks.map((item) => (
+          <div className="footer__links" key={item.id}>
+            <h5 className="footer__links-title">{item.text}</h5>
+            <div className="footer__links-link subNameMovie">
+              {item.link.map((i) => (
+                <Link key={i.id} to={i.to}>
+                  {i.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div className="footer__links">
+          <h5 className="footer__links-title">Download</h5>
+          <div className="footer__links-download subNameMovie">
+            <img src={appStore} alt="download" />
+            <img src={ggPlay} alt="download" />
+            <img src={windows} alt="download" />
+          </div>
         </div>
       </div>
       <div className="footer__copy">
         <h2>© 2021 - Cinema Website | Developed By NhanNguyen</h2>
+        <h2>For educational purpose</h2>
       </div>
     </Wrapper>
   );
@@ -79,12 +100,74 @@ function Footer() {
 
 const Wrapper = styled.footer`
   position: relative;
-  background-position: center center;
-  background-repeat: no-repeat;
-  object-fit: cover;
+  background-color: var(--color-darkBg);
   z-index: 2;
   color: var(--color-white);
+  margin-top: 15rem;
   /* width: 10rem; */
+  .footer__newsletter {
+    background-color: var(--color-darkBg2);
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 20px 10px rgb(0 0 0 / 50%);
+    border-radius: var(--radius2);
+    .newsletter__container {
+      ${FlexCenter()}
+      flex-direction: column;
+      padding: 3.5rem 1.25rem;
+      font-weight: 700;
+      .subNameMovie,
+      .nameMovie {
+        text-align: center;
+      }
+      .newsletter__title {
+        .subNameMovie {
+          color: #31d7a9;
+          font-size: 1.5rem;
+        }
+        .nameMovie {
+          font-size: 2rem;
+          padding: 1rem 0 2rem;
+        }
+      }
+      .newsletter__form {
+        display: flex;
+        position: relative;
+        padding-bottom: 1rem;
+        input {
+          height: 64px;
+          width: 100%;
+          padding-right: 160px;
+          color: #99abe2;
+          border: 2px solid #31d7a9;
+          border-radius: 50px;
+          padding-left: 20px;
+          box-shadow: 0 3px 10px 0 rgb(0 0 0 / 10%);
+        }
+        button {
+          position: absolute;
+          right: 6.5px;
+          top: 6.5px;
+          background: #31d7a9;
+          color: #050068;
+          -webkit-box-shadow: 0 10px 15px 0 rgb(59 55 188 / 50%);
+          box-shadow: 0 10px 15px 0 rgb(59 55 188 / 50%);
+          width: auto;
+          height: 60%;
+          padding: 0 40px;
+          border-radius: 25px;
+          border: none;
+          transition: all 0.5s ease-in-out;
+        }
+      }
+    }
+  }
+  .footer__information {
+    padding-top: 20rem;
+  }
   .overlay {
     background: var(--color-overlay);
     opacity: 1;
@@ -94,33 +177,53 @@ const Wrapper = styled.footer`
     position: relative;
     z-index: 2;
   }
-  .footer__link {
-    padding: 1rem 0;
-    display: flex;
-    justify-content: center;
-  }
-  .footer__link__icon {
-    width: 3rem;
-    height: 3rem;
-    border: 2px solid var(--color-white);
-    transform: rotate(45deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    svg {
-      transform: rotate(-45deg);
-      width: 2rem;
-      height: 2rem;
-      fill: var(--color-white);
-    }
-  }
+
   .footer__links {
-    padding: 1.5rem;
-    h2 {
-      text-align: center;
+    padding: 0.5rem;
+    .footer__links-title {
       color: var(--color-white);
       font-size: 1.75rem;
+      position: relative;
+      margin: 2rem 0 3rem;
+      &:before {
+        position: absolute;
+        content: '';
+        width: 50px;
+        height: 2px;
+        background: #31d7a9;
+        bottom: -16px;
+        left: 0;
+      }
+      &:after {
+        position: absolute;
+        content: '';
+        width: 30px;
+        height: 3px;
+        background: #31d7a9;
+        bottom: -22px;
+        left: 0;
+      }
     }
+    .footer__links-content {
+      color: var(--color-white);
+    }
+    .footer__links-link {
+      a {
+        display: inline-block;
+        width: 100%;
+        padding: 0 0 0.5rem;
+      }
+    }
+    .footer__links-download {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      img {
+        max-width: 30%;
+        border-radius: var(--radius);
+      }
+    }
+
     ul {
       display: flex;
       margin: 0 auto;
@@ -151,11 +254,33 @@ const Wrapper = styled.footer`
       font-size: 1rem;
     }
   }
-  @media (min-width: 920px) {
-    .section__middle {
+  @media (min-width: 992px) {
+    .footer__newsletter {
+      top: -23%;
+      .newsletter__container {
+        .newsletter__title {
+          .subNameMovie {
+            font-size: 1.5rem;
+          }
+          .nameMovie {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+    .footer__information {
+      padding-top: 14rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
+      grid-template-columns: repeat(4, 1fr);
+      .footer__links-download {
+        display: flex;
+        img {
+          max-width: 50%;
+        }
+      }
+    }
+    .footer__copy {
+      padding: 1rem;
     }
   }
 `;

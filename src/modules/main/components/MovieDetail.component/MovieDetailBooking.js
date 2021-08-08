@@ -13,11 +13,11 @@ import lotte from '../../../../assets/img/cinema/lotte-cinema.png';
 import megas from '../../../../assets/img/cinema/megags.png';
 import BookingTable from './BookingTable.js';
 //
-function MovieDetailBooking({ movie }) {
+function MovieDetailBooking({ movies }) {
   const history = useHistory();
   const [cinema, setCinema] = useState('CGV');
   // Tương ứng vớI mỗi click event trên logo rạp ta lọc ra các lịch chiếu phim `params` của rạp đó và truyền vào booking table
-  const maHeThongRap = movie.lichChieu?.filter(
+  const maHeThongRap = movies.lichChieu?.filter(
     (item) => item.thongTinRap.maHeThongRap === cinema
   );
   return (
@@ -93,7 +93,7 @@ function MovieDetailBooking({ movie }) {
           </div>
           {/* Booking  */}
           <div className='booking__table'>
-            <BookingTable movie={maHeThongRap} cinema={cinema}></BookingTable>
+            <BookingTable movies={maHeThongRap} cinema={cinema}></BookingTable>
           </div>
         </div>
       </main>

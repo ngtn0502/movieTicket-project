@@ -3,14 +3,19 @@ import styled from 'styled-components';
 
 function Loading({ className }) {
   return (
-    <Wrapper className={className}>
-      <div className="bar">
-        <div className="circle" />
-        <p className="loading__p">Loading</p>
-      </div>
-    </Wrapper>
+    <BigWrapper>
+      <Wrapper className={`section-middle ${className}`}>
+        <div className="bar">
+          <div className="circle" />
+          <p className="loading__p">Loading</p>
+        </div>
+      </Wrapper>
+    </BigWrapper>
   );
 }
+const BigWrapper = styled.section`
+  height: 100vh;
+`;
 
 export default Loading;
 const Wrapper = styled.div`
