@@ -384,9 +384,10 @@ svg {
   margin-left: auto;
   margin-right: auto;
 } */
-/* .page-100 { */
-/* padding: 4rem 0; */
-/* } */
+/* .page-100 {
+  height: calc(100vh - 5rem);
+  -top: 5rem;
+} */
 .page {
   min-height: calc(100vh - (20vh + 10rem));
 }

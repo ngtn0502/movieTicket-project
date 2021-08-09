@@ -44,7 +44,7 @@ function Footer() {
             </p>
           </div>
           <form className="newsletter__form">
-            <input type="text" placeholder="Your Email Address" />
+            <input type="text" placeholder="Your Email Address" required />
             <button type="submit">Subscribe</button>
           </form>
           <p className="subNameMovie">

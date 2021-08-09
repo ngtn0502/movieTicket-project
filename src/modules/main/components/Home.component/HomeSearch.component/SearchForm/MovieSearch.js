@@ -12,13 +12,7 @@ import dateFormat from 'date-format';
 import { Link, useHistory } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AiOutlineSchedule } from 'react-icons/ai';
-import {
-  cityList,
-  exitVariants,
-  loadingVariants3,
-  movieCategory,
-  today,
-} from '../../../../../utils/constants';
+import { loadingVariants3, today } from '../../../../../utils/constants';
 import { getMovieDetailAction } from '../../../../../redux/actions/MovieAction/getMovieDetailAction';
 import { getDay } from '../../../../../utils/helper.js';
 import { FlexCenter } from '../../../../../utils/mixin.js';
@@ -114,7 +108,7 @@ export default function MovieSearch() {
           >
             {cinemaByMovieUnique?.map((item) => (
               <MenuItem value={item}>{item}</MenuItem>
-            ))}
+            ))}{' '}
           </Select>
         </FormControl>
       </div>

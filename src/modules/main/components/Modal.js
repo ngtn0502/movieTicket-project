@@ -22,14 +22,14 @@ const trailerModalVariants = {
 };
 function Modal({ trailer }) {
   const dispatch = useDispatch();
-  const keydownHadler = (event) => {
-    if (event.keyCode === 27) {
-      dispatch({ type: CLOSE_MODAL });
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('keydown', keydownHadler);
-  }, []);
+  // const keydownHadler = (event) => {
+  //   if (event.keyCode === 27) {
+  //     dispatch({ type: CLOSE_MODAL });
+  //   }
+  // };
+  // useEffect(() => {
+  //   document.addEventListener('keydown', keydownHadler);
+  // }, []);
   return (
     <Wrapper>
       <motion.div

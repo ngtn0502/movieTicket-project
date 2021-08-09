@@ -39,14 +39,14 @@ function AlertModal({
   const history = useHistory();
   const dispatch = useDispatch();
   // keydown esc to close modal
-  const keydownHandler = (event) => {
-    if (event.keyCode === 27) {
-      dispatch({ type: CLOSE_MODAL });
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('keydown', keydownHandler);
-  }, []);
+  // const keydownHandler = (event) => {
+  //   if (event.keyCode === 27) {
+  //     dispatch({ type: CLOSE_MODAL });
+  //   }
+  // };
+  // useEffect(() => {
+  //   document.addEventListener('keydown', keydownHandler);
+  // }, []);
 
   //
   const closeModalHandler = () => {
@@ -238,9 +238,9 @@ const Wrapper = styled.div`
   z-index: 3000;
   .modal {
     position: fixed;
-    top: 26.8%;
-    left: 16.7%;
-    /* transform: translate(-50%, -50%); */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
     z-index: 3000;
     width: 20rem;
     height: 25rem;
@@ -570,9 +570,9 @@ const Wrapper = styled.div`
     .modal {
       width: 35rem;
       height: 25rem;
-      top: 26.9%;
-      left: 34%;
-      /* transform: translate(-50%, -50%); */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
       .alert {
         p {
           font-size: 1.5rem;

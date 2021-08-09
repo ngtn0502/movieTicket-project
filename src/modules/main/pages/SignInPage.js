@@ -1,4 +1,4 @@
-import { TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -12,6 +12,7 @@ import { userLoginAction } from '../../redux/actions/authAction';
 import AlertModal from '../components/AlertModal.js';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import { loadingVariants } from '../../utils/constants.js';
+import { validationLengthCheck } from '../../utils/helper.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,12 +30,26 @@ function SignInPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  // For form input
   const [userLogin, setUserLogin] = useState({
     taiKhoan: '',
     matKhau: '',
   });
+  // For validation
+  const [isUsernameError, setIsUsernameError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
   const userLoginHandler = (e) => {
     const { value, name } = e.target;
+    // Validation
+    if (name === 'taiKhoan') {
+      setIsUsernameError(false);
+      validationLengthCheck(name, value, 'taiKhoan', setIsUsernameError);
+    }
+    if (name === 'matKhau') {
+      setIsPasswordError(false);
+      validationLengthCheck(name, value, 'matKhau', setIsPasswordError);
+    }
+
     setUserLogin({
       ...userLogin,
       [name]: value,
@@ -58,8 +73,8 @@ function SignInPage() {
           {isModalShow && (
             <div>
               {/* eslint-disable */}
-          <div className="backdrop" onClick={closeModalHandler} />
-          {/* eslint-enable */}
+              <div className='backdrop' onClick={closeModalHandler} />
+              {/* eslint-enable */}
               <AlertModal
                 message={message}
                 goTo={goTo}
@@ -77,8 +92,8 @@ function SignInPage() {
             <div className="signIn__form">
               <form
                 className={classes.root}
-                noValidate
                 autoComplete="off"
+                required
                 onSubmit={userSubmitHandler}
               >
                 <TextField
@@ -88,6 +103,13 @@ function SignInPage() {
                   label="Tài Khoản"
                   className="signIn__input"
                   name="taiKhoan"
+                  required
+                  helperText={`${
+                    isUsernameError
+                      ? 'Username must be larger than 4 characters!'
+                      : ' '
+                  } `}
+                  error={isUsernameError}
                   onChange={userLoginHandler}
                 />
                 <TextField
@@ -95,11 +117,18 @@ function SignInPage() {
                   color="secondary"
                   id="standard-basic"
                   label="Mật Khẩu"
+                  type="password"
                   className="signIn__input"
                   name="matKhau"
+                  error={isPasswordError}
+                  helperText={`${
+                    isPasswordError
+                      ? 'Password must be larger than 4 characters!'
+                      : ' '
+                  } `}
+                  required
                   onChange={userLoginHandler}
                 />
-
                 <div className="signIn__button">
                   <button type="submit" className="btn__watching">
                     Đăng Nhập
@@ -129,7 +158,7 @@ const Wrapper = styled.main`
   }
   .signIn {
     width: 350px;
-    padding: 40px 32px 30px;
+    padding: 2rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -195,7 +224,7 @@ const Wrapper = styled.main`
   }
   @media screen and (min-width: 576px) {
     .signIn {
-      width: 450px;
+      width: 30rem;
     }
   }
 `;

@@ -9,6 +9,12 @@ import {
 
 export const userLoginAction = (loginData, history) => async (dispatch) => {
   const sendRequest = async (dataString) => {
+    if (dataString.taiKhoan.replace(/ /g, '').length < 4) {
+      throw Error("Username's length must bigger than 4 characters!");
+    }
+    if (dataString.matKhau.replace(/ /g, '').length < 4) {
+      throw Error("Password's length must bigger than 4 characters!");
+    }
     const response = await fetch(`${baseUrl}/QuanLyNguoiDung/DangNhap`, {
       method: METHOD__HTTP.POST,
       headers: {
@@ -17,6 +23,10 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
       },
       body: JSON.stringify(dataString),
     });
+    if (!response.ok) {
+      const message = await response.text();
+      throw Error(message);
+    }
     const data = await response.json();
     return data;
   };
@@ -39,7 +49,7 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
       payload: {
         type: 'Error',
         message: 'Đăng nhập thất bại!',
-        message2: 'Vui lòng kiểm tra lại thông tin.',
+        message2: error.message || 'Vui lòng kiểm tra lại thông tin.',
         goTo: null,
       },
     });
@@ -49,6 +59,12 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
 export const userSignUpAction = (signUpData, history) => async (dispatch) => {
   //
   const sendRequest = async (data1) => {
+    if (data1.taiKhoan.replace(/ /g, '').length < 4) {
+      throw Error("Username's length must bigger than 4 characters!");
+    }
+    if (data1.matKhau.replace(/ /g, '').length < 4) {
+      throw Error("Password's length must bigger than 4 characters!");
+    }
     const response = await fetch(`${baseUrl}/QuanLyNguoiDung/DangKy`, {
       method: METHOD__HTTP.POST,
       body: JSON.stringify(data1),
@@ -57,6 +73,10 @@ export const userSignUpAction = (signUpData, history) => async (dispatch) => {
         'Content-Type': 'application/json-patch+json',
       },
     });
+    if (!response.ok) {
+      const text = await response.text();
+      throw Error(text);
+    }
     const data = await response.json();
     return data;
   };
@@ -77,8 +97,8 @@ export const userSignUpAction = (signUpData, history) => async (dispatch) => {
       type: USER_SIGN_UP_FAIL,
       payload: {
         type: 'Error',
-        message: 'Đăng ký thất bại!',
-        message2: 'vui lòng kiểm tra lại thông tin',
+        message: 'Sign Up Fail!',
+        message2: error.message,
         goTo: null,
       },
     });

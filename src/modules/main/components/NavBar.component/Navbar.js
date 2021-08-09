@@ -76,13 +76,24 @@ function Navbar() {
                 </Link>
 
                 <button type="button" onClick={logoutHandler}>
-                  Đăng xuất
+                  LOG OUT
                 </button>
               </div>
             ) : (
-              <Link to="/sign-in" className="nav_login--title">
-                Đăng nhập
-              </Link>
+              <>
+                <Link to="/sign-in" className="btn2 nav_login--title signIn">
+                  LOG IN
+                </Link>
+                <Link
+                  to="/sign-up"
+                  className="btn nav_login--title"
+                  onClick={() => {
+                    setIsSideBarShow(false);
+                  }}
+                >
+                  SIGN UP
+                </Link>
+              </>
             )}
           </div>
           {/* eslint-disable */}
@@ -120,27 +131,42 @@ function Navbar() {
         <div className={`sideBar ${isSideBarShow ? 'sideBar__show' : null}`}>
           <div className='sideBar__links'>
             <div className='nav_login'>
-              <FiUser />
               {isLoginSuccess || userLogin ? (
-                <Link to='/profile' className='nav_login--title'>
-                  {loginData?.hoTen || userLogin.hoTen}
-                </Link>
+                <>
+                  <FiUser />
+                  <Link to='/profile' className='nav_login--title'>
+                    {loginData?.hoTen || userLogin.hoTen}
+                  </Link>
+                </>
               ) : (
-                <Link
-                  to='/sign-in'
-                  className='nav_login--title'
-                  onClick={() => {
-                    setIsSideBarShow(false);
-                  }}
-                >
-                  Đăng nhập
-                </Link>
+                <>
+                  <Link
+                    to='/sign-in'
+                    className='nav_login--title signIn'
+                    onClick={() => {
+                      setIsSideBarShow(false);
+                    }}
+                  >
+                    LOG IN
+                  </Link>
+                  <Link
+                    to='/sign-up'
+                    className='nav_login--title'
+                    onClick={() => {
+                      setIsSideBarShow(false);
+                    }}
+                  >
+                    SIGN UP
+                  </Link>
+                </>
               )}
             </div>
             {/*  */}
             <NavLink
               logoutHandler={logoutHandler}
               setIsSideBarShow={setIsSideBarShow}
+              isLoginSuccess={isLoginSuccess}
+              userLogin={userLogin}
             />
           </div>
         </div>
@@ -286,14 +312,36 @@ const Wrapper = styled.nav`
       .nav_login--title {
         font-weight: 400;
         font-size: 1.25rem;
+        letter-spacing: 0.05rem;
         color: var(--color-gray-700);
+      }
+      .signIn {
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -0.5rem;
+          background-color: var(--color-gray-700);
+          height: 100%;
+          width: 1px;
+        }
       }
     }
   }
+
   /*  */
   .sideBar__show {
     transform: none;
   }
+  .btn,
+  .btn2 {
+    padding: 0.5rem;
+  }
+  .btn2 {
+    border-color: var(--color-gray-700);
+  }
+
   @media (min-width: 768px) {
     .sideBar__toggle {
       display: none;
@@ -351,7 +399,7 @@ const Wrapper = styled.nav`
         }
       }
       .nav_login {
-        gap: 1rem;
+        gap: 0.5rem;
         ${FlexCenter()}
         color: var(--color-gray-700);
         .nav_login--title {
@@ -375,7 +423,7 @@ const Wrapper = styled.nav`
               top: 0;
               left: -0.5rem;
               height: 100%;
-              width: 2px;
+              width: 1px;
               background-color: #fff;
             }
           }

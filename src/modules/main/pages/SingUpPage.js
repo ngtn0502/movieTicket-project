@@ -11,23 +11,17 @@ import { userSignUpAction } from '../../redux/actions/authAction';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import AlertModal from '../components/AlertModal.js';
 import { loadingVariants } from '../../utils/constants.js';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
-}));
+import { validationLengthCheck } from '../../utils/helper.js';
 
 function SignUpPage() {
   const { isModalShow, message, type, message2, goTo } = useSelector(
     (state) => state.uiReducer.modal
   );
-  const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  const [isUsernameError, setIsUsernameError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
+  const [isEmailError, setIsEmailError] = useState(false);
   const [userLogin, setUserLogin] = useState({
     taiKhoan: '',
     matKhau: '',
@@ -37,14 +31,26 @@ function SignUpPage() {
     maLoaiNguoiDung: 'KhachHang',
     hoTen: '',
   });
+  // Check validation
+
   const userLoginHandler = (e) => {
     const { value, name } = e.target;
+    // Validation
+    if (name === 'taiKhoan') {
+      setIsUsernameError(false);
+      validationLengthCheck(name, value, 'taiKhoan', setIsUsernameError);
+    }
+    if (name === 'matKhau') {
+      setIsPasswordError(false);
+      validationLengthCheck(name, value, 'matKhau', setIsPasswordError);
+    }
+
+    // Set value of input
     setUserLogin({
       ...userLogin,
       [name]: value,
     });
   };
-  console.log(userLogin);
   const userSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(userSignUpAction(userLogin, history));
@@ -63,8 +69,8 @@ function SignUpPage() {
           {isModalShow && (
             <div>
               {/* eslint-disable */}
-            <div className="backdrop" onClick={closeModalHandler} />
-            {/* eslint-enable */}
+              <div className='backdrop' onClick={closeModalHandler} />
+              {/* eslint-enable */}
               <AlertModal
                 message={message}
                 goTo={goTo}
@@ -80,12 +86,7 @@ function SignUpPage() {
             <img src={logo} alt="movie" />
             <h5>Thế giới phim trên đầu ngón tay</h5>
             <div className="signIn__form">
-              <form
-                className={classes.root}
-                noValidate
-                autoComplete="off"
-                onSubmit={userSubmitHandler}
-              >
+              <form autoComplete="off" onSubmit={userSubmitHandler}>
                 <TextField
                   variant="filled"
                   color="secondary"
@@ -93,6 +94,7 @@ function SignUpPage() {
                   label="Họ và tên"
                   className="signIn__input"
                   name="hoTen"
+                  required
                   onChange={userLoginHandler}
                 />
                 <TextField
@@ -102,6 +104,13 @@ function SignUpPage() {
                   label="Tài Khoản"
                   className="signIn__input"
                   name="taiKhoan"
+                  error={isUsernameError}
+                  helperText={`${
+                    isUsernameError
+                      ? 'Username must be larger than 4 characters!'
+                      : ' '
+                  } `}
+                  required
                   onChange={userLoginHandler}
                 />
                 <TextField
@@ -111,6 +120,14 @@ function SignUpPage() {
                   label="Mật Khẩu"
                   className="signIn__input"
                   name="matKhau"
+                  error={isPasswordError}
+                  type="password"
+                  helperText={`${
+                    isPasswordError
+                      ? 'Password must be larger than 4 characters!'
+                      : ' '
+                  } `}
+                  required
                   onChange={userLoginHandler}
                 />
                 <TextField
@@ -120,6 +137,8 @@ function SignUpPage() {
                   label="Email"
                   className="signIn__input"
                   name="email"
+                  type="email"
+                  required
                   onChange={userLoginHandler}
                 />
                 <TextField
@@ -129,6 +148,8 @@ function SignUpPage() {
                   label="Số điện thoại"
                   className="signIn__input"
                   name="soDt"
+                  type="number"
+                  required
                   onChange={userLoginHandler}
                 />
                 <div className="signIn__button">
@@ -152,10 +173,10 @@ const Wrapper = styled.main`
     height: 100vh;
   }
   .signIn {
-    width: 350px;
-    padding: 20px 20px 0;
+    width: 20rem;
+    padding: 20px;
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
     /* background-image: linear-gradient(
@@ -180,7 +201,7 @@ const Wrapper = styled.main`
   .signIn__form {
     .signIn__button {
       width: 100%;
-      margin: 2rem auto;
+      margin: 1rem auto 0;
       .btn__watching {
         text-transform: none;
         width: 100%;
@@ -193,7 +214,7 @@ const Wrapper = styled.main`
     display: block;
     margin: 0 auto;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 1rem;
     background-color: rgba(160, 160, 160, 0.2);
     .MuiInputBase-root {
       width: 100%;
@@ -219,7 +240,7 @@ const Wrapper = styled.main`
   }
   @media screen and (min-width: 576px) {
     .signIn {
-      width: 450px;
+      width: 30rem;
     }
   }
 `;
