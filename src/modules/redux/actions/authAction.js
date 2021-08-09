@@ -5,8 +5,12 @@ import {
   USER_SIGN_UP_FAIL,
   USER_SIGN_UP_SUCCESS,
   USER_LOGIN_SUCCESS,
+  GET_USER_PROFILE_LOADING,
+  GET_USER_PROFILE_SUCCESS,
+  GET_USER_PROFILE_ERROR,
 } from './constantsAction.js';
 
+// SIGN IN PAGE
 export const userLoginAction = (loginData, history) => async (dispatch) => {
   const sendRequest = async (dataString) => {
     if (dataString.taiKhoan.replace(/ /g, '').length < 4) {
@@ -55,7 +59,7 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
     });
   }
 };
-
+// SIGN UP PAGE
 export const userSignUpAction = (signUpData, history) => async (dispatch) => {
   //
   const sendRequest = async (data1) => {
@@ -102,5 +106,35 @@ export const userSignUpAction = (signUpData, history) => async (dispatch) => {
         goTo: null,
       },
     });
+  }
+};
+
+// PROFILE PAGE
+
+export const getUserProfileAction = () => async (dispatch) => {
+  const userLogin = JSON.parse(localStorage.getItem('userLogin'));
+  const sendRequest = async () => {
+    dispatch({ type: GET_USER_PROFILE_LOADING });
+    const response = await fetch(
+      `${baseUrl}/QuanLyNguoiDung/ThongTinTaiKhoan`,
+      {
+        method: METHOD__HTTP.POST,
+        body: JSON.stringify({
+          taiKhoan: userLogin.taiKhoan,
+        }),
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json-patch+json',
+        },
+      }
+    );
+    const data = response.json();
+    return data;
+  };
+  try {
+    const data = await sendRequest();
+    dispatch({ type: GET_USER_PROFILE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: GET_USER_PROFILE_ERROR });
   }
 };

@@ -97,10 +97,7 @@ function HomePage() {
 
         {!isLoading && (
           <div>
-            <CarouselCoverflow
-              movieList={movieList}
-              className="carousel__overflow"
-            />
+            <CarouselCoverflow className="carousel__overflow" />
             <div id="homePage__search" />
 
             {/* <Carousel movieList={movieList} className="home__carousel" /> */}

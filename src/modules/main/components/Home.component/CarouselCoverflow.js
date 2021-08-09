@@ -12,7 +12,7 @@ import {
 } from '../../../utils/constants.js';
 import { carouselData } from '../../../utils/carouselData.js';
 
-function CarouselCoverflow({ movieList, className }) {
+function CarouselCoverflow({ className }) {
   const dispatch = useDispatch();
   const silde = [
     carouselData.slice(0).map((movie) => (
@@ -63,8 +63,8 @@ function CarouselCoverflow({ movieList, className }) {
     </motion.section>
   );
 }
-
-export default CarouselCoverflow;
+// Using React.memo to prevent re-render child component when parent component re-render - prevent every time CarouselCoverFlow re-render it will re-load the carousel again and harm to UX
+export default React.memo(CarouselCoverflow);
 const BigWrapper = styled.main`
   position: relative;
   .overlay {

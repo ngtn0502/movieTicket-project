@@ -313,7 +313,7 @@ svg {
   text-transform: uppercase;
   padding: 1rem 1rem;
   letter-spacing: var(--spacing);
-  color: #343a40;
+  color: var(--color-white);
   border: 1px solid #343a40;
   cursor: pointer;
   border-radius: var(--radius);
@@ -386,8 +386,10 @@ svg {
 } */
 /* .page-100 {
   height: calc(100vh - 5rem);
-  -top: 5rem;
 } */
+.page-95 {
+  height: calc(100% - 5rem);
+}
 .page {
   min-height: calc(100vh - (20vh + 10rem));
 }

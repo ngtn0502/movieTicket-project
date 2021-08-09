@@ -91,7 +91,16 @@ function Footer() {
         </div>
       </div>
       <div className="footer__copy">
-        <h2>© 2021 - Cinema Website | Developed By NhanNguyen</h2>
+        <h2>
+          © 2021 - Cinema Website | Developed By{' '}
+          <a
+            href="http://nhannguyen.netlify.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            NhanNguyen
+          </a>
+        </h2>
         <h2>For educational purpose</h2>
       </div>
     </Wrapper>
@@ -281,6 +290,9 @@ const Wrapper = styled.footer`
     }
     .footer__copy {
       padding: 1rem;
+      a {
+        color: var(--color-black);
+      }
     }
   }
 `;

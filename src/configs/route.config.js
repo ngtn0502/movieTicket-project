@@ -2,6 +2,7 @@ import BookingPage from '../modules/main/pages/BookingPage.js';
 import HomePage from '../modules/main/pages/HomePage';
 import MovieDetailsPage from '../modules/main/pages/MovieDetailsPage.js';
 import NewsPage from '../modules/main/pages/NewsPages.js';
+import ProfilePage from '../modules/main/pages/ProfilePage.js';
 
 export const mainRoutes = [
   {
@@ -18,6 +19,11 @@ export const mainRoutes = [
     path: '/news',
     exact: true,
     Component: <BookingPage />,
+  },
+  {
+    path: '/profile',
+    exact: true,
+    Component: <ProfilePage />,
   },
 ];
 

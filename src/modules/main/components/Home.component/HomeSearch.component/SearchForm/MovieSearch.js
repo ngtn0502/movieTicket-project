@@ -149,7 +149,7 @@ export default function MovieSearch() {
           {scheduleChoose === '' ? null : (
             <div className="search__btn">
               <Link
-                to={`/booking/${movieByCinema[0].maLichChieu}`}
+                to={`/booking/${movieByCinema[0]?.maLichChieu}`}
                 className="booking__button"
               >
                 Avaiable Now
