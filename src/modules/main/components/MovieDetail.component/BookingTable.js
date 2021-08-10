@@ -49,8 +49,8 @@ function BookingTable({ movies, cinema }) {
         key={cinema}
         className='booking__table'
       >
-        <div className='booking__table--map'>
-          <div>{getCinema(cinema)}</div>
+        <div className='booking__table--logo'>
+          <div className='logo'>{getCinema(cinema)}</div>
           {/* eslint-enable */}
         </div>
         <div className="booking__info">
@@ -79,7 +79,7 @@ const Wrapper = styled.section`
       height: 400px;
     }
   }
-  .booking__table--map {
+  .booking__table--logo {
     display: none;
   }
   @media screen and (min-width: 1000px) {
@@ -92,7 +92,7 @@ const Wrapper = styled.section`
         height: 400px;
       }
     }
-    .booking__table--map {
+    .booking__table--logo {
       display: block;
     }
     .booking__info {

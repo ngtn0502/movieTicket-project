@@ -163,5 +163,7 @@ export const uiReducer = (state = init, action) => {
       isScheduleEmpty: true,
     };
   }
+  // PROFILE PAGE
+
   return { ...state };
 };

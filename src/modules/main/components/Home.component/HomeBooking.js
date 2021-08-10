@@ -38,7 +38,7 @@ export const loadingScheduleVariants = {
 };
 
 function HomeBooking() {
-  const { cineplexList, movieByCineplex } = useSelector(
+  const { cineplexList, movieByCineplex, isLoading } = useSelector(
     (state) => state.homeReducer
   );
 
@@ -201,6 +201,7 @@ const Wrapper = styled.main`
   .accorditon {
     background-color: transparent;
   }
+  /*  */
   .desktop {
     display: none;
   }

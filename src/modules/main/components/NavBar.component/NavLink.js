@@ -9,6 +9,11 @@ function NavLink({
   isLoginSuccess,
   userLogin,
 }) {
+  console.log(
+    '🚀 ~ file: NavLink.js ~ line 12 ~ isLoginSuccess',
+    isLoginSuccess
+  );
+  console.log('🚀 ~ file: NavLink.js ~ line 12 ~ userLogin', userLogin);
   // const history = useHistory();
   // const navLinkHandler = (item) => {
   //   if (item.id === '4') {
@@ -39,7 +44,7 @@ function NavLink({
             </li>
           </Link>
         ))}
-        {isLoginSuccess || userLogin && (
+        {(isLoginSuccess || userLogin) && (
           <li
             className='nav_link mobile'
             key={5}

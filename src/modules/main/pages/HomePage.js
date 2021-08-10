@@ -59,7 +59,7 @@ function HomePage() {
       initial="hidden"
       animate="visible"
     >
-      <Wrapper className="page-100">
+      <Wrapper className="page-100" id="homepage">
         {isLoading && <Loading />}
         <AnimatePresence>
           {isTrailerShow && (

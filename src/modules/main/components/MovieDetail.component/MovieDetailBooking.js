@@ -20,6 +20,22 @@ function MovieDetailBooking({ movies }) {
   const maHeThongRap = movies.lichChieu?.filter(
     (item) => item.thongTinRap.maHeThongRap === cinema
   );
+  // Get cinema picture respective with what user choose
+  const getCinemaPicture = (img, setString) => (
+    /* eslint-disable */
+    <div
+      className='booking__cinema--main'
+      onClick={() => {
+        setCinema(setString);
+      }}
+    >
+      <img src={img} alt='cinema' />
+      <div
+        className={`${cinema === setString ? 'active__cinema' : 'overlay'}`}
+      />
+    </div>
+    /* eslint-enable */
+  );
   return (
     <Wrapper>
       {/* eslint-disable */}
@@ -27,69 +43,12 @@ function MovieDetailBooking({ movies }) {
         <div className='booking'>
           <h5 className='booking__title'>CHỌN RẠP CHIẾU</h5>
           <div className='booking__cinema'>
-            {/*  */}
-            <div
-              className='booking__cinema--main'
-              onClick={() => {
-                setCinema('LotteCinima');
-              }}
-            >
-              <img src={lotte} alt='cinema' />
-              <div
-                className={`${cinema === 'LotteCinima' ? null : 'overlay'}`}
-              />
-            </div>
-            {/*  */}
-            <div
-              className='booking__cinema--main'
-              onClick={() => {
-                setCinema('CGV');
-              }}
-            >
-              <img src={cgv} alt='cinema' />
-              <div className={`${cinema === 'CGV' ? null : 'overlay'}`} />
-            </div>
-            {/*  */}
-
-            <div
-              className='booking__cinema--main'
-              onClick={() => {
-                setCinema('BHDStar');
-              }}
-            >
-              <img src={bhd} alt='cinema' />
-              <div className={`${cinema === 'BHDStar' ? null : 'overlay'}`} />
-            </div>
-            {/*  */}
-            <div
-              className='booking__cinema--main'
-              onClick={() => {
-                setCinema('CineStar');
-              }}
-            >
-              <img src={cinestar} alt='cinema' />
-              <div className={`${cinema === 'CineStar' ? null : 'overlay'}`} />
-            </div>
-            {/*  */}
-            <div
-              className='booking__cinema--main'
-              onClick={() => {
-                setCinema('Galaxy');
-              }}
-            >
-              <img src={galaxy} alt='cinema' />
-              <div className={`${cinema === 'Galaxy' ? null : 'overlay'}`} />
-            </div>
-            {/*  */}
-            <div
-              className='booking__cinema--main'
-              onClick={() => {
-                setCinema('MegaGS');
-              }}
-            >
-              <img src={megas} alt='cinema' />
-              <div className={`${cinema === 'MegaGS' ? null : 'overlay'}`} />
-            </div>
+            {getCinemaPicture(lotte, 'LotteCinima')}
+            {getCinemaPicture(cgv, 'CGV')}
+            {getCinemaPicture(bhd, 'BHDStar')}
+            {getCinemaPicture(cinestar, 'CineStar')}
+            {getCinemaPicture(galaxy, 'Galaxy')}
+            {getCinemaPicture(megas, 'MegaGS')}
           </div>
           {/* Booking  */}
           <div className='booking__table'>
@@ -125,14 +84,26 @@ const Wrapper = styled.section`
         background: rgba(0, 0, 0, 0.8);
       }
     }
+    .active__cinema {
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -1rem;
+        height: 2px;
+        width: 100%;
+        right: 1rem;
+        background-color: #fb4226;
+        box-shadow: 0 -4px 10px 1px #fb4226;
+      }
+    }
     img {
       width: 5rem;
       height: 5rem;
       border-radius: 50%;
+      /* margin: 0 auto; */
       margin-right: 2rem;
     }
   }
-  @media screen and (min-width: 700px){
-
+  @media screen and (min-width: 700px) {
   }
 `;

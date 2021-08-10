@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FiUser, FiMenu } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { HashLink } from 'react-router-hash-link';
 import logo from '../../../../assets/img/logo-full.png';
 import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
 import NavLink from './NavLink.js';
@@ -14,6 +15,10 @@ import {
 
 function Navbar() {
   const [isSideBarShow, setIsSideBarShow] = useState(false);
+  console.log(
+    '🚀 ~ file: Navbar.js ~ line 18 ~ Navbar ~ isSideBarShow',
+    isSideBarShow
+  );
   const history = useHistory();
   const dispatch = useDispatch();
   const { isLoginSuccess, loginData } = useSelector(
@@ -56,10 +61,11 @@ function Navbar() {
     <Wrapper>
       <div className={`nav__bar ${isSideBarScroll && 'nav__scrollDown'}`}>
         <div className="nav">
+          {/* DESKTOP */}
           <div className="nav_logo">
-            <Link to="/home">
+            <HashLink to="/home#homepage">
               <img src={logo} alt="logo" />
-            </Link>
+            </HashLink>
           </div>
           <div className="nav_links">
             <NavLink
@@ -74,7 +80,6 @@ function Navbar() {
                 <Link to="/profile" className="nav_login--title">
                   {loginData?.hoTen || userLogin.hoTen}
                 </Link>
-
                 <button type="button" onClick={logoutHandler}>
                   LOG OUT
                 </button>
@@ -132,12 +137,16 @@ function Navbar() {
           <div className='sideBar__links'>
             <div className='nav_login'>
               {isLoginSuccess || userLogin ? (
-                <>
+                <div
+                  onClick={() => {
+                    setIsSideBarShow(false);
+                  }}
+                >
                   <FiUser />
                   <Link to='/profile' className='nav_login--title'>
                     {loginData?.hoTen || userLogin.hoTen}
                   </Link>
-                </>
+                </div>
               ) : (
                 <>
                   <Link

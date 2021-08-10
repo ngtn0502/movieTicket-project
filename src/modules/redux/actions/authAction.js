@@ -8,6 +8,7 @@ import {
   GET_USER_PROFILE_LOADING,
   GET_USER_PROFILE_SUCCESS,
   GET_USER_PROFILE_ERROR,
+  USER_PROFILE_UPDATE_SUCCESS,
 } from './constantsAction.js';
 
 // SIGN IN PAGE
@@ -136,5 +137,82 @@ export const getUserProfileAction = () => async (dispatch) => {
     dispatch({ type: GET_USER_PROFILE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: GET_USER_PROFILE_ERROR });
+  }
+};
+
+// UPDATE/CHANGE PROFILE INFORMATION
+
+export const changeProfileUserAction = (userData) => async (dispatch) => {
+  const userLogin = JSON.parse(localStorage.getItem('userLogin'));
+  const sendRequest = async (data1) => {
+    const response = await fetch(
+      `${baseUrl}/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+      {
+        method: METHOD__HTTP.PUT,
+        body: JSON.stringify(data1),
+        headers: {
+          Authorization: `Bearer ${userLogin.accessToken}`,
+          accept: 'application/json',
+          'Content-Type': 'application/json-patch+json',
+        },
+      }
+    );
+    if (!response.ok) {
+      const error = await response.text();
+      throw Error(error);
+    }
+    const data = await response.json();
+    return data;
+  };
+  try {
+    const data = await sendRequest(userData);
+    console.log(
+      '🚀 ~ file: authAction.js ~ line 167 ~ changeProfileUserAction ~ data',
+      data
+    );
+    // dispatch({
+    //   type: USER_PROFILE_UPDATE_SUCCESS,
+    //   payload: {
+    //     type: 'Success',
+    //     message: 'Update information successfully!',
+    //     goTo: null,
+    //   },
+    // });
+  } catch (error) {
+    console.log(
+      '🚀 ~ file: authAction.js ~ line 180 ~ changeProfileUserAction ~ error',
+      error.message
+    );
+  }
+};
+
+// GET QR CODE
+
+export const getQRCodeAction = (qrText) => async (dispatch) => {
+  const sendRequest = async () => {
+    const response = await fetch(
+      `https://api.qr-code-generator.com/v1/create/
+`,
+      {
+        method: METHOD__HTTP.POST,
+        body: JSON.stringify({
+          frame_name: 'no-frame',
+          qr_code_text: qrText,
+          image_format: 'SVG',
+          qr_code_logo: 'scan-me-square',
+        }),
+      }
+    );
+    const data = response.json();
+    return data;
+  };
+  try {
+    const data = await sendRequest();
+    console.log(
+      '🚀 ~ file: authAction.js ~ line 211 ~ getQRCodeAction ~ data',
+      data
+    );
+  } catch (error) {
+    //
   }
 };

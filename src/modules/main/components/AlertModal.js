@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { motion } from 'framer-motion';
+import { HashLink } from 'react-router-hash-link';
 import {
   CLOSE_MODAL,
   RESET__AMOUNT,
@@ -62,7 +63,8 @@ function AlertModal({
       type: USER_BOOKING_SUCCESS,
       payload: {
         type: 'Success',
-        message: 'Đặt vé thành công, thông tin đặt vé đã gửi về email!',
+        message:
+          'You got it!, booking information will be send via your email!',
         goTo: '/home',
       },
     });
@@ -199,6 +201,19 @@ function AlertModal({
           <p className="alert__title">{message}</p>
           {message2 && <p className="alert__subTitle">{message2}</p>}
           <div className="alert__button">
+            {type === 'Success' &&
+              message ===
+                'You got it!, booking information will be send via your email!' && (
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  onClick={() => {
+                    dispatch({ type: CLOSE_MODAL });
+                  }}
+                >
+                  <HashLink to="/profile#transaction">Booking History</HashLink>
+                </button>
+              )}
             {type === 'Confirm' && (
               <button
                 type="button"
@@ -289,6 +304,9 @@ const Wrapper = styled.div`
     margin-top: 1.5rem;
     padding: 1rem 1.5rem;
     background-color: #44c020;
+  }
+  .btn-success {
+    background-color: var(--color-choosingSeat);
   }
   .btn__cancel {
     background: #4a4a4a;
