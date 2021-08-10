@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import format from 'date-format';
-import { useHistory } from 'react-router';
-import { FlexCenter } from '../../../utils/mixin.js';
 // Cinema
 
 import bhd from '../../../../assets/img/cinema/bhd-star-cineplex.png';
@@ -14,7 +11,6 @@ import megas from '../../../../assets/img/cinema/megags.png';
 import BookingTable from './BookingTable.js';
 //
 function MovieDetailBooking({ movies }) {
-  const history = useHistory();
   const [cinema, setCinema] = useState('CGV');
   // Tương ứng vớI mỗi click event trên logo rạp ta lọc ra các lịch chiếu phim `params` của rạp đó và truyền vào booking table
   const maHeThongRap = movies.lichChieu?.filter(
@@ -41,7 +37,7 @@ function MovieDetailBooking({ movies }) {
       {/* eslint-disable */}
       <main className='section-middle'>
         <div className='booking'>
-          <h5 className='booking__title'>CHỌN RẠP CHIẾU</h5>
+          <h5 className='booking__title'>CHOOSING CINEMAS</h5>
           <div className='booking__cinema'>
             {getCinemaPicture(lotte, 'LotteCinima')}
             {getCinemaPicture(cgv, 'CGV')}

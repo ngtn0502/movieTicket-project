@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, FlexCenter, FlexHCenter } from '../../../utils/mixin.js';
+import { FlexCenter } from '../../../utils/mixin.js';
 
 function BookingFotter({ choosingSeat, className, setIsSideBarShow }) {
-  console.log(choosingSeat);
   return (
     <Wrapper className={className}>
       <section className="booking__fotter">

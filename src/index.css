@@ -250,7 +250,7 @@ button {
     width: 95vw;
   }
   .section-middle {
-    width: 95vw;
+    width: 70vw;
     margin: 0 auto;
     max-width: var(--max-width);
   }
@@ -458,7 +458,7 @@ svg {
   --slice-4: inset(40% -6px 43% 0);
   --slice-5: inset(80% -6px 5% 0);
 
-  content: 'ĐẶT VÉ';
+  content: 'AVAILABLE NOW';
   display: block;
   position: absolute;
   top: 0;
@@ -527,3 +527,5 @@ svg {
     transform: translate(0);
   }
 }
+
+/* Responsive */

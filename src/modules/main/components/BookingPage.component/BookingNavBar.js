@@ -1,17 +1,15 @@
 import React from 'react';
 import { FiUser } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../../../assets/img/logo-full.png';
-import { Flex, FlexCenter, FlexHCenter } from '../../../utils/mixin.js';
+import { Flex, FlexCenter } from '../../../utils/mixin.js';
 
 let userLogin;
 if (localStorage.getItem('userLogin')) {
   userLogin = JSON.parse(localStorage.getItem('userLogin'));
 }
 function BookingNavBar() {
-  const history = useHistory();
-
   return (
     <Wrapper>
       <section className="nav">

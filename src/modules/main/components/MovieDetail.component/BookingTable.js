@@ -29,7 +29,6 @@ function BookingTable({ movies, cinema }) {
     ?.map((item) => item.ngayChieuGioChieu)
     .map((item) => format(`MM / dd / yyyy`, new Date(item)));
   const ngayChieuAllUnique = [...new Set(ngayChieuAll)];
-  console.log(ngayChieuAllUnique);
   useEffect(() => {
     setNgayChieu([getDay(new Date(ngayChieuAllUnique[0]))]);
   }, [cinema]);

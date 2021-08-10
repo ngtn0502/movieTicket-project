@@ -72,10 +72,8 @@ export default function BookingInfo({
     setValue(newValue);
   };
   useEffect(() => {
-    console.log('Change cinema');
     setValue(0);
   }, [cinema]);
-  // console.log(value);
   const ngayChieuHandler = (item) => {
     setNgayChieu([getDay(new Date(item))]);
   };
@@ -94,11 +92,7 @@ export default function BookingInfo({
     });
     return arr;
   };
-  // debugger;
-  // console.log(lichChieuDuyNhat(dateChieu));
-  // console.log(ngayChieuAllUnique);
-  // console.log(dateChieu);
-  // console.log(value);
+
   return (
     <Wrapper>
       <div className={classes.root}>
@@ -130,7 +124,7 @@ export default function BookingInfo({
             {ngayChieuAllUnique.length === 0 && (
               <div className='bookingInfo__notfound'>
                 <Typography component={'span'} variant={'body2'}>
-                  Không tìm thấy lịch chiếu
+                  THERE ARE NO MOVIE SHOWING NOW
                 </Typography>
               </div>
             )}
@@ -138,7 +132,6 @@ export default function BookingInfo({
           </Tabs>
         </AppBar>
         {/* {dateChieu?.map((item, i) => {
-          console.log(item.thongTinRap.tenCumRap);
           return (
             <TabPanel value={value} index={i} className='tabPanel' key={i}>
               <div className='tabPanel__btn'>

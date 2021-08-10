@@ -1,24 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import format from 'date-format';
-import { MdLocalMovies, MdMovie } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
 import schedule from '../../../../assets/img/movie.png';
 import { FlexHCenter } from '../../../utils/mixin.js';
 import { getCinemaLogo } from '../../../utils/constants.js';
-import { getQRCodeAction } from '../../../redux/actions/authAction.js';
 import CircleLoading from '../CircleLoading';
 
 function ProfileTransaction({ className, thongTinDatVe }) {
-  const dispatch = useDispatch();
-  // const getQRCode = (qrText) => {
-  //   dispatch(getQRCodeAction(qrText));
-  // };
+  const [isImgLoading, setIsImgLoading] = useState(false);
   return (
     <Wrapper className={`${className}`}>
       <div className="transaction">
         {thongTinDatVe?.map((item) => (
-          // getQRCode(item.maVe);
           <>
             {' '}
             <img src={schedule} alt="" className="transaction__icon" />
@@ -54,13 +47,22 @@ function ProfileTransaction({ className, thongTinDatVe }) {
                 </div>
               </div>{' '}
               <div className="transasction__qrCode">
-                {(
-                  <img
-                    src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${item.maVe}`}
-                    alt="qrCode"
-                  />
-                ) || <CircleLoading />}
-                <p>QR CODE FOR TICKET</p>
+                <img
+                  src={`https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${item.maVe}&choe=UTF-8`}
+                  alt="qrCode"
+                  onLoad={() => setIsImgLoading(true)}
+                  className="desktop"
+                />{' '}
+                <img
+                  src={`https://chart.googleapis.com/chart?chs=500x200&cht=qr&chl=${item.maVe}&choe=UTF-8`}
+                  alt="qrCode"
+                  onLoad={() => setIsImgLoading(true)}
+                  className="mobile"
+                />
+                {!isImgLoading && <CircleLoading />}
+                <p>
+                  {isImgLoading ? 'QR CODE FOR TICKET' : 'GENERATING QR CODE'}
+                </p>
               </div>
             </div>
             <hr />
@@ -74,16 +76,10 @@ function ProfileTransaction({ className, thongTinDatVe }) {
 export default ProfileTransaction;
 const Wrapper = styled.div`
   .transaction__icon {
-    height: 100%;
-    width: 6rem;
-    /* padding-bottom: 1rem; */
-    margin: 0 auto;
+    display: none;
   }
 
   .transaction__item {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1rem;
     p {
       font-size: 1.25rem;
       padding: 0.5rem 0;
@@ -112,9 +108,40 @@ const Wrapper = styled.div`
       flex-direction: column;
       align-items: center;
       img {
-        width: 50%;
-        height: auto;
+        /* width: 5rem; */
+        /* height: 5rem; */
         margin-bottom: 0.25rem;
+      }
+    }
+  }
+  .desktop {
+    display: none;
+  }
+
+  @media screen and (min-width: 576px) {
+    .desktop {
+      display: block;
+    }
+    .mobile {
+      display: none;
+    }
+    .transaction__icon {
+      display: block;
+      height: 100%;
+      width: 6rem;
+      /* padding-bottom: 1rem; */
+      margin: 0 auto;
+    }
+
+    .transaction__item {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      align-items: center;
+      gap: 1rem;
+      .transasction__qrCode {
+        img {
+          width: 50%;
+        }
       }
     }
   }

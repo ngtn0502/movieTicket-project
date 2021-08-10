@@ -10,7 +10,7 @@ import {
   randomNumber,
 } from '../../../utils/helper.js';
 import imdbLogo from '../../../../assets/img/imdb-logo.png';
-import { FlexHCenter, FlexVCenter } from '../../../utils/mixin';
+import { FlexVCenter } from '../../../utils/mixin';
 import ButtonMovie from './ButtonMovie.js';
 import MovieClass from '../Home.component/MovieClass';
 import { movieDetailContent, loadingVariants } from '../../../utils/constants';
@@ -35,31 +35,20 @@ function MovieInfor({ movieDetail, movie }) {
               }}
             >
               <FaPlay />
-              <span>Xem trailer</span>
+              <span>TRAILER</span>
             </ButtonMovie>
           </div>
           <div className="movieInfor__bottom">
             <h5 className="title"> {movieDetail.tenPhim} (2020)</h5>
             <p className="subtitle__meta">
               <MovieClass />
-              {randomDuration()} phút
+              {randomDuration()} minutes
             </p>
             <div className="subtitle__imdb">
               <img src={imdbLogo} alt="" />
               <span className="subtitle__meta">{randomNumber()} ++</span>
             </div>
             {/*  */}
-            <div className="movieInfor__sharing">
-              <HashLink className="movieInfor__sharing--btn btn__save">
-                <ButtonMovie className="btn__save">+ Đặt vé</ButtonMovie>
-              </HashLink>
-              <div className="movieInfor__sharing--btn ">
-                <ButtonMovie>
-                  <FaFacebookSquare />
-                  Chia sẻ
-                </ButtonMovie>
-              </div>
-            </div>
             {/*  */}
             {/*  */}
             <div className="movieInfor__detail">
@@ -70,13 +59,13 @@ function MovieInfor({ movieDetail, movie }) {
                 </p>
               ))}
               <p className="movieInfor__detail--item">
-                <span className="subtitle">Ngày công chiếu: </span>
+                <span className="subtitle">Release date: </span>
                 <span className="subtitle__detail">
                   {converDate(movieDetail.ngayKhoiChieu)}
                 </span>
               </p>
               <p className="movieInfor__detail--item">
-                <span className="subtitle">Nội dung: </span>
+                <span className="subtitle">Overview: </span>
               </p>
               <p className="subtitle__detail--content">{movie.moTa}</p>
             </div>
@@ -124,7 +113,6 @@ const Wrapper = styled.main`
     color: var(--color-white);
   }
   .movieInfor__detail {
-    margin-top: 2rem;
     .movieInfor__detail--item {
       margin-top: 1rem;
 

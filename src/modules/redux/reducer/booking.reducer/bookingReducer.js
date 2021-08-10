@@ -1,6 +1,5 @@
 import {
   GET_CINE_ROOM_SUCCESS,
-  GET_CINE_ROOM_ERROR,
   GET_CINE_ROOM_LOADING,
   CHOOSING_SEAT,
   RESET__AMOUNT,
@@ -37,9 +36,7 @@ export const bookingReducer = (state = init, action) => {
     const oldSeat = [...state.cineSeatList];
     const seat = { ...action.payload };
     const index = oldSeat.findIndex((item) => item.maGhe === seat.maGhe);
-    console.log(state.cineSeatList);
     const updateSeat = { ...oldSeat[index] };
-    // console.log('asdasd', oldSeat[index]);
     if (updateSeat.dangChon) {
       state.totalAmount -= updateSeat.giaVe;
     } else {

@@ -1,36 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaBars, FaGlobe } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import {
-  footerCompany,
-  importantLinks,
-  socials,
-} from '../../../utils/constants';
-import bgImage from '../../../../assets/img/bg-popcorn.jpg';
+import { footerCompany, importantLinks } from '../../../utils/constants';
 import appStore from '../../../../assets/img/download/app_store.jpg';
 import windows from '../../../../assets/img/download/windows.jpg';
 import ggPlay from '../../../../assets/img/download/google_play.jpg';
 import { FlexCenter } from '../../../utils/mixin.js';
-
-const socialsVariants = {
-  hover: {
-    scale: 1.5,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
-const linksVariants = {
-  hover: {
-    scale: 1.5,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
 
 function Footer() {
   return (
@@ -84,9 +59,27 @@ function Footer() {
         <div className="footer__links">
           <h5 className="footer__links-title">Download</h5>
           <div className="footer__links-download subNameMovie">
-            <img src={appStore} alt="download" />
-            <img src={ggPlay} alt="download" />
-            <img src={windows} alt="download" />
+            <a
+              href="https://apps.apple.com/vn/app/apple-store/id375380948?l=vi"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={appStore} alt="download" />
+            </a>
+            <a
+              href="https://play.google.com/store"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={ggPlay} alt="download" />
+            </a>
+            <a
+              href="https://www.microsoft.com/vi-vn/store/apps/windows"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={windows} alt="download" />
+            </a>
           </div>
         </div>
       </div>
@@ -149,19 +142,22 @@ const Wrapper = styled.footer`
         input {
           height: 64px;
           width: 100%;
+          font-size: 1rem;
           padding-right: 160px;
-          color: #99abe2;
+          color: var(--color-black);
           border: 2px solid #31d7a9;
           border-radius: 50px;
           padding-left: 20px;
           box-shadow: 0 3px 10px 0 rgb(0 0 0 / 10%);
+          outline: none;
         }
         button {
           position: absolute;
           right: 6.5px;
           top: 6.5px;
           background: #31d7a9;
-          color: #050068;
+          font-size: 1rem;
+          color: var(--color-black);
           -webkit-box-shadow: 0 10px 15px 0 rgb(59 55 188 / 50%);
           box-shadow: 0 10px 15px 0 rgb(59 55 188 / 50%);
           width: auto;
@@ -215,21 +211,28 @@ const Wrapper = styled.footer`
     }
     .footer__links-content {
       color: var(--color-white);
+      font-weight: 500;
     }
     .footer__links-link {
       a {
+        font-weight: 500;
         display: inline-block;
         width: 100%;
         padding: 0 0 0.5rem;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
     .footer__links-download {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      img {
-        max-width: 30%;
-        border-radius: var(--radius);
+      a {
+        img {
+          max-width: 100%;
+          border-radius: var(--radius);
+        }
       }
     }
 
@@ -291,7 +294,10 @@ const Wrapper = styled.footer`
     .footer__copy {
       padding: 1rem;
       a {
-        color: var(--color-black);
+        color: var(--color-title);
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

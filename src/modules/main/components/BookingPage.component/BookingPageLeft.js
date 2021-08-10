@@ -1,18 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { motion } from 'framer-motion';
-import {
-  mapCGV,
-  mapLotte,
-  mapBHD,
-  mapCineStar,
-  mapGalaxy,
-  mapMegaGS,
-  loadingVariants,
-} from '../../../utils/constants.js';
-import { FlexCenter, FlexHCenter, FlexVCenter } from '../../../utils/mixin.js';
+import { loadingVariants } from '../../../utils/constants.js';
+import { FlexVCenter } from '../../../utils/mixin.js';
 import { choosingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
 import screen from '../../../../assets/img/bookingPage/screen.png';
 
@@ -35,27 +27,6 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
       return 'seat seat__choosingSeat';
     }
     return seat.loaiGhe === 'Vip' ? 'seat  seat__vipSeat' : 'seat';
-  };
-  //   Get cinema picture base on what movie user booked
-  const getCinema = () => {
-    if (cineRoomMovie?.tenCumRap?.split(' ')[0].toLowerCase() === 'cgv') {
-      return mapCGV;
-    }
-    if (cineRoomMovie?.tenCumRap?.split(' ')[0].toLowerCase() === 'lotte') {
-      return mapLotte;
-    }
-    if (cineRoomMovie?.tenCumRap?.split(' ')[0].toLowerCase() === 'bhd') {
-      return mapBHD;
-    }
-    if (cineRoomMovie?.tenCumRap?.split(' ')[0].toLowerCase() === 'cns') {
-      return mapCineStar;
-    }
-    if (cineRoomMovie?.tenCumRap?.split(' ')[0].toLowerCase() === 'glx') {
-      return mapGalaxy;
-    }
-    if (cineRoomMovie?.tenCumRap?.split(' ')[0].toLowerCase() === 'megags') {
-      return mapMegaGS;
-    }
   };
   useEffect(() => {
     bookingRef.current.scrollIntoView({ inline: 'center' });
@@ -96,6 +67,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -110,6 +82,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -124,6 +97,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -138,6 +112,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -152,6 +127,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -166,6 +142,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -180,6 +157,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -194,6 +172,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -208,6 +187,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -222,6 +202,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
                     onClick={() => {
                       selectSeatHandler(seat);
                     }}
+                    key={seat.maGhe}
                   >
                     {`${seat.stt}`}
                   </button>
@@ -234,19 +215,25 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
               <button type="button" className="seat seat__vipSeat">
                 {/* ewrưe */}
               </button>
-              <span>Ghế VIP</span>
+              <span>VIP Seat</span>
             </div>
             <div>
               <button type="button" className="seat">
                 {/* ewrưe */}
               </button>
-              <span>Ghế thường</span>
+              <span>Normal Seat</span>
             </div>
             <div>
               <button type="button" className="seat seat__selected">
                 {/* ewrưe */}
               </button>
-              <span>Ghế đã có người chọn</span>
+              <span>Reserved Seat</span>
+            </div>{' '}
+            <div>
+              <button type="button" className="seat seat__choosingSeat">
+                {/* ewrưe */}
+              </button>
+              <span>Selected Seat</span>
             </div>
           </div>
         </div>
@@ -259,7 +246,7 @@ export default BookingPageLeft;
 const Wrapper = styled.section`
   padding-bottom: 5rem;
   .booking__info {
-    margin: 5rem 0 0;
+    margin: 7rem 0 0;
     .booking__info--name {
       display: flex;
       span {

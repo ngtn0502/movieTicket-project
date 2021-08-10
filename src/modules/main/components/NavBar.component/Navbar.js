@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FiUser, FiMenu } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
+import { FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashLink } from 'react-router-hash-link';
 import logo from '../../../../assets/img/logo-full.png';
@@ -9,17 +9,12 @@ import { Flex, FlexCenter, FlexVCenter } from '../../../utils/mixin';
 import NavLink from './NavLink.js';
 import {
   CLOSE_MODAL,
-  USER_LOGOUT,
   USER_LOGOUT_ALERT,
 } from '../../../redux/actions/constantsAction.js';
 
 function Navbar() {
   const [isSideBarShow, setIsSideBarShow] = useState(false);
-  console.log(
-    '🚀 ~ file: Navbar.js ~ line 18 ~ Navbar ~ isSideBarShow',
-    isSideBarShow
-  );
-  const history = useHistory();
+
   const dispatch = useDispatch();
   const { isLoginSuccess, loginData } = useSelector(
     (state) => state.authReducer
@@ -106,7 +101,7 @@ function Navbar() {
       </div>
       <div className='sideBar__toggle'>
         <div
-          class='menuToggle'
+          className='menuToggle'
           onClick={() => setIsSideBarShow((prev) => !prev)}
         >
           {/* eslint-enable */}

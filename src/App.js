@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -7,13 +7,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import HomePage from './modules/main/pages/HomePage';
-import MovieDetailsPage from './modules/main/pages/MovieDetailsPage';
 import SignInPage from './modules/main/pages/SignInPage';
-import NewsPage from './modules/main/pages/NewsPages';
-import ErrorPage from './modules/main/pages/ErrorPage';
 import Navbar from './modules/main/components/NavBar.component/Navbar';
-import Footer from './modules/main/components/Footer.component/Footer';
 import BookingPage from './modules/main/pages/BookingPage';
 import SingUpPage from './modules/main/pages/SingUpPage';
 import { mainRoutes } from './configs/route.config';
@@ -24,7 +19,7 @@ function App() {
     mainRoutes.map((item) => {
       const { path, Component, exact } = item;
       return (
-        <Route path={path} exact={exact}>
+        <Route path={path} exact={exact} key={item.id}>
           <MainTemplates>{Component}</MainTemplates>
         </Route>
       );

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -11,7 +11,7 @@ import {
   USER_LOGOUT,
   USER_LOGOUT_SUCCESS,
 } from '../../redux/actions/constantsAction.js';
-import { FlexHCenter, FlexVCenter } from '../../utils/mixin';
+import { FlexVCenter } from '../../utils/mixin';
 import { bookingSeatAction } from '../../redux/actions/BookingAction/bookingAction.js';
 
 const alertModalVariants = {
@@ -35,7 +35,6 @@ function AlertModal({
   message2,
   choosingSeat,
   cineRoomMovie,
-  className,
 }) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -94,7 +93,7 @@ function AlertModal({
       type: USER_LOGOUT_SUCCESS,
       payload: {
         type: 'Success',
-        message: 'Đăng xuất thành công',
+        message: 'Log out successfully',
         goTo: '/home',
       },
     });
@@ -220,7 +219,7 @@ function AlertModal({
                 className="btn btn-paying"
                 onClick={acceptModalHandler}
               >
-                Đặt vé
+                Booking
               </button>
             )}
             {!(type === 'Logout') ? (
@@ -229,7 +228,7 @@ function AlertModal({
                 className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
                 onClick={closeModalHandler}
               >
-                {type === 'Confirm' ? 'Hủy' : 'Ok'}
+                {type === 'Confirm' ? 'Cancel' : 'Ok'}
               </button>
             ) : (
               <button

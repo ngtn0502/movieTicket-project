@@ -16,7 +16,7 @@ function CarouselCoverflow({ className }) {
   const dispatch = useDispatch();
   const silde = [
     carouselData.slice(0).map((movie) => (
-      <div className="carousel__slider">
+      <div className="carousel__slider" key={movie.maPhim}>
         <FaPlay
           className="playVideo"
           onClick={() => {
@@ -25,8 +25,8 @@ function CarouselCoverflow({ className }) {
         />
         <div className="carousel__button">
           <Link to={`/movie-details/${movie.maPhim}`}>
-            <button type="button" className="booking__button">
-              ĐẶT VÉ
+            <button type="button" className="btn__watching">
+              Available Now
             </button>
           </Link>
         </div>
@@ -118,17 +118,19 @@ const Wrapper = styled.div`
       opacity: 0;
       z-index: 2;
       transition: var(--transition);
-      .btn__watching {
-        margin: 0;
-        padding: 0.5rem 1rem;
-      }
     }
     .carousel__button {
       position: absolute;
       opacity: 0;
       bottom: 0;
       left: 50%;
-      transform: translateX(-50%);
+      width: 100%;
+      transform: translate(-50%, 100%);
+      transition: var(--transition);
+      .btn__watching {
+        /* font-size: 1.25rem; */
+        width: 100%;
+      }
     }
   }
   .carousel__slider:hover .booking__button {

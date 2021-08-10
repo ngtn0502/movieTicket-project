@@ -35,7 +35,6 @@ export const homeReducer = (state = init, action) => {
     };
   }
   if (action.type === GET_MOVIE_LIST_SUCCESS) {
-    console.log('payload', action.payload);
     return {
       ...state,
       isLoading: false,

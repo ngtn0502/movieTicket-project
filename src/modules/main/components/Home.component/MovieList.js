@@ -10,14 +10,10 @@ import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 
 // import Swiper core and required modules
-import SwiperCore, { Autoplay, Navigation } from 'swiper/core';
+import SwiperCore, { Navigation } from 'swiper/core';
 import { motion } from 'framer-motion';
 import MovieCard from './MovieCard';
-import {
-  loadingVariants,
-  loadingVariants2,
-  today,
-} from '../../../utils/constants.js';
+import { loadingVariants, today } from '../../../utils/constants.js';
 
 // install Swiper modules
 SwiperCore.use([Navigation]);
@@ -36,17 +32,6 @@ export default function Carousel({ movieLists }) {
     setTypeMovie(false);
   };
   // Render movie list
-  const renderMovieList = () => {
-    for (let i = 18; i < movieList.length; i + 8) {
-      return (
-        <SwiperSlide className="movie__list">
-          {movieList.slice(i, i + 8).map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
-        </SwiperSlide>
-      );
-    }
-  };
   return (
     <motion.section
       variants={loadingVariants}
@@ -61,14 +46,14 @@ export default function Carousel({ movieLists }) {
             className={`btn2 ${typeMovie ? `btn2__active` : null}`}
             onClick={currentMovieHandler}
           >
-            Đang chiếu
+            NOW SHOWING
           </button>
           <button
             type="button"
             className={`btn2 ${!typeMovie ? `btn2__active` : null}`}
             onClick={comingMovieHandler}
           >
-            Sắp chiếu
+            COMING SOON
           </button>
         </div>
         {/* For screen > 800px */}
@@ -86,12 +71,12 @@ export default function Carousel({ movieLists }) {
             <>
               <SwiperSlide className="movie__list">
                 {movieList.slice(0, 8).map((movie) => (
-                  <MovieCard movie={movie} />
+                  <MovieCard movie={movie} key={movie.maPhim} />
                 ))}
               </SwiperSlide>
               <SwiperSlide className="movie__list">
                 {movieList.slice(8, 16).map((movie) => (
-                  <MovieCard movie={movie} />
+                  <MovieCard movie={movie} key={movie.maPhim} />
                 ))}
               </SwiperSlide>
             </>
@@ -101,12 +86,12 @@ export default function Carousel({ movieLists }) {
             <>
               <SwiperSlide className="movie__list">
                 {movieList.slice(16, 24).map((movie) => (
-                  <MovieCard movie={movie} />
+                  <MovieCard movie={movie} key={movie.maPhim} />
                 ))}
               </SwiperSlide>
               <SwiperSlide className="movie__list">
-                {movieList.slice(24).map((movie) => (
-                  <MovieCard movie={movie} />
+                {movieList.slice(24, 24 + 8).map((movie) => (
+                  <MovieCard movie={movie} key={movie.maPhim} />
                 ))}
               </SwiperSlide>
             </>
@@ -117,14 +102,14 @@ export default function Carousel({ movieLists }) {
           {typeMovie && (
             <>
               {movieList.slice(0, 8).map((movie) => (
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} key={movie.maPhim} />
               ))}
             </>
           )}{' '}
           {!typeMovie && (
             <>
               {movieList.slice(8, 16).map((movie) => (
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} key={movie.maPhim} />
               ))}
             </>
           )}

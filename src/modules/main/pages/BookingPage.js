@@ -7,11 +7,14 @@ import Loading from '../components/Loading.js';
 import { getCineRoomAction } from '../../redux/actions/BookingAction/getCineRoomAction';
 import BookingPageLeft from '../components/BookingPage.component/BookingPageLeft.js';
 import BookingPageRight from '../components/BookingPage.component/BookingPageRight.js';
-import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
+import {
+  CLOSE_MODAL,
+  RESET__AMOUNT,
+} from '../../redux/actions/constantsAction.js';
 import AlertModal from '../components/AlertModal.js';
-import BookingNavBar from '../components/BookingPage.component/BookingNavBar.js';
 import BookingFotter from '../components/BookingPage.component/BookingFotter.js';
 import { loadingVariants, loadingVariants4 } from '../../utils/constants.js';
+import ScrollToTop from '../components/ScrollToTop.js';
 
 function BookingPage() {
   const history = useHistory();
@@ -33,6 +36,9 @@ function BookingPage() {
       history.push(goTo);
     }
   };
+  useEffect(() => {
+    dispatch({ type: RESET__AMOUNT });
+  }, []);
   //
   // fetch Api phòng chiếu của bộ phim tương ứng vơi mã rạp chiếu trong chi tiết bộ phim
   useEffect(() => {
@@ -71,6 +77,7 @@ function BookingPage() {
         {isLoading && <Loading />}
         {!isLoading && (
           <main className="booking section-middle">
+            {' '}
             <BookingPageLeft
               className="left"
               cineSeatList={cineSeatList}

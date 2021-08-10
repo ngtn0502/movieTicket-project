@@ -1,32 +1,30 @@
 import format from 'date-format';
-import React, { forwardRef, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { randomDuration, randomNumber } from '../../../utils/helper.js';
-import { FlexCenter, FlexHCenter } from '../../../utils/mixin.js';
+import { FlexHCenter } from '../../../utils/mixin.js';
 import MovieClass from './MovieClass.js';
 import imdbLogo from '../../../../assets/img/imdb-logo.png';
 import { today } from '../../../utils/constants.js';
 
-function HomeBookingSchedule(props, ref) {
-  const { danhSachPhim, className, style, isEmptyHandler } = props;
+function HomeBookingSchedule(props) {
+  const { danhSachPhim, className } = props;
   const renderSchedule = () =>
-    danhSachPhim?.map((item) => {
+    danhSachPhim?.map((item, i) => {
       const lstLichChieuTheoPhim = item.lstLichChieuTheoPhim.filter(
         (movie) => new Date(movie.ngayChieuGioChieu) > today()
       );
       if (lstLichChieuTheoPhim.length !== 0) {
         return (
-          <div className="homeBooking__schedule--item">
+          <div className="homeBooking__schedule--item" key={i}>
             <div className="item__info">
               <img src={item.hinhAnh} alt="" className="item__info--img" />
               <div>
                 <MovieClass />
                 <p className="nameMovie">{item.tenPhim}</p>
                 <div className="subNameMovie">
-                  <p>{randomDuration()} phút </p>
+                  <p>{randomDuration()} minutes </p>
                   <div className="subtitle__imdb">
                     <img src={imdbLogo} alt="" />
                     {randomNumber()} ++
@@ -35,8 +33,12 @@ function HomeBookingSchedule(props, ref) {
               </div>
             </div>
             <div className="item__schedule">
-              {lstLichChieuTheoPhim.slice(0, 6).map((lichChieu) => (
-                <Link className="btn" to={`/booking/${lichChieu.maLichChieu}`}>
+              {lstLichChieuTheoPhim.slice(0, 6).map((lichChieu, index) => (
+                <Link
+                  className="btn"
+                  to={`/booking/${lichChieu.maLichChieu}`}
+                  key={index}
+                >
                   {format(`hh:mm`, new Date(lichChieu.ngayChieuGioChieu))}
                 </Link>
               ))}
@@ -49,9 +51,7 @@ function HomeBookingSchedule(props, ref) {
   const checkRenderSchedule = () => {
     if (renderSchedule() !== undefined) {
       return renderSchedule()[0] === null ? (
-        <p className="item__empty btn2">
-          Không tìm thấy lịch chiếu trong cụm rạp này
-        </p>
+        <p className="item__empty btn2">THERE ARE NO MOVIE SHOWING NOW</p>
       ) : (
         renderSchedule()
       );

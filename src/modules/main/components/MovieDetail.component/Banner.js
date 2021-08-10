@@ -6,10 +6,6 @@ import { motion } from 'framer-motion';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
 import { loadingVariants } from '../../../utils/constants.js';
 
-// // i use hard link cause lack of trailer in api
-
-// const trailer = 'https://www.youtube.com/embed/K0eDlFX9GMc';
-
 function Banner({ movie }) {
   const dispatch = useDispatch();
   return (

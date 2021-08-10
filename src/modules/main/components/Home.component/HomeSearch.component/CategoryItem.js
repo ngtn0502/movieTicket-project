@@ -3,7 +3,7 @@ import { HashLink } from 'react-router-hash-link';
 import styled from 'styled-components';
 import { FlexCenter } from '../../../../utils/mixin.js';
 
-function CategoryItem({ searchMovie, message, onClick, to }) {
+function CategoryItem({ searchMovie, message, to }) {
   return (
     <Wrapper>
       <HashLink to={to}>
@@ -25,7 +25,11 @@ const Wrapper = styled.div`
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 50%);
     border-radius: 10px;
     padding: 0.5rem 2rem;
-
+    transition: var(--transition);
+    &:hover {
+      box-shadow: 0px 10px 15px 0px rgb(160 160 160 / 50%);
+      background-color: rgb(10, 63, 73, 0.7);
+    }
     img {
       width: 2rem;
       height: 2rem;

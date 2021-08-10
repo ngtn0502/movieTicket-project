@@ -1,10 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { FiUser } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
-import schedule from '../../../../assets/img/searchSection/news.png';
-import { FlexHCenter } from '../../../utils/mixin.js';
-import user from '../../../../assets/img/user.png';
 
 function contentItem(title, content) {
   return (

@@ -13,6 +13,7 @@ import Loading from '../components/Loading.js';
 import MovieDetailBooking from '../components/MovieDetail.component/MovieDetailBooking';
 import AlertModal from '../components/AlertModal.js';
 import { loadingVariants } from '../../utils/constants.js';
+import ScrollToTop from '../components/ScrollToTop.js';
 
 function MovieDetailsPage() {
   const history = useHistory();
@@ -28,6 +29,7 @@ function MovieDetailsPage() {
   const { movieDetail, isLoading } = useSelector(
     (state) => state.movieDetailReducer
   );
+
   // const { movieList } = useSelector((state) => state.homeReducer);
   // const movie = movieList.find((item) => item.maPhim === Number(params.id));
 
@@ -52,7 +54,6 @@ function MovieDetailsPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  console.log(movieDetail);
   return (
     <motion.section
       variants={loadingVariants}
@@ -60,7 +61,7 @@ function MovieDetailsPage() {
       animate="visible"
     >
       <Wrapper>
-        <div className="page-100">
+        <div className="page-100" id="movieDetail">
           {isLoading && <Loading className="movieDetail__loading" />}
           <AnimatePresence>
             {isTrailerShow && (
@@ -94,6 +95,9 @@ function MovieDetailsPage() {
           </AnimatePresence>
           {!isLoading && (
             <div>
+              <ScrollToTop
+                to={`/movie-details/${movieDetail?.maPhim}#movieDetail`}
+              />
               <Banner movie={movieDetail || []} params={params} />
               <MovieInfor
                 movieDetail={movieDetail || []}

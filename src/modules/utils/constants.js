@@ -45,7 +45,7 @@ export const carouselBackground = bgPopcorn;
 
 export const today = () => {
   const toDay = new Date();
-  toDay.setMonth(toDay.getMonth() - 22);
+  toDay.setMonth(toDay.getMonth() - 2);
   return toDay;
 };
 
@@ -106,6 +106,7 @@ export const navBarLink = [
   {
     id: '1',
     title: 'HOME',
+    path: '#homepage',
     goTo: '/home',
   },
   {
@@ -136,24 +137,24 @@ export const navBarLink = [
 export const movieDetailContent = [
   {
     id: 1,
-    title: 'Đạo diễn:',
-    content: 'Martin Wilson',
+    title: 'Directors: ',
+    content: 'Anthony RussoJoe, Joe Russo',
   },
 
   {
     id: 1,
-    title: 'Diễn viên:',
+    title: 'Stars: ',
     content:
       'Scarlett Johansson, Samuel l. Jackson, Jeremy Renner, Chris Evans, Mark Ruffalo, Chris Hem,...',
   },
   {
     id: 1,
-    title: 'Thể loại:',
+    title: 'Genres: ',
     content: 'Action, Thriller, Crime',
   },
   {
     id: 1,
-    title: 'Định dạng:',
+    title: 'Technology: ',
     content: '2D/Digitals',
   },
 ];
@@ -231,7 +232,7 @@ export const footerCompany = [
     id: 1,
     title: 'Company',
     content:
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam blanditiis itaque consequuntur est. Eveniet, similique! Id iste qui culpa?',
+      'N-Cinema is one of the worlds leading entertainment services with over 0.001 million paid memberships in over 1 countries enjoying our theatres services',
   },
 ];
 export const importantLinks = [
@@ -257,7 +258,7 @@ export const importantLinks = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     text: 'Frequent Question',
     link: [
       {

@@ -8,7 +8,6 @@ import {
   GET_USER_PROFILE_LOADING,
   GET_USER_PROFILE_SUCCESS,
   GET_USER_PROFILE_ERROR,
-  USER_PROFILE_UPDATE_SUCCESS,
 } from './constantsAction.js';
 
 // SIGN IN PAGE
@@ -42,7 +41,7 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: {
         type: 'Success',
-        message: 'Đăng nhập thành công!',
+        message: 'Login successfully!',
         goTo: null,
       },
     });
@@ -53,8 +52,10 @@ export const userLoginAction = (loginData, history) => async (dispatch) => {
       type: USER_LOGIN_FAIL,
       payload: {
         type: 'Error',
-        message: 'Đăng nhập thất bại!',
-        message2: error.message || 'Vui lòng kiểm tra lại thông tin.',
+        message: 'Login fail!',
+        message2:
+          error.message ||
+          'Please make sure fill username and passwords correctly!',
         goTo: null,
       },
     });
@@ -92,8 +93,8 @@ export const userSignUpAction = (signUpData, history) => async (dispatch) => {
       type: USER_SIGN_UP_SUCCESS,
       payload: {
         type: 'Success',
-        message: 'Đăng kí thành công!',
-        goTo: '/home',
+        message: 'Sign up successfully!',
+        goTo: '/sign-in',
       },
     });
     history.goBack();
@@ -102,7 +103,7 @@ export const userSignUpAction = (signUpData, history) => async (dispatch) => {
       type: USER_SIGN_UP_FAIL,
       payload: {
         type: 'Error',
-        message: 'Sign Up Fail!',
+        message: 'Sign up fail!',
         message2: error.message,
         goTo: null,
       },

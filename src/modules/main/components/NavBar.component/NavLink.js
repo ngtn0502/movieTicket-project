@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HashLink as Link } from 'react-router-hash-link';
+import { HashLink } from 'react-router-hash-link';
 import { navBarLink } from '../../../utils/constants';
 
 function NavLink({
@@ -9,11 +9,6 @@ function NavLink({
   isLoginSuccess,
   userLogin,
 }) {
-  console.log(
-    '🚀 ~ file: NavLink.js ~ line 12 ~ isLoginSuccess',
-    isLoginSuccess
-  );
-  console.log('🚀 ~ file: NavLink.js ~ line 12 ~ userLogin', userLogin);
   // const history = useHistory();
   // const navLinkHandler = (item) => {
   //   if (item.id === '4') {
@@ -32,7 +27,7 @@ function NavLink({
       {/*eslint-disable*/}
       <ul>
         {navBarLink.map((item) => (
-          <Link smooth to={`${item.goTo}${item.path}`}>
+          <HashLink smooth to={`${item.goTo}${item.path}`} key={item.id}>
             <li
               className='nav_link'
               key={item.id}
@@ -42,7 +37,7 @@ function NavLink({
             >
               <span className='nav_title'>{item.title}</span>
             </li>
-          </Link>
+          </HashLink>
         ))}
         {(isLoginSuccess || userLogin) && (
           <li

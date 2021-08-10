@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
-import { getNewsAction } from '../../../../redux/actions/HomeAction/getNewsAction';
-import NewsCard from './NewsCard.js';
 import NewsGroup from './NewsGroup.js';
 import { loadingVariants2 } from '../../../../utils/constants.js';
 
@@ -13,7 +11,7 @@ function HomeNews({ className }) {
   // continue state
   const [isContinue, setIsContinue] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
-  const { isLoading, newsDatas } = useSelector((state) => state.homeReducer);
+  const { newsDatas } = useSelector((state) => state.homeReducer);
   let newsData = newsDatas.slice(17);
   if (!typeNews) {
     newsData = newsDatas.slice(0, 17);
@@ -29,7 +27,7 @@ function HomeNews({ className }) {
               setTypeNews(false);
             }}
           >
-            Điện ảnh 24h
+            Movie 24h
           </button>
           <button
             type="button"
@@ -38,7 +36,7 @@ function HomeNews({ className }) {
               setTypeNews(true);
             }}
           >
-            Khuyến mãi
+            Discount
           </button>
         </div>
         <div className="homeNews__news">
@@ -68,7 +66,7 @@ function HomeNews({ className }) {
                     setIsEnd(true);
                   }}
                 >
-                  Xem thêm...
+                  Read more...
                 </button>
               )}
               {isContinue && (
@@ -81,7 +79,7 @@ function HomeNews({ className }) {
                     setIsEnd(false);
                   }}
                 >
-                  Thu gọn
+                  Hide...
                 </button>
               )}
             </div>

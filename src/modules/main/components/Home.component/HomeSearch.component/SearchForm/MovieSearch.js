@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { BiMovie } from 'react-icons/bi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import dateFormat from 'date-format';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AiOutlineSchedule } from 'react-icons/ai';
 import { loadingVariants3, today } from '../../../../../utils/constants';
@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MovieSearch() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const classes = useStyles();
   // Handle choosen event
   const [movieChoose, setMovieChoose] = useState('');
@@ -64,6 +63,10 @@ export default function MovieSearch() {
     (item) => item.thongTinRap.tenCumRap
   );
   const cinemaByMovieUnique = [...new Set(cinemaByMovie)];
+  console.log(
+    '🚀 ~ file: MovieSearch.js ~ line 64 ~ MovieSearch ~ cinemaByMovieUnique',
+    cinemaByMovieUnique
+  );
   // Lấy thời gian chiếu bộ phim này của rạp đã chọn
 
   const movieByCinema = movieDetail?.lichChieu?.filter(
@@ -74,10 +77,10 @@ export default function MovieSearch() {
     <Wrapper>
       {/* Movie Search Part */}
       <div>
-        <FormControl variant="" className={classes.formControl}>
+        <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-outlined-label">
             <BiMovie />
-            Phim
+            Moives
           </InputLabel>
           <Select
             labelId="demo-simple-select-outlined-label"
@@ -86,18 +89,27 @@ export default function MovieSearch() {
             onChange={movieChooseHandler}
             label="Phim"
           >
-            {movieAfterToday.map((item) => (
-              <MenuItem value={item.maPhim}>{item.tenPhim}</MenuItem>
+            {movieAfterToday.map((item, i) => (
+              <MenuItem value={item.maPhim} key={i}>
+                {item.tenPhim}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
       </div>
       {/* Cinema Search Part */}
       <div>
-        <FormControl variant="" className={classes.formControl}>
-          <InputLabel id="demo-simple-select-outlined-label">
-            <FaMapMarkerAlt />
-            Rạp chiếu
+        <FormControl className={classes.formControl}>
+          <InputLabel
+            id="demo-simple-select-outlined-label"
+            className={`${movieChoose === '' ? 'cinemaSearch__label' : null}`}
+          >
+            <FaMapMarkerAlt
+              className={`${isLoading ? 'cinemaSearch__label' : null}`}
+            />
+            <p className={`${isLoading ? 'cinemaSearch__label' : null}`}>
+              {isLoading ? 'Finding Cinemas...' : 'Cinemas'}
+            </p>
           </InputLabel>
           <Select
             labelId="demo-simple-select-outlined-label"
@@ -105,19 +117,27 @@ export default function MovieSearch() {
             value={cinemaChoose}
             onChange={cinemaChooseHandler}
             label="Cinema"
+            disabled={isLoading || movieChoose === ''}
           >
-            {cinemaByMovieUnique?.map((item) => (
-              <MenuItem value={item}>{item}</MenuItem>
-            ))}{' '}
+            {!isLoading ? (
+              cinemaByMovieUnique?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))
+            ) : (
+              <MenuItem value="1">Finding Cinema</MenuItem>
+            )}
           </Select>
         </FormControl>
       </div>
       {/* Schedule Search Part */}{' '}
       <div>
-        <FormControl variant="" className={classes.formControl}>
-          <InputLabel id="demo-simple-select-outlined-label">
+        <FormControl className={classes.formControl}>
+          <InputLabel
+            id="demo-simple-select-outlined-label"
+            className={`${cinemaChoose === '' ? 'cinemaSearch__label' : null}`}
+          >
             <AiOutlineSchedule />
-            Lịch chiếu
+            <p> Dates</p>
           </InputLabel>
           <Select
             labelId="demo-simple-select-outlined-label"
@@ -127,6 +147,7 @@ export default function MovieSearch() {
               setScheduleChoose(e.target.value);
             }}
             label="schedule"
+            disabled={isLoading || movieChoose === '' || cinemaChoose === ''}
           >
             {movieByCinema?.map((item) => (
               <MenuItem value={item.ngayChieuGioChieu}>
@@ -145,9 +166,10 @@ export default function MovieSearch() {
           animate="visible"
           // exit={{ opacity: 0 }}
           key={scheduleChoose}
+          className="search__btn"
         >
           {scheduleChoose === '' ? null : (
-            <div className="search__btn">
+            <div>
               <Link
                 to={`/booking/${movieByCinema[0]?.maLichChieu}`}
                 className="booking__button"
@@ -163,6 +185,13 @@ export default function MovieSearch() {
 }
 
 const Wrapper = styled.div`
+  .cinemaSearch__label {
+    color: var(--color-gray-700);
+    p,
+    svg {
+      color: var(--color-gray-700);
+    }
+  }
   #demo-simple-select-outlined-label {
     ${FlexCenter()}
     font-size: 1.25rem;
@@ -187,10 +216,15 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    .booking__button {
-      font-size: 1.25rem;
-      height: 3.5rem;
-      opacity: 1;
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .booking__button {
+        font-size: 1.25rem;
+        height: 3.5rem;
+        opacity: 1;
+      }
     }
   }
   @media screen and (min-width: 576px) {

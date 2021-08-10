@@ -18,6 +18,7 @@ import { getMovieByCineplex } from '../../redux/actions/HomeAction/getMovieByCin
 import HomeNews from '../components/Home.component/HomeNew.component/HomeNews.js';
 import { getNewsAction } from '../../redux/actions/HomeAction/getNewsAction.js';
 import SearchBar2 from '../components/Home.component/HomeSearch.component/SearchBar2.js';
+import ScrollToTop from '../components/ScrollToTop.js';
 
 function HomePage() {
   const history = useHistory();
@@ -39,6 +40,7 @@ function HomePage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   // movieList
   const { movieList, isLoading } = useSelector((state) => state.homeReducer);
   // cinema List
@@ -97,6 +99,7 @@ function HomePage() {
 
         {!isLoading && (
           <div>
+            <ScrollToTop to="/home#homepage" />
             <CarouselCoverflow className="carousel__overflow" />
             <div id="homePage__search" />
 

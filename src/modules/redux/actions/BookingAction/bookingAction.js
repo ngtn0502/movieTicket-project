@@ -1,10 +1,4 @@
-import {
-  CHOOSING_SEAT,
-  RESET__AMOUNT,
-  USER_BOOKING_FAIL,
-  USER_BOOKING_SUCCESS,
-  USER_BOOKING_WARNING,
-} from '../constantsAction.js';
+import { CHOOSING_SEAT, USER_BOOKING_FAIL } from '../constantsAction.js';
 import { baseUrl, METHOD__HTTP } from '../../../../configs/api.configs.js';
 
 export const choosingSeatAction = (data, history) => (dispatch) => {
@@ -12,13 +6,12 @@ export const choosingSeatAction = (data, history) => (dispatch) => {
   if (localStorage.getItem('userLogin')) {
     userLogin = JSON.parse(localStorage.getItem('userLogin'));
   }
-  console.log(userLogin);
   if (!userLogin) {
     dispatch({
       type: USER_BOOKING_FAIL,
       payload: {
         type: 'Warning',
-        message: 'Vui lòng đăng nhập để đặt vé xem phim!',
+        message: 'Please login to select seat!',
         goTo: null,
       },
     });
@@ -28,12 +21,7 @@ export const choosingSeatAction = (data, history) => (dispatch) => {
   }
 };
 
-export const bookingSeatAction = (
-  maLichChieu,
-  danhSachVe,
-  history,
-  choosingSeat
-) => async (dispatch) => {
+export const bookingSeatAction = (maLichChieu, danhSachVe) => async () => {
   let userLogin;
   if (localStorage.getItem('userLogin')) {
     userLogin = JSON.parse(localStorage.getItem('userLogin'));
@@ -62,6 +50,6 @@ export const bookingSeatAction = (
   try {
     const data = await sendRequest(maLichChieu, danhSachVe);
   } catch (error) {
-    console.log(error);
+    //
   }
 };

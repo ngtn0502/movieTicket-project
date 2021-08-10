@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineLike } from 'react-icons/ai';
 import { VscComment } from 'react-icons/vsc';

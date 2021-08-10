@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../../configs/api.configs';
+import { baseUrl, maNhom } from '../../../../configs/api.configs';
 import {
   GET_MOVIE_BY_CINEPLEX_LOADING,
   GET_MOVIE_BY_CINEPLEX_SUCCESS,
@@ -9,7 +9,7 @@ export const getMovieByCineplex = () => async (dispatch) => {
   const sendRequest = async () => {
     dispatch({ type: GET_MOVIE_BY_CINEPLEX_LOADING });
     const response = await fetch(
-      `${baseUrl}/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP03`
+      `${baseUrl}/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${maNhom}`
     );
     const data = await response.json();
     return data;

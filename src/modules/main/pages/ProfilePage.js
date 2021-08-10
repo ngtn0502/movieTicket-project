@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { FiUser } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useHistory } from 'react-router';
 import ProfileContent from '../components/ProfilePage.component/ProfileContent.js';
-import ProfileNavigation from '../components/ProfilePage.component/ProfileNavigation.js';
-import schedule from '../../../assets/img/searchSection/news.png';
 import user from '../../../assets/img/user.png';
 import { getUserProfileAction } from '../../redux/actions/authAction.js';
-import { authReducer } from '../../redux/reducer/authReducer';
-import { FlexHCenter, FlexVCenter } from '../../utils/mixin';
+import { FlexVCenter } from '../../utils/mixin';
 import ProfileTransaction from '../components/ProfilePage.component/ProfileTransaction.js';
 import { loadingVariants, loadingVariants3 } from '../../utils/constants.js';
 import ProfileUpdate from '../components/ProfilePage.component/ProfileUpdate.js';
 import Loading from '../components/Loading';
 import { CLOSE_MODAL } from '../../redux/actions/constantsAction.js';
 import AlertModal from '../components/AlertModal.js';
+import ScrollToTop from '../components/ScrollToTop.js';
 
 function ProfilePage({ className }) {
   const history = useHistory();
@@ -34,16 +31,13 @@ function ProfilePage({ className }) {
       history.push(goTo);
     }
   };
-  console.log(
-    '🚀 ~ file: ProfilePage.js ~ line 23 ~ ProfilePage ~ userProfile',
-    userProfile
-  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getUserProfileAction());
-  }, []);
+  }, [dispatch]);
   return (
-    <Wrapper className={`page-95 ${className}`}>
+    <Wrapper className={`page-95 ${className}`} id="profile">
       <motion.div
         variants={loadingVariants}
         initial="hidden"
@@ -71,6 +65,7 @@ function ProfilePage({ className }) {
         {!isLoading && (
           <main className="profile section-middle">
             {/* <ProfileNavigation /> */}
+            <ScrollToTop to="/profile#profile" />
             <h1>Hi, {userProfile.hoTen}</h1>
             <img
               src={user}
@@ -127,22 +122,24 @@ function ProfilePage({ className }) {
                   >
                     {isContinue && (
                       <ProfileTransaction
-                        thongTinDatVe={userProfile.thongTinDatVe?.slice(0)}
+                        thongTinDatVe={userProfile.thongTinDatVe?.slice(2)}
                       />
                     )}{' '}
                   </motion.div>{' '}
                 </AnimatePresence>
-                <div className="profile__update profile__readMore">
-                  <button
-                    type="button"
-                    className="btn2"
-                    onClick={() => {
-                      setIsContinue((state) => !state);
-                    }}
-                  >
-                    {isContinue ? 'Thu Gọn' : 'More history purchase...'}
-                  </button>
-                </div>
+                {userProfile.thongTinDatVe?.length > 2 && (
+                  <div className="profile__update profile__readMore">
+                    <button
+                      type="button"
+                      className="btn2"
+                      onClick={() => {
+                        setIsContinue((state) => !state);
+                      }}
+                    >
+                      {isContinue ? 'Thu Gọn' : 'More history purchase...'}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </main>
@@ -177,6 +174,11 @@ const Wrapper = styled.section`
       margin: 2rem auto;
     }
   }
+  hr {
+    border-top: 3px solid var(--color-gray-800);
+    padding: 0.5rem 0;
+  }
+
   @media screen and (min-width: 768px) {
     padding: 5rem 0 0;
     .profile__main {

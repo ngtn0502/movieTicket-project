@@ -1,31 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { MdPayment } from 'react-icons/md';
 import { FaCcVisa } from 'react-icons/fa';
 import { HiOutlineCash } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 import { IoIosArrowDropleftCircle } from 'react-icons/io';
-import { AnimatePresence, motion } from 'framer-motion';
-import { duration } from '@material-ui/core';
 import {
   FlexCenter,
   Flex,
   FlexHCenter,
   FlexVCenter,
 } from '../../../utils/mixin.js';
-import { bookingSeatAction } from '../../../redux/actions/BookingAction/bookingAction';
 import {
   REQUIRE__CHOOSINGSEAT,
-  RESET__AMOUNT,
   USER_BOOKING_WARNING,
 } from '../../../redux/actions/constantsAction.js';
-import {
-  loadingVariants,
-  loadingVariants2,
-  exitVariants,
-  loadingVariants4,
-} from '../../../utils/constants.js';
 
 function BookingPageRight({
   cineRoomMovie,
@@ -33,10 +22,8 @@ function BookingPageRight({
   choosingSeat,
   setIsSideBarShow,
   className,
-  isSideBarShow,
 }) {
   const dispatch = useDispatch();
-  const history = useHistory();
   // Handle reset total amount
 
   // Handle booking
@@ -46,8 +33,8 @@ function BookingPageRight({
         type: REQUIRE__CHOOSINGSEAT,
         payload: {
           type: 'Warning',
-          message: 'Vui lòng chọn ghế',
-          message2: 'có vẻ bạn đã quên chọn ghế!',
+          message: 'Please selecting your seat',
+          message2: 'you may forgot something!',
           goTo: null,
         },
       });
@@ -57,8 +44,8 @@ function BookingPageRight({
         type: USER_BOOKING_WARNING,
         payload: {
           type: 'Confirm',
-          message: 'Thông tin đặt vé sẽ được gởi qua Email!',
-          message2: 'vui lòng kiểm tra lại thông tin trước khi xác nhận',
+          message: 'Ticket will be send to you via Email!',
+          message2: 'please make sure the information is correct',
           goTo: null,
         },
       });
@@ -87,36 +74,38 @@ function BookingPageRight({
           <h2>{totalAmount}đ</h2>
           <hr />
           <div>
-            <p>Ngày chiếu:</p>
+            <p>Date: </p>
             <p>{cineRoomMovie?.ngayChieu}</p>
           </div>
           <div>
-            <p>Giờ Chiếu:</p>
+            <p>Show time: </p>
             <p>{cineRoomMovie?.gioChieu}</p>
           </div>
           <div>
-            <p>Rạp:</p>
+            <p>Room: </p>
             <p>{cineRoomMovie?.tenRap}</p>
           </div>
           <div className="seat">
-            <p>Ghế:</p>
+            <p>Seat: </p>
             <div>
               {choosingSeat?.length !== 0 ? (
-                choosingSeat?.map((item) => <p>Ghế {item.stt}.</p>)
+                choosingSeat?.map((item) => (
+                  <p key={item.maGhe}>Ghế {item.stt}.</p>
+                ))
               ) : (
-                <p>Vui lòng chọn ghế</p>
+                <p>Please choosing your seat!</p>
               )}
             </div>
           </div>
           <div>
-            <p>Ưu đãi:</p>
+            <p>Discount: </p>
             <p>0%</p>
           </div>
         </div>
         <hr />
         <div className="booking__pay">
           <div className="payMethod">
-            <h5>Hình thức thanh toán</h5>
+            <h5>Payment method</h5>
             <div className="radio-selection">
               <form>
                 <div className="radio__item">
@@ -132,7 +121,7 @@ function BookingPageRight({
                     <div className="pay__figure">
                       <MdPayment />
                     </div>
-                    <p className="pay__text">Thẻ ATM nội địa</p>
+                    <p className="pay__text">Credit Cards</p>
                   </label>
                 </div>
                 <div className="radio__item">
@@ -162,7 +151,7 @@ function BookingPageRight({
                     <div className="pay__figure">
                       <HiOutlineCash />
                     </div>
-                    <p className="pay__text">Thanh toán tiền mặt</p>
+                    <p className="pay__text">By Cash</p>
                   </label>
                 </div>
               </form>
@@ -177,7 +166,7 @@ function BookingPageRight({
           className="booking__button"
           onClick={bookingHandler}
         >
-          Đặt vé
+          BOOKING
         </button>
       </div>
     </Wrapper>

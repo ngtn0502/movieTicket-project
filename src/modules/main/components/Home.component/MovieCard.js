@@ -6,10 +6,11 @@ import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { HashLink } from 'react-router-hash-link';
 import MovieClass from './MovieClass';
-import { FlexHCenter } from '../../../utils/mixin';
 import { randomDuration } from '../../../utils/helper';
 // import playVideo from '../../../assets/img/play-video.png';
 import { SHOW_MODAL } from '../../../redux/actions/constantsAction';
+import CircleLoading from '../CircleLoading.js';
+import commingsoon from '../../../../assets/img/commingsoon.jpg';
 
 export const loadingVariants2 = {
   hidden: {
@@ -25,6 +26,7 @@ export const loadingVariants2 = {
   },
 };
 function MovieCard({ movie }) {
+  const [isImgLoading, setIsImgLoading] = useState(false);
   const dispatch = useDispatch();
   return (
     <Wrapper>
@@ -48,12 +50,17 @@ function MovieCard({ movie }) {
               type="button"
               className="btn__watching"
             >
-              Đặt vé
+              Available now
             </HashLink>
           </div>
           <Link to={`/movie-details/${movie.maPhim}`}>
             <div className="overlay" />
-            <img src={movie.hinhAnh} alt="movie" />
+            <img
+              src={movie.hinhAnh || commingsoon}
+              alt="movie"
+              onLoad={() => setIsImgLoading(true)}
+            />
+            {!isImgLoading && <CircleLoading />}
           </Link>
         </div>
         <h5 className="nameMovie">
@@ -62,7 +69,7 @@ function MovieCard({ movie }) {
             {movie.tenPhim}
           </Link>
         </h5>
-        <p className="subNameMovie">{randomDuration()} phút</p>{' '}
+        <p className="subNameMovie">{randomDuration()} minutes</p>{' '}
       </motion.div>
     </Wrapper>
   );

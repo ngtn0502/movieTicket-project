@@ -7,13 +7,13 @@ export const converDate = (data) => {
 
 // Conver UTC date string to DAY and MONTH
 const days = [
-  'Thứ Bảy',
-  'Chủ Nhật',
-  'Thứ Hai',
-  'Thứ Ba',
-  'Thứ Tư',
-  'Thứ Năm',
-  'Thứ Sáu',
+  'Saturday',
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
 ];
 const months = [
   'January',

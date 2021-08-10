@@ -91,7 +91,7 @@ const Wrapper = styled.section`
       /* TOP */
       .searchBar__top {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 2fr 1fr;
         .searchBar__title {
           p {
             text-align: left;

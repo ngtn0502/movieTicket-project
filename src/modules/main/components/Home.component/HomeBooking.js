@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import HomeBookingSchedule from './HomeBookingSchedule.js';
-import { FlexCenter, FlexHCenter, FlexVCenter } from '../../../utils/mixin';
+import { FlexHCenter } from '../../../utils/mixin';
 import { getCinema } from '../../../utils/constants';
 
 // variant for MUI
@@ -38,7 +37,7 @@ export const loadingScheduleVariants = {
 };
 
 function HomeBooking() {
-  const { cineplexList, movieByCineplex, isLoading } = useSelector(
+  const { cineplexList, movieByCineplex } = useSelector(
     (state) => state.homeReducer
   );
 
@@ -49,10 +48,8 @@ function HomeBooking() {
   // For animation key purpose (because i design two layout screen so each layout much have one unique key value array)
   const [cineplex2, setCineplex2] = useState('BHDStar2');
   //
-  const [isShowSchedule, setIsShowSchedule] = useState(false);
   const itemCupRapHandler = (data) => {
     setPhimTheoCumRap(data);
-    setIsShowSchedule((state) => !state);
   };
   //
   const setCineplexHandler = (item) => {
@@ -76,10 +73,6 @@ function HomeBooking() {
   let danhSachPhim;
   if (phimTheoCumRapArray !== undefined) {
     danhSachPhim = phimTheoCumRapArray[0]?.danhSachPhim;
-    console.log(
-      '🚀 ~ file: HomeBooking.js ~ line 79 ~ HomeBooking ~ danhSachPhim',
-      danhSachPhim
-    );
   }
   // lấy cụm rạp đầu tiên
   useEffect(() => {
@@ -98,6 +91,7 @@ function HomeBooking() {
               className={`homeBooking__logo--item ${
                 cineplex === item.maHeThongRap ? 'active' : null
               }`}
+              key={item.biDanh}
             >
               <img src={item.logo} alt='movie' />
             </div>
@@ -122,7 +116,10 @@ function HomeBooking() {
                 danhSachPhim2 = phimTheoCumRapArray[0]?.danhSachPhim;
               }
               return (
-                <Accordion className='accorditon hoomBooking'>
+                <Accordion
+                  className='accorditon hoomBooking'
+                  key={item.maCumRap}
+                >
                   <AccordionSummary
                     className={`homeBooking__cineplex--item ${
                       phimTheoCumRap === item.maCumRap ? 'active' : null
@@ -163,6 +160,7 @@ function HomeBooking() {
                   phimTheoCumRap === item.maCumRap ? 'active' : null
                 }`}
                 onClick={itemCupRapHandler.bind(null, item.maCumRap)}
+                key={item.maCumRap}
               >
                 {getCinema(cineplex)}
                 <div>

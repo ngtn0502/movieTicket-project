@@ -2,7 +2,6 @@ import { TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import bgImage from '../../../assets/img/bg-singin.jpg';
@@ -21,7 +20,6 @@ function SignUpPage() {
   const history = useHistory();
   const [isUsernameError, setIsUsernameError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
-  const [isEmailError, setIsEmailError] = useState(false);
   const [userLogin, setUserLogin] = useState({
     taiKhoan: '',
     matKhau: '',
@@ -84,14 +82,14 @@ function SignUpPage() {
         <div className="page-100">
           <div className="signIn">
             <img src={logo} alt="movie" />
-            <h5>Thế giới phim trên đầu ngón tay</h5>
+            <h5>JOIN US NOW</h5>
             <div className="signIn__form">
               <form autoComplete="off" onSubmit={userSubmitHandler}>
                 <TextField
                   variant="filled"
                   color="secondary"
                   id="standard-basic"
-                  label="Họ và tên"
+                  label="Name"
                   className="signIn__input"
                   name="hoTen"
                   required
@@ -101,7 +99,7 @@ function SignUpPage() {
                   variant="filled"
                   color="secondary"
                   id="standard-basic"
-                  label="Tài Khoản"
+                  label="Username"
                   className="signIn__input"
                   name="taiKhoan"
                   error={isUsernameError}
@@ -117,7 +115,7 @@ function SignUpPage() {
                   variant="filled"
                   color="secondary"
                   id="standard-basic"
-                  label="Mật Khẩu"
+                  label="Password"
                   className="signIn__input"
                   name="matKhau"
                   error={isPasswordError}
@@ -145,7 +143,7 @@ function SignUpPage() {
                   variant="filled"
                   color="secondary"
                   id="standard-basic"
-                  label="Số điện thoại"
+                  label="Phone number"
                   className="signIn__input"
                   name="soDt"
                   type="number"
@@ -154,7 +152,7 @@ function SignUpPage() {
                 />
                 <div className="signIn__button">
                   <button type="submit" className="btn__watching">
-                    Đăng Ký
+                    SIGN UP
                   </button>
                 </div>
               </form>

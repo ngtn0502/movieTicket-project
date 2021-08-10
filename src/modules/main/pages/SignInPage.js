@@ -1,4 +1,4 @@
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -88,7 +88,7 @@ function SignInPage() {
         <div className="page-100">
           <div className="signIn">
             <img src={logo} alt="movie" />
-            <h5>Thế giới phim trên đầu ngón tay</h5>
+            <h5>JOIN US NOW</h5>
             <div className="signIn__form">
               <form
                 className={classes.root}
@@ -100,7 +100,7 @@ function SignInPage() {
                   variant="filled"
                   color="secondary"
                   id="standard-basic"
-                  label="Tài Khoản"
+                  label="Username"
                   className="signIn__input"
                   name="taiKhoan"
                   required
@@ -116,7 +116,7 @@ function SignInPage() {
                   variant="filled"
                   color="secondary"
                   id="standard-basic"
-                  label="Mật Khẩu"
+                  label="Password"
                   type="password"
                   className="signIn__input"
                   name="matKhau"
@@ -131,11 +131,11 @@ function SignInPage() {
                 />
                 <div className="signIn__button">
                   <button type="submit" className="btn__watching">
-                    Đăng Nhập
+                    Login
                   </button>
                   <p className="signUp">
-                    Bạn mới tham gia G-Cinema?{' '}
-                    <Link to="/sign-up">Đăng ký ngay.</Link>
+                    Don't have an account?{' '}
+                    <Link to="/sign-up">Sign up now. </Link>
                   </p>
                 </div>
               </form>
