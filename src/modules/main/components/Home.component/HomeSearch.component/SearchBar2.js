@@ -46,7 +46,7 @@ function SearchBar2({ className }) {
 
 export default SearchBar2;
 const Wrapper = styled.section`
-  margin: 5rem auto;
+  margin: 0 auto 5rem;
   background-color: #004953;
   border-radius: var(--radius2);
   font-weight: 600;
@@ -85,6 +85,7 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 1200px) {
+    margin: 5rem auto;
     .searchBar {
       display: grid;
       padding: 2rem;
