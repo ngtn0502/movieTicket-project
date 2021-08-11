@@ -70,7 +70,7 @@ export default function Carousel({ movieLists }) {
           {typeMovie && (
             <>
               <SwiperSlide className="movie__list">
-                {movieList.slice(0, 8).map((movie) => (
+                {movieList.slice(24, 24 + 8).map((movie) => (
                   <MovieCard movie={movie} key={movie.maPhim} />
                 ))}
               </SwiperSlide>
@@ -85,12 +85,12 @@ export default function Carousel({ movieLists }) {
           {!typeMovie && (
             <>
               <SwiperSlide className="movie__list">
-                {movieList.slice(16, 24).map((movie) => (
+                {movieList.slice(0, 8).map((movie) => (
                   <MovieCard movie={movie} key={movie.maPhim} />
                 ))}
               </SwiperSlide>
               <SwiperSlide className="movie__list">
-                {movieList.slice(24, 24 + 8).map((movie) => (
+                {movieList.slice(16, 16 + 8).map((movie) => (
                   <MovieCard movie={movie} key={movie.maPhim} />
                 ))}
               </SwiperSlide>
@@ -101,7 +101,7 @@ export default function Carousel({ movieLists }) {
         <div className="movie__list--mobile">
           {typeMovie && (
             <>
-              {movieList.slice(0, 8).map((movie) => (
+              {movieList.slice(24, 24 + 8).map((movie) => (
                 <MovieCard movie={movie} key={movie.maPhim} />
               ))}
             </>
@@ -191,7 +191,7 @@ const Wrapper = styled.main`
       bottom: 3rem;
     }
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 992px) {
     .swiper-button-prev,
     .swiper-button-next {
       display: block;

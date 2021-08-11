@@ -20,7 +20,7 @@ export const scrollToTopVariants = {
 function ScrollToTop({ to, className }) {
   const [isShowScrollToTop, setIsShowScrollToTop] = useState(false);
   const scrollHandler = () => {
-    if (window.pageYOffset > 500) {
+    if (window.pageYOffset > 450) {
       setIsShowScrollToTop(true);
     } else {
       setIsShowScrollToTop(false);

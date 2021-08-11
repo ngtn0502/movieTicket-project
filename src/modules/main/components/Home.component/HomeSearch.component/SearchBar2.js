@@ -65,7 +65,7 @@ const Wrapper = styled.section`
         font-size: 1.25rem;
       }
       .nameMovie {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
       }
     }
     .searchBar__catagory {
@@ -84,7 +84,7 @@ const Wrapper = styled.section`
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1200px) {
     .searchBar {
       display: grid;
       padding: 2rem;

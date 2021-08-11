@@ -61,7 +61,7 @@ export default MovieDetailBooking;
 const Wrapper = styled.section`
   margin-top: 5rem;
   .booking__title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     margin: 5rem 0;
     color: var(--color-white);
@@ -74,7 +74,7 @@ const Wrapper = styled.section`
     .booking__cinema--main {
       position: relative;
       .overlay {
-        width: 72%;
+        width: 67%;
         border-radius: 50%;
         opacity: 1;
         background: rgba(0, 0, 0, 0.8);
@@ -93,13 +93,32 @@ const Wrapper = styled.section`
       }
     }
     img {
-      width: 5rem;
-      height: 5rem;
+      width: 4rem;
+      height: auto;
       border-radius: 50%;
       /* margin: 0 auto; */
       margin-right: 2rem;
     }
   }
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 768px) {
+    .booking__cinema {
+      img {
+        width: 5rem;
+        height: 5rem;
+      }
+      .booking__cinema--main {
+        position: relative;
+        .overlay {
+          width: 72%;
+          border-radius: 50%;
+          opacity: 1;
+          background: rgba(0, 0, 0, 0.8);
+        }
+      }
+    }
+
+    .booking__title {
+      font-size: 2rem;
+    }
   }
 `;

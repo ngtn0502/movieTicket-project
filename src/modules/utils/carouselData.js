@@ -1,5 +1,17 @@
 export const carouselData = [
   {
+    maPhim: 1524,
+    tenPhim: 'Loki',
+    biDanh: 'loki',
+    trailer: 'https://www.youtube.com/embed/nW948Va-l10',
+    hinhAnh: 'http://movie0706.cybersoft.edu.vn/hinhanh/loki_gp01.jpg',
+    moTa:
+      'Loki là sê-ri phim truyền hình Mỹ ra mắt năm 2021, phát độc quyền trên nền tảng trực tuyến Disney+ của đạo diễn Michael Waldron. Phim dựa trên nhân vật cùng tên từ truyện tranh Marvel Comics. Lấy bối cảnh trong vũ trụ Điện ảnh Marvel (MCU), phim phát triển nội dung sau các sự kiện xảy ra sự kiện trong Avengers: Endgame (2019). Trong phim, Tom Hiddleston đảm nhận vai chính Loki, bên cạnh sự tham gia của các diễn viên Gugu Mbatha-Raw, Wunmi Mosaku, Eugene Cordero, Tara Strong, Owen Wilson, Sophia Di Martino và Sasha Lane. Về lịch sử sản xuất, dự án phim được công bố lần đầu tiên vào tháng 11/2018, tới tháng 2/2019, Waldron được thuê làm đạo diễn. Quá trình quay phim diễn ra tại thành phố Atlanta, Georgia vào tháng 1/2020, tới tháng 3, dự án tạm dừng vì đại dịch COVID-19. Tháng 9, đoàn sản xuất trở lại phim trường và hoàn thành quay vào tháng 12 cùng năm. Loki công chiếu tập đầu tiên vào ngày 9/6/2021 trên Disney+ và sẽ bao gồm sáu tập, là một phần trong Giai đoạn 4 của Vũ trụ điện ảnh Marvel. Phần hai của phim cũng đang trong quá trình phát triển.',
+    maNhom: 'GP01',
+    ngayKhoiChieu: '2021-08-29T00:00:00',
+    danhGia: 10,
+  },
+  {
     maPhim: 6551,
     tenPhim: 'Saw',
     biDanh: 'saw',
@@ -11,19 +23,7 @@ export const carouselData = [
     ngayKhoiChieu: '2021-12-20T00:00:00',
     danhGia: 10,
   },
-  {
-    maPhim: 1350,
-    tenPhim: 'Lừa đểu gặp lừa đảo',
-    biDanh: 'lua-deu-gap-lua-dao',
-    trailer: 'https://www.youtube.com/embed/T36HGZagV5w',
-    hinhAnh:
-      'http://movie0706.cybersoft.edu.vn/hinhanh/lua-deu-gap-lua-dao_gp07.jpeg',
-    moTa:
-      'Lừa Đểu Gặp Lừa Đảo xoay quanh lần gặp gỡ oan gia giữa siêu lừa đảo Tower cùng cô nàng bị lừa tình Ina, cả 2 sẽ cùng hợp tác trong phi vụ lừa lại tên lừa đểu Petch - tên bạn trai bội bạc của Ina bằng những chiêu trò lừa đảo không hồi kết.',
-    maNhom: 'GP07',
-    ngayKhoiChieu: '2021-07-20T00:00:00',
-    danhGia: 10,
-  },
+
   {
     maPhim: 1331,
     tenPhim: 'Trainwreck',
@@ -50,17 +50,16 @@ export const carouselData = [
     danhGia: 10,
   },
   {
-    maPhim: 1526,
-    tenPhim: 'Avengers: Infinity War ',
-    biDanh: 'avengers-infinity-war',
-    trailer: 'https://www.youtube.com/embed/DKqu9qc-5f4',
-    hinhAnh:
-      'http://movie0706.cybersoft.edu.vn/hinhanh/avengers-infinity-war.jpg',
+    maPhim: 1352,
+    tenPhim: 'Bloodshot',
+    biDanh: 'bloodshot',
+    trailer: 'https://www.youtube.com/embed/vOUVVDWdXbo',
+    hinhAnh: 'http://movie0706.cybersoft.edu.vn/hinhanh/bloodshot_gp09.jpg',
     moTa:
-      'Biệt đội siêu anh hùng Avengers và những đồng minh sẽ phải sẵn sàng hi sinh tính mạng để chống lại siêu ác nhân hùng mạnh Thanos trước khi hắn phá huỷ mọi thứ và đặt dấu chấm hết cho vũ trụ. ',
-    maNhom: 'GP03',
-    ngayKhoiChieu: '2019-07-29T00:00:00',
-    danhGia: 5,
+      'Siêu anh hùng Bloodshot là bộ phim được định hình mở màn cho loạt phim lấy bối cảnh trong vũ trụ điện ảnh Valiant Comics. Nhân vật chính của phim là tài tử Vin Diesel, với đạo diễn David SF Wilson kết hợp cùng kịch bản của Jeff Wadlow và Eric Heisserer. Phim xoay quanh câu chuyện của một thuỷ quân lục chiến đã bị giết trong lúc hành động, tuy nhiên anh đã được hồi sinh với siêu năng lực bởi một tổ chức ngầm muốn dùng anh như một vũ khí để loại trừ các đối thủ.',
+    maNhom: 'GP09',
+    ngayKhoiChieu: '2021-07-09T00:00:00',
+    danhGia: 10,
   },
 
   {
@@ -84,6 +83,32 @@ export const carouselData = [
     moTa: 'test',
     maNhom: 'GP07',
     ngayKhoiChieu: '2021-07-12T00:00:00',
+    danhGia: 10,
+  },
+  {
+    maPhim: 1330,
+    tenPhim: 'CHỊ MƯỜI BA: BA NGÀY SINH TỬ',
+    biDanh: 'chi-muoi-ba-ba-ngay-sinh-tu',
+    trailer: 'https://www.youtube.com/embed/Ncwkodt5dA4',
+    hinhAnh:
+      'http://movie0706.cybersoft.edu.vn/hinhanh/chi-muoi-ba-ba-ngay-sinh-tu_gp02.jpg',
+    moTa:
+      'Chị Mười Ba đưa Kẽm Gai, tay đàn em cũ vừa mới ra tù, lên Đà Lạt để làm việc cho tiệm Gara của mình. Tại đây, Kẽm Gai dường như đã tìm lại được sự bình yên và hạnh phúc. Tuy vậy, anh sớm trở thành đối tượng bị tình nghi giết hại Đức Mát - em trai của đại ca Thắng Khùng khét tiếng đất Đà Lạt - và phải trốn chạy. Với thời hạn chỉ ba ngày, liệu Chị Mười Ba có minh oan được cho Kẽm Gai và cứu anh em An Cư Nghĩa Đoàn khỏi mối đe doạ mới? Liệu có bí mật khủng khiếp nào khác đang được che giấu? Tất cả sẽ được hé lộ vào ngày 25/12/2020',
+    maNhom: 'GP02',
+    ngayKhoiChieu: '2021-06-17T11:18:02.457',
+    danhGia: 10,
+  },
+  {
+    maPhim: 7872,
+    tenPhim: 'Fast & Furious 9',
+    biDanh: 'fast-furious-9',
+    trailer: 'https://www.youtube.com/embed/_qyw6LC5pnE',
+    hinhAnh:
+      'http://movie0706.cybersoft.edu.vn/hinhanh/fast-furious-9_gp09.png',
+    moTa:
+      "F9 (also known as F9: The Fast Saga and Fast & Furious 9) is a 2021 American action film directed by Justin Lin from a screenplay by Daniel Casey and Lin. ... In F9, Dominic Toretto and the team come together to stop a world-shattering plot headed by Toretto's brother, Jakob.",
+    maNhom: 'GP09',
+    ngayKhoiChieu: '2021-07-11T00:00:00',
     danhGia: 10,
   },
 ];

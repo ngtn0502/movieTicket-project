@@ -76,7 +76,7 @@ function BookingPage() {
         {/* Check if it loading */}
         {isLoading && <Loading />}
         {!isLoading && (
-          <main className="booking section-middle">
+          <main className="booking section-center">
             {' '}
             <BookingPageLeft
               className="left"

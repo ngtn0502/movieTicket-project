@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function CircleLoading() {
+function CircleLoading({ className }) {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <div className="lds-ring">
         <div />
         <div />

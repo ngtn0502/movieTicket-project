@@ -85,12 +85,12 @@ function BookingPageRight({
             <p>Room: </p>
             <p>{cineRoomMovie?.tenRap}</p>
           </div>
-          <div className="seat">
+          <div className="booking__seat">
             <p>Seat: </p>
             <div>
               {choosingSeat?.length !== 0 ? (
                 choosingSeat?.map((item) => (
-                  <p key={item.maGhe}>Ghế {item.stt}.</p>
+                  <p key={item.maGhe}>Seat {item.stt}.</p>
                 ))
               ) : (
                 <p>Please choosing your seat!</p>
@@ -103,7 +103,7 @@ function BookingPageRight({
           </div>
         </div>
         <hr />
-        <div className="booking__pay">
+        <div className="booking__payMethod">
           <div className="payMethod">
             <h5>Payment method</h5>
             <div className="radio-selection">
@@ -252,9 +252,9 @@ const Wrapper = styled.main`
       }
       padding: 0.5rem 0;
     }
-    .seat {
+    .booking__seat {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 2fr;
       p {
         color: var(--color-redNetflix);
         margin: 0;
@@ -272,16 +272,20 @@ const Wrapper = styled.main`
     }
   }
   /* payMethod */
-  .payMethod {
-    .radio__item {
-      ${FlexHCenter()}
-      gap: 0.5rem;
-      .radio__item--label {
+  .booking__payMethod {
+    margin-bottom: 1rem;
+    .payMethod {
+      .radio__item {
         ${FlexHCenter()}
-        svg {
-          width: 2rem;
-          height: 2rem;
-          margin-right: 1rem;
+        gap: 0.5rem;
+        .radio__item--label {
+          cursor: pointer;
+          ${FlexHCenter()}
+          svg {
+            width: 2rem;
+            height: 2rem;
+            margin-right: 1rem;
+          }
         }
       }
     }
@@ -315,7 +319,7 @@ const Wrapper = styled.main`
     position: absolute;
     ${FlexVCenter()}
     width: 100%;
-    bottom: 5rem;
+    bottom: 1rem;
     .booking__button {
       ${FlexCenter()}
       width: 90%;
@@ -326,13 +330,16 @@ const Wrapper = styled.main`
 
   /*  */
   @media screen and (min-width: 1000px) {
-    width: 20rem;
+    width: 22rem;
     top: 4rem;
     .booking__right {
       height: 85vh;
     }
     .booking__back {
       display: none;
+    } /* Button paying */
+    .bookingLeft__button {
+      bottom: 4.5rem;
     }
   }
 `;

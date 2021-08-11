@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import ProfileContent from '../components/ProfilePage.component/ProfileContent.js';
 import user from '../../../assets/img/user.png';
 import { getUserProfileAction } from '../../redux/actions/authAction.js';
@@ -16,6 +16,12 @@ import AlertModal from '../components/AlertModal.js';
 import ScrollToTop from '../components/ScrollToTop.js';
 
 function ProfilePage({ className }) {
+  const params = useParams();
+  console.log(
+    '🚀 ~ file: ProfilePage.js ~ line 20 ~ ProfilePage ~ params',
+    params
+  );
+
   const history = useHistory();
   const dispatch = useDispatch();
   const [isContinue, setIsContinue] = useState(false);
@@ -31,11 +37,28 @@ function ProfilePage({ className }) {
       history.push(goTo);
     }
   };
-
+  useEffect(() => {
+    if (params.transaction === 'transaction') {
+      window.scrollTo(0, 400);
+    }
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getUserProfileAction());
   }, [dispatch]);
+
+  // Sort to current date
+  const sortDate = (array) => {
+    const newSortArray = array?.sort(
+      (a, b) => new Date(b.ngayDat) - new Date(a.ngayDat)
+    );
+    return newSortArray;
+  };
+  const thongTinDatVe = sortDate(userProfile.thongTinDatVe);
+  console.log(
+    '🚀 ~ file: ProfilePage.js ~ line 48 ~ ProfilePage ~ thongTinDatVe',
+    thongTinDatVe
+  );
   return (
     <Wrapper className={`page-95 ${className}`} id="profile">
       <motion.div
@@ -63,7 +86,7 @@ function ProfilePage({ className }) {
         </AnimatePresence>
         {isLoading && <Loading />}
         {!isLoading && (
-          <main className="profile section-middle">
+          <main className="profile section-center">
             {/* <ProfileNavigation /> */}
             <ScrollToTop to="/profile#profile" />
             <h1>Hi, {userProfile.hoTen}</h1>

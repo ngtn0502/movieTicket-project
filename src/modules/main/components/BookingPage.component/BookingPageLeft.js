@@ -210,7 +210,7 @@ function BookingPageLeft({ cineSeatList, cineRoomMovie }) {
               </div>
             </div>
           </main>
-          <div className="note">
+          <div className="bookingPage__note">
             <div>
               <button type="button" className="seat seat__vipSeat">
                 {/* ewrưe */}
@@ -279,13 +279,13 @@ const Wrapper = styled.section`
       width: 80%;
     }
   }
-  .note {
+  .bookingPage__note {
     ${FlexVCenter()}
     padding-top: 1rem;
     div {
       margin-right: 1rem;
       span {
-        font-size: 0.75rem;
+        font-size: 1rem;
         text-decoration: initial;
       }
       button {
@@ -326,6 +326,13 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 768px) {
+    .bookingPage__note {
+      div {
+        span {
+          font-size: 1.25rem;
+        }
+      }
+    }
     .booking__container {
       overflow: visible;
       overflow-x: visible;

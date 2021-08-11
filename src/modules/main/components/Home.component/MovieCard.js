@@ -55,12 +55,12 @@ function MovieCard({ movie }) {
           </div>
           <Link to={`/movie-details/${movie.maPhim}`}>
             <div className="overlay" />
+            {!isImgLoading && <CircleLoading className="loading" />}
             <img
               src={movie.hinhAnh || commingsoon}
               alt="movie"
               onLoad={() => setIsImgLoading(true)}
             />
-            {!isImgLoading && <CircleLoading />}
           </Link>
         </div>
         <h5 className="nameMovie">
@@ -79,6 +79,13 @@ export default MovieCard;
 
 const Wrapper = styled.div`
   margin-bottom: 2rem;
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   img {
     border-radius: var(--radius);
     display: block;

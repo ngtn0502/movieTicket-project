@@ -20,6 +20,7 @@ export default CategoryItem;
 const Wrapper = styled.div`
   .category__item {
     ${FlexCenter()}
+    margin: 0 auto;
     gap: 1rem;
     /* width: 40%; */
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 50%);

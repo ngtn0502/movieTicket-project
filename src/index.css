@@ -166,6 +166,7 @@ h5 {
 p {
   padding-top: 0;
   margin-bottom: 0.25rem;
+  font-size: 1rem;
   /* color: var(--color-title); */
 }
 span {
@@ -198,6 +199,9 @@ span {
     line-height: 1;
   }
   span {
+    font-size: 1.25rem;
+  }
+  p {
     font-size: 1.25rem;
   }
 }
@@ -247,7 +251,7 @@ button {
 
 @media screen and (min-width: 992px) {
   .section-center {
-    width: 95vw;
+    width: 90vw;
   }
   .section-middle {
     width: 70vw;
@@ -344,7 +348,7 @@ svg {
   display: inline-block;
   font-weight: 600;
   transition: var(--transition);
-  font-size: 0.875rem;
+  font-size: 1rem;
   cursor: pointer;
   border-radius: var(--radius);
   display: flex;

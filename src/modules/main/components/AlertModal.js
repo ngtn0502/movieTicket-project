@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { motion } from 'framer-motion';
 import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 import {
   CLOSE_MODAL,
   RESET__AMOUNT,
@@ -27,6 +28,9 @@ const alertModalVariants = {
   //   duration: 0.8,
   // },
 };
+
+const bookingSuccessMessage =
+  'You got it! booking information will be send via your Email';
 
 function AlertModal({
   message,
@@ -62,9 +66,8 @@ function AlertModal({
       type: USER_BOOKING_SUCCESS,
       payload: {
         type: 'Success',
-        message:
-          'You got it!, booking information will be send via your email!',
-        goTo: '/home',
+        message: bookingSuccessMessage,
+        goTo: '/profile/transaction',
       },
     });
 
@@ -199,20 +202,36 @@ function AlertModal({
           )}
           <p className="alert__title">{message}</p>
           {message2 && <p className="alert__subTitle">{message2}</p>}
-          <div className="alert__button">
-            {type === 'Success' &&
-              message ===
-                'You got it!, booking information will be send via your email!' && (
-                <button
+          <div
+            className={`alert__button ${
+              message === bookingSuccessMessage ? 'alert__success' : null
+            }`}
+          >
+            {type === 'Success' && message === bookingSuccessMessage && (
+              <>
+                {' '}
+                <Link
+                  to="/home"
+                  type="button"
+                  className="btn"
+                  onClick={() => {
+                    dispatch({ type: CLOSE_MODAL });
+                  }}
+                >
+                  Home page
+                </Link>
+                <HashLink
+                  to="/profile#transaction"
                   type="button"
                   className="btn btn-success"
                   onClick={() => {
                     dispatch({ type: CLOSE_MODAL });
                   }}
                 >
-                  <HashLink to="/profile#transaction">Booking History</HashLink>
-                </button>
-              )}
+                  Booking History
+                </HashLink>
+              </>
+            )}
             {type === 'Confirm' && (
               <button
                 type="button"
@@ -222,23 +241,24 @@ function AlertModal({
                 Booking
               </button>
             )}
-            {!(type === 'Logout') ? (
-              <button
-                type="button"
-                className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
-                onClick={closeModalHandler}
-              >
-                {type === 'Confirm' ? 'Cancel' : 'Ok'}
-              </button>
-            ) : (
-              <button
-                type="button"
-                className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
-                onClick={logoutHandler}
-              >
-                Logout
-              </button>
-            )}
+            {message !== bookingSuccessMessage &&
+              (!(type === 'Logout') ? (
+                <button
+                  type="button"
+                  className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
+                  onClick={closeModalHandler}
+                >
+                  {type === 'Confirm' ? 'Cancel' : 'Ok'}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={`btn ${type === 'Confirm' ? 'btn__cancel' : null}`}
+                  onClick={logoutHandler}
+                >
+                  Logout
+                </button>
+              ))}
           </div>
         </div>
       </motion.div>
@@ -285,10 +305,14 @@ const Wrapper = styled.div`
       .alert__button {
         ${FlexVCenter()}
         gap: 2rem;
+        margin-bottom: 2rem;
         button {
-          margin: 0 auto 2rem;
+          margin: auto;
           /* margin-right: 1rem; */
         }
+      }
+      .alert__success {
+        margin-bottom: 0;
       }
     }
     .modal__close {
@@ -303,6 +327,7 @@ const Wrapper = styled.div`
     margin-top: 1.5rem;
     padding: 1rem 1.5rem;
     background-color: #44c020;
+    margin: auto;
   }
   .btn-success {
     background-color: var(--color-choosingSeat);

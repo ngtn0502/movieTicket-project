@@ -168,10 +168,10 @@ export default SignUpPage;
 const Wrapper = styled.main`
   position: relative;
   .page-100 {
-    height: 100vh;
+    height: 120vh;
   }
   .signIn {
-    width: 20rem;
+    width: 90vw;
     padding: 20px;
     position: absolute;
     top: 52%;
@@ -188,7 +188,7 @@ const Wrapper = styled.main`
     border-radius: 6px;
     img {
       margin: 0 auto;
-      max-width: 200px;
+      max-width: 100px;
     }
     h5 {
       font-size: 1.25rem;
@@ -237,6 +237,14 @@ const Wrapper = styled.main`
     }
   }
   @media screen and (min-width: 576px) {
+    .signIn {
+      width: 30rem;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .page-100 {
+      height: 100vh;
+    }
     .signIn {
       width: 30rem;
     }

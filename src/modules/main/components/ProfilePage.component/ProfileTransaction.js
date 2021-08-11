@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import format from 'date-format';
 import schedule from '../../../../assets/img/movie.png';
 import { FlexHCenter } from '../../../utils/mixin.js';
-import { getCinemaLogo } from '../../../utils/constants.js';
+import { getCinemaLogo, today } from '../../../utils/constants.js';
 import CircleLoading from '../CircleLoading';
+import { isToday, isYesterday } from '../../../utils/helper';
 
 function ProfileTransaction({ className, thongTinDatVe }) {
   const [isImgLoading, setIsImgLoading] = useState(false);
@@ -26,9 +27,15 @@ function ProfileTransaction({ className, thongTinDatVe }) {
                   </p>
                   <p>
                     Booking Date:{' '}
-                    <span className="highlight">
+                    <span className="highlight__seat">
                       {' '}
-                      {format('dd:MM:yyyy', new Date(item.ngayDat))}{' '}
+                      {format('dd-MM-yyyy', new Date(item.ngayDat))}
+                      {isToday(new Date(item.ngayDat))
+                        ? ' --  RESERVATION TODAY'
+                        : null}
+                      {isYesterday(new Date(item.ngayDat))
+                        ? ' --  RESERVATION YESTERDAY'
+                        : null}
                     </span>
                   </p>
                   {/* <p>Price:{item.giaVe}đ</p> */}
@@ -39,7 +46,7 @@ function ProfileTransaction({ className, thongTinDatVe }) {
                         {getCinemaLogo(i.maHeThongRap)}
                         <div>
                           <p className="highlight">{i.tenHeThongRap}</p>
-                          <p className="highlight__seat">|| Seat {i.tenGhe}</p>
+                          <p className="highlight">|| Seat {i.tenGhe}</p>
                         </div>
                       </div>
                     ))}

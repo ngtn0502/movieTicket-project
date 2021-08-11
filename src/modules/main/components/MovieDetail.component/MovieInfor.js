@@ -48,9 +48,6 @@ function MovieInfor({ movieDetail, movie }) {
               <img src={imdbLogo} alt="" />
               <span className="subtitle__meta">{randomNumber()} ++</span>
             </div>
-            {/*  */}
-            {/*  */}
-            {/*  */}
             <div className="movieInfor__detail">
               {movieDetailContent.map((item, index) => (
                 <p className="movieInfor__detail--item" key={index}>
@@ -84,7 +81,7 @@ const Wrapper = styled.main`
   /* banner */
   .movieInfor__banner {
     width: 80%;
-    height: 80%;
+    height: auto;
     margin: 0 auto;
     margin-bottom: 2rem;
   }
@@ -97,11 +94,11 @@ const Wrapper = styled.main`
   /* title */
 
   .subtitle__meta {
-    color: var(--color-white);
+    color: var(--color-title);
     letter-spacing: var(--spacing);
   }
   .subtitle {
-    color: var(--color-title);
+    color: var(--color-white);
     letter-spacing: var(--spacing);
   }
   .title {
@@ -110,7 +107,7 @@ const Wrapper = styled.main`
   }
   .subtitle__detail {
     font-size: 1rem;
-    color: var(--color-white);
+    color: var(--color-title);
   }
   .movieInfor__detail {
     .movieInfor__detail--item {
@@ -121,7 +118,7 @@ const Wrapper = styled.main`
     }
     .subtitle__detail--content {
       font-size: 1rem;
-      color: var(--color-sub);
+      color: var(--color-title);
       padding: 0.5rem 0;
     }
   }

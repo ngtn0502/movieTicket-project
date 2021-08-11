@@ -33,6 +33,25 @@ const months = [
 export const getDay = (date) => days[date.getDay()];
 export const getMonth = (date) => months[date.getMonth()];
 
+// check if date is today
+export const isToday = (someDate) => {
+  const today = new Date();
+  return (
+    someDate.getDate() === today.getDate() &&
+    someDate.getMonth() === today.getMonth() &&
+    someDate.getFullYear() === today.getFullYear()
+  );
+};
+// check if date is yesterday
+export const isYesterday = (someDate) => {
+  const today = new Date();
+  return (
+    someDate.getDate() === today.getDate() - 1 &&
+    someDate.getMonth() === today.getMonth() &&
+    someDate.getFullYear() === today.getFullYear()
+  );
+};
+
 // Fake api value of movie length and IMDB
 
 export const randomDuration = () =>

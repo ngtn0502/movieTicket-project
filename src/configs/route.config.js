@@ -22,6 +22,12 @@ export const mainRoutes = [
     exact: true,
     Component: <ProfilePage />,
   },
+  {
+    id: '4',
+    path: '/profile/:transaction',
+    exact: true,
+    Component: <ProfilePage />,
+  },
 ];
 
 export const adminRoutes = [

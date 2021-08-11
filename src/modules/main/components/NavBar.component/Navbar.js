@@ -200,7 +200,7 @@ const Wrapper = styled.nav`
     align-items: center;
     justify-content: space-between;
     img {
-      width: 8rem;
+      max-width: 4rem;
       height: 3rem;
       margin: 0 1rem;
     }
@@ -370,7 +370,7 @@ const Wrapper = styled.nav`
     }
     .nav {
       img {
-        width: 7rem;
+        max-width: 4rem;
       }
       width: 90%;
       ${Flex({ justify: 'space-between' })}

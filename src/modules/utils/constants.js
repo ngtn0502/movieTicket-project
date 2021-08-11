@@ -43,9 +43,9 @@ export const carouselBackground = bgPopcorn;
 
 // export const toDay = new Date()
 
-export const today = () => {
+export const today = (minusDay = 11) => {
   const toDay = new Date();
-  toDay.setMonth(toDay.getMonth() - 2);
+  toDay.setMonth(toDay.getMonth() - minusDay);
   return toDay;
 };
 
@@ -144,8 +144,7 @@ export const movieDetailContent = [
   {
     id: 1,
     title: 'Stars: ',
-    content:
-      'Scarlett Johansson, Samuel l. Jackson, Jeremy Renner, Chris Evans, Mark Ruffalo, Chris Hem,...',
+    content: 'Scarlett Johansson, Chris Evans, Mark Ruffalo, Chris Hem,...',
   },
   {
     id: 1,

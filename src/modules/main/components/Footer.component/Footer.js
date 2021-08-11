@@ -85,13 +85,13 @@ function Footer() {
       </div>
       <div className="footer__copy">
         <h2>
-          © 2021 - Cinema Website | Developed By{' '}
+          © 2021 - Booking Ticket Website | By{' '}
           <a
             href="http://nhannguyen.netlify.app/"
             target="_blank"
             rel="noreferrer"
           >
-            NhanNguyen
+            Nhan
           </a>
         </h2>
         <h2>For educational purpose</h2>
@@ -128,10 +128,10 @@ const Wrapper = styled.footer`
       .newsletter__title {
         .subNameMovie {
           color: #31d7a9;
-          font-size: 1.5rem;
+          font-size: 1.25rem;
         }
         .nameMovie {
-          font-size: 2rem;
+          font-size: 1.75rem;
           padding: 1rem 0 2rem;
         }
       }
@@ -268,7 +268,7 @@ const Wrapper = styled.footer`
   }
   @media (min-width: 992px) {
     .footer__newsletter {
-      top: -23%;
+      top: -30%;
       .newsletter__container {
         .newsletter__title {
           .subNameMovie {
@@ -299,6 +299,11 @@ const Wrapper = styled.footer`
           text-decoration: underline;
         }
       }
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .footer__newsletter {
+      top: -22%;
     }
   }
 `;
