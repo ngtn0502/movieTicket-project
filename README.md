@@ -2,9 +2,7 @@
 
 **_A simple web application for booking movie ticket online_**
 
- <img src="../../movie-project/src/assets/img/poster.PNG" alt="d" width="900px">
-
----
+ <img src="../src/assets/img/poster.PNG" alt="website poster" width="900px">
 
 ## Features :briefcase:
 
@@ -13,8 +11,6 @@
 - [x] allow user login and sign up account via controlled component (process via api)
 - [x] allow user manage their profile and booking/purchase history
 - [x] more and more...
-
----
 
 ## Tech Stack
 
@@ -32,8 +28,6 @@ Back end API :
 
 ##### REST API
 
----
-
 ## UI LIBRARY:
 
 ##### Material-UI
@@ -43,8 +37,6 @@ Back end API :
 ##### Swiper JS
 
 ##### React 3D carousel
-
----
 
 ---
 
