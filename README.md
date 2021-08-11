@@ -1,8 +1,8 @@
-# Movie List :movie_camera:
+# N-Cinema: Online ticket booking :movie_camera:
 
 **_A simple web application for booking movie ticket online_**
 
- <img src="../src/assets/img/poster.PNG" alt="website poster" width="900px">
+ <img src="./src/assets/img/poster.PNG" alt="website poster" width="900px">
 
 ## Features :briefcase:
 
