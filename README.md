@@ -1,4 +1,54 @@
-### Install Eslint + Prettier plugin
+# Movie List :movie_camera:
+
+**_A simple web application for booking movie ticket online_**
+
+ <img src="../../movie-project/src/assets/img/poster.PNG" alt="d" width="900px">
+
+---
+
+## Features :briefcase:
+
+- [x] listing movies from movie api
+- [x] allow user book movie ticket online (process via api)
+- [x] allow user login and sign up account via controlled component (process via api)
+- [x] allow user manage their profile and booking/purchase history
+- [x] more and more...
+
+---
+
+## Tech Stack
+
+Front end development :
+
+##### HTML5
+
+##### CSS3
+
+##### JavaScript
+
+##### React JS
+
+Back end API :
+
+##### REST API
+
+---
+
+## UI LIBRARY:
+
+##### Material-UI
+
+##### Framer motion
+
+##### Swiper JS
+
+##### React 3D carousel
+
+---
+
+---
+
+#### Install Eslint + Prettier plugin
 
 ```
 npm i -D eslint prettier eslint-plugin-prettier eslint-config-prettier
